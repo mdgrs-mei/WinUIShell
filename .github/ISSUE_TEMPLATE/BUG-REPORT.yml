@@ -1,0 +1,37 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🙏 Thanks for taking the time to fill out this bug report!
+
+  - type: textarea
+    id: ps-version-table
+    attributes:
+      label: PSVersionTable
+      description: Please copy and paste the output of `$PSVersionTable`.
+      placeholder: |
+        Name                           Value
+        ----                           -----
+        PSVersion                      7.4.1
+        PSEdition                      Core
+        GitCommitId                    7.4.1
+        OS                             Microsoft Windows 10.0.22621
+        Platform                       Win32NT
+        PSCompatibleVersions           {1.0, 2.0, 3.0, 4.0…}
+        PSRemotingProtocolVersion      2.3
+        SerializationVersion           1.1.0.1
+        WSManStackVersion              3.0
+      render: powershell
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+    validations:
+      required: true
+

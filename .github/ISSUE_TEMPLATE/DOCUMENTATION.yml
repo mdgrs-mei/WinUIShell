@@ -1,0 +1,17 @@
+name: Documentation
+description: Suggest a documentation improvement
+title: "[Documentation]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👍 Thanks for helping us improve this project.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What needs to be improved?
+    validations:
+      required: true
+      

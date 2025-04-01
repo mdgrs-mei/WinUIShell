@@ -1,0 +1,27 @@
+name: Publish Module
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  publish_module:
+    name: Publish Module
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.201'
+      - name: Build
+        shell: pwsh
+        run: |
+          & ./Build.ps1 Release
+      - name: Publish
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        shell: pwsh
+        run: |
+          Publish-Module -Path ./module/WinUIShell -NuGetApiKey "$env:NUGET_API_KEY"
