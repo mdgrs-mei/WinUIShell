@@ -8,7 +8,7 @@
 
 Scripting WinUI 3 with PowerShell.
 
-![Demo](https://github.com/user-attachments/assets/5893bc4f-c9c2-4004-9b7b-54f2ddbee05b)
+![Demo](https://github.com/user-attachments/assets/0ca145dd-bf42-4bf1-bbed-b06ef74ed101)
 
 *WinUIShell* is a PowerShell module that allows you to create WinUI 3 applications in PowerShell.
 
@@ -56,7 +56,7 @@ $win.Activate()
 $win.WaitForClosed()
 ```
 
-![QuickStart](https://github.com/user-attachments/assets/b05470b0-3a1d-424f-ba18-d9673ac77021)
+![QuickStart](https://github.com/user-attachments/assets/45b36c3c-1380-4384-bff2-18fe114c2dc1)
 
 If you dot-source the script and comment out `$win.WaitForClosed()`, you can inspect UI objects or even modify them on the terminal:
 
@@ -76,7 +76,7 @@ CharacterSpacing           : 0
 
 *WinUIShell* launches a server process `WinUIShell.Server.exe` that provides all the UI functionalities. The WinUIShell module communicates with the server through IPC (Inter-Process Communication) to create UI elements and handle events. No WinUI 3 dlls are loaded in PowerShell.
 
-<img src=https://github.com/user-attachments/assets/e0fe33a1-6d21-4526-a3cd-b9ed02596f85 width="600">
+<img src=https://github.com/user-attachments/assets/9de693bd-0071-4dd3-9826-5280d7a56d11 width="600">
 
 This model simplifies the script structure. You can write long-running code in event handlers without blocking GUI. It's also allowed to access properties of UI elements directly on any thread without using Dispatchers.
 
@@ -104,7 +104,7 @@ $button.AddClick({
 })
 ```
 
-![ProgressBar](https://github.com/user-attachments/assets/60c5e15b-accf-4d5f-83a9-21ebd8ecb30a)
+![ProgressBar](https://github.com/user-attachments/assets/1dc6bf2e-6529-4036-84b1-c20e8bcf9940)
 
 ## Major Limitations
 
