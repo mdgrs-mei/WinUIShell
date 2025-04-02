@@ -63,14 +63,18 @@ If you dot-source the script and comment out `$win.WaitForClosed()`, you can ins
 ```powershell
 PS> $button
 
-Content                    : Click Me
-Background                 : WinUIShell.Brush
-BackgroundSizing           : InnerBorderEdge
-BorderBrush                : WinUIShell.Brush
-BorderThickness            : 1,1,1,1
-CharacterSpacing           : 0
+Content             : Click Me
+Background          : WinUIShell.Brush
+BackgroundSizing    : InnerBorderEdge
+BorderBrush         : WinUIShell.Brush
+BorderThickness     : 1,1,1,1
+CharacterSpacing    : 0
 :
 ```
+
+Since the API of WinUIShell tries following the WinUI 3's API, you can read the Windows App SDK documentation to see what should be available. The documentation of the `Button` class is [here](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button?view=windows-app-sdk-1.7) for example.
+
+You can also look at the [examples](./examples/) folder for script examples.
 
 ## How It Works
 
