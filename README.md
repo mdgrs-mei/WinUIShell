@@ -112,8 +112,22 @@ $button.AddClick({
 
 ## Major Limitations
 
-- Not all UI elements are supported
+- Not all UI elements are supported yet
 - No XAML support
+
+## Contributing
+
+### Code of Conduct
+
+Please read our [Code of Conduct](./CODE_OF_CONDUCT.md) to foster a welcoming environment. By participating in this project, you are expected to uphold this code.
+
+### Have a question or want to showcase something?
+
+Please come to our [Discussions](https://github.com/mdgrs-mei/WinUIShell/discussions) page and avoid filing an issue to ask a question.
+
+### Want to file an issue or make a PR?
+
+Please see our [Contribution Guidelines](./CONTRIBUTING.md).
 
 ## Credits
 
