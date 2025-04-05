@@ -4,10 +4,6 @@ using Windows.Foundation;
 namespace WinUIShell.Server;
 internal sealed partial class TextBox : Microsoft.UI.Xaml.Controls.TextBox
 {
-    public TextBox()
-    {
-    }
-
     public void AddBeforeTextChanging(
         int queueThreadId,
         int eventId,
