@@ -39,6 +39,37 @@ internal sealed class EventCallbackList
             disabledControlIds);
     }
 
+    public void Add(
+        string accessorClassName,
+        string addMethodName,
+        ObjectId id,
+        EventCallback? eventCallback)
+    {
+        if (eventCallback is null)
+            return;
+
+        int eventId = _callbacks.Count;
+        _callbacks.Add(eventCallback);
+
+        ObjectId[]? disabledControlIds = null;
+        if (eventCallback.DisabledControlsWhileProcessing is not null)
+        {
+            disabledControlIds = new ObjectId[eventCallback.DisabledControlsWhileProcessing.Length];
+            for (int i = 0; i<eventCallback.DisabledControlsWhileProcessing.Length; ++i)
+            {
+                disabledControlIds[i] = eventCallback.DisabledControlsWhileProcessing[i].Id;
+            }
+        }
+
+        CommandClient.Get().InvokeStaticMethod(
+            accessorClassName,
+            addMethodName,
+            id,
+            Environment.CurrentManagedThreadId,
+            eventId,
+            disabledControlIds);
+    }
+
     public void Invoke(int eventId, object? eventArgs)
     {
         if (eventId < 0 || eventId >= _callbacks.Count)
