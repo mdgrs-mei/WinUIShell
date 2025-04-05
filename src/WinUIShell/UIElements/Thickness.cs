@@ -24,13 +24,6 @@ public class Thickness : WinUIShellObject
         get => PropertyAccessor.Get<double>(Id, nameof(Top))!;
     }
 
-    public Thickness()
-    {
-        Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Thickness, Microsoft.WinUI",
-            this);
-    }
-
     internal Thickness(ObjectId id)
         : base(id)
     {
