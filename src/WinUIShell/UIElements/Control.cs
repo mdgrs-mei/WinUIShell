@@ -32,7 +32,12 @@ public abstract class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(CharacterSpacing), value);
     }
 
-    //public CornerRadius CornerRadius
+    public CornerRadius CornerRadius
+    {
+        get => PropertyAccessor.Get<CornerRadius>(Id, nameof(CornerRadius))!;
+        set => PropertyAccessor.Set(Id, nameof(CornerRadius), value?.Id);
+    }
+
     //public FontFamily FontFamily
 
     public double FontSize
