@@ -22,7 +22,11 @@ public class StackPanel : Panel
         set => PropertyAccessor.Set(Id, nameof(BorderThickness), value?.Id);
     }
 
-    // public CornerRadius CornerRadius
+    public CornerRadius CornerRadius
+    {
+        get => PropertyAccessor.Get<CornerRadius>(Id, nameof(CornerRadius))!;
+        set => PropertyAccessor.Set(Id, nameof(CornerRadius), value?.Id);
+    }
 
     public Orientation Orientation
     {

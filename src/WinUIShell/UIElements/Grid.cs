@@ -29,7 +29,11 @@ public class Grid : Panel
         set => PropertyAccessor.Set(Id, nameof(ColumnSpacing), value);
     }
 
-    //public CornerRadius CornerRadius
+    public CornerRadius CornerRadius
+    {
+        get => PropertyAccessor.Get<CornerRadius>(Id, nameof(CornerRadius))!;
+        set => PropertyAccessor.Set(Id, nameof(CornerRadius), value?.Id);
+    }
 
     public Thickness Padding
     {
