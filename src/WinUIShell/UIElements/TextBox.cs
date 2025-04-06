@@ -97,7 +97,7 @@ public class TextBox : Control
     public TextBox()
     {
         Id = CommandClient.Get().CreateObject(
-            "WinUIShell.Server.TextBox, WinUIShell.Server",
+            "Microsoft.UI.Xaml.Controls.TextBox, Microsoft.WinUI",
             this);
     }
 
@@ -112,7 +112,11 @@ public class TextBox : Control
     }
     public void AddBeforeTextChanging(EventCallback eventCallback)
     {
-        _beforeTextChangingCallbacks.Add(eventCallback, Id, nameof(AddBeforeTextChanging));
+        _beforeTextChangingCallbacks.Add(
+            "WinUIShell.Server.TextBoxAccessor, WinUIShell.Server",
+            nameof(AddBeforeTextChanging),
+            Id,
+            eventCallback);
     }
 
     internal void OnBeforeTextChanging(int eventId, TextBoxBeforeTextChangingEventArgs eventArgs)
@@ -130,7 +134,11 @@ public class TextBox : Control
     }
     public void AddTextChanged(EventCallback eventCallback)
     {
-        _textChangedCallbacks.Add(eventCallback, Id, nameof(AddTextChanged));
+        _textChangedCallbacks.Add(
+            "WinUIShell.Server.TextBoxAccessor, WinUIShell.Server",
+            nameof(AddTextChanged),
+            Id,
+            eventCallback);
     }
 
     internal void OnTextChanged(int eventId, TextChangedEventArgs eventArgs)
