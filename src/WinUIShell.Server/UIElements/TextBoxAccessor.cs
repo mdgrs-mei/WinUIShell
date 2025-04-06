@@ -7,13 +7,13 @@ internal static class TextBoxAccessor
     public static void AddBeforeTextChanging(
         TextBox target,
         int queueThreadId,
+        string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<TextBoxBeforeTextChangingEventArgs>(
-            target,
-            "OnBeforeTextChanging",
             queueThreadId,
+            eventListId,
             eventId,
             disabledControlsWhileProcessing);
 
@@ -23,13 +23,13 @@ internal static class TextBoxAccessor
     public static void AddTextChanged(
         TextBox target,
         int queueThreadId,
+        string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<TextChangedEventArgs>(
-            target,
-            "OnTextChanged",
             queueThreadId,
+            eventListId,
             eventId,
             disabledControlsWhileProcessing);
 

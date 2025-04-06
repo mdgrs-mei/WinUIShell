@@ -22,9 +22,4 @@ public abstract class ButtonBase : ContentControl
             Id,
             eventCallback);
     }
-
-    internal void OnClick(int eventId, RoutedEventArgs eventArgs)
-    {
-        _clickCallbacks.Invoke(eventId, eventArgs);
-    }
 }

@@ -4,9 +4,8 @@ namespace WinUIShell;
 internal static class EventCallback
 {
     public static Action<object, TEventArgs> Create<TEventArgs>(
-        object parentObjectAddress,
-        string callbackName,
         int queueThreadId,
+        string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
@@ -29,14 +28,22 @@ internal static class EventCallback
                 }
             }
 
-            var id = ObjectStore.Get().GetId(parentObjectAddress);
+            var senderId = ObjectStore.Get().GetId(sender);
             var queueId = new CommandQueueId(queueThreadId);
 
             var eventArgsId = CommandClient.Get().CreateObject(
                 queueId,
                 $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
                 eventArgs);
-            await CommandClient.Get().InvokeMethodWaitAsync(queueId, id, callbackName, eventId, eventArgsId);
+
+            await CommandClient.Get().InvokeMethodWaitAsync(
+                queueId,
+                new ObjectId(eventListId),
+                "Invoke",
+                eventId,
+                senderId,
+                eventArgsId);
+
             CommandClient.Get().DestroyObject(eventArgsId);
 
             if (disabledControls is not null)

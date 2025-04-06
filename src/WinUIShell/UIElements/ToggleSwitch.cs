@@ -85,9 +85,4 @@ public class ToggleSwitch : Control
             Id,
             eventCallback);
     }
-
-    internal void OnToggled(int eventId, RoutedEventArgs eventArgs)
-    {
-        _toggledCallbacks.Invoke(eventId, eventArgs);
-    }
 }

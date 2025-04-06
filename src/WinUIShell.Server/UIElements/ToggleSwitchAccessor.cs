@@ -7,13 +7,13 @@ internal static class ToggleSwitchAccessor
     public static void AddToggled(
         ToggleSwitch target,
         int queueThreadId,
+        string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<RoutedEventArgs>(
-            target,
-            "OnToggled",
             queueThreadId,
+            eventListId,
             eventId,
             disabledControlsWhileProcessing);
 

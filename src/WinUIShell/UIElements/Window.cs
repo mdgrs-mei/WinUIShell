@@ -99,11 +99,6 @@ public class Window : WinUIShellObject
         }
     }
 
-    internal void OnClosed(int eventId, WindowEventArgs eventArgs)
-    {
-        _closedCallbacks.Invoke(eventId, eventArgs);
-    }
-
     private void ClearClosedCallbackStates()
     {
         _closedCallbacks.ClearIsInvoked();

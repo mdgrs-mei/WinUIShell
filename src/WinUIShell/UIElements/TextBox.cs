@@ -119,11 +119,6 @@ public class TextBox : Control
             eventCallback);
     }
 
-    internal void OnBeforeTextChanging(int eventId, TextBoxBeforeTextChangingEventArgs eventArgs)
-    {
-        _beforeTextChangingCallbacks.Invoke(eventId, eventArgs);
-    }
-
     public void AddTextChanged(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddTextChanged(new EventCallback
@@ -139,10 +134,5 @@ public class TextBox : Control
             nameof(AddTextChanged),
             Id,
             eventCallback);
-    }
-
-    internal void OnTextChanged(int eventId, TextChangedEventArgs eventArgs)
-    {
-        _textChangedCallbacks.Invoke(eventId, eventArgs);
     }
 }
