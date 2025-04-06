@@ -16,7 +16,11 @@ public abstract class ButtonBase : ContentControl
     }
     public void AddClick(EventCallback eventCallback)
     {
-        _clickCallbacks.Add(eventCallback, Id, nameof(AddClick));
+        _clickCallbacks.Add(
+            "WinUIShell.Server.ButtonBaseAccessor, WinUIShell.Server",
+            nameof(AddClick),
+            Id,
+            eventCallback);
     }
 
     internal void OnClick(int eventId, RoutedEventArgs eventArgs)
