@@ -11,35 +11,6 @@ internal sealed class EventCallbackList
     }
 
     public void Add(
-        EventCallback? eventCallback,
-        ObjectId id,
-        string addMethodName)
-    {
-        if (eventCallback is null)
-            return;
-
-        int eventId = _callbacks.Count;
-        _callbacks.Add(eventCallback);
-
-        ObjectId[]? disabledControlIds = null;
-        if (eventCallback.DisabledControlsWhileProcessing is not null)
-        {
-            disabledControlIds = new ObjectId[eventCallback.DisabledControlsWhileProcessing.Length];
-            for (int i = 0; i<eventCallback.DisabledControlsWhileProcessing.Length; ++i)
-            {
-                disabledControlIds[i] = eventCallback.DisabledControlsWhileProcessing[i].Id;
-            }
-        }
-
-        CommandClient.Get().InvokeMethod(
-            id,
-            addMethodName,
-            Environment.CurrentManagedThreadId,
-            eventId,
-            disabledControlIds);
-    }
-
-    public void Add(
         string accessorClassName,
         string addMethodName,
         ObjectId id,
