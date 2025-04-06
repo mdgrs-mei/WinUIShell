@@ -5,7 +5,7 @@ namespace WinUIShell.Server;
 internal static class TextBoxAccessor
 {
     public static void AddBeforeTextChanging(
-        Microsoft.UI.Xaml.Controls.TextBox target,
+        TextBox target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -17,11 +17,11 @@ internal static class TextBoxAccessor
             eventId,
             disabledControlsWhileProcessing);
 
-        target.BeforeTextChanging += new TypedEventHandler<Microsoft.UI.Xaml.Controls.TextBox, TextBoxBeforeTextChangingEventArgs>(callback);
+        target.BeforeTextChanging += new TypedEventHandler<TextBox, TextBoxBeforeTextChangingEventArgs>(callback);
     }
 
     public static void AddTextChanged(
-        Microsoft.UI.Xaml.Controls.TextBox target,
+        TextBox target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
