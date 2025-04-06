@@ -68,7 +68,11 @@ public class Window : WinUIShellObject
     }
     public void AddClosed(EventCallback eventCallback)
     {
-        _closedCallbacks.Add(eventCallback, Id, nameof(AddClosed));
+        _closedCallbacks.Add(
+            "WinUIShell.Server.WindowAccessor, WinUIShell.Server",
+            nameof(AddClosed),
+            Id,
+            eventCallback);
     }
 
     public void Close()
