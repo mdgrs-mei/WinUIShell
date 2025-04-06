@@ -1,19 +1,20 @@
 ﻿using Microsoft.UI.Xaml;
 
 namespace WinUIShell.Server;
-internal sealed partial class Button : Microsoft.UI.Xaml.Controls.Button, IButton
+internal static class ButtonBaseAccessor
 {
-    public void AddClick(
+    public static void AddClick(
+        Microsoft.UI.Xaml.Controls.Primitives.ButtonBase target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<RoutedEventArgs>(
-            this,
+            target,
             "OnClick",
             queueThreadId,
             eventId,
             disabledControlsWhileProcessing);
-        Click += new RoutedEventHandler(callback);
+        target.Click += new RoutedEventHandler(callback);
     }
 }

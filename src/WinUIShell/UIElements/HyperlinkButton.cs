@@ -13,7 +13,7 @@ public class HyperlinkButton : ButtonBase
     public HyperlinkButton()
     {
         Id = CommandClient.Get().CreateObject(
-            "WinUIShell.Server.HyperlinkButton, WinUIShell.Server",
+            "Microsoft.UI.Xaml.Controls.HyperlinkButton, Microsoft.WinUI",
             this);
     }
 }

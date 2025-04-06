@@ -1,18 +1,22 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+
 namespace WinUIShell.Server;
-internal sealed partial class HyperlinkButton : Microsoft.UI.Xaml.Controls.HyperlinkButton, IButton
+internal static class ToggleSwitchAccessor
 {
-    public void AddClick(
+    public static void AddToggled(
+        ToggleSwitch target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<RoutedEventArgs>(
-            this,
-            "OnClick",
+            target,
+            "OnToggled",
             queueThreadId,
             eventId,
             disabledControlsWhileProcessing);
-        Click += new RoutedEventHandler(callback);
+
+        target.Toggled += new RoutedEventHandler(callback);
     }
 }

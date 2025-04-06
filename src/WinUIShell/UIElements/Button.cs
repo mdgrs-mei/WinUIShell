@@ -7,7 +7,7 @@ public class Button : ButtonBase
     public Button()
     {
         Id = CommandClient.Get().CreateObject(
-            "WinUIShell.Server.Button, WinUIShell.Server",
+            "Microsoft.UI.Xaml.Controls.Button, Microsoft.WinUI",
             this);
     }
 }

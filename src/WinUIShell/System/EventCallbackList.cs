@@ -11,9 +11,10 @@ internal sealed class EventCallbackList
     }
 
     public void Add(
-        EventCallback? eventCallback,
+        string accessorClassName,
+        string addMethodName,
         ObjectId id,
-        string addMethodName)
+        EventCallback? eventCallback)
     {
         if (eventCallback is null)
             return;
@@ -31,9 +32,10 @@ internal sealed class EventCallbackList
             }
         }
 
-        CommandClient.Get().InvokeMethod(
-            id,
+        CommandClient.Get().InvokeStaticMethod(
+            accessorClassName,
             addMethodName,
+            id,
             Environment.CurrentManagedThreadId,
             eventId,
             disabledControlIds);

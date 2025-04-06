@@ -2,39 +2,37 @@
 using Windows.Foundation;
 
 namespace WinUIShell.Server;
-internal sealed partial class TextBox : Microsoft.UI.Xaml.Controls.TextBox
+internal static class TextBoxAccessor
 {
-    public TextBox()
-    {
-    }
-
-    public void AddBeforeTextChanging(
+    public static void AddBeforeTextChanging(
+        Microsoft.UI.Xaml.Controls.TextBox target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<TextBoxBeforeTextChangingEventArgs>(
-            this,
+            target,
             "OnBeforeTextChanging",
             queueThreadId,
             eventId,
             disabledControlsWhileProcessing);
 
-        BeforeTextChanging += new TypedEventHandler<Microsoft.UI.Xaml.Controls.TextBox, TextBoxBeforeTextChangingEventArgs>(callback);
+        target.BeforeTextChanging += new TypedEventHandler<Microsoft.UI.Xaml.Controls.TextBox, TextBoxBeforeTextChangingEventArgs>(callback);
     }
 
-    public void AddTextChanged(
+    public static void AddTextChanged(
+        Microsoft.UI.Xaml.Controls.TextBox target,
         int queueThreadId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         var callback = EventCallback.Create<TextChangedEventArgs>(
-            this,
+            target,
             "OnTextChanged",
             queueThreadId,
             eventId,
             disabledControlsWhileProcessing);
 
-        TextChanged += new TextChangedEventHandler(callback);
+        target.TextChanged += new TextChangedEventHandler(callback);
     }
 }
