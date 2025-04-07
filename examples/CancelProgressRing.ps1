@@ -32,7 +32,6 @@ $toggle.AddToggled({
 
                 Start-Sleep -Milliseconds 100
             }
-            $progressRing.Value = 100
         } else {
             $progressRing.Value = 0
         }
