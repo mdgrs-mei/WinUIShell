@@ -5,7 +5,8 @@ namespace WinUIShell;
 
 public class Window : WinUIShellObject
 {
-    private readonly EventCallbackList _closedCallbacks = new();
+    private const string _accessorClassName = "WinUIShell.Server.WindowAccessor, WinUIShell.Server";
+    private readonly EventCallbackList _closedCallbacks = new(_accessorClassName);
     private bool _isActivateCalled;
     private bool _isCloseCalled;
     private bool IsTerminated { get => _isActivateCalled && (_isCloseCalled || IsClosed); }
@@ -69,7 +70,6 @@ public class Window : WinUIShellObject
     public void AddClosed(EventCallback eventCallback)
     {
         _closedCallbacks.Add(
-            "WinUIShell.Server.WindowAccessor, WinUIShell.Server",
             nameof(AddClosed),
             Id,
             eventCallback);
@@ -97,11 +97,6 @@ public class Window : WinUIShellObject
             CommandServer.Get().ProcessCommands(queueId);
             Thread.Sleep(8);
         }
-    }
-
-    internal void OnClosed(int eventId, WindowEventArgs eventArgs)
-    {
-        _closedCallbacks.Invoke(eventId, eventArgs);
     }
 
     private void ClearClosedCallbackStates()
