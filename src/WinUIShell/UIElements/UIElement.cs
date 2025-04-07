@@ -16,6 +16,8 @@ public class UIElement : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(RasterizationScale), value);
     }
 
+    //public Visibility Visibility
+
     internal UIElement()
     {
     }
