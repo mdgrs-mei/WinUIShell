@@ -4,16 +4,17 @@ namespace WinUIShell;
 
 internal sealed class EventCallbackList : WinUIShellObject
 {
+    private readonly string _accessorClassName;
     private readonly List<EventCallback> _callbacks = [];
 
-    public EventCallbackList()
+    public EventCallbackList(string accessorClassName)
     {
+        _accessorClassName = accessorClassName;
         _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
         Id = id;
     }
 
     public void Add(
-        string accessorClassName,
         string addMethodName,
         ObjectId targetObjectId,
         EventCallback? eventCallback)
@@ -35,7 +36,7 @@ internal sealed class EventCallbackList : WinUIShellObject
         }
 
         CommandClient.Get().InvokeStaticMethod(
-            accessorClassName,
+            _accessorClassName,
             addMethodName,
             targetObjectId,
             Environment.CurrentManagedThreadId,

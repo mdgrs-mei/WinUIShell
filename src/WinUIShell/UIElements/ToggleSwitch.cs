@@ -5,7 +5,8 @@ namespace WinUIShell;
 
 public class ToggleSwitch : Control
 {
-    private readonly EventCallbackList _toggledCallbacks = new();
+    private const string _accessorClassName = "WinUIShell.Server.ToggleSwitchAccessor, WinUIShell.Server";
+    private readonly EventCallbackList _toggledCallbacks = new(_accessorClassName);
 
     public object? Header
     {
@@ -80,7 +81,6 @@ public class ToggleSwitch : Control
     public void AddToggled(EventCallback eventCallback)
     {
         _toggledCallbacks.Add(
-            "WinUIShell.Server.ToggleSwitchAccessor, WinUIShell.Server",
             nameof(AddToggled),
             Id,
             eventCallback);
