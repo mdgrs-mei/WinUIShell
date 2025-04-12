@@ -24,4 +24,9 @@ public class SolidColorBrush : Brush
             this,
             color?.Id);
     }
+
+    internal SolidColorBrush(ObjectId id)
+    : base(id)
+    {
+    }
 }
