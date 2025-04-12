@@ -128,8 +128,19 @@ public class TextBlock : FrameworkElement
     }
 
     //public IList<TextHighlighter> TextHighlighters
-    //public TextLineBounds TextLineBounds
-    //public TextReadingOrder TextReadingOrder
+
+    public TextLineBounds TextLineBounds
+    {
+        get => PropertyAccessor.Get<TextLineBounds>(Id, nameof(TextLineBounds))!;
+        set => PropertyAccessor.Set(Id, nameof(TextLineBounds), value);
+    }
+
+    public TextReadingOrder TextReadingOrder
+    {
+        get => PropertyAccessor.Get<TextReadingOrder>(Id, nameof(TextReadingOrder))!;
+        set => PropertyAccessor.Set(Id, nameof(TextReadingOrder), value);
+    }
+
     //public TextTrimming TextTrimming
     //public TextWrapping TextWrapping
 
