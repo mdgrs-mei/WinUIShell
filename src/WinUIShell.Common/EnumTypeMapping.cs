@@ -20,6 +20,8 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.TextDecorations, WinUIShell", "Windows.UI.Text.TextDecorations, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.TextLineBounds, WinUIShell", "Microsoft.UI.Xaml.TextLineBounds, Microsoft.WinUI"),
         ("WinUIShell.TextReadingOrder, WinUIShell", "Microsoft.UI.Xaml.TextReadingOrder, Microsoft.WinUI"),
+        ("WinUIShell.TextTrimming, WinUIShell", "Microsoft.UI.Xaml.TextTrimming, Microsoft.WinUI"),
+        ("WinUIShell.TextWrapping, WinUIShell", "Microsoft.UI.Xaml.TextWrapping, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()

@@ -141,8 +141,17 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(TextReadingOrder), value);
     }
 
-    //public TextTrimming TextTrimming
-    //public TextWrapping TextWrapping
+    public TextTrimming TextTrimming
+    {
+        get => PropertyAccessor.Get<TextTrimming>(Id, nameof(TextTrimming))!;
+        set => PropertyAccessor.Set(Id, nameof(TextTrimming), value);
+    }
+
+    public TextWrapping TextWrapping
+    {
+        get => PropertyAccessor.Get<TextWrapping>(Id, nameof(TextWrapping))!;
+        set => PropertyAccessor.Set(Id, nameof(TextWrapping), value);
+    }
 
     public TextBlock()
     {
