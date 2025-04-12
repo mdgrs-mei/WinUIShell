@@ -72,7 +72,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(LineHeight), value);
     }
 
-    //public LineStackingStrategy LineStackingStrategy
+    public LineStackingStrategy LineStackingStrategy
+    {
+        get => PropertyAccessor.Get<LineStackingStrategy>(Id, nameof(LineStackingStrategy))!;
+        set => PropertyAccessor.Set(Id, nameof(LineStackingStrategy), value);
+    }
 
     public int MaxLines
     {
@@ -80,7 +84,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(MaxLines), value);
     }
 
-    //public OpticalMarginAlignment OpticalMarginAlignment
+    public OpticalMarginAlignment OpticalMarginAlignment
+    {
+        get => PropertyAccessor.Get<OpticalMarginAlignment>(Id, nameof(OpticalMarginAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(OpticalMarginAlignment), value);
+    }
 
     public Thickness Padding
     {
@@ -113,7 +121,12 @@ public class TextBlock : FrameworkElement
     //Deprecated
     //public TextAlignment TextAlignment
 
-    //public TextDecorations TextDecorations
+    public TextDecorations TextDecorations
+    {
+        get => PropertyAccessor.Get<TextDecorations>(Id, nameof(TextDecorations))!;
+        set => PropertyAccessor.Set(Id, nameof(TextDecorations), value);
+    }
+
     //public IList<TextHighlighter> TextHighlighters
     //public TextLineBounds TextLineBounds
     //public TextReadingOrder TextReadingOrder

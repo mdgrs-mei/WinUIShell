@@ -15,6 +15,9 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.GridUnitType, WinUIShell", "Microsoft.UI.Xaml.GridUnitType, Microsoft.WinUI"),
         ("WinUIShell.BackgroundSizing, WinUIShell", "Microsoft.UI.Xaml.Controls.BackgroundSizing, Microsoft.WinUI"),
         ("WinUIShell.MicaKind, WinUIShell", "Microsoft.UI.Composition.SystemBackdrops.MicaKind, Microsoft.InteractiveExperiences.Projection"),
+        ("WinUIShell.LineStackingStrategy, WinUIShell", "Microsoft.UI.Xaml.LineStackingStrategy, Microsoft.WinUI"),
+        ("WinUIShell.OpticalMarginAlignment, WinUIShell", "Microsoft.UI.Xaml.OpticalMarginAlignment, Microsoft.WinUI"),
+        ("WinUIShell.TextDecorations, WinUIShell", "Windows.UI.Text.TextDecorations, Microsoft.Windows.SDK.NET"),
     ];
 
     public EnumTypeMapping()
