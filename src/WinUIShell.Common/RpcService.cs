@@ -334,7 +334,7 @@ internal sealed class RpcService
             throw new InvalidOperationException($"Type [{enumTargetName}] not found.");
         }
 
-        return Enum.ToObject(targetEnumType, (int)value);
+        return Enum.ToObject(targetEnumType, value);
     }
 
     private object? ConvertRpcValueToObject(RpcValue rpcValue)

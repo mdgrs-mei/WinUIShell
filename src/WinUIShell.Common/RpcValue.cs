@@ -44,7 +44,7 @@ public class RpcValue
 
     private bool IsEnum()
     {
-        return StringValue is not null && IntValue is not null;
+        return StringValue is not null && (IntValue is not null || UIntValue is not null);
     }
 
     public string? GetEnumTypeName()
@@ -89,7 +89,14 @@ public class RpcValue
                     var typeName = type.FullName;
                     var assemblyName = value.GetType().Assembly.GetName().Name;
                     StringValue = $"{typeName}, {assemblyName}";
-                    IntValue = (int)obj;
+                    if (Enum.GetUnderlyingType(type) == typeof(int))
+                    {
+                        IntValue = (int)obj;
+                    }
+                    else
+                    {
+                        UIntValue = (uint)obj;
+                    }
                     break;
                 }
             case Array array:
@@ -110,7 +117,14 @@ public class RpcValue
     {
         if (IsEnum())
         {
-            return IntValue;
+            if (IntValue is not null)
+            {
+                return IntValue;
+            }
+            else
+            {
+                return UIntValue;
+            }
         }
         if (IdValue is not null)
         {
