@@ -3,12 +3,10 @@
 internal sealed class RpcService
 {
     private readonly CommandServer _commandServer;
-    private readonly Dictionary<string, string> _enumMapping = [];
 
     public RpcService(CommandServer commandServer)
     {
         _commandServer = commandServer;
-        InitEnumMapping();
     }
 
     public void CreateObject(CommandQueueId queueId, ObjectId id, string typeName, RpcValue[]? rpcArguments)
@@ -310,26 +308,6 @@ internal sealed class RpcService
         Console.Error.WriteLine(message);
     }
 
-    private void InitEnumMapping()
-    {
-        AddEnumMapping("WinUIShell.HorizontalAlignment, WinUIShell", "Microsoft.UI.Xaml.HorizontalAlignment, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.VerticalAlignment, WinUIShell", "Microsoft.UI.Xaml.VerticalAlignment, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.TextAlignment, WinUIShell", "Microsoft.UI.Xaml.TextAlignment, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.CompactOverlaySize, WinUIShell", "Microsoft.UI.Windowing.CompactOverlaySize, Microsoft.InteractiveExperiences.Projection");
-        AddEnumMapping("WinUIShell.Symbol, WinUIShell", "Microsoft.UI.Xaml.Controls.Symbol, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.Orientation, WinUIShell", "Microsoft.UI.Xaml.Controls.Orientation, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.TitleBarTheme, WinUIShell", "Microsoft.UI.Windowing.TitleBarTheme, Microsoft.InteractiveExperiences.Projection");
-        AddEnumMapping("WinUIShell.GridUnitType, WinUIShell", "Microsoft.UI.Xaml.GridUnitType, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.BackgroundSizing, WinUIShell", "Microsoft.UI.Xaml.Controls.BackgroundSizing, Microsoft.WinUI");
-        AddEnumMapping("WinUIShell.MicaKind, WinUIShell", "Microsoft.UI.Composition.SystemBackdrops.MicaKind, Microsoft.InteractiveExperiences.Projection");
-    }
-
-    private void AddEnumMapping(string type0, string type1)
-    {
-        _enumMapping.Add(type0, type1);
-        _enumMapping.Add(type1, type0);
-    }
-
     private object? ConvertRpcValueToEnum(RpcValue rpcValue)
     {
         var value = rpcValue.GetObject();
@@ -344,7 +322,7 @@ internal sealed class RpcService
             return null;
         }
 
-        _ = _enumMapping.TryGetValue(sourceEnumName, out string? enumTargetName);
+        _ = EnumTypeMapping.Get().TryGetValue(sourceEnumName, out string? enumTargetName);
         if (enumTargetName is null)
         {
             throw new InvalidOperationException($"Enum mapping for [{sourceEnumName}] not found.");
