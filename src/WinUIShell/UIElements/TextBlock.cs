@@ -17,7 +17,11 @@ public class TextBlock : FrameworkElement
 
     //public TextPointer ContentEnd
     //public TextPointer ContentStart
-    //public FontFamily FontFamily
+    public FontFamily FontFamily
+    {
+        get => PropertyAccessor.Get<FontFamily>(Id, nameof(FontFamily))!;
+        set => PropertyAccessor.Set(Id, nameof(FontFamily), value?.Id);
+    }
 
     public double FontSize
     {
