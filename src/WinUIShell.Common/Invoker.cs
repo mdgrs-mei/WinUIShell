@@ -105,12 +105,7 @@ public class Invoker : Singleton<Invoker>
         if (!IsValid(obj))
             return;
 
-        var property = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        if (property == null)
-        {
-            throw new InvalidOperationException($"Property [{propertyName}] not found.");
-        }
-        property.SetValue(obj, value);
+        SetPropertyOrField(obj, obj.GetType(), propertyName, value);
     }
 
     public object? GetProperty(object obj, string propertyName)
@@ -119,12 +114,7 @@ public class Invoker : Singleton<Invoker>
         if (!IsValid(obj))
             return null;
 
-        var property = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-        if (property == null)
-        {
-            throw new InvalidOperationException($"Property [{propertyName}] not found.");
-        }
-        return property.GetValue(obj);
+        return GetPropertyOrField(obj, obj.GetType(), propertyName);
     }
 
     public object? GetStaticProperty(string className, string propertyName)
@@ -134,13 +124,43 @@ public class Invoker : Singleton<Invoker>
         {
             throw new InvalidOperationException($"Type [{className}] not found.");
         }
+        return GetPropertyOrField(null, classType, propertyName);
+    }
 
-        var property = classType.GetProperty(propertyName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-        if (property == null)
+    private void SetPropertyOrField(object? obj, Type objType, string name, object? value)
+    {
+        BindingFlags instanceOrStatic = obj is null ? BindingFlags.Static : BindingFlags.Instance;
+        var property = objType.GetProperty(name, instanceOrStatic | BindingFlags.Public | BindingFlags.NonPublic);
+        if (property is not null)
         {
-            throw new InvalidOperationException($"Property [{propertyName}] not found.");
+            property.SetValue(obj, value);
+            return;
         }
-        return property.GetValue(null);
+
+        var field = objType.GetField(name, instanceOrStatic | BindingFlags.Public | BindingFlags.NonPublic);
+        if (field is not null)
+        {
+            field.SetValue(obj, value);
+            return;
+        }
+        throw new InvalidOperationException($"Property or Filed [{name}] not found.");
+    }
+
+    private object? GetPropertyOrField(object? obj, Type objType, string name)
+    {
+        BindingFlags instanceOrStatic = obj is null ? BindingFlags.Static : BindingFlags.Instance;
+        var property = objType.GetProperty(name, instanceOrStatic | BindingFlags.Public | BindingFlags.NonPublic);
+        if (property is not null)
+        {
+            return property.GetValue(obj);
+        }
+
+        var field = objType.GetField(name, instanceOrStatic | BindingFlags.Public | BindingFlags.NonPublic);
+        if (field is not null)
+        {
+            return field.GetValue(obj);
+        }
+        throw new InvalidOperationException($"Property or Filed [{name}] not found.");
     }
 
     public void SetIndexerProperty(object obj, object index, object? value)
