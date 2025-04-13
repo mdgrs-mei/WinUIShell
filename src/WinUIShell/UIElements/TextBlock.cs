@@ -29,8 +29,18 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontSize), value);
     }
 
-    //public FontStretch FontStretch
-    //public FontStyle FontStyle
+    public FontStretch FontStretch
+    {
+        get => PropertyAccessor.Get<FontStretch>(Id, nameof(FontStretch))!;
+        set => PropertyAccessor.Set(Id, nameof(FontStretch), value);
+    }
+
+    public FontStyle FontStyle
+    {
+        get => PropertyAccessor.Get<FontStyle>(Id, nameof(FontStyle))!;
+        set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
+    }
+
     //public FontWeight FontWeight
 
     public Brush Foreground
