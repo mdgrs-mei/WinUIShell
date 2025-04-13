@@ -136,8 +136,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Text), value);
     }
 
-    //Deprecated
-    //public TextAlignment TextAlignment
+    public TextAlignment TextAlignment
+    {
+        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(TextAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(TextAlignment), value);
+    }
 
     public TextDecorations TextDecorations
     {
