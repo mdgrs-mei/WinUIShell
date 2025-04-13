@@ -30,7 +30,11 @@ public class TextBox : Control
         get => PropertyAccessor.Get<bool>(Id, nameof(CanUndo))!;
     }
 
-    //public CharacterCasing CharacterCasing
+    public CharacterCasing CharacterCasing
+    {
+        get => PropertyAccessor.Get<CharacterCasing>(Id, nameof(CharacterCasing))!;
+        set => PropertyAccessor.Set(Id, nameof(CharacterCasing), value);
+    }
 
     public object? Description
     {
@@ -48,7 +52,11 @@ public class TextBox : Control
         }
     }
 
-    //public CandidateWindowAlignment DesiredCandidateWindowAlignment
+    public CandidateWindowAlignment DesiredCandidateWindowAlignment
+    {
+        get => PropertyAccessor.Get<CandidateWindowAlignment>(Id, nameof(DesiredCandidateWindowAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(DesiredCandidateWindowAlignment), value);
+    }
 
     public object? Header
     {
