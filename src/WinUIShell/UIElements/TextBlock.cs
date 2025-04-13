@@ -41,7 +41,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
     }
 
-    //public FontWeight FontWeight
+    public FontWeight FontWeight
+    {
+        get => PropertyAccessor.Get<FontWeight>(Id, nameof(FontWeight))!;
+        set => PropertyAccessor.Set(Id, nameof(FontWeight), value?.Id);
+    }
 
     public Brush Foreground
     {
