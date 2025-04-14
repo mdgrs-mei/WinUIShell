@@ -15,6 +15,27 @@ public class TextBox : Control
         set => PropertyAccessor.Set(Id, nameof(AcceptsReturn), value);
     }
 
+    public bool CanPasteClipboardContent
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(CanPasteClipboardContent))!;
+    }
+
+    public bool CanRedo
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(CanRedo))!;
+    }
+
+    public bool CanUndo
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(CanUndo))!;
+    }
+
+    public CharacterCasing CharacterCasing
+    {
+        get => PropertyAccessor.Get<CharacterCasing>(Id, nameof(CharacterCasing))!;
+        set => PropertyAccessor.Set(Id, nameof(CharacterCasing), value);
+    }
+
     public object? Description
     {
         get => PropertyAccessor.Get<object>(Id, nameof(Description));
@@ -29,6 +50,12 @@ public class TextBox : Control
                 PropertyAccessor.Set(Id, nameof(Description), value);
             }
         }
+    }
+
+    public CandidateWindowAlignment DesiredCandidateWindowAlignment
+    {
+        get => PropertyAccessor.Get<CandidateWindowAlignment>(Id, nameof(DesiredCandidateWindowAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(DesiredCandidateWindowAlignment), value);
     }
 
     public object? Header
@@ -47,10 +74,36 @@ public class TextBox : Control
         }
     }
 
+    public TextAlignment HorizontalTextAlignment
+    {
+        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(HorizontalTextAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(HorizontalTextAlignment), value);
+    }
+
+    //public InputScope InputScope
+
+    public bool IsColorFontEnabled
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsColorFontEnabled))!;
+        set => PropertyAccessor.Set(Id, nameof(IsColorFontEnabled), value);
+    }
+
     public bool IsReadOnly
     {
         get => PropertyAccessor.Get<bool>(Id, nameof(IsReadOnly))!;
         set => PropertyAccessor.Set(Id, nameof(IsReadOnly), value);
+    }
+
+    public bool IsSpellCheckEnabled
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsSpellCheckEnabled))!;
+        set => PropertyAccessor.Set(Id, nameof(IsSpellCheckEnabled), value);
+    }
+
+    public bool IsTextPredictionEnabled
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsTextPredictionEnabled))!;
+        set => PropertyAccessor.Set(Id, nameof(IsTextPredictionEnabled), value);
     }
 
     public int MaxLength
@@ -59,16 +112,44 @@ public class TextBox : Control
         set => PropertyAccessor.Set(Id, nameof(MaxLength), value);
     }
 
+    public Brush PlaceholderForeground
+    {
+        get => PropertyAccessor.Get<Brush>(Id, nameof(PlaceholderForeground))!;
+        set => PropertyAccessor.Set(Id, nameof(PlaceholderForeground), value?.Id);
+    }
+
     public string PlaceholderText
     {
         get => PropertyAccessor.Get<string>(Id, nameof(PlaceholderText))!;
         set => PropertyAccessor.Set(Id, nameof(PlaceholderText), value);
     }
 
+    public bool PreventKeyboardDisplayOnProgrammaticFocus
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(PreventKeyboardDisplayOnProgrammaticFocus))!;
+        set => PropertyAccessor.Set(Id, nameof(PreventKeyboardDisplayOnProgrammaticFocus), value);
+    }
+
+    //public FlyoutBase ProofingMenuFlyout
+
     public string SelectedText
     {
         get => PropertyAccessor.Get<string>(Id, nameof(SelectedText))!;
         set => PropertyAccessor.Set(Id, nameof(SelectedText), value);
+    }
+
+    //public FlyoutBase SelectionFlyout
+
+    public SolidColorBrush SelectionHighlightColor
+    {
+        get => PropertyAccessor.Get<SolidColorBrush>(Id, nameof(SelectionHighlightColor))!;
+        set => PropertyAccessor.Set(Id, nameof(SelectionHighlightColor), value?.Id);
+    }
+
+    public SolidColorBrush SelectionHighlightColorWhenNotFocused
+    {
+        get => PropertyAccessor.Get<SolidColorBrush>(Id, nameof(SelectionHighlightColorWhenNotFocused))!;
+        set => PropertyAccessor.Set(Id, nameof(SelectionHighlightColorWhenNotFocused), value?.Id);
     }
 
     public int SelectionLength
@@ -95,13 +176,24 @@ public class TextBox : Control
         set => PropertyAccessor.Set(Id, nameof(TextAlignment), value);
     }
 
+    public TextReadingOrder TextReadingOrder
+    {
+        get => PropertyAccessor.Get<TextReadingOrder>(Id, nameof(TextReadingOrder))!;
+        set => PropertyAccessor.Set(Id, nameof(TextReadingOrder), value);
+    }
+
+    public TextWrapping TextWrapping
+    {
+        get => PropertyAccessor.Get<TextWrapping>(Id, nameof(TextWrapping))!;
+        set => PropertyAccessor.Set(Id, nameof(TextWrapping), value);
+    }
+
     public TextBox()
     {
         Id = CommandClient.Get().CreateObject(
             "Microsoft.UI.Xaml.Controls.TextBox, Microsoft.WinUI",
             this);
     }
-
 
     public void AddBeforeTextChanging(ScriptBlock scriptBlock, object? argumentList = null)
     {

@@ -24,6 +24,8 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.TextWrapping, WinUIShell", "Microsoft.UI.Xaml.TextWrapping, Microsoft.WinUI"),
         ("WinUIShell.FontStretch, WinUIShell", "Windows.UI.Text.FontStretch, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.FontStyle, WinUIShell", "Windows.UI.Text.FontStyle, Microsoft.Windows.SDK.NET"),
+        ("WinUIShell.CharacterCasing, WinUIShell", "Microsoft.UI.Xaml.Controls.CharacterCasing, Microsoft.WinUI"),
+        ("WinUIShell.CandidateWindowAlignment, WinUIShell", "Microsoft.UI.Xaml.Controls.CandidateWindowAlignment, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()

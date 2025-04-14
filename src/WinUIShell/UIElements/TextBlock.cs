@@ -41,7 +41,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
     }
 
-    //public FontWeight FontWeight
+    public FontWeight FontWeight
+    {
+        get => PropertyAccessor.Get<FontWeight>(Id, nameof(FontWeight))!;
+        set => PropertyAccessor.Set(Id, nameof(FontWeight), value?.Id);
+    }
 
     public Brush Foreground
     {
@@ -132,8 +136,11 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Text), value);
     }
 
-    //Deprecated
-    //public TextAlignment TextAlignment
+    public TextAlignment TextAlignment
+    {
+        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(TextAlignment))!;
+        set => PropertyAccessor.Set(Id, nameof(TextAlignment), value);
+    }
 
     public TextDecorations TextDecorations
     {
