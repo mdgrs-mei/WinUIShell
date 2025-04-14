@@ -26,6 +26,11 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.FontStyle, WinUIShell", "Windows.UI.Text.FontStyle, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.CharacterCasing, WinUIShell", "Microsoft.UI.Xaml.Controls.CharacterCasing, Microsoft.WinUI"),
         ("WinUIShell.CandidateWindowAlignment, WinUIShell", "Microsoft.UI.Xaml.Controls.CandidateWindowAlignment, Microsoft.WinUI"),
+        ("WinUIShell.ScrollingContentOrientation, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingContentOrientation, Microsoft.WinUI"),
+        ("WinUIShell.ScrollingScrollBarVisibility, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility, Microsoft.WinUI"),
+        ("WinUIShell.ScrollingChainMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingChainMode, Microsoft.WinUI"),
+        ("WinUIShell.ScrollingScrollMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollMode, Microsoft.WinUI"),
+        ("WinUIShell.ScrollingRailMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingRailMode, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()
