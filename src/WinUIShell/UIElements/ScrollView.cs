@@ -15,7 +15,11 @@ public class ScrollView : Control
         set => PropertyAccessor.Set(Id, nameof(Content), value?.Id);
     }
 
-    //public ScrollingContentOrientation ContentOrientation
+    public ScrollingContentOrientation ContentOrientation
+    {
+        get => PropertyAccessor.Get<ScrollingContentOrientation>(Id, nameof(ContentOrientation))!;
+        set => PropertyAccessor.Set(Id, nameof(ContentOrientation), value);
+    }
 
     //public UIElement CurrentAnchor
     //public CompositionPropertySet ExpressionAnimationSources
@@ -24,11 +28,29 @@ public class ScrollView : Control
     //public double HorizontalAnchorRatio
     //public double HorizontalOffset
 
-    //public ScrollingScrollBarVisibility HorizontalScrollBarVisibility
+    public ScrollingScrollBarVisibility HorizontalScrollBarVisibility
+    {
+        get => PropertyAccessor.Get<ScrollingScrollBarVisibility>(Id, nameof(HorizontalScrollBarVisibility))!;
+        set => PropertyAccessor.Set(Id, nameof(HorizontalScrollBarVisibility), value);
+    }
 
-    //public ScrollingChainMode HorizontalScrollChainMode
-    //public ScrollingScrollMode HorizontalScrollMode
-    //public ScrollingRailMode HorizontalScrollRailMode
+    public ScrollingChainMode HorizontalScrollChainMode
+    {
+        get => PropertyAccessor.Get<ScrollingChainMode>(Id, nameof(HorizontalScrollChainMode))!;
+        set => PropertyAccessor.Set(Id, nameof(HorizontalScrollChainMode), value);
+    }
+
+    public ScrollingScrollMode HorizontalScrollMode
+    {
+        get => PropertyAccessor.Get<ScrollingScrollMode>(Id, nameof(HorizontalScrollMode))!;
+        set => PropertyAccessor.Set(Id, nameof(HorizontalScrollMode), value);
+    }
+
+    public ScrollingRailMode HorizontalScrollRailMode
+    {
+        get => PropertyAccessor.Get<ScrollingRailMode>(Id, nameof(HorizontalScrollRailMode))!;
+        set => PropertyAccessor.Set(Id, nameof(HorizontalScrollRailMode), value);
+    }
 
     //public ScrollingInputKinds IgnoredInputKinds
     //public double MaxZoomFactor
@@ -40,10 +62,29 @@ public class ScrollView : Control
     //public double VerticalAnchorRatio
     //public double VerticalOffset
 
-    //public ScrollingScrollBarVisibility VerticalScrollBarVisibility
-    //public ScrollingChainMode VerticalScrollChainMode
-    //public ScrollingScrollMode VerticalScrollMode
-    //public ScrollingRailMode VerticalScrollRailMode
+    public ScrollingScrollBarVisibility VerticalScrollBarVisibility
+    {
+        get => PropertyAccessor.Get<ScrollingScrollBarVisibility>(Id, nameof(VerticalScrollBarVisibility))!;
+        set => PropertyAccessor.Set(Id, nameof(VerticalScrollBarVisibility), value);
+    }
+
+    public ScrollingChainMode VerticalScrollChainMode
+    {
+        get => PropertyAccessor.Get<ScrollingChainMode>(Id, nameof(VerticalScrollChainMode))!;
+        set => PropertyAccessor.Set(Id, nameof(VerticalScrollChainMode), value);
+    }
+
+    public ScrollingScrollMode VerticalScrollMode
+    {
+        get => PropertyAccessor.Get<ScrollingScrollMode>(Id, nameof(VerticalScrollMode))!;
+        set => PropertyAccessor.Set(Id, nameof(VerticalScrollMode), value);
+    }
+
+    public ScrollingRailMode VerticalScrollRailMode
+    {
+        get => PropertyAccessor.Get<ScrollingRailMode>(Id, nameof(VerticalScrollRailMode))!;
+        set => PropertyAccessor.Set(Id, nameof(VerticalScrollRailMode), value);
+    }
 
     //public double ViewportHeight
     //public double ViewportWidth
