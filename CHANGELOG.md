@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.0] - 2025-04-15
+
+### Added
+
+- Added basic properties to `TextBlock`
+- Added basic properties to `TextBox`
+- Added `ScrollView`
+- Added `Brush` resource
+
 ## [0.1.0] - 2025-04-07
 
 ### Added
