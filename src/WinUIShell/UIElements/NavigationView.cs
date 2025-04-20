@@ -64,7 +64,12 @@ public class NavigationView : ContentControl
     //public StyleSelector MenuItemContainerStyleSelector
     //public DataTemplate MenuItemTemplate
     //public DataTemplateSelector MenuItemTemplateSelector
-    //public IList<object> MenuItems => INavigationViewMethods.get_MenuItems(_objRef_global__Microsoft_UI_Xaml_Controls_INavigationView)
+
+    public WinUIShellObjectList<object> MenuItems
+    {
+        get => PropertyAccessor.Get<WinUIShellObjectList<object>>(Id, nameof(MenuItems))!;
+    }
+
     //public object MenuItemsSource
     //public double OpenPaneLength
     //public NavigationViewOverflowLabelMode OverflowLabelMode
