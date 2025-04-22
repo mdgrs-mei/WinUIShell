@@ -26,6 +26,22 @@ public abstract class FrameworkElement : UIElement
         set => PropertyAccessor.Set(Id, nameof(Style), value?.Id);
     }
 
+    public object? Tag
+    {
+        get => PropertyAccessor.Get<object>(Id, nameof(Tag));
+        set
+        {
+            if (value is WinUIShellObject v)
+            {
+                PropertyAccessor.Set(Id, nameof(Tag), v.Id);
+            }
+            else
+            {
+                PropertyAccessor.Set(Id, nameof(Tag), value);
+            }
+        }
+    }
+
     public VerticalAlignment VerticalAlignment
     {
         get => PropertyAccessor.Get<VerticalAlignment>(Id, nameof(VerticalAlignment))!;
