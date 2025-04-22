@@ -1,9 +1,13 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
 public class NavigationView : ContentControl
 {
+    private const string _accessorClassName = "WinUIShell.Server.NavigationViewAccessor, WinUIShell.Server";
+    private readonly EventCallbackList _itemInvokedCallbacks = new(_accessorClassName);
+
     public bool AlwaysShowHeader
     {
         get => PropertyAccessor.Get<bool>(Id, nameof(AlwaysShowHeader))!;
@@ -112,5 +116,21 @@ public class NavigationView : ContentControl
         Id = CommandClient.Get().CreateObject(
             "Microsoft.UI.Xaml.Controls.NavigationView, Microsoft.WinUI",
             this);
+    }
+
+    public void AddItemInvoked(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddItemInvoked(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddItemInvoked(EventCallback eventCallback)
+    {
+        _itemInvokedCallbacks.Add(
+            nameof(AddItemInvoked),
+            Id,
+            eventCallback);
     }
 }
