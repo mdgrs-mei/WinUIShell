@@ -36,5 +36,12 @@ public class NavigationViewItemInvokedEventArgs
         }
     }
 
-    //public NavigationTransitionInfo RecommendedNavigationTransitionInfo => INavigationViewItemInvokedEventArgs2Methods.get_RecommendedNavigationTransitionInfo(_objRef_global__Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs2);
+    public NavigationTransitionInfo RecommendedNavigationTransitionInfo
+    {
+        get
+        {
+            var id = ObjectStore.Get().GetId(this);
+            return PropertyAccessor.Get<NavigationTransitionInfo>(id, nameof(RecommendedNavigationTransitionInfo))!;
+        }
+    }
 }
