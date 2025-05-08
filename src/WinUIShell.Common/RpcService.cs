@@ -143,11 +143,11 @@ internal sealed class RpcService
             });
     }
 
-    public Task InvokeStaticMethodWaitAsync(string className, string methodName, RpcValue[]? rpcArguments)
+    public Task InvokeStaticMethodWaitAsync(CommandQueueId queueId, string className, string methodName, RpcValue[]? rpcArguments)
     {
         var taskCompletion = new TaskCompletionSource();
         _commandServer.AddCommand(
-            CommandQueueId.MainThread,
+            queueId,
             () =>
             {
                 try

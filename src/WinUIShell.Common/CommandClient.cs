@@ -179,14 +179,14 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public Task InvokeStaticMethodWaitAsync(string className, string methodName, params object?[] arguments)
+    public Task InvokeStaticMethodWaitAsync(CommandQueueId queueId, string className, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
         var rpcArguments = ConvertArguments(arguments);
 
-        return _rpc.InvokeAsync("InvokeStaticMethodWait", className, methodName, rpcArguments);
+        return _rpc.InvokeAsync("InvokeStaticMethodWait", queueId, className, methodName, rpcArguments);
     }
 
     public T? InvokeStaticMethodAndGetResult<T>(string className, string methodName, params object?[] arguments)
