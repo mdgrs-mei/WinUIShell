@@ -1,5 +1,7 @@
 using namespace WinUIShell
-Import-Module "$PSScriptRoot\..\module\WinUIShell"
+if (-not (Get-Module WinUIShell)) {
+    Import-Module WinUIShell
+}
 
 $titleBar = [TitleBar]::new()
 $titleBar.IconSource = [SymbolIconSource]@{

@@ -1,7 +1,9 @@
 using namespace WinUIShell
+if (-not (Get-Module WinUIShell)) {
+    Import-Module WinUIShell
+}
 
-$modulePath = "$PSScriptRoot\..\module\WinUIShell"
-Import-Module $modulePath
+$modulePath = (Get-Module WinUIShell).Path
 
 $win = [Window]::new()
 $win.Title = 'Multi Threading'
