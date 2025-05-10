@@ -1,4 +1,5 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -53,12 +54,28 @@ public class Frame : ContentControl
         CommandClient.Get().InvokeMethod(Id, nameof(GoForward));
     }
 
-    public bool Navigate(string pageName)
+    public bool Navigate(
+        string pageName,
+        ScriptBlock onLoaded,
+        object? onLoadedArgumentList = null)
     {
+        return Navigate(pageName, new EventCallback
+        {
+            ScriptBlock = onLoaded,
+            ArgumentList = onLoadedArgumentList
+        });
+    }
+
+    public bool Navigate(
+        string pageName,
+        EventCallback onLoaded)
+    {
+        PageStore.Get().RegisterLoaded(pageName, onLoaded);
         return CommandClient.Get().InvokeStaticMethodAndGetResult<bool>(
             _accessorClassName,
             nameof(Navigate),
             Id,
+            Environment.CurrentManagedThreadId,
             pageName);
     }
 

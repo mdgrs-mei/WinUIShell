@@ -1,5 +1,5 @@
 ﻿using WinUIShell.Common;
-namespace WinUIShell;
+namespace WinUIShell.Server;
 
 internal static class EventCallback
 {
