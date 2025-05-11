@@ -1,4 +1,5 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
+namespace WinUIShell;
 
 public abstract class FrameworkElement : UIElement
 {
@@ -52,5 +53,14 @@ public abstract class FrameworkElement : UIElement
     {
         get => PropertyAccessor.Get<double>(Id, nameof(Width))!;
         set => PropertyAccessor.Set(Id, nameof(Width), value);
+    }
+
+    internal FrameworkElement()
+    {
+    }
+
+    internal FrameworkElement(ObjectId id)
+        : base(id)
+    {
     }
 }

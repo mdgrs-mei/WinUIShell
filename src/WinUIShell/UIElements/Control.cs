@@ -1,4 +1,5 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
+namespace WinUIShell;
 
 public abstract class Control : FrameworkElement
 {
@@ -96,5 +97,14 @@ public abstract class Control : FrameworkElement
     {
         get => PropertyAccessor.Get<VerticalAlignment>(Id, nameof(VerticalContentAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalContentAlignment), value);
+    }
+
+    internal Control()
+    {
+    }
+
+    internal Control(ObjectId id)
+        : base(id)
+    {
     }
 }

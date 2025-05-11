@@ -12,16 +12,16 @@ internal sealed class PageStore : Singleton<PageStore>
         _ = _loadedCallbacks.AddOrUpdate(pageName, callback, (key, oldValue) => callback);
     }
 
-    public static void OnLoaded(string pageName)
+    public static void OnLoaded(string pageName, Page page, RoutedEventArgs eventArgs)
     {
-        Get().CallLoaded(pageName);
+        Get().CallLoaded(pageName, page, eventArgs);
     }
 
-    private void CallLoaded(string pageName)
+    private void CallLoaded(string pageName, Page page, RoutedEventArgs eventArgs)
     {
         if (_loadedCallbacks.TryGetValue(pageName, out EventCallback? callback))
         {
-            callback.Invoke(null, null);
+            callback.Invoke(page, eventArgs);
         }
     }
 }
