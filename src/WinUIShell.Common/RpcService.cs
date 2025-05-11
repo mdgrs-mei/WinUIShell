@@ -21,6 +21,17 @@ internal sealed class RpcService
             });
     }
 
+    public void CreateObjectWithId(CommandQueueId queueId, ObjectId id, string typeName)
+    {
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                var obj = Invoker.Get().CreateObject(typeName, [id]);
+                ObjectStore.Get().RegisterObject(id, obj);
+            });
+    }
+
     public Task CreateObjectWaitAsync(CommandQueueId queueId, ObjectId id, string typeName, RpcValue[]? rpcArguments)
     {
         var taskCompletion = new TaskCompletionSource();
