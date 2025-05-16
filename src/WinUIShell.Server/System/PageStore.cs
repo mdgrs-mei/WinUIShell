@@ -19,6 +19,7 @@ internal sealed class PageStore : Singleton<PageStore>
     {
         Type[] pageTypes = [
             typeof(Page01),
+            typeof(Page02),
         ];
         _maxPageCount = pageTypes.Length;
 
