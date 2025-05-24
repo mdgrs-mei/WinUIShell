@@ -56,10 +56,11 @@ public class Frame : ContentControl
 
     public bool Navigate(
         string pageName,
+        NavigationCacheMode cacheMode,
         ScriptBlock onLoaded,
         object? onLoadedArgumentList = null)
     {
-        return Navigate(pageName, new EventCallback
+        return Navigate(pageName, cacheMode, new EventCallback
         {
             ScriptBlock = onLoaded,
             ArgumentList = onLoadedArgumentList
@@ -68,6 +69,7 @@ public class Frame : ContentControl
 
     public bool Navigate(
         string pageName,
+        NavigationCacheMode cacheMode,
         EventCallback onLoaded)
     {
         PageStore.Get().RegisterLoaded(pageName, onLoaded);
@@ -76,7 +78,8 @@ public class Frame : ContentControl
             nameof(Navigate),
             Id,
             Environment.CurrentManagedThreadId,
-            pageName);
+            pageName,
+            cacheMode);
     }
 
     //public bool Navigate(Type sourcePageType, object parameter, NavigationTransitionInfo infoOverride)

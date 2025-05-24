@@ -1,4 +1,5 @@
-﻿using WinUIShell.Common;
+﻿using Microsoft.UI.Xaml.Navigation;
+using WinUIShell.Common;
 
 namespace WinUIShell.Server;
 
@@ -9,6 +10,7 @@ internal sealed class PageStore : Singleton<PageStore>
         public string Name { get; set; } = "";
         public Type? Type { get; set; }
         public int CallbackQueueThreadId { get; set; }
+        public NavigationCacheMode NavigationCacheMode { get; set; }
     }
 
     private readonly int _maxPageCount;
@@ -29,13 +31,14 @@ internal sealed class PageStore : Singleton<PageStore>
         }
     }
 
-    public Type RegisterPage(string pageName, int callbackQueueThreadId)
+    public Type RegisterPage(string pageName, int callbackQueueThreadId, NavigationCacheMode navigationCacheMode)
     {
         lock (_remainingPageTypes)
         {
             if (_assignedPages.TryGetValue(pageName, out var pageProperty))
             {
                 pageProperty.CallbackQueueThreadId = callbackQueueThreadId;
+                pageProperty.NavigationCacheMode = navigationCacheMode;
                 return pageProperty.Type!;
             }
 
@@ -45,7 +48,8 @@ internal sealed class PageStore : Singleton<PageStore>
                 {
                     Name = pageName,
                     Type = newPageType,
-                    CallbackQueueThreadId = callbackQueueThreadId
+                    CallbackQueueThreadId = callbackQueueThreadId,
+                    NavigationCacheMode = navigationCacheMode
                 };
                 return newPageType;
             }

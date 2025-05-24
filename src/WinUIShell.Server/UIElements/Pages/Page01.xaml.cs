@@ -10,7 +10,6 @@ public partial class Page01 : Page, IPage
     public Page01()
     {
         InitializeComponent();
-        Loaded += IPage.CreateOnLoaded(this);
-        Unloaded += IPage.CreateOnUnloaded(this);
+        IPage.Initialize(this);
     }
 }

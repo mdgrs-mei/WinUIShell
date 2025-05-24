@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
@@ -6,7 +7,18 @@ public interface IPage
 {
     ObjectId Id { get; set; }
 
-    static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : IPage
+    static void Initialize<TPage>(TPage page) where TPage : Page, IPage
+    {
+        ArgumentNullException.ThrowIfNull(page);
+
+        var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
+
+        page.NavigationCacheMode = pageProperty.NavigationCacheMode;
+        page.Loaded += CreateOnLoaded(page);
+        page.Unloaded += CreateOnUnloaded(page);
+    }
+
+    private static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : Page, IPage
     {
         return async (object sender, RoutedEventArgs eventArgs) =>
         {
@@ -35,7 +47,7 @@ public interface IPage
         };
     }
 
-    static RoutedEventHandler CreateOnUnloaded<TPage>(TPage page) where TPage : IPage
+    private static RoutedEventHandler CreateOnUnloaded<TPage>(TPage page) where TPage : Page, IPage
     {
         return (object sender, RoutedEventArgs eventArgs) =>
         {
