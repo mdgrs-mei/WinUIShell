@@ -10,7 +10,7 @@ internal static class FrameAccessor
         string pageName,
         NavigationCacheMode navigationCacheMode)
     {
-        var pageType = PageStore.Get().RegisterPage(pageName, queueThreadId, navigationCacheMode);
+        var pageType = PageStore.Get().RegisterPageProperty(pageName, queueThreadId, navigationCacheMode);
         return frame.Navigate(pageType);
     }
 }

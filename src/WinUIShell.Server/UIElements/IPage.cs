@@ -11,11 +11,11 @@ public interface IPage
     {
         ArgumentNullException.ThrowIfNull(page);
 
+        PageStore.Get().RegisterPageInstance(page);
         var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
 
         page.NavigationCacheMode = pageProperty.NavigationCacheMode;
         page.Loaded += CreateOnLoaded(page);
-        page.Unloaded += CreateOnUnloaded(page);
     }
 
     private static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : Page, IPage
@@ -44,15 +44,6 @@ public interface IPage
                 eventArgsId);
 
             CommandClient.Get().DestroyObject(eventArgsId);
-        };
-    }
-
-    private static RoutedEventHandler CreateOnUnloaded<TPage>(TPage page) where TPage : Page, IPage
-    {
-        return (object sender, RoutedEventArgs eventArgs) =>
-        {
-            CommandClient.Get().DestroyObject(page.Id);
-            page.Id = new();
         };
     }
 }

@@ -16,6 +16,7 @@ internal sealed class PageStore : Singleton<PageStore>
     private readonly int _maxPageCount;
     private readonly Queue<Type> _remainingPageTypes = [];
     private readonly Dictionary<string, PageProperty> _assignedPages = [];
+    private readonly Dictionary<string, IPage> _pageInstances = [];
 
     public PageStore()
     {
@@ -31,7 +32,7 @@ internal sealed class PageStore : Singleton<PageStore>
         }
     }
 
-    public Type RegisterPage(string pageName, int callbackQueueThreadId, NavigationCacheMode navigationCacheMode)
+    public Type RegisterPageProperty(string pageName, int callbackQueueThreadId, NavigationCacheMode navigationCacheMode)
     {
         lock (_remainingPageTypes)
         {
@@ -73,4 +74,22 @@ internal sealed class PageStore : Singleton<PageStore>
             throw new InvalidOperationException($"Page name not found for type [{pageType}].");
         }
     }
+
+    public void RegisterPageInstance<TPage>(TPage page) where TPage : IPage
+    {
+        var property = GetPageProperty(typeof(TPage));
+
+        lock (_remainingPageTypes)
+        {
+            if (_pageInstances.TryGetValue(property.Name, out IPage? previousPage))
+            {
+                // Destroy previous page instance.
+                CommandClient.Get().DestroyObject(previousPage.Id);
+                previousPage.Id = new();
+            }
+
+            _pageInstances[property.Name] = page;
+        }
+    }
+
 }
