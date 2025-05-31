@@ -55,4 +55,9 @@ public class NavigationViewItem : NavigationViewItemBase
             "Microsoft.UI.Xaml.Controls.NavigationViewItem, Microsoft.WinUI",
             this);
     }
+
+    internal NavigationViewItem(ObjectId id)
+        : base(id)
+    {
+    }
 }

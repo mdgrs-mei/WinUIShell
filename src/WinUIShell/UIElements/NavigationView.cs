@@ -62,7 +62,13 @@ public class NavigationView : ContentControl
     //public bool IsPaneOpen
     //public bool IsPaneToggleButtonVisible
     //public bool IsPaneVisible
-    //public bool IsSettingsVisible
+
+    public bool IsSettingsVisible
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsSettingsVisible))!;
+        set => PropertyAccessor.Set(Id, nameof(IsSettingsVisible), value);
+    }
+
     //public bool IsTitleBarAutoPaddingEnabled
     //public Style MenuItemContainerStyle
     //public StyleSelector MenuItemContainerStyleSelector
@@ -90,24 +96,19 @@ public class NavigationView : ContentControl
 
     //public Style PaneToggleButtonStyle
 
-    public object? SelectedItem
+    public NavigationViewItem? SelectedItem
     {
-        get => PropertyAccessor.Get<object>(Id, nameof(SelectedItem));
-        set
-        {
-            if (value is WinUIShellObject v)
-            {
-                PropertyAccessor.Set(Id, nameof(SelectedItem), v.Id);
-            }
-            else
-            {
-                PropertyAccessor.Set(Id, nameof(SelectedItem), value);
-            }
-        }
+        get => PropertyAccessor.Get<NavigationViewItem>(Id, nameof(SelectedItem));
+        set => PropertyAccessor.Set(Id, nameof(SelectedItem), value?.Id);
     }
 
     //public NavigationViewSelectionFollowsFocus SelectionFollowsFocus
-    //public object SettingsItem => INavigationViewMethods.get_SettingsItem(_objRef_global__Microsoft_UI_Xaml_Controls_INavigationView);
+
+    public NavigationViewItem? SettingsItem
+    {
+        get => PropertyAccessor.Get<NavigationViewItem>(Id, nameof(SettingsItem));
+    }
+
     //public NavigationViewShoulderNavigationEnabled ShoulderNavigationEnabled
     //public NavigationViewTemplateSettings TemplateSettings => INavigationView2Methods.get_TemplateSettings(_objRef_global__Microsoft_UI_Xaml_Controls_INavigationView2);
 
