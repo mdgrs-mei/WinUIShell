@@ -29,7 +29,10 @@ public class NavigationView : ContentControl
     }
 
     //public UIElement ContentOverlay
-    //public NavigationViewDisplayMode DisplayMode => INavigationViewMethods.get_DisplayMode(_objRef_global__Microsoft_UI_Xaml_Controls_INavigationView);
+    public NavigationViewDisplayMode DisplayMode
+    {
+        get => PropertyAccessor.Get<NavigationViewDisplayMode>(Id, nameof(DisplayMode))!;
+    }
 
     public double ExpandedModeThresholdWidth
     {
@@ -57,11 +60,35 @@ public class NavigationView : ContentControl
     }
 
     //public DataTemplate HeaderTemplate
-    //public NavigationViewBackButtonVisible IsBackButtonVisible
-    //public bool IsBackEnabled
-    //public bool IsPaneOpen
-    //public bool IsPaneToggleButtonVisible
-    //public bool IsPaneVisible
+    public NavigationViewBackButtonVisible IsBackButtonVisible
+    {
+        get => PropertyAccessor.Get<NavigationViewBackButtonVisible>(Id, nameof(IsBackButtonVisible))!;
+        set => PropertyAccessor.Set(Id, nameof(IsBackButtonVisible), value);
+    }
+
+    public bool IsBackEnabled
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsBackEnabled))!;
+        set => PropertyAccessor.Set(Id, nameof(IsBackEnabled), value);
+    }
+
+    public bool IsPaneOpen
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsPaneOpen))!;
+        set => PropertyAccessor.Set(Id, nameof(IsPaneOpen), value);
+    }
+
+    public bool IsPaneToggleButtonVisible
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsPaneToggleButtonVisible))!;
+        set => PropertyAccessor.Set(Id, nameof(IsPaneToggleButtonVisible), value);
+    }
+
+    public bool IsPaneVisible
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsPaneVisible))!;
+        set => PropertyAccessor.Set(Id, nameof(IsPaneVisible), value);
+    }
 
     public bool IsSettingsVisible
     {
@@ -69,7 +96,12 @@ public class NavigationView : ContentControl
         set => PropertyAccessor.Set(Id, nameof(IsSettingsVisible), value);
     }
 
-    //public bool IsTitleBarAutoPaddingEnabled
+    public bool IsTitleBarAutoPaddingEnabled
+    {
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsTitleBarAutoPaddingEnabled))!;
+        set => PropertyAccessor.Set(Id, nameof(IsTitleBarAutoPaddingEnabled), value);
+    }
+
     //public Style MenuItemContainerStyle
     //public StyleSelector MenuItemContainerStyleSelector
     //public DataTemplate MenuItemTemplate
@@ -84,7 +116,13 @@ public class NavigationView : ContentControl
     //public double OpenPaneLength
     //public NavigationViewOverflowLabelMode OverflowLabelMode
     //public UIElement PaneCustomContent
-    //public NavigationViewPaneDisplayMode PaneDisplayMode
+
+    public NavigationViewPaneDisplayMode PaneDisplayMode
+    {
+        get => PropertyAccessor.Get<NavigationViewPaneDisplayMode>(Id, nameof(PaneDisplayMode))!;
+        set => PropertyAccessor.Set(Id, nameof(PaneDisplayMode), value);
+    }
+
     //public UIElement PaneFooter
     //public UIElement PaneHeader
 
