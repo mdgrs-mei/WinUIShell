@@ -56,11 +56,12 @@ public class Frame : ContentControl
 
     public bool Navigate(
         string pageName,
+        NavigationTransitionInfo? transitionOverride,
         NavigationCacheMode cacheMode,
         ScriptBlock onLoaded,
         object? onLoadedArgumentList = null)
     {
-        return Navigate(pageName, cacheMode, new EventCallback
+        return Navigate(pageName, transitionOverride, cacheMode, new EventCallback
         {
             ScriptBlock = onLoaded,
             ArgumentList = onLoadedArgumentList
@@ -69,6 +70,7 @@ public class Frame : ContentControl
 
     public bool Navigate(
         string pageName,
+        NavigationTransitionInfo? transitionOverride,
         NavigationCacheMode cacheMode,
         EventCallback onLoaded)
     {
@@ -79,13 +81,12 @@ public class Frame : ContentControl
             Id,
             Environment.CurrentManagedThreadId,
             pageName,
+            transitionOverride?.Id,
             cacheMode);
     }
 
-    //public bool Navigate(Type sourcePageType, object parameter, NavigationTransitionInfo infoOverride)
     //public bool NavigateToType(Type sourcePageType, object parameter, FrameNavigationOptions navigationOptions)
     //public string GetNavigationState()
     //public void SetNavigationState(string navigationState)
     //public void SetNavigationState(string navigationState, bool suppressNavigate)
-    //public bool Navigate(Type sourcePageType)
 }
