@@ -7,6 +7,7 @@ public class NavigationView : ContentControl
 {
     private const string _accessorClassName = "WinUIShell.Server.NavigationViewAccessor, WinUIShell.Server";
     private readonly EventCallbackList _itemInvokedCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _backRequestedCallbacks = new(_accessorClassName);
 
     public bool AlwaysShowHeader
     {
@@ -169,6 +170,22 @@ public class NavigationView : ContentControl
     {
         _itemInvokedCallbacks.Add(
             nameof(AddItemInvoked),
+            Id,
+            eventCallback);
+    }
+
+    public void AddBackRequested(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddBackRequested(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddBackRequested(EventCallback eventCallback)
+    {
+        _backRequestedCallbacks.Add(
+            nameof(AddBackRequested),
             Id,
             eventCallback);
     }
