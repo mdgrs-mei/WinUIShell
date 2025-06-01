@@ -6,6 +6,7 @@ namespace WinUIShell;
 public class Frame : ContentControl
 {
     private const string _accessorClassName = "WinUIShell.Server.FrameAccessor, WinUIShell.Server";
+    private readonly EventCallbackList _navigatedCallbacks = new(_accessorClassName);
 
     //public IList<PageStackEntry> BackStack => IFrameMethods.get_BackStack(_objRef_global__Microsoft_UI_Xaml_Controls_IFrame);
     //public int BackStackDepth => IFrameMethods.get_BackStackDepth(_objRef_global__Microsoft_UI_Xaml_Controls_IFrame);
@@ -36,6 +37,16 @@ public class Frame : ContentControl
     }
 
     //public Type SourcePageType
+    public string SourcePageName
+    {
+        get
+        {
+            return CommandClient.Get().InvokeStaticMethodAndGetResult<string>(
+                _accessorClassName,
+                "GetSourcePageName",
+                Id)!;
+        }
+    }
 
     public Frame()
     {
@@ -89,4 +100,20 @@ public class Frame : ContentControl
     //public string GetNavigationState()
     //public void SetNavigationState(string navigationState)
     //public void SetNavigationState(string navigationState, bool suppressNavigate)
+
+    public void AddNavigated(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddNavigated(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddNavigated(EventCallback eventCallback)
+    {
+        _navigatedCallbacks.Add(
+            nameof(AddNavigated),
+            Id,
+            eventCallback);
+    }
 }

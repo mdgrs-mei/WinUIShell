@@ -36,6 +36,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.NavigationViewDisplayMode, WinUIShell", "Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode, Microsoft.WinUI"),
         ("WinUIShell.NavigationViewPaneDisplayMode, WinUIShell", "Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode, Microsoft.WinUI"),
         ("WinUIShell.SlideNavigationTransitionEffect, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect, Microsoft.WinUI"),
+        ("WinUIShell.NavigationMode, WinUIShell", "Microsoft.UI.Xaml.Navigation.NavigationMode, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()
