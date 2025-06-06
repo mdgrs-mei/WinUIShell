@@ -3,20 +3,31 @@ if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
 
-$longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mi ipsum. Phasellus vel malesuada mauris. Donec pharetra, enim sit amet mattis tincidunt, felis nisi semper lectus, vel porta diam nisi in augue. Pellentesque lacus tortor, aliquam et faucibus id, rhoncus ut justo. Sed id lectus odio, eget pulvinar diam. Suspendisse eleifend ornare libero, in luctus purus aliquet non. Sed interdum, sem vitae rutrum rhoncus, felis ligula ultrices sem, in eleifend eros ante id neque.'
 $resources = [Application]::Current.Resources
 $win = [Window]::new()
-$win.Title = 'NavigationView'
+$win.Title = 'Navigation View'
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
-$win.AppWindow.ResizeClient(1200, 480)
+$win.AppWindow.ResizeClient(1000, 520)
 
-function CreatePageContent($pageName) {
+$frame = [Frame]::new()
+$navigationView = [NavigationView]::new()
+$navigationView.Content = $frame
+$navigationView.PaneTitle = 'Menu'
+$navigationView.ExpandedModeThresholdWidth = 800
+$navigationView.CompactModeThresholdWidth = 400
+
+$contentPageCreator = {
+    param ($pageName, $page, $e)
+    if ($page.Content) {
+        return
+    }
+
     $title = [TextBlock]::new()
     $title.Text = "This is $pageName"
     $title.Style = $resources['TitleTextBlockStyle']
 
     $text = [TextBlock]::new()
-    $text.Text = $longString
+    $text.Text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac mi ipsum. Phasellus vel malesuada mauris. Donec pharetra, enim sit amet mattis tincidunt, felis nisi semper lectus, vel porta diam nisi in augue. Pellentesque lacus tortor, aliquam et faucibus id, rhoncus ut justo. Sed id lectus odio, eget pulvinar diam. Suspendisse eleifend ornare libero, in luctus purus aliquet non. Sed interdum, sem vitae rutrum rhoncus, felis ligula ultrices sem, in eleifend eros ante id neque.'
     $text.Style = $resources['BodyTextBlockStyle']
 
     $button = [Button]::new()
@@ -30,77 +41,47 @@ function CreatePageContent($pageName) {
     $panel.Children.Add($title)
     $panel.Children.Add($text)
     $panel.Children.Add($button)
-    $panel
+
+    $page.Content = $panel
 }
 
-$pageCreator = @{
-    Home = {
-        param ($pageName, $page, $e)
-        if ($page.Content) {
-            return
-        }
-        $page.Content = CreatePageContent $pageName
+$settingsPageCreator = {
+    param ($pageName, $page, $e)
+    if ($page.Content) {
+        return
     }
-    Favorite = {
-        param ($pageName, $page, $e)
-        if ($page.Content) {
-            return
-        }
-        $page.Content = CreatePageContent $pageName
-    }
-    Mail = {
-        param ($pageName, $page, $e)
-        if ($page.Content) {
-            return
-        }
-        $page.Content = CreatePageContent $pageName
-    }
-    Chat = {
-        param ($pageName, $page, $e)
-        if ($page.Content) {
-            return
-        }
-        $page.Content = CreatePageContent $pageName
-    }
-    Settings = {
-        param ($tag, $page, $e)
-        if ($page.Content) {
-            return
-        }
 
-        $toggle1 = [ToggleSwitch]::new()
-        $toggle1.IsOn = $true
-        $toggle1.Header = 'Badge Notification'
+    $toggle1 = [ToggleSwitch]::new()
+    $toggle1.IsOn = $true
+    $toggle1.Header = 'Badge Notification'
 
-        $toggle2 = [ToggleSwitch]::new()
-        $toggle2.Header = 'Banner Notification'
+    $toggle2 = [ToggleSwitch]::new()
+    $toggle2.Header = 'Banner Notification'
 
-        $toggle3 = [ToggleSwitch]::new()
-        $toggle3.Header = 'Brightness Control'
+    $toggle3 = [ToggleSwitch]::new()
+    $toggle3.Header = 'Brightness Control'
 
-        $panel = [StackPanel]::new()
-        $panel.Margin = 32
-        $panel.Spacing = 16
-        $panel.Children.Add($toggle1)
-        $panel.Children.Add($toggle2)
-        $panel.Children.Add($toggle3)
+    $panel = [StackPanel]::new()
+    $panel.Margin = 32
+    $panel.Spacing = 16
+    $panel.Children.Add($toggle1)
+    $panel.Children.Add($toggle2)
+    $panel.Children.Add($toggle3)
 
-        $page.Content = $panel
-    }
+    $page.Content = $panel
 }
-
-$frame = [Frame]::new()
-$navigationView = [NavigationView]::new()
 
 function Navigate($pageName) {
     if ($frame.SourcePageName -eq $pageName) {
         return
     }
 
-    $onLoaded = $pageCreator[$pageName]
+    $onLoaded = if ($pageName -eq 'Settings') { $settingsPageCreator } else { $contentPageCreator }
     $onLoadedArgumentList = $pageName
 
+    # Page instance is created only once per page name. Cached pages are used from the second navigation.
     $cacheMode = [NavigationCacheMode]::Enabled
+
     $transition = $e.RecommendedNavigationTransitionInfo
     $frame.Navigate($pageName, $transition, $cacheMode, $onLoaded, $onLoadedArgumentList) | Out-Null
 }
@@ -121,14 +102,6 @@ $navigationView.AddBackRequested({
         if (-not ($frame.CanGoBack)) {
             return
         }
-
-        $displayMode = $navigationView.DisplayMode
-        if ($navigationView.IsPaneOpen -and
-            ($displayMode -eq [NavigationViewDisplayMode]::Compact ||
-            $displayMode -eq [NavigationViewDisplayMode]::Minimal)) {
-            return
-        }
-
         $frame.GoBack()
     })
 
@@ -152,8 +125,7 @@ $frame.AddNavigated({
         $navigationView.SelectedItem = $menuItem
     })
 
-$navigationView.Content = $frame
-$navigationView.PaneTitle = 'Menu'
+
 $menuItemMap = @{}
 
 $separator = [NavigationViewItemSeparator]::new()
