@@ -7,6 +7,7 @@ $resources = [Application]::Current.Resources
 $win = [Window]::new()
 $win.Title = 'Navigation View'
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
+$win.AppWindow.TitleBar.PreferredTheme = 'UseDefaultAppMode'
 $win.AppWindow.ResizeClient(1000, 520)
 
 $frame = [Frame]::new()
@@ -16,9 +17,10 @@ $navigationView.PaneTitle = 'Menu'
 $navigationView.ExpandedModeThresholdWidth = 800
 $navigationView.CompactModeThresholdWidth = 400
 
-$contentPageCreator = {
+$contentPageOnLoaded = {
     param ($pageName, $page, $e)
     if ($page.Content) {
+        # Cached instance is used so we reuse the content.
         return
     }
 
@@ -45,7 +47,7 @@ $contentPageCreator = {
     $page.Content = $panel
 }
 
-$settingsPageCreator = {
+$settingsPageOnLoaded = {
     param ($pageName, $page, $e)
     if ($page.Content) {
         return
@@ -76,16 +78,20 @@ function Navigate($pageName) {
         return
     }
 
-    $onLoaded = if ($pageName -eq 'Settings') { $settingsPageCreator } else { $contentPageCreator }
+    $onLoaded = if ($pageName -eq 'Settings') { $settingsPageOnLoaded } else { $contentPageOnLoaded }
     $onLoadedArgumentList = $pageName
 
     # Page instance is created only once per page name. Cached pages are used from the second navigation.
     $cacheMode = [NavigationCacheMode]::Enabled
 
+    # You can change the transition animation by setting [DrillInNavigationTransitionInfo]::new() etc.
     $transition = $e.RecommendedNavigationTransitionInfo
+
+    # Page instance is created internally and onLoaded script block is called.
     $frame.Navigate($pageName, $transition, $cacheMode, $onLoaded, $onLoadedArgumentList) | Out-Null
 }
 
+# Called when NavigationViewItem is clicked.
 $navigationView.AddItemInvoked({
         param($argumentList, $s, $e)
 
@@ -98,6 +104,7 @@ $navigationView.AddItemInvoked({
         Navigate $pageName
     })
 
+# Called when Back button is clicked.
 $navigationView.AddBackRequested({
         if (-not ($frame.CanGoBack)) {
             return
@@ -126,11 +133,10 @@ $frame.AddNavigated({
     })
 
 
-$menuItemMap = @{}
-
 $separator = [NavigationViewItemSeparator]::new()
 $navigationView.MenuItems.Add($separator)
 
+$menuItemMap = @{}
 $item1 = [NavigationViewItem]::new()
 $item1.Content = 'Home'
 $item1.Icon = [SymbolIcon]::new('Home')
