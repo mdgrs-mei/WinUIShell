@@ -21,6 +21,17 @@ internal sealed class RpcService
             });
     }
 
+    public void CreateObjectWithId(CommandQueueId queueId, ObjectId id, string typeName)
+    {
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                var obj = Invoker.Get().CreateObject(typeName, [id]);
+                ObjectStore.Get().RegisterObject(id, obj);
+            });
+    }
+
     public Task CreateObjectWaitAsync(CommandQueueId queueId, ObjectId id, string typeName, RpcValue[]? rpcArguments)
     {
         var taskCompletion = new TaskCompletionSource();
@@ -141,6 +152,28 @@ internal sealed class RpcService
                 var arguments = ConvertArguments(rpcArguments);
                 _ = Invoker.Get().InvokeStaticMethod(className, methodName, arguments);
             });
+    }
+
+    public Task InvokeStaticMethodWaitAsync(CommandQueueId queueId, string className, string methodName, RpcValue[]? rpcArguments)
+    {
+        var taskCompletion = new TaskCompletionSource();
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                try
+                {
+                    var arguments = ConvertArguments(rpcArguments);
+                    _ = Invoker.Get().InvokeStaticMethod(className, methodName, arguments);
+
+                    taskCompletion.SetResult();
+                }
+                catch (Exception e)
+                {
+                    taskCompletion.SetException(e);
+                }
+            });
+        return taskCompletion.Task;
     }
 
     public Task<RpcValue> InvokeStaticMethodAndGetResultAsync(string className, string methodName, RpcValue[]? rpcArguments)

@@ -1,4 +1,6 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
+
+namespace WinUIShell;
 
 public abstract class ContentControl : Control
 {
@@ -16,5 +18,14 @@ public abstract class ContentControl : Control
                 PropertyAccessor.Set(Id, nameof(Content), value);
             }
         }
+    }
+
+    internal ContentControl()
+    {
+    }
+
+    internal ContentControl(ObjectId id)
+        : base(id)
+    {
     }
 }

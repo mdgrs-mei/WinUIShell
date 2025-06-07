@@ -23,7 +23,14 @@ public class Invoker : Singleton<Invoker>
         {
             throw new InvalidOperationException($"Type [{typeName}] not found.");
         }
-        var obj = Activator.CreateInstance(type, arguments);
+
+        var obj = Activator.CreateInstance(
+            type,
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic,
+            null,
+            arguments,
+            null);
+
         if (obj == null)
         {
             throw new InvalidOperationException($"Failed to create instance of type [{typeName}].");
