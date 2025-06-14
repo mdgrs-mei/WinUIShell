@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0] - 2025-06-14
+
+### Added
+
+- Added `NavigationView`
+- Added `Frame`
+- Added `Page`
+- Added `Tag` property to `FrameworkElement`
+
 ## [0.2.0] - 2025-04-15
 
 ### Added
