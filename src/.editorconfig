@@ -244,3 +244,5 @@ dotnet_diagnostic.VSTHRD101.severity = none
 dotnet_diagnostic.IDE0045.severity = none
 # CA1028: Enum Storage should be Int32
 dotnet_diagnostic.CA1028.severity = none
+# VSTHRD100: Avoid async void methods
+dotnet_diagnostic.VSTHRD100.severity = none

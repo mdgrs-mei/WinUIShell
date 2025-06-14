@@ -54,6 +54,25 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
+    public ObjectId CreateObjectWithId(string typeName, object? linkedObject)
+    {
+        return CreateObjectWithId(CommandQueueId.MainThread, typeName, linkedObject);
+    }
+
+    public ObjectId CreateObjectWithId(CommandQueueId queueId, string typeName, object? linkedObject)
+    {
+        Debug.Assert(_rpc is not null);
+
+        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
+            return id;
+
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("CreateObjectWithId", queueId, id, typeName);
+        });
+        return id;
+    }
+
     public Task<ObjectId> CreateObjectWaitAsync(string typeName, object? linkedObject, params object?[] arguments)
     {
         return CreateObjectWaitAsync(CommandQueueId.MainThread, typeName, linkedObject, arguments);
@@ -177,6 +196,16 @@ public class CommandClient : Singleton<CommandClient>
         {
             await _rpc.InvokeAsync("InvokeStaticMethod", className, methodName, rpcArguments);
         });
+    }
+
+    public Task InvokeStaticMethodWaitAsync(CommandQueueId queueId, string className, string methodName, params object?[] arguments)
+    {
+        Debug.Assert(_rpc is not null);
+        ArgumentNullException.ThrowIfNull(arguments);
+
+        var rpcArguments = ConvertArguments(arguments);
+
+        return _rpc.InvokeAsync("InvokeStaticMethodWait", queueId, className, methodName, rpcArguments);
     }
 
     public T? InvokeStaticMethodAndGetResult<T>(string className, string methodName, params object?[] arguments)
