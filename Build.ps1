@@ -29,6 +29,8 @@ function CopyFolderItems($FolderPath, $Destination) {
     }
 }
 
+$dotnetExeVersion = dotnet --version
+Write-Host "dotnet.exe version: $dotnetExeVersion"
 Remove-Item -Path $outDir -Recurse -ErrorAction Ignore
 Remove-Item -Path $outServer -Recurse -ErrorAction Ignore
 
