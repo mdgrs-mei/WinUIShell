@@ -27,8 +27,6 @@ Install-PSResource -Name WinUIShell
 
 - PowerShell 7.4 or newer
 - Windows 10/11 build 10.0.17763.0 or newer
-- Windows App Runtime 1.7.0 or newer
-- .NET Desktop Runtime 8.0 or newer
 
 ## Quick Start
 
