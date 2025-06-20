@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.0] - 2025-06-20
+
+### Changed
+
+- `WinUIShell.Server.exe` is now a self-contained app
+
 ## [0.3.0] - 2025-06-14
 
 ### Added
