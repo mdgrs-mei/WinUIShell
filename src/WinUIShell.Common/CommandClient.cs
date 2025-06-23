@@ -330,8 +330,25 @@ public class CommandClient : Singleton<CommandClient>
             {
                 // Newly created object on the server side.
                 // Create the corresponding object on the client side.
+                Type? targetType = null;
+                if (!string.IsNullOrEmpty(valueObjectId.Type))
+                {
+                    // If object type is stored on the server side, and the corresponding type is found on the client side, use that type.
+                    var sourceTypeName = valueObjectId.Type;
+                    _ = EnumTypeMapping.Get().TryGetValue(sourceTypeName, out string? targetTypeName);
+                    if (targetTypeName is not null)
+                    {
+                        targetType = Type.GetType(targetTypeName);
+                    }
+                }
+
+                if (targetType is null)
+                {
+                    targetType = typeof(T);
+                }
+
                 obj = Activator.CreateInstance(
-                    typeof(T),
+                    targetType,
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
                     null,
                     [valueObjectId],

@@ -416,7 +416,7 @@ internal sealed class RpcService
             {
                 // If the object is not a primitive type or a registered object, register it here.
                 // The corresponding object needs to be created on the client side.
-                _ = ObjectStore.Get().RegisterObject(obj!, out ObjectId id);
+                _ = ObjectStore.Get().RegisterObjectWithType(obj!, out ObjectId id);
                 return new RpcValue(id);
             }
         }

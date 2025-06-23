@@ -92,7 +92,7 @@ public class RpcValue
                 {
                     var type = value.GetType();
                     var typeName = type.FullName;
-                    var assemblyName = value.GetType().Assembly.GetName().Name;
+                    var assemblyName = type.Assembly.GetName().Name;
                     StringValue = $"{typeName}, {assemblyName}";
                     if (Enum.GetUnderlyingType(type) == typeof(int))
                     {
