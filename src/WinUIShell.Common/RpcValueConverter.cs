@@ -84,27 +84,7 @@ public static class RpcValueConverter
             ObjectStore.Get().RegisterObject(objectId, obj);
         }
 
-        if (obj is T)
-        {
-            return (T?)obj;
-        }
-        else
-        {
-            // Call constructor for type conversion.
-            obj = Activator.CreateInstance(
-                typeof(T),
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
-                null,
-                [obj],
-                null);
-
-            if (obj == null)
-            {
-                throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
-            }
-
-            return (T?)obj;
-        }
+        return (T?)obj;
     }
 
     private static object? ConvertRpcValueToEnum(RpcValue rpcValue)
