@@ -33,8 +33,8 @@ Install-PSResource -Name WinUIShell
 This code creates a Window that has a clickable button:
 
 ```powershell
-Import-Module WinUIShell
 using namespace WinUIShell
+Import-Module WinUIShell
 
 $win = [Window]::new()
 $win.Title = 'Hello from PowerShell!'
