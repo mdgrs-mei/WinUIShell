@@ -41,6 +41,11 @@ public class Window : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(Title), value);
     }
 
+    internal Window(ObjectId id)
+    : base(id)
+    {
+    }
+
     public Window()
     {
         Id = CommandClient.Get().CreateObject(
