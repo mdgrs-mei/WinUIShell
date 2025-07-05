@@ -1,6 +1,6 @@
 ﻿namespace WinUIShell.Common;
 
-internal sealed class ObjectTypeMapping : Singleton<EnumTypeMapping>
+internal sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
 {
     private readonly Dictionary<string, string> _map = [];
 
