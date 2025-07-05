@@ -31,7 +31,7 @@ public static class RpcValueConverter
                     return objectId;
 
                 var sourceTypeName = objectId.Type;
-                _ = EnumTypeMapping.Get().TryGetValue(sourceTypeName, out string? targetTypeName);
+                _ = ObjectTypeMapping.Get().TryGetValue(sourceTypeName, out string? targetTypeName);
                 if (targetTypeName is null)
                     return objectId;
 
