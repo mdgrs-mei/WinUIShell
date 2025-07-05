@@ -50,6 +50,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -115,6 +116,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -138,6 +140,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -171,6 +174,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -193,6 +197,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -243,6 +248,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -264,6 +270,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -284,6 +291,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
@@ -330,6 +338,7 @@ internal sealed class RpcService
                 catch (Exception e)
                 {
                     taskCompletion.SetException(e);
+                    throw;
                 }
             });
         return taskCompletion.Task;
