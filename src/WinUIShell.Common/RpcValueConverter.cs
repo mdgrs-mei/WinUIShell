@@ -4,7 +4,41 @@ namespace WinUIShell.Common;
 
 public static class RpcValueConverter
 {
-    public static object? ConvertRpcValueToObject(RpcValue rpcValue)
+    public static T? ConvertRpcValueTo<T>(RpcValue rpcValue)
+    {
+        var obj = ConvertRpcValueToObject(rpcValue);
+        if (obj is null)
+            return default;
+
+        if (obj is ObjectId objectId)
+        {
+            // Newly created object on the server side, and no type mapping was found.
+            // Create the object on the client side with the return type. It needs to have a constructor from ObjectId.
+            if (typeof(T) == typeof(object))
+            {
+                throw new InvalidOperationException($"Object not found or unsupported object type. Id:[{objectId.Id}], Type:[{objectId.Type}].");
+            }
+            else
+            {
+                obj = Activator.CreateInstance(
+                    typeof(T),
+                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
+                    null,
+                    [objectId],
+                    null);
+
+                if (obj == null)
+                {
+                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
+                }
+                ObjectStore.Get().RegisterObject(objectId, obj);
+            }
+        }
+
+        return (T?)obj;
+    }
+
+    private static object? ConvertRpcValueToObject(RpcValue rpcValue)
     {
         if (rpcValue is null)
             return null;
@@ -61,32 +95,6 @@ public static class RpcValueConverter
         }
     }
 
-    public static T? ConvertRpcValueTo<T>(RpcValue rpcValue)
-    {
-        var obj = ConvertRpcValueToObject(rpcValue);
-        if (obj is null)
-            return default;
-
-        if (obj is ObjectId objectId)
-        {
-            // Newly created object on the server side. Create the corresponding object on the client side.
-            obj = Activator.CreateInstance(
-                typeof(T),
-                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
-                null,
-                [objectId],
-                null);
-
-            if (obj == null)
-            {
-                throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
-            }
-            ObjectStore.Get().RegisterObject(objectId, obj);
-        }
-
-        return (T?)obj;
-    }
-
     private static object? ConvertRpcValueToEnum(RpcValue rpcValue)
     {
         var value = rpcValue.GetObject();
@@ -126,7 +134,7 @@ public static class RpcValueConverter
         var objectArray = new object?[rpcArray.Length];
         for (int i = 0; i < objectArray.Length; ++i)
         {
-            objectArray[i] = ConvertRpcValueToObject(rpcArray[i]);
+            objectArray[i] = ConvertRpcValueTo<object>(rpcArray[i]);
         }
         return objectArray;
     }
