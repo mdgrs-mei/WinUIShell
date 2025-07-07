@@ -1,6 +1,6 @@
 ﻿namespace WinUIShell.Common;
 
-internal sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
+public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
 {
     private readonly Dictionary<string, string> _map = [];
 
@@ -8,6 +8,7 @@ internal sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.Application, WinUIShell", "Microsoft.UI.Xaml.Application, Microsoft.WinUI"),
         ("WinUIShell.Button, WinUIShell", "Microsoft.UI.Xaml.Controls.Button, Microsoft.WinUI"),
         ("WinUIShell.ColumnDefinition, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinition, Microsoft.WinUI"),
+        ("WinUIShell.CompactOverlayPresenter, WinUIShell", "Microsoft.UI.Windowing.CompactOverlayPresenter, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.CornerRadius, WinUIShell", "Microsoft.UI.Xaml.CornerRadius, Microsoft.WinUI"),
         ("WinUIShell.DesktopAcrylicBackdrop, WinUIShell", "Microsoft.UI.Xaml.Media.DesktopAcrylicBackdrop, Microsoft.WinUI"),
         ("WinUIShell.DrillInNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo, Microsoft.WinUI"),
@@ -40,6 +41,7 @@ internal sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.ToggleSwitch, WinUIShell", "Microsoft.UI.Xaml.Controls.ToggleSwitch, Microsoft.WinUI"),
         ("WinUIShell.Uri, WinUIShell", "System.Uri, System.Private.Uri"),
         ("WinUIShell.Window, WinUIShell", "Microsoft.UI.Xaml.Window, Microsoft.WinUI"),
+        ("WinUIShell.XamlReader, WinUIShell", "Microsoft.UI.Xaml.Markup.XamlReader, Microsoft.WinUI"),
     ];
 
     public ObjectTypeMapping()
@@ -51,8 +53,23 @@ internal sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         }
     }
 
-    public bool TryGetValue(string sourceEnumType, out string? targetEnumType)
+    public bool TryGetValue(string sourceTypeName, out string? targetTypeName)
     {
-        return _map.TryGetValue(sourceEnumType, out targetEnumType);
+        return _map.TryGetValue(sourceTypeName, out targetTypeName);
+    }
+
+    public string GetTargetTypeName<T>()
+    {
+        var type = typeof(T);
+        var typeName = type.FullName;
+        var assemblyName = type.Assembly.GetName().Name;
+        var sourceTypeName = $"{typeName}, {assemblyName}";
+
+        _ = TryGetValue(sourceTypeName, out string? targetTypeName);
+        if (targetTypeName is null)
+        {
+            throw new InvalidOperationException($"Object type mapping not found for [{sourceTypeName}].");
+        }
+        return targetTypeName;
     }
 }
