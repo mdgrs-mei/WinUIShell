@@ -1,9 +1,11 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
+
+namespace WinUIShell;
 
 #pragma warning disable IDE0025 // Use block body for property
-public static class Colors
+public sealed class Colors
 {
-    private const string s_className = "Microsoft.UI.Colors, Microsoft.InteractiveExperiences.Projection";
+    private static readonly string s_className = ObjectTypeMapping.Get().GetTargetTypeName<Colors>();
 
     public static Color AliceBlue => PropertyAccessor.GetStatic<Color>(s_className, nameof(AliceBlue))!;
     public static Color AntiqueWhite => PropertyAccessor.GetStatic<Color>(s_className, nameof(AntiqueWhite))!;

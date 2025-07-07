@@ -7,6 +7,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
     private readonly List<(string, string)> _list = [
         ("WinUIShell.Application, WinUIShell", "Microsoft.UI.Xaml.Application, Microsoft.WinUI"),
         ("WinUIShell.Button, WinUIShell", "Microsoft.UI.Xaml.Controls.Button, Microsoft.WinUI"),
+        ("WinUIShell.Color, WinUIShell", "Windows.UI.Color, Microsoft.Windows.SDK.NET"),
+        ("WinUIShell.Colors, WinUIShell", "Microsoft.UI.Colors, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ColumnDefinition, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinition, Microsoft.WinUI"),
         ("WinUIShell.CompactOverlayPresenter, WinUIShell", "Microsoft.UI.Windowing.CompactOverlayPresenter, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.CornerRadius, WinUIShell", "Microsoft.UI.Xaml.CornerRadius, Microsoft.WinUI"),
@@ -15,6 +17,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.EntranceNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo, Microsoft.WinUI"),
         ("WinUIShell.FontFamily, WinUIShell", "Microsoft.UI.Xaml.Media.FontFamily, Microsoft.WinUI"),
         ("WinUIShell.FontWeight, WinUIShell", "Windows.UI.Text.FontWeight, Microsoft.Windows.SDK.NET"),
+        ("WinUIShell.FontWeights, WinUIShell", "Microsoft.UI.Text.FontWeights, Microsoft.WinUI"),
         ("WinUIShell.Frame, WinUIShell", "Microsoft.UI.Xaml.Controls.Frame, Microsoft.WinUI"),
         ("WinUIShell.Grid, WinUIShell", "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI"),
         ("WinUIShell.GridLength, WinUIShell", "Microsoft.UI.Xaml.GridLength, Microsoft.WinUI"),
