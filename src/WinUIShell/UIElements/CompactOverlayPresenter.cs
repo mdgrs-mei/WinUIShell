@@ -13,7 +13,7 @@ public class CompactOverlayPresenter : AppWindowPresenter
     public CompactOverlayPresenter()
     {
         Id = CommandClient.Get().CreateObjectWithStaticMethod(
-            "Microsoft.UI.Windowing.CompactOverlayPresenter, Microsoft.InteractiveExperiences.Projection",
+            ObjectTypeMapping.Get().GetTargetTypeName<CompactOverlayPresenter>(),
             "Create",
             this);
     }

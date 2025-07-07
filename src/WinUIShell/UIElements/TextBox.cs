@@ -191,7 +191,7 @@ public class TextBox : Control
     public TextBox()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.TextBox, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<TextBox>(),
             this);
     }
 

@@ -69,7 +69,7 @@ public class PasswordBox : Control
     public PasswordBox()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.PasswordBox, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<PasswordBox>(),
             this);
     }
 }

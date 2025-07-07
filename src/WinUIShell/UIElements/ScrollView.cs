@@ -95,7 +95,7 @@ public class ScrollView : Control
     public ScrollView()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.ScrollView, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<ScrollView>(),
             this);
     }
 }

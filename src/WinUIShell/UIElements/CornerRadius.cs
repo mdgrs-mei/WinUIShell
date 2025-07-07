@@ -32,7 +32,7 @@ public class CornerRadius : WinUIShellObject
     public CornerRadius(double uniformRadius)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.CornerRadius, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<CornerRadius>(),
             this,
             uniformRadius);
     }
@@ -40,7 +40,7 @@ public class CornerRadius : WinUIShellObject
     public CornerRadius(double topLeft, double topRight, double bottomRight, double bottomLeft)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.CornerRadius, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<CornerRadius>(),
             this,
             topLeft,
             topRight,

@@ -17,7 +17,7 @@ public class FontWeight : WinUIShellObject
     public FontWeight(ushort weight)
     {
         Id = CommandClient.Get().CreateObject(
-            "Windows.UI.Text.FontWeight, Microsoft.Windows.SDK.NET",
+            ObjectTypeMapping.Get().GetTargetTypeName<FontWeight>(),
             this,
             weight);
     }

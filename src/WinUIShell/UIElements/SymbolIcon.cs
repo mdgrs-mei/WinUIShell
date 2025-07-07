@@ -13,14 +13,14 @@ public class SymbolIcon : IconElement
     public SymbolIcon()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.SymbolIcon, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SymbolIcon>(),
             this);
     }
 
     public SymbolIcon(Symbol symbol)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.SymbolIcon, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SymbolIcon>(),
             this,
             symbol);
     }

@@ -2,13 +2,13 @@
 
 namespace WinUIShell;
 
-public static class XamlReader
+public sealed class XamlReader
 {
     public static object? Load(string xaml)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<object>(
-                    "Microsoft.UI.Xaml.Markup.XamlReader, Microsoft.WinUI",
-                    nameof(Load),
-                    xaml);
+            ObjectTypeMapping.Get().GetTargetTypeName<XamlReader>(),
+            nameof(Load),
+            xaml);
     }
 }

@@ -154,7 +154,7 @@ public class NavigationView : ContentControl
     public NavigationView()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.NavigationView, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<NavigationView>(),
             this);
     }
 

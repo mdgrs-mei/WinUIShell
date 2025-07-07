@@ -51,7 +51,7 @@ public class Frame : ContentControl
     public Frame()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.Frame, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Frame>(),
             this);
     }
 

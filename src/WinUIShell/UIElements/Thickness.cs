@@ -37,7 +37,7 @@ public class Thickness : WinUIShellObject
     public Thickness(double left, double top, double right, double bottom)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Thickness, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Thickness>(),
             this,
             left,
             top,

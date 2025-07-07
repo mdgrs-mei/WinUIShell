@@ -55,7 +55,7 @@ public class TitleBar : Control
     public TitleBar()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.TitleBar, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<TitleBar>(),
             this);
     }
 }

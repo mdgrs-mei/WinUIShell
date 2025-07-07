@@ -7,7 +7,7 @@ public class Application : WinUIShellObject
     public static Application Current
     {
         get => PropertyAccessor.GetStatic<Application>(
-            "Microsoft.UI.Xaml.Application, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Application>(),
             nameof(Current))!;
     }
 

@@ -13,14 +13,14 @@ public class SolidColorBrush : Brush
     public SolidColorBrush()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SolidColorBrush>(),
             this);
     }
 
     public SolidColorBrush(Color color)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SolidColorBrush>(),
             this,
             color?.Id);
     }
