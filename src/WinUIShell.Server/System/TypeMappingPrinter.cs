@@ -128,6 +128,6 @@ internal static class TypeMappingPrinter
     {
         var fullname = type.FullName;
         var assemblyName = type.Assembly.GetName().Name;
-        Debug.WriteLine($"(\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"");
+        Debug.WriteLine($"(\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"),");
     }
 }

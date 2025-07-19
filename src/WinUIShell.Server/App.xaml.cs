@@ -38,6 +38,7 @@ public partial class App : Application
     {
 #if DEBUG
         //System.Diagnostics.Debugger.Launch();
+        //TypeMappingPrinter.Print();
 #endif
         DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
