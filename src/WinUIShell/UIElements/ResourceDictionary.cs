@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class ResourceDictionary : WinUIShellObject
 {
-    public Resource? this[object key]
+    public object? this[object key]
     {
-        get => PropertyAccessor.GetIndexer<Resource>(Id, key);
+        get => PropertyAccessor.GetIndexer<object>(Id, key);
     }
 
     internal ResourceDictionary(ObjectId id)
