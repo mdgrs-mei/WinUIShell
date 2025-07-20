@@ -24,4 +24,9 @@ public class SymbolIcon : IconElement
             this,
             symbol);
     }
+
+    internal SymbolIcon(ObjectId id)
+        : base(id)
+    {
+    }
 }

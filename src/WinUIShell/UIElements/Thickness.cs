@@ -24,11 +24,6 @@ public class Thickness : WinUIShellObject
         get => PropertyAccessor.Get<double>(Id, nameof(Top))!;
     }
 
-    internal Thickness(ObjectId id)
-        : base(id)
-    {
-    }
-
     public Thickness(double uniformLength)
         : this(uniformLength, uniformLength, uniformLength, uniformLength)
     {
@@ -43,6 +38,11 @@ public class Thickness : WinUIShellObject
             top,
             right,
             bottom);
+    }
+
+    internal Thickness(ObjectId id)
+    : base(id)
+    {
     }
 
     public override string ToString()

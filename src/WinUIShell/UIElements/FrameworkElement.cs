@@ -1,7 +1,7 @@
 ﻿using WinUIShell.Common;
 namespace WinUIShell;
 
-public abstract class FrameworkElement : UIElement
+public class FrameworkElement : UIElement
 {
     public double Height
     {

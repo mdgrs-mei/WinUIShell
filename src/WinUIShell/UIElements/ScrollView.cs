@@ -98,4 +98,9 @@ public class ScrollView : Control
             ObjectTypeMapping.Get().GetTargetTypeName<ScrollView>(),
             this);
     }
+
+    internal ScrollView(ObjectId id)
+        : base(id)
+    {
+    }
 }

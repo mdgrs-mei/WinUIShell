@@ -69,6 +69,10 @@ public class ToggleSwitch : Control
             this);
     }
 
+    internal ToggleSwitch(ObjectId id)
+        : base(id)
+    {
+    }
 
     public void AddToggled(ScriptBlock scriptBlock, object? argumentList = null)
     {

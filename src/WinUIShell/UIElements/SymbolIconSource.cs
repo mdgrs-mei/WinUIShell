@@ -16,4 +16,9 @@ public class SymbolIconSource : IconSource
             ObjectTypeMapping.Get().GetTargetTypeName<SymbolIconSource>(),
             this);
     }
+
+    internal SymbolIconSource(ObjectId id)
+        : base(id)
+    {
+    }
 }

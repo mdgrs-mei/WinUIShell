@@ -1,4 +1,6 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
+
+namespace WinUIShell;
 
 public class RangeBase : Control
 {
@@ -18,5 +20,14 @@ public class RangeBase : Control
     {
         get => PropertyAccessor.Get<double>(Id, nameof(Value))!;
         set => PropertyAccessor.Set(Id, nameof(Value), value);
+    }
+
+    internal RangeBase()
+    {
+    }
+
+    internal RangeBase(ObjectId id)
+        : base(id)
+    {
     }
 }

@@ -17,4 +17,9 @@ public class CompactOverlayPresenter : AppWindowPresenter
             "Create",
             this);
     }
+
+    internal CompactOverlayPresenter(ObjectId id)
+        : base(id)
+    {
+    }
 }

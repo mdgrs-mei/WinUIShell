@@ -10,4 +10,9 @@ public class DesktopAcrylicBackdrop : SystemBackdrop
             ObjectTypeMapping.Get().GetTargetTypeName<DesktopAcrylicBackdrop>(),
             this);
     }
+
+    internal DesktopAcrylicBackdrop(ObjectId id)
+        : base(id)
+    {
+    }
 }

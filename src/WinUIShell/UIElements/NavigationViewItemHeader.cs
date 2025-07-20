@@ -10,4 +10,9 @@ public class NavigationViewItemHeader : NavigationViewItemBase
             ObjectTypeMapping.Get().GetTargetTypeName<NavigationViewItemHeader>(),
             this);
     }
+
+    internal NavigationViewItemHeader(ObjectId id)
+        : base(id)
+    {
+    }
 }

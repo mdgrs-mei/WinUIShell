@@ -41,16 +41,16 @@ public class Window : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(Title), value);
     }
 
-    internal Window(ObjectId id)
-    : base(id)
-    {
-    }
-
     public Window()
     {
         Id = CommandClient.Get().CreateObject(
             "WinUIShell.Server.Window, WinUIShell.Server",
             this);
+    }
+
+    internal Window(ObjectId id)
+        : base(id)
+    {
     }
 
     public void Activate()

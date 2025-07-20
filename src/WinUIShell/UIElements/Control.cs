@@ -1,7 +1,7 @@
 ﻿using WinUIShell.Common;
 namespace WinUIShell;
 
-public abstract class Control : FrameworkElement
+public class Control : FrameworkElement
 {
     public Brush Background
     {

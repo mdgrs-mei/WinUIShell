@@ -195,6 +195,11 @@ public class TextBox : Control
             this);
     }
 
+    internal TextBox(ObjectId id)
+        : base(id)
+    {
+    }
+
     public void AddBeforeTextChanging(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddBeforeTextChanging(new EventCallback

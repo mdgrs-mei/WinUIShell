@@ -40,4 +40,9 @@ public class ProgressRing : Control
             ObjectTypeMapping.Get().GetTargetTypeName<ProgressRing>(),
             this);
     }
+
+    internal ProgressRing(ObjectId id)
+        : base(id)
+    {
+    }
 }

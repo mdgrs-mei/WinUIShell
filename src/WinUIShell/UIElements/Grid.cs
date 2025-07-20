@@ -59,6 +59,11 @@ public class Grid : Panel
             this);
     }
 
+    internal Grid(ObjectId id)
+        : base(id)
+    {
+    }
+
     public static int GetRow(FrameworkElement element)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<int>(

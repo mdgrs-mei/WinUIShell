@@ -10,4 +10,9 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
             ObjectTypeMapping.Get().GetTargetTypeName<NavigationViewItemSeparator>(),
             this);
     }
+
+    internal NavigationViewItemSeparator(ObjectId id)
+        : base(id)
+    {
+    }
 }

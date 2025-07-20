@@ -16,4 +16,9 @@ public class HyperlinkButton : ButtonBase
             ObjectTypeMapping.Get().GetTargetTypeName<HyperlinkButton>(),
             this);
     }
+
+    internal HyperlinkButton(ObjectId id)
+        : base(id)
+    {
+    }
 }

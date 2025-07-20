@@ -58,4 +58,9 @@ public class TitleBar : Control
             ObjectTypeMapping.Get().GetTargetTypeName<TitleBar>(),
             this);
     }
+
+    internal TitleBar(ObjectId id)
+        : base(id)
+    {
+    }
 }

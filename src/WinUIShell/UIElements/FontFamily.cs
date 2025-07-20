@@ -17,16 +17,16 @@ public class FontFamily : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(Source), value);
     }
 
-    internal FontFamily(ObjectId id)
-        : base(id)
-    {
-    }
-
     public FontFamily(string familyName)
     {
         Id = CommandClient.Get().CreateObject(
             ObjectTypeMapping.Get().GetTargetTypeName<FontFamily>(),
             this,
             familyName);
+    }
+
+    internal FontFamily(ObjectId id)
+        : base(id)
+    {
     }
 }

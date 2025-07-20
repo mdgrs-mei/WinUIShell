@@ -10,4 +10,9 @@ public class Button : ButtonBase
             ObjectTypeMapping.Get().GetTargetTypeName<Button>(),
             this);
     }
+
+    internal Button(ObjectId id)
+        : base(id)
+    {
+    }
 }

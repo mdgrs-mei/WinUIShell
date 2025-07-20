@@ -55,6 +55,11 @@ public class Frame : ContentControl
             this);
     }
 
+    internal Frame(ObjectId id)
+        : base(id)
+    {
+    }
+
     public void GoBack()
     {
         CommandClient.Get().InvokeMethod(Id, nameof(GoBack));

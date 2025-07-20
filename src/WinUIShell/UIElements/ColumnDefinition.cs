@@ -33,4 +33,9 @@ public class ColumnDefinition : WinUIShellObject
             ObjectTypeMapping.Get().GetTargetTypeName<ColumnDefinition>(),
             this);
     }
+
+    internal ColumnDefinition(ObjectId id)
+        : base(id)
+    {
+    }
 }

@@ -33,4 +33,9 @@ public class RowDefinition : WinUIShellObject
             ObjectTypeMapping.Get().GetTargetTypeName<RowDefinition>(),
             this);
     }
+
+    internal RowDefinition(ObjectId id)
+        : base(id)
+    {
+    }
 }

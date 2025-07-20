@@ -180,4 +180,9 @@ public class TextBlock : FrameworkElement
             ObjectTypeMapping.Get().GetTargetTypeName<TextBlock>(),
             this);
     }
+
+    internal TextBlock(ObjectId id)
+        : base(id)
+    {
+    }
 }

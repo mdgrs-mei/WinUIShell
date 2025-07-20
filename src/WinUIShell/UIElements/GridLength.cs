@@ -36,11 +36,6 @@ public class GridLength : WinUIShellObject
             nameof(Auto))!;
     }
 
-    internal GridLength(ObjectId id)
-        : base(id)
-    {
-    }
-
     public GridLength(double pixels)
         : this(pixels, GridUnitType.Pixel)
     {
@@ -53,6 +48,11 @@ public class GridLength : WinUIShellObject
             this,
             value,
             type);
+    }
+
+    internal GridLength(ObjectId id)
+    : base(id)
+    {
     }
 
     public override string ToString()

@@ -158,6 +158,11 @@ public class NavigationView : ContentControl
             this);
     }
 
+    internal NavigationView(ObjectId id)
+        : base(id)
+    {
+    }
+
     public void AddItemInvoked(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddItemInvoked(new EventCallback

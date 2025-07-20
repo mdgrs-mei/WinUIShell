@@ -10,15 +10,15 @@ public class SlideNavigationTransitionInfo : NavigationTransitionInfo
         set => PropertyAccessor.Set(Id, nameof(Effect), value);
     }
 
-    internal SlideNavigationTransitionInfo(ObjectId id)
-        : base(id)
-    {
-    }
-
     public SlideNavigationTransitionInfo()
     {
         Id = CommandClient.Get().CreateObject(
             ObjectTypeMapping.Get().GetTargetTypeName<SlideNavigationTransitionInfo>(),
             this);
+    }
+
+    internal SlideNavigationTransitionInfo(ObjectId id)
+        : base(id)
+    {
     }
 }

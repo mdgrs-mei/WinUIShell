@@ -1,6 +1,8 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
 
-public abstract class Panel : FrameworkElement
+namespace WinUIShell;
+
+public class Panel : FrameworkElement
 {
     public Brush Background
     {
@@ -15,5 +17,14 @@ public abstract class Panel : FrameworkElement
     public UIElementCollection Children
     {
         get => PropertyAccessor.Get<UIElementCollection>(Id, nameof(Children))!;
+    }
+
+    internal Panel()
+    {
+    }
+
+    internal Panel(ObjectId id)
+        : base(id)
+    {
     }
 }

@@ -72,4 +72,9 @@ public class PasswordBox : Control
             ObjectTypeMapping.Get().GetTargetTypeName<PasswordBox>(),
             this);
     }
+
+    internal PasswordBox(ObjectId id)
+        : base(id)
+    {
+    }
 }

@@ -16,4 +16,9 @@ public class MicaBackdrop : SystemBackdrop
             ObjectTypeMapping.Get().GetTargetTypeName<MicaBackdrop>(),
             this);
     }
+
+    internal MicaBackdrop(ObjectId id)
+        : base(id)
+    {
+    }
 }

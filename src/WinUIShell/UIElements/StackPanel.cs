@@ -52,4 +52,9 @@ public class StackPanel : Panel
             ObjectTypeMapping.Get().GetTargetTypeName<StackPanel>(),
             this);
     }
+
+    internal StackPanel(ObjectId id)
+        : base(id)
+    {
+    }
 }

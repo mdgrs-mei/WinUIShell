@@ -28,4 +28,9 @@ public class ProgressBar : RangeBase
             ObjectTypeMapping.Get().GetTargetTypeName<ProgressBar>(),
             this);
     }
+
+    internal ProgressBar(ObjectId id)
+        : base(id)
+    {
+    }
 }
