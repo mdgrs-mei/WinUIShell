@@ -37,6 +37,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Text.FontWeights));
         Print(typeof(Microsoft.UI.Xaml.Controls.Frame));
         Print(typeof(Microsoft.UI.Xaml.FrameworkElement));
+        Print(typeof(Microsoft.UI.Windowing.FullScreenPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.Grid));
         Print(typeof(Microsoft.UI.Xaml.GridLength));
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
@@ -55,6 +56,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewItemHeader));
         Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewItemSeparator));
+        Print(typeof(Microsoft.UI.Windowing.OverlappedPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.Page));
         Print(typeof(Microsoft.UI.Xaml.Controls.Panel));
         Print(typeof(Microsoft.UI.Xaml.Controls.PasswordBox));
@@ -111,6 +113,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode));
         Print(typeof(Microsoft.UI.Xaml.OpticalMarginAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.Orientation));
+        Print(typeof(Microsoft.UI.Windowing.OverlappedPresenterState));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingChainMode));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingContentOrientation));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingRailMode));

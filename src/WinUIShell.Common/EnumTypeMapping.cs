@@ -23,6 +23,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.NavigationViewPaneDisplayMode, WinUIShell", "Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode, Microsoft.WinUI"),
         ("WinUIShell.OpticalMarginAlignment, WinUIShell", "Microsoft.UI.Xaml.OpticalMarginAlignment, Microsoft.WinUI"),
         ("WinUIShell.Orientation, WinUIShell", "Microsoft.UI.Xaml.Controls.Orientation, Microsoft.WinUI"),
+        ("WinUIShell.OverlappedPresenterState, WinUIShell", "Microsoft.UI.Windowing.OverlappedPresenterState, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ScrollingChainMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingChainMode, Microsoft.WinUI"),
         ("WinUIShell.ScrollingContentOrientation, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingContentOrientation, Microsoft.WinUI"),
         ("WinUIShell.ScrollingRailMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingRailMode, Microsoft.WinUI"),
