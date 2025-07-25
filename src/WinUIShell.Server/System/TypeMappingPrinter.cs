@@ -31,6 +31,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Media.DesktopAcrylicBackdrop));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo));
+        Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.FlyoutBase));
         Print(typeof(Microsoft.UI.Xaml.Media.FontFamily));
         Print(typeof(Windows.UI.Text.FontWeight));
         Print(typeof(Microsoft.UI.Text.FontWeights));
@@ -41,6 +42,9 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
+        Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyout));
+        Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItem));
+        Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase));
         Print(typeof(Microsoft.UI.Xaml.Media.MicaBackdrop));
         Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo));
