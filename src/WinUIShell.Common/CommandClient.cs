@@ -218,7 +218,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, new RpcValue(value));
+            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -229,7 +229,7 @@ public class CommandClient : Singleton<CommandClient>
     public Task SetPropertyAsync(CommandQueueId queueId, ObjectId id, string propertyName, object? value)
     {
         Debug.Assert(_rpc is not null);
-        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, new RpcValue(value));
+        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
     }
 
     public void SetPropertyWait(ObjectId id, string propertyName, object? value)
@@ -242,7 +242,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, new RpcValue(value));
+            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -276,7 +276,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetIndexerProperty", id, new RpcValue(index), new RpcValue(value));
+            await _rpc.InvokeAsync("SetIndexerProperty", id, RpcValueConverter.ConvertObjectToRpcValue(index), RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -286,7 +286,7 @@ public class CommandClient : Singleton<CommandClient>
 
         var rpcValue = _joinableTaskFactory.Run(async () =>
         {
-            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, new RpcValue(index));
+            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, RpcValueConverter.ConvertObjectToRpcValue(index));
         });
 
         return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);

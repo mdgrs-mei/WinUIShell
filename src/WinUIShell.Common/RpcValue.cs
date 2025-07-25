@@ -106,11 +106,7 @@ public class RpcValue
                 }
             case Array array:
                 {
-                    ArrayValue = new RpcValue[array.Length];
-                    for (int i = 0; i < array.Length; ++i)
-                    {
-                        ArrayValue[i] = new RpcValue(array.GetValue(i));
-                    }
+                    ArrayValue = RpcValueConverter.ConvertObjectArrayToRpcArray(array);
                     break;
                 }
             default:

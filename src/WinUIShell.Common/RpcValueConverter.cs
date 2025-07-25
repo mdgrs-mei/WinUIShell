@@ -164,6 +164,11 @@ public static class RpcValueConverter
 
     public static RpcValue[]? ConvertObjectArrayToRpcArray(object?[]? objectArray)
     {
+        return ConvertObjectArrayToRpcArray((Array?)objectArray);
+    }
+
+    public static RpcValue[]? ConvertObjectArrayToRpcArray(Array? objectArray)
+    {
         if (objectArray is null || objectArray.Length == 0)
         {
             return null;
@@ -172,8 +177,9 @@ public static class RpcValueConverter
         var rpcArray = new RpcValue[objectArray.Length];
         for (int i = 0; i < objectArray.Length; ++i)
         {
-            rpcArray[i] = new RpcValue(objectArray[i]);
+            rpcArray[i] = ConvertObjectToRpcValue(objectArray.GetValue(i));
         }
         return rpcArray;
     }
+
 }
