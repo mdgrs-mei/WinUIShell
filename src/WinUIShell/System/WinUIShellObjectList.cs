@@ -18,7 +18,17 @@ public class WinUIShellObjectList<T> : WinUIShellObject, IList<T> where T : clas
     public T this[int index]
     {
         get => PropertyAccessor.GetIndexer<T>(Id, index)!;
-        set => PropertyAccessor.SetIndexer(Id, index, value);
+        set
+        {
+            if (value is WinUIShellObject obj)
+            {
+                PropertyAccessor.SetIndexer(Id, index, obj.Id);
+            }
+            else
+            {
+                PropertyAccessor.SetIndexer(Id, index, value);
+            }
+        }
     }
 
     internal WinUIShellObjectList(ObjectId id)
