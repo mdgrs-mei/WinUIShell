@@ -93,6 +93,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
+        Print(typeof(Microsoft.UI.Xaml.ElementTheme));
         Print(typeof(Windows.UI.Text.FontStretch));
         Print(typeof(Windows.UI.Text.FontStyle));
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));

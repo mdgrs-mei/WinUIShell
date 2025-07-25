@@ -27,6 +27,12 @@ public class FrameworkElement : UIElement
         set => PropertyAccessor.Set(Id, nameof(HorizontalAlignment), value);
     }
 
+    public ElementTheme RequestedTheme
+    {
+        get => PropertyAccessor.Get<ElementTheme>(Id, nameof(RequestedTheme))!;
+        set => PropertyAccessor.Set(Id, nameof(RequestedTheme), value);
+    }
+
     public Style? Style
     {
         get => PropertyAccessor.Get<Style>(Id, nameof(Style));
@@ -68,5 +74,10 @@ public class FrameworkElement : UIElement
     internal FrameworkElement(ObjectId id)
         : base(id)
     {
+    }
+
+    public object? FindName(string name)
+    {
+        return CommandClient.Get().InvokeMethodAndGetResult<object?>(Id, nameof(FindName), name);
     }
 }
