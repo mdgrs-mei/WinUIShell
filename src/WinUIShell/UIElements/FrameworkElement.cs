@@ -15,6 +15,12 @@ public class FrameworkElement : UIElement
         set => PropertyAccessor.Set(Id, nameof(Margin), value?.Id);
     }
 
+    public string Name
+    {
+        get => PropertyAccessor.Get<string>(Id, nameof(Name))!;
+        set => PropertyAccessor.Set(Id, nameof(Name), value);
+    }
+
     public HorizontalAlignment HorizontalAlignment
     {
         get => PropertyAccessor.Get<HorizontalAlignment>(Id, nameof(HorizontalAlignment))!;
