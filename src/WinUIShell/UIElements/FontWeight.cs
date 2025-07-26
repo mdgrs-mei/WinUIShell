@@ -9,16 +9,16 @@ public class FontWeight : WinUIShellObject
         get => PropertyAccessor.Get<ushort>(Id, nameof(Weight))!;
     }
 
-    internal FontWeight(ObjectId id)
-        : base(id)
-    {
-    }
-
     public FontWeight(ushort weight)
     {
         Id = CommandClient.Get().CreateObject(
-            "Windows.UI.Text.FontWeight, Microsoft.Windows.SDK.NET",
+            ObjectTypeMapping.Get().GetTargetTypeName<FontWeight>(),
             this,
             weight);
+    }
+
+    internal FontWeight(ObjectId id)
+        : base(id)
+    {
     }
 }

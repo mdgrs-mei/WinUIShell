@@ -65,10 +65,14 @@ public class ToggleSwitch : Control
     public ToggleSwitch()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.ToggleSwitch, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<ToggleSwitch>(),
             this);
     }
 
+    internal ToggleSwitch(ObjectId id)
+        : base(id)
+    {
+    }
 
     public void AddToggled(ScriptBlock scriptBlock, object? argumentList = null)
     {

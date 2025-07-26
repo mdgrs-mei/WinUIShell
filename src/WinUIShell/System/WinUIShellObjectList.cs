@@ -1,8 +1,9 @@
-﻿using WinUIShell.Common;
+﻿using System.Collections;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
-public class WinUIShellObjectList<T> : WinUIShellObject
+public class WinUIShellObjectList<T> : WinUIShellObject, IList<T> where T : class
 {
     public int Count
     {
@@ -17,7 +18,17 @@ public class WinUIShellObjectList<T> : WinUIShellObject
     public T this[int index]
     {
         get => PropertyAccessor.GetIndexer<T>(Id, index)!;
-        set => PropertyAccessor.SetIndexer(Id, index, value);
+        set
+        {
+            if (value is WinUIShellObject obj)
+            {
+                PropertyAccessor.SetIndexer(Id, index, obj.Id);
+            }
+            else
+            {
+                PropertyAccessor.SetIndexer(Id, index, value);
+            }
+        }
     }
 
     internal WinUIShellObjectList(ObjectId id)
@@ -83,6 +94,27 @@ public class WinUIShellObjectList<T> : WinUIShellObject
         }
     }
 
+    public void CopyTo(T[] array, int arrayIndex)
+    {
+        ArgumentNullException.ThrowIfNull(array);
+        ArgumentOutOfRangeException.ThrowIfNegative(arrayIndex);
+        if (array.Length <= arrayIndex && Count > 0)
+        {
+            throw new ArgumentOutOfRangeException($"{nameof(arrayIndex)}");
+        }
+
+        if (array.Length - arrayIndex < Count)
+        {
+            throw new ArgumentException("Insufficient space to copy.");
+        }
+
+        int num = Count;
+        for (int i = 0; i < num; i++)
+        {
+            array[i + arrayIndex] = this[i];
+        }
+    }
+
     public bool Remove(T item)
     {
         if (item is WinUIShellObject obj)
@@ -92,6 +124,63 @@ public class WinUIShellObjectList<T> : WinUIShellObject
         else
         {
             return CommandClient.Get().InvokeMethodAndGetResult<bool>(Id, nameof(Remove), item);
+        }
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        return new Enumerator<T>(this);
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    private struct Enumerator<U> : IEnumerator<U> where U : class
+    {
+        private readonly IList<U> _list;
+        private int _index = -1;
+        public readonly U Current
+        {
+            get
+            {
+                if (_index < 0 || _index >= _list.Count)
+                {
+                    throw new InvalidOperationException();
+                }
+                return _list[_index];
+            }
+        }
+        readonly object IEnumerator.Current
+        {
+            get => Current;
+        }
+
+        public Enumerator(IList<U> list)
+        {
+            _list = list;
+        }
+
+        public readonly void Dispose() { }
+
+        public bool MoveNext()
+        {
+            if (_index < _list.Count - 1)
+            {
+                _index++;
+                return true;
+            }
+            else
+            {
+                _index = _list.Count;
+                return false;
+            }
+        }
+
+        void IEnumerator.Reset()
+        {
+            _index = -1;
         }
     }
 }

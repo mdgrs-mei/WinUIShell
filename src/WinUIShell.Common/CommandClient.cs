@@ -45,7 +45,7 @@ public class CommandClient : Singleton<CommandClient>
         if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
             return id;
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -86,7 +86,7 @@ public class CommandClient : Singleton<CommandClient>
         if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
             return id;
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         await _rpc.InvokeAsync("CreateObjectWait", queueId, id, typeName, rpcArguments);
 
@@ -105,7 +105,7 @@ public class CommandClient : Singleton<CommandClient>
         if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
             return id;
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -127,27 +127,12 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    private RpcValue[]? ConvertArguments(params object?[] arguments)
-    {
-        if (arguments.Length == 0)
-        {
-            return null;
-        }
-
-        var rpcArguments = new RpcValue[arguments.Length];
-        for (int i = 0; i < arguments.Length; ++i)
-        {
-            rpcArguments[i] = new RpcValue(arguments[i]);
-        }
-        return rpcArguments;
-    }
-
     public void InvokeMethod(ObjectId id, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -165,7 +150,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        RpcValue[]? rpcArguments = ConvertArguments(arguments);
+        RpcValue[]? rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         return _rpc.InvokeAsync("InvokeMethodWait", queueId, id, methodName, rpcArguments);
     }
@@ -175,14 +160,14 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         var rpcValue = _joinableTaskFactory.Run(async () =>
         {
             return await _rpc.InvokeAsync<RpcValue>("InvokeMethodAndGetResult", id, methodName, rpcArguments);
         });
 
-        return ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void InvokeStaticMethod(string className, string methodName, params object?[] arguments)
@@ -190,7 +175,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -203,7 +188,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         return _rpc.InvokeAsync("InvokeStaticMethodWait", queueId, className, methodName, rpcArguments);
     }
@@ -213,14 +198,14 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        var rpcArguments = ConvertArguments(arguments);
+        var rpcArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(arguments);
 
         var rpcValue = _joinableTaskFactory.Run(async () =>
         {
             return await _rpc.InvokeAsync<RpcValue>("InvokeStaticMethodAndGetResult", className, methodName, rpcArguments);
         });
 
-        return ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void SetProperty(ObjectId id, string propertyName, object? value)
@@ -233,7 +218,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, new RpcValue(value));
+            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -244,7 +229,7 @@ public class CommandClient : Singleton<CommandClient>
     public Task SetPropertyAsync(CommandQueueId queueId, ObjectId id, string propertyName, object? value)
     {
         Debug.Assert(_rpc is not null);
-        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, new RpcValue(value));
+        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
     }
 
     public void SetPropertyWait(ObjectId id, string propertyName, object? value)
@@ -257,7 +242,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, new RpcValue(value));
+            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -270,7 +255,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetProperty", id, propertyName);
         });
 
-        return ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public T? GetStaticProperty<T>(string className, string propertyName)
@@ -282,7 +267,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetStaticProperty", className, propertyName);
         });
 
-        return ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void SetIndexerProperty(ObjectId id, object index, object? value)
@@ -291,7 +276,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetIndexerProperty", id, new RpcValue(index), new RpcValue(value));
+            await _rpc.InvokeAsync("SetIndexerProperty", id, RpcValueConverter.ConvertObjectToRpcValue(index), RpcValueConverter.ConvertObjectToRpcValue(value));
         });
     }
 
@@ -301,10 +286,10 @@ public class CommandClient : Singleton<CommandClient>
 
         var rpcValue = _joinableTaskFactory.Run(async () =>
         {
-            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, new RpcValue(index));
+            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, RpcValueConverter.ConvertObjectToRpcValue(index));
         });
 
-        return ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void WriteError(string message)
@@ -315,60 +300,5 @@ public class CommandClient : Singleton<CommandClient>
         {
             await _rpc.InvokeAsync("WriteError", message);
         });
-    }
-
-    private T? ConvertRpcValueTo<T>(RpcValue rpcValue)
-    {
-        var value = rpcValue.GetObject();
-        if (value is null)
-            return default;
-
-        if (value is ObjectId valueObjectId)
-        {
-            object? obj = ObjectStore.Get().FindObject(valueObjectId);
-            if (obj is null)
-            {
-                // Newly created object on the server side.
-                // Create the corresponding object on the client side.
-                obj = Activator.CreateInstance(
-                    typeof(T),
-                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
-                    null,
-                    [valueObjectId],
-                    null);
-
-                if (obj == null)
-                {
-                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
-                }
-                ObjectStore.Get().RegisterObject(valueObjectId, obj);
-            }
-
-            if (obj is T)
-            {
-                return (T?)obj;
-            }
-            else
-            {
-                // Call constructor for type conversion.
-                obj = Activator.CreateInstance(
-                    typeof(T),
-                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
-                    null,
-                    [obj],
-                    null);
-
-                if (obj == null)
-                {
-                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
-                }
-
-                return (T?)obj;
-            }
-        }
-        else
-        {
-            return (T?)value;
-        }
     }
 }

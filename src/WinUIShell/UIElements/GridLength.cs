@@ -32,13 +32,8 @@ public class GridLength : WinUIShellObject
     public static GridLength Auto
     {
         get => PropertyAccessor.GetStatic<GridLength>(
-            "Microsoft.UI.Xaml.GridLength, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<GridLength>(),
             nameof(Auto))!;
-    }
-
-    internal GridLength(ObjectId id)
-        : base(id)
-    {
     }
 
     public GridLength(double pixels)
@@ -49,10 +44,15 @@ public class GridLength : WinUIShellObject
     public GridLength(double value, GridUnitType type)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.GridLength, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<GridLength>(),
             this,
             value,
             type);
+    }
+
+    internal GridLength(ObjectId id)
+    : base(id)
+    {
     }
 
     public override string ToString()

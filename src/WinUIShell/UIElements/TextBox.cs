@@ -191,8 +191,13 @@ public class TextBox : Control
     public TextBox()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.TextBox, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<TextBox>(),
             this);
+    }
+
+    internal TextBox(ObjectId id)
+        : base(id)
+    {
     }
 
     public void AddBeforeTextChanging(ScriptBlock scriptBlock, object? argumentList = null)

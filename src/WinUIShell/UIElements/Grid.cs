@@ -55,14 +55,19 @@ public class Grid : Panel
     public Grid()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             this);
+    }
+
+    internal Grid(ObjectId id)
+        : base(id)
+    {
     }
 
     public static int GetRow(FrameworkElement element)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<int>(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(GetRow),
             element?.Id);
     }
@@ -70,7 +75,7 @@ public class Grid : Panel
     public static void SetRow(FrameworkElement element, int value)
     {
         CommandClient.Get().InvokeStaticMethod(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(SetRow),
             element?.Id,
             value);
@@ -79,7 +84,7 @@ public class Grid : Panel
     public static int GetColumn(FrameworkElement element)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<int>(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(GetColumn),
             element?.Id);
     }
@@ -87,7 +92,7 @@ public class Grid : Panel
     public static void SetColumn(FrameworkElement element, int value)
     {
         CommandClient.Get().InvokeStaticMethod(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(SetColumn),
             element?.Id,
             value);
@@ -96,7 +101,7 @@ public class Grid : Panel
     public static int GetRowSpan(FrameworkElement element)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<int>(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(GetRowSpan),
             element?.Id);
     }
@@ -104,7 +109,7 @@ public class Grid : Panel
     public static void SetRowSpan(FrameworkElement element, int value)
     {
         CommandClient.Get().InvokeStaticMethod(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(SetRowSpan),
             element?.Id,
             value);
@@ -113,7 +118,7 @@ public class Grid : Panel
     public static int GetColumnSpan(FrameworkElement element)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<int>(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(GetColumnSpan),
             element?.Id);
     }
@@ -121,7 +126,7 @@ public class Grid : Panel
     public static void SetColumnSpan(FrameworkElement element, int value)
     {
         CommandClient.Get().InvokeStaticMethod(
-            "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Grid>(),
             nameof(SetColumnSpan),
             element?.Id,
             value);

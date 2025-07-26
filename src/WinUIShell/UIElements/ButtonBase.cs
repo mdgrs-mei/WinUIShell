@@ -1,11 +1,21 @@
 ﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
-public abstract class ButtonBase : ContentControl
+public class ButtonBase : ContentControl
 {
     private const string _accessorClassName = "WinUIShell.Server.ButtonBaseAccessor, WinUIShell.Server";
     private readonly EventCallbackList _clickCallbacks = new(_accessorClassName);
+
+    internal ButtonBase()
+    {
+    }
+
+    internal ButtonBase(ObjectId id)
+        : base(id)
+    {
+    }
 
     public void AddClick(ScriptBlock scriptBlock, object? argumentList = null)
     {

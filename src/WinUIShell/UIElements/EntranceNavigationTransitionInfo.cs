@@ -7,7 +7,12 @@ public class EntranceNavigationTransitionInfo : NavigationTransitionInfo
     public EntranceNavigationTransitionInfo()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.Animation.EntranceNavigationTransitionInfo, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<EntranceNavigationTransitionInfo>(),
             this);
+    }
+
+    internal EntranceNavigationTransitionInfo(ObjectId id)
+        : base(id)
+    {
     }
 }

@@ -92,7 +92,7 @@ public class RpcValue
                 {
                     var type = value.GetType();
                     var typeName = type.FullName;
-                    var assemblyName = value.GetType().Assembly.GetName().Name;
+                    var assemblyName = type.Assembly.GetName().Name;
                     StringValue = $"{typeName}, {assemblyName}";
                     if (Enum.GetUnderlyingType(type) == typeof(int))
                     {
@@ -106,11 +106,7 @@ public class RpcValue
                 }
             case Array array:
                 {
-                    ArrayValue = new RpcValue[array.Length];
-                    for (int i = 0; i < array.Length; ++i)
-                    {
-                        ArrayValue[i] = new RpcValue(array.GetValue(i));
-                    }
+                    ArrayValue = RpcValueConverter.ConvertObjectArrayToRpcArray(array);
                     break;
                 }
             default:

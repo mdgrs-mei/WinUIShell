@@ -177,7 +177,12 @@ public class TextBlock : FrameworkElement
     public TextBlock()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.TextBlock, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<TextBlock>(),
             this);
+    }
+
+    internal TextBlock(ObjectId id)
+        : base(id)
+    {
     }
 }

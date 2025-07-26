@@ -7,7 +7,12 @@ public class DrillInNavigationTransitionInfo : NavigationTransitionInfo
     public DrillInNavigationTransitionInfo()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.Animation.DrillInNavigationTransitionInfo, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<DrillInNavigationTransitionInfo>(),
             this);
+    }
+
+    internal DrillInNavigationTransitionInfo(ObjectId id)
+        : base(id)
+    {
     }
 }

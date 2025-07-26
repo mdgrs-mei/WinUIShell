@@ -49,7 +49,12 @@ public class StackPanel : Panel
     public StackPanel()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.StackPanel, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<StackPanel>(),
             this);
+    }
+
+    internal StackPanel(ObjectId id)
+        : base(id)
+    {
     }
 }

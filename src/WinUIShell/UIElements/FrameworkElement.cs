@@ -1,7 +1,7 @@
 ﻿using WinUIShell.Common;
 namespace WinUIShell;
 
-public abstract class FrameworkElement : UIElement
+public class FrameworkElement : UIElement
 {
     public double Height
     {
@@ -15,10 +15,22 @@ public abstract class FrameworkElement : UIElement
         set => PropertyAccessor.Set(Id, nameof(Margin), value?.Id);
     }
 
+    public string Name
+    {
+        get => PropertyAccessor.Get<string>(Id, nameof(Name))!;
+        set => PropertyAccessor.Set(Id, nameof(Name), value);
+    }
+
     public HorizontalAlignment HorizontalAlignment
     {
         get => PropertyAccessor.Get<HorizontalAlignment>(Id, nameof(HorizontalAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalAlignment), value);
+    }
+
+    public ElementTheme RequestedTheme
+    {
+        get => PropertyAccessor.Get<ElementTheme>(Id, nameof(RequestedTheme))!;
+        set => PropertyAccessor.Set(Id, nameof(RequestedTheme), value);
     }
 
     public Style? Style
@@ -62,5 +74,10 @@ public abstract class FrameworkElement : UIElement
     internal FrameworkElement(ObjectId id)
         : base(id)
     {
+    }
+
+    public object? FindName(string name)
+    {
+        return CommandClient.Get().InvokeMethodAndGetResult<object?>(Id, nameof(FindName), name);
     }
 }

@@ -30,7 +30,12 @@ public class ColumnDefinition : WinUIShellObject
     public ColumnDefinition()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.ColumnDefinition, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<ColumnDefinition>(),
             this);
+    }
+
+    internal ColumnDefinition(ObjectId id)
+        : base(id)
+    {
     }
 }

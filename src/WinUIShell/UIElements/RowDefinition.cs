@@ -30,7 +30,12 @@ public class RowDefinition : WinUIShellObject
     public RowDefinition()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.RowDefinition, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<RowDefinition>(),
             this);
+    }
+
+    internal RowDefinition(ObjectId id)
+        : base(id)
+    {
     }
 }

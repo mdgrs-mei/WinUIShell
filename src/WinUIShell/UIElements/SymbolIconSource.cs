@@ -13,7 +13,12 @@ public class SymbolIconSource : IconSource
     public SymbolIconSource()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.SymbolIconSource, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SymbolIconSource>(),
             this);
+    }
+
+    internal SymbolIconSource(ObjectId id)
+        : base(id)
+    {
     }
 }

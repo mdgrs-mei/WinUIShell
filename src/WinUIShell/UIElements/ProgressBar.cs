@@ -25,7 +25,12 @@ public class ProgressBar : RangeBase
     public ProgressBar()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.ProgressBar, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<ProgressBar>(),
             this);
+    }
+
+    internal ProgressBar(ObjectId id)
+        : base(id)
+    {
     }
 }

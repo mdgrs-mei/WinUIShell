@@ -13,7 +13,12 @@ public class MicaBackdrop : SystemBackdrop
     public MicaBackdrop()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.MicaBackdrop, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<MicaBackdrop>(),
             this);
+    }
+
+    internal MicaBackdrop(ObjectId id)
+        : base(id)
+    {
     }
 }

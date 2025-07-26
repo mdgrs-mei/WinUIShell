@@ -32,7 +32,7 @@ public class Color : WinUIShellObject
     public static Color FromArgb(byte a, byte r, byte g, byte b)
     {
         return CommandClient.Get().InvokeStaticMethodAndGetResult<Color>(
-            "Windows.UI.Color, Microsoft.Windows.SDK.NET",
+            ObjectTypeMapping.Get().GetTargetTypeName<Color>(),
             nameof(FromArgb),
             a, r, g, b)!;
     }

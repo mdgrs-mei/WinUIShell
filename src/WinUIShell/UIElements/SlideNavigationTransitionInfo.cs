@@ -13,7 +13,12 @@ public class SlideNavigationTransitionInfo : NavigationTransitionInfo
     public SlideNavigationTransitionInfo()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<SlideNavigationTransitionInfo>(),
             this);
+    }
+
+    internal SlideNavigationTransitionInfo(ObjectId id)
+        : base(id)
+    {
     }
 }

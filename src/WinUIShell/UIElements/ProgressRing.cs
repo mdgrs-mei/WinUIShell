@@ -37,7 +37,12 @@ public class ProgressRing : Control
     public ProgressRing()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.ProgressRing, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<ProgressRing>(),
             this);
+    }
+
+    internal ProgressRing(ObjectId id)
+        : base(id)
+    {
     }
 }

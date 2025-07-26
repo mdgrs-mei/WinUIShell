@@ -7,7 +7,7 @@ public class FontFamily : WinUIShellObject
     public static FontFamily XamlAutoFontFamily
     {
         get => PropertyAccessor.GetStatic<FontFamily>(
-            "Microsoft.UI.Xaml.Media.FontFamily, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<FontFamily>(),
             nameof(XamlAutoFontFamily))!;
     }
 
@@ -17,16 +17,16 @@ public class FontFamily : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(Source), value);
     }
 
-    internal FontFamily(ObjectId id)
-        : base(id)
-    {
-    }
-
     public FontFamily(string familyName)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Media.FontFamily, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<FontFamily>(),
             this,
             familyName);
+    }
+
+    internal FontFamily(ObjectId id)
+        : base(id)
+    {
     }
 }

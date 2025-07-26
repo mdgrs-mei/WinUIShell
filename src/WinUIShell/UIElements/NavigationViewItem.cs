@@ -52,7 +52,7 @@ public class NavigationViewItem : NavigationViewItemBase
     public NavigationViewItem()
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Controls.NavigationViewItem, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<NavigationViewItem>(),
             this);
     }
 

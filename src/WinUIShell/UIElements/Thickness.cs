@@ -24,11 +24,6 @@ public class Thickness : WinUIShellObject
         get => PropertyAccessor.Get<double>(Id, nameof(Top))!;
     }
 
-    internal Thickness(ObjectId id)
-        : base(id)
-    {
-    }
-
     public Thickness(double uniformLength)
         : this(uniformLength, uniformLength, uniformLength, uniformLength)
     {
@@ -37,12 +32,17 @@ public class Thickness : WinUIShellObject
     public Thickness(double left, double top, double right, double bottom)
     {
         Id = CommandClient.Get().CreateObject(
-            "Microsoft.UI.Xaml.Thickness, Microsoft.WinUI",
+            ObjectTypeMapping.Get().GetTargetTypeName<Thickness>(),
             this,
             left,
             top,
             right,
             bottom);
+    }
+
+    internal Thickness(ObjectId id)
+    : base(id)
+    {
     }
 
     public override string ToString()
