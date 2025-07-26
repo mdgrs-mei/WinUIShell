@@ -44,13 +44,16 @@ public class Window : WinUIShellObject
     public Window()
     {
         Id = CommandClient.Get().CreateObject(
-            "WinUIShell.Server.Window, WinUIShell.Server",
+            ObjectTypeMapping.Get().GetTargetTypeName<Window>(),
             this);
+
+        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", Id);
     }
 
     internal Window(ObjectId id)
         : base(id)
     {
+        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", Id);
     }
 
     public void Activate()

@@ -4,7 +4,7 @@ namespace WinUIShell.Common;
 
 internal sealed class ClassTypeObjectStore
 {
-    public sealed class ObjectComparer : IEqualityComparer<object>
+    private sealed class ObjectComparer : IEqualityComparer<object>
     {
         public new bool Equals(object? x, object? y)
         {

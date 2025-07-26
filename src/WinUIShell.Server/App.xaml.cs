@@ -63,7 +63,8 @@ public partial class App : Application
             else
             if (obj is Window window)
             {
-                if (window.IsTerminated)
+                var property = WindowStore.Get().GetWindowProperty(window);
+                if (property.IsTerminated)
                     return false;
             }
             return true;
