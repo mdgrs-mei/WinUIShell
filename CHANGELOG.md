@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.5.0] - 2025-07-26
+
+### Added
+
+- Added `[XamlReader]::Load()`
+- Added `FindName` method to `FrameworkElement`
+- Added `Name` and `RequestedTheme` properties to `FrameworkElement`
+- Added IEnumerator implementation to `WinUIShellObjectList`
+- Added `MenuFlyout`, `MenuFlyoutItem`
+- Added `Flyout` property to `Button`
+- Added `FullScreenPreseenter` and `OverlappedPresenter`
+
+### Changed
+
+- Removed `Resource`
+
 ## [0.4.0] - 2025-06-20
 
 ### Changed
