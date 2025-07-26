@@ -108,10 +108,39 @@ $button.AddClick({
 
 ![ProgressBar](https://github.com/user-attachments/assets/1dc6bf2e-6529-4036-84b1-c20e8bcf9940)
 
+## XamlReader
+
+Instead of creating UI elements by code, you can also create them by loading XAML similar to WPF in PowerShell. You can search for an UI element by the `FindName` method of `FrameworkElement` and add event handlers from PowerShell. Note that you can't use `x:Class` attributes or code-behind binding in XAML as mentioned in this [documentation](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.markup.xamlreader).
+
+```powershell
+$xamlString = @'
+<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Button x:Name="button" Content="Click Me"/>
+    </StackPanel>
+</Window>
+'@
+
+$win = [XamlReader]::Load($xamlString)
+$win.AppWindow.ResizeClient(400, 200)
+# FrameworkElement has FindName method (Window doesn't have it).
+$button = $win.Content.FindName('button')
+$button.AddClick({
+    $button.Content = 'Clicked!'
+})
+
+$win.Activate()
+$win.WaitForClosed()
+```
+
+You can use any UI element that is available in Windows App SDK but it has to be a type that is supported in WinUIShell to get the object or access properties in PowerShell. It throws an error when calling `FindName` if the type is not supported by WinUIShell.
+
 ## Major Limitations
 
 - Not all UI elements are supported yet
-- No XAML support
 
 ## Contributing
 
