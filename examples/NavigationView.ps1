@@ -73,7 +73,7 @@ $settingsPageOnLoaded = {
     $page.Content = $panel
 }
 
-function Navigate($pageName) {
+function Navigate($pageName, $recommendedNavigationTransitionInfo) {
     if ($frame.SourcePageName -eq $pageName) {
         return
     }
@@ -85,7 +85,7 @@ function Navigate($pageName) {
     $cacheMode = [NavigationCacheMode]::Enabled
 
     # You can change the transition animation by setting [DrillInNavigationTransitionInfo]::new() etc.
-    $transition = $e.RecommendedNavigationTransitionInfo
+    $transition = $recommendedNavigationTransitionInfo
 
     # Page instance is created internally and onLoaded script block is called.
     $frame.Navigate($pageName, $transition, $cacheMode, $onLoaded, $onLoadedArgumentList) | Out-Null
@@ -101,7 +101,7 @@ $navigationView.AddItemInvoked({
             $pageName = $e.InvokedItemContainer.Tag
         }
 
-        Navigate $pageName
+        Navigate $pageName $e.RecommendedNavigationTransitionInfo
     })
 
 # Called when Back button is clicked.
@@ -171,5 +171,5 @@ $navigationView.MenuItems.Add($item4)
 
 $win.Content = $navigationView
 $win.Activate()
-Navigate 'Home'
+Navigate 'Home' $null
 $win.WaitForClosed()
