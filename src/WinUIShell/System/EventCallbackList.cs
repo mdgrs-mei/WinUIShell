@@ -4,19 +4,10 @@ namespace WinUIShell;
 
 internal sealed class EventCallbackList : WinUIShellObject
 {
-    private readonly string _accessorClassName;
     private readonly List<EventCallback> _callbacks = [];
 
     public EventCallbackList()
     {
-        _accessorClassName = "";
-        _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
-        Id = id;
-    }
-
-    public EventCallbackList(string accessorClassName)
-    {
-        _accessorClassName = accessorClassName;
         _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
         Id = id;
     }
@@ -53,37 +44,6 @@ internal sealed class EventCallbackList : WinUIShellObject
             targetObjectId,
             eventName,
             eventArgsTypeName,
-            Environment.CurrentManagedThreadId,
-            Id.Id,
-            eventId,
-            disabledControlIds);
-    }
-
-    public void Add(
-        string addMethodName,
-        ObjectId targetObjectId,
-        EventCallback? eventCallback)
-    {
-        if (eventCallback is null)
-            return;
-
-        int eventId = _callbacks.Count;
-        _callbacks.Add(eventCallback);
-
-        ObjectId[]? disabledControlIds = null;
-        if (eventCallback.DisabledControlsWhileProcessing is not null)
-        {
-            disabledControlIds = new ObjectId[eventCallback.DisabledControlsWhileProcessing.Length];
-            for (int i = 0; i<eventCallback.DisabledControlsWhileProcessing.Length; ++i)
-            {
-                disabledControlIds[i] = eventCallback.DisabledControlsWhileProcessing[i].Id;
-            }
-        }
-
-        CommandClient.Get().InvokeStaticMethod(
-            _accessorClassName,
-            addMethodName,
-            targetObjectId,
             Environment.CurrentManagedThreadId,
             Id.Id,
             eventId,
