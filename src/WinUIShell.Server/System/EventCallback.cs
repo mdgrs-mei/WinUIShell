@@ -74,7 +74,7 @@ internal static class EventCallback
             var senderId = ObjectStore.Get().GetId(sender);
             var queueId = new CommandQueueId(queueThreadId);
 
-            var eventArgsId = CommandClient.Get().CreateObject(
+            var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 queueId,
                 $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
                 eventArgs);

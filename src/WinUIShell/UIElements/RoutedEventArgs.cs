@@ -2,14 +2,15 @@
 
 namespace WinUIShell;
 
-public class RoutedEventArgs
+public class RoutedEventArgs : WinUIShellObject
 {
     public WinUIShellObject OriginalSource
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<WinUIShellObject>(id, nameof(OriginalSource))!;
-        }
+        get => PropertyAccessor.Get<WinUIShellObject>(Id, nameof(OriginalSource))!;
+    }
+
+    internal RoutedEventArgs(ObjectId id)
+        : base(id)
+    {
     }
 }

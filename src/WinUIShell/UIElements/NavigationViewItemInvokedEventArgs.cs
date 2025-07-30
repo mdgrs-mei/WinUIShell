@@ -2,46 +2,31 @@
 
 namespace WinUIShell;
 
-public class NavigationViewItemInvokedEventArgs
+public class NavigationViewItemInvokedEventArgs : WinUIShellObject
 {
     public object? InvokedItem
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<object>(id, nameof(InvokedItem));
-        }
+        get => PropertyAccessor.Get<object>(Id, nameof(InvokedItem));
     }
 
     public NavigationViewItemBase? InvokedItemContainer
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<NavigationViewItemBase>(id, nameof(InvokedItemContainer));
-        }
+        get => PropertyAccessor.Get<NavigationViewItemBase>(Id, nameof(InvokedItemContainer));
     }
 
     public bool IsSettingsInvoked
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<bool>(id, nameof(IsSettingsInvoked))!;
-        }
-        set
-        {
-            var id = ObjectStore.Get().GetId(this);
-            PropertyAccessor.SetAndWait(id, nameof(IsSettingsInvoked), value);
-        }
+        get => PropertyAccessor.Get<bool>(Id, nameof(IsSettingsInvoked))!;
+        set => PropertyAccessor.SetAndWait(Id, nameof(IsSettingsInvoked), value);
     }
 
     public NavigationTransitionInfo RecommendedNavigationTransitionInfo
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<NavigationTransitionInfo>(id, nameof(RecommendedNavigationTransitionInfo))!;
-        }
+        get => PropertyAccessor.Get<NavigationTransitionInfo>(Id, nameof(RecommendedNavigationTransitionInfo))!;
+    }
+
+    internal NavigationViewItemInvokedEventArgs(ObjectId id)
+        : base(id)
+    {
     }
 }

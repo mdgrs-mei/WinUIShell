@@ -30,7 +30,7 @@ public interface IPage
                 "WinUIShell.Page, WinUIShell",
                 page);
 
-            var eventArgsId = CommandClient.Get().CreateObject(
+            var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 queueId,
                 "WinUIShell.RoutedEventArgs, WinUIShell",
                 eventArgs);

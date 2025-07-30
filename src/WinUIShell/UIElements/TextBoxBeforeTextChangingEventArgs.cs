@@ -2,28 +2,21 @@
 
 namespace WinUIShell;
 
-public class TextBoxBeforeTextChangingEventArgs
+public class TextBoxBeforeTextChangingEventArgs : WinUIShellObject
 {
     public bool Cancel
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<bool>(id, nameof(Cancel))!;
-        }
-        set
-        {
-            var id = ObjectStore.Get().GetId(this);
-            PropertyAccessor.SetAndWait(id, nameof(Cancel), value);
-        }
+        get => PropertyAccessor.Get<bool>(Id, nameof(Cancel))!;
+        set => PropertyAccessor.SetAndWait(Id, nameof(Cancel), value);
     }
 
     public string NewText
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<string>(id, nameof(NewText))!;
-        }
+        get => PropertyAccessor.Get<string>(Id, nameof(NewText))!;
+    }
+
+    internal TextBoxBeforeTextChangingEventArgs(ObjectId id)
+        : base(id)
+    {
     }
 }

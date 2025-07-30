@@ -2,36 +2,29 @@
 
 namespace WinUIShell;
 
-public class NavigationEventArgs
+public class NavigationEventArgs : WinUIShellObject
 {
     public object? Content
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<object>(id, nameof(Content));
-        }
+        get => PropertyAccessor.Get<object>(Id, nameof(Content));
     }
 
     public NavigationMode NavigationMode
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<NavigationMode>(id, nameof(NavigationMode))!;
-        }
+        get => PropertyAccessor.Get<NavigationMode>(Id, nameof(NavigationMode))!;
     }
 
     public NavigationTransitionInfo? NavigationTransitionInfo
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<NavigationTransitionInfo>(id, nameof(NavigationTransitionInfo));
-        }
+        get => PropertyAccessor.Get<NavigationTransitionInfo>(Id, nameof(NavigationTransitionInfo));
     }
 
     //public object Parameter => INavigationEventArgsMethods.get_Parameter(_objRef_global__Microsoft_UI_Xaml_Navigation_INavigationEventArgs);
     //public Type SourcePageType => INavigationEventArgsMethods.get_SourcePageType(_objRef_global__Microsoft_UI_Xaml_Navigation_INavigationEventArgs);
     //public Uri Uri
+
+    internal NavigationEventArgs(ObjectId id)
+        : base(id)
+    {
+    }
 }

@@ -2,19 +2,16 @@
 
 namespace WinUIShell;
 
-public class WindowEventArgs
+public class WindowEventArgs : WinUIShellObject
 {
     public bool Handled
     {
-        get
-        {
-            var id = ObjectStore.Get().GetId(this);
-            return PropertyAccessor.Get<bool>(id, nameof(Handled))!;
-        }
-        set
-        {
-            var id = ObjectStore.Get().GetId(this);
-            PropertyAccessor.SetAndWait(id, nameof(Handled), value);
-        }
+        get => PropertyAccessor.Get<bool>(Id, nameof(Handled))!;
+        set => PropertyAccessor.SetAndWait(Id, nameof(Handled), value);
+    }
+
+    internal WindowEventArgs(ObjectId id)
+        : base(id)
+    {
     }
 }

@@ -1,5 +1,11 @@
-﻿namespace WinUIShell;
+﻿using WinUIShell.Common;
 
-public class NavigationViewBackRequestedEventArgs
+namespace WinUIShell;
+
+public class NavigationViewBackRequestedEventArgs : WinUIShellObject
 {
+    internal NavigationViewBackRequestedEventArgs(ObjectId id)
+        : base(id)
+    {
+    }
 }
