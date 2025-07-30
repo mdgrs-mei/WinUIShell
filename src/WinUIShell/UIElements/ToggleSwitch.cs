@@ -5,8 +5,7 @@ namespace WinUIShell;
 
 public class ToggleSwitch : Control
 {
-    private const string _accessorClassName = "WinUIShell.Server.ToggleSwitchAccessor, WinUIShell.Server";
-    private readonly EventCallbackList _toggledCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _callbacks = new();
 
     public object? Header
     {
@@ -84,9 +83,10 @@ public class ToggleSwitch : Control
     }
     public void AddToggled(EventCallback eventCallback)
     {
-        _toggledCallbacks.Add(
-            nameof(AddToggled),
+        _callbacks.Add(
             Id,
+            "Toggled",
+            ObjectTypeMapping.Get().GetTargetTypeName<RoutedEventArgs>(),
             eventCallback);
     }
 }

@@ -5,9 +5,7 @@ namespace WinUIShell;
 
 public class TextBox : Control
 {
-    private const string _accessorClassName = "WinUIShell.Server.TextBoxAccessor, WinUIShell.Server";
-    private readonly EventCallbackList _beforeTextChangingCallbacks = new(_accessorClassName);
-    private readonly EventCallbackList _textChangedCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _callbacks = new();
 
     public bool AcceptsReturn
     {
@@ -210,9 +208,10 @@ public class TextBox : Control
     }
     public void AddBeforeTextChanging(EventCallback eventCallback)
     {
-        _beforeTextChangingCallbacks.Add(
-            nameof(AddBeforeTextChanging),
+        _callbacks.Add(
             Id,
+            "BeforeTextChanging",
+            ObjectTypeMapping.Get().GetTargetTypeName<TextBoxBeforeTextChangingEventArgs>(),
             eventCallback);
     }
 
@@ -226,9 +225,10 @@ public class TextBox : Control
     }
     public void AddTextChanged(EventCallback eventCallback)
     {
-        _textChangedCallbacks.Add(
-            nameof(AddTextChanged),
+        _callbacks.Add(
             Id,
+            "TextChanged",
+            ObjectTypeMapping.Get().GetTargetTypeName<TextChangedEventArgs>(),
             eventCallback);
     }
 }

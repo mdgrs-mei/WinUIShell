@@ -27,20 +27,4 @@ internal static class FrameAccessor
         var property = PageStore.Get().GetPageProperty(frame.SourcePageType);
         return property.Name;
     }
-
-    public static void AddNavigated(
-        Frame frame,
-        int queueThreadId,
-        string eventListId,
-        int eventId,
-        object?[]? disabledControlsWhileProcessing)
-    {
-        var callback = EventCallback.Create<NavigationEventArgs>(
-            queueThreadId,
-            eventListId,
-            eventId,
-            disabledControlsWhileProcessing);
-
-        frame.Navigated += new NavigatedEventHandler(callback);
-    }
 }

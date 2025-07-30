@@ -5,9 +5,7 @@ namespace WinUIShell;
 
 public class NavigationView : ContentControl
 {
-    private const string _accessorClassName = "WinUIShell.Server.NavigationViewAccessor, WinUIShell.Server";
-    private readonly EventCallbackList _itemInvokedCallbacks = new(_accessorClassName);
-    private readonly EventCallbackList _backRequestedCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _callbacks = new();
 
     public bool AlwaysShowHeader
     {
@@ -173,9 +171,10 @@ public class NavigationView : ContentControl
     }
     public void AddItemInvoked(EventCallback eventCallback)
     {
-        _itemInvokedCallbacks.Add(
-            nameof(AddItemInvoked),
+        _callbacks.Add(
             Id,
+            "ItemInvoked",
+            ObjectTypeMapping.Get().GetTargetTypeName<NavigationViewItemInvokedEventArgs>(),
             eventCallback);
     }
 
@@ -189,9 +188,10 @@ public class NavigationView : ContentControl
     }
     public void AddBackRequested(EventCallback eventCallback)
     {
-        _backRequestedCallbacks.Add(
-            nameof(AddBackRequested),
+        _callbacks.Add(
             Id,
+            "BackRequested",
+            ObjectTypeMapping.Get().GetTargetTypeName<NavigationViewBackRequestedEventArgs>(),
             eventCallback);
     }
 }

@@ -5,8 +5,7 @@ namespace WinUIShell;
 
 public class ButtonBase : ContentControl
 {
-    private const string _accessorClassName = "WinUIShell.Server.ButtonBaseAccessor, WinUIShell.Server";
-    private readonly EventCallbackList _clickCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _callbacks = new();
 
     internal ButtonBase()
     {
@@ -27,9 +26,10 @@ public class ButtonBase : ContentControl
     }
     public void AddClick(EventCallback eventCallback)
     {
-        _clickCallbacks.Add(
-            nameof(AddClick),
+        _callbacks.Add(
             Id,
+            "Click",
+            ObjectTypeMapping.Get().GetTargetTypeName<RoutedEventArgs>(),
             eventCallback);
     }
 }

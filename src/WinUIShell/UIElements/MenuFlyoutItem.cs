@@ -5,8 +5,7 @@ namespace WinUIShell;
 
 public class MenuFlyoutItem : MenuFlyoutItemBase
 {
-    private const string _accessorClassName = "WinUIShell.Server.MenuFlyoutItemAccessor, WinUIShell.Server";
-    private readonly EventCallbackList _clickCallbacks = new(_accessorClassName);
+    private readonly EventCallbackList _callbacks = new();
 
     public IconElement? Icon
     {
@@ -45,9 +44,10 @@ public class MenuFlyoutItem : MenuFlyoutItemBase
     }
     public void AddClick(EventCallback eventCallback)
     {
-        _clickCallbacks.Add(
-            nameof(AddClick),
+        _callbacks.Add(
             Id,
+            "Click",
+            ObjectTypeMapping.Get().GetTargetTypeName<RoutedEventArgs>(),
             eventCallback);
     }
 }
