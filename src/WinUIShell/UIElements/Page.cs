@@ -14,8 +14,11 @@ public class Page : UserControl
     //public NavigationCacheMode NavigationCacheMode
     //public AppBar TopAppBar
 
-    internal Page()
+    public Page()
     {
+        Id = CommandClient.Get().CreateObject(
+            ObjectTypeMapping.Get().GetTargetTypeName<Page>(),
+            this);
     }
 
     internal Page(ObjectId id)
