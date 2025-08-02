@@ -102,7 +102,7 @@ public class Window : WinUIShellObject
     {
         while (!IsClosed || !IsAllClosedCallbacksInvoked())
         {
-            Engine.Update();
+            Engine.UpdateThread();
             Thread.Sleep(8);
         }
     }

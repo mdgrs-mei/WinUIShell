@@ -7,8 +7,8 @@ $server = "$PSScriptRoot/bin/$serverTarget/WinUIShell.Server.exe"
 
 Import-Module $dll
 
-[WinUIShell.Engine]::Start($server)
+[WinUIShell.Engine]::InitThread($server)
 
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
-    [WinUIShell.Engine]::Stop()
+    [WinUIShell.Engine]::TermThread()
 }

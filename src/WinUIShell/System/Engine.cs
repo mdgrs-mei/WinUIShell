@@ -6,7 +6,7 @@ namespace WinUIShell;
 
 public static class Engine
 {
-    private static readonly ThreadLocal<bool> _isThisThreadStarted = new(() => false);
+    private static readonly ThreadLocal<bool> _isThisThreadInitialized = new(() => false);
     private static readonly ThreadLocal<bool> _isThisThreadInUpdate = new(() => false);
     private static readonly object _lock = new();
     private static int _mainThreadId = Constants.InvalidThreadId;
@@ -14,9 +14,9 @@ public static class Engine
     private static string _downstreamPipeName = "";
     private static Process? _serverProcess;
 
-    public static void Start(string serverExePath)
+    public static void InitThread(string serverExePath)
     {
-        if (_isThisThreadStarted.Value)
+        if (_isThisThreadInitialized.Value)
             return;
 
         lock (_lock)
@@ -41,15 +41,15 @@ public static class Engine
 
         InitTimerEvent();
 
-        _isThisThreadStarted.Value = true;
+        _isThisThreadInitialized.Value = true;
     }
 
-    public static void Stop()
+    public static void TermThread()
     {
-        if (!_isThisThreadStarted.Value)
+        if (!_isThisThreadInitialized.Value)
             return;
 
-        _isThisThreadStarted.Value = false;
+        _isThisThreadInitialized.Value = false;
 
         TermTimerEvent();
 
@@ -114,7 +114,7 @@ $script:engineUpdateTimer.Interval = 8
 $script:engineUpdateTimer.AutoReset = $false
 $script:engineUpdateTimer.Enabled = $true
 $script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdateTimer -EventName 'Elapsed' -Action {
-    [WinUIShell.Engine]::IdleUpdate()
+    [WinUIShell.Engine]::IdleUpdateThread()
     $engineUpdateTimer = $Sender
     $engineUpdateTimer.Start()
 }
@@ -132,9 +132,9 @@ $script:engineUpdateJob.StopJob()
         _ = scriptBlock.Invoke();
     }
 
-    public static void IdleUpdate()
+    public static void IdleUpdateThread()
     {
-        if (!_isThisThreadStarted.Value)
+        if (!_isThisThreadInitialized.Value)
             return;
 
         // Do not run commands inside other event callbacks.
@@ -145,9 +145,9 @@ $script:engineUpdateJob.StopJob()
         CommandServer.Get().ProcessCommands(queueId);
     }
 
-    internal static void Update()
+    internal static void UpdateThread()
     {
-        if (!_isThisThreadStarted.Value)
+        if (!_isThisThreadInitialized.Value)
             return;
 
         var queueId = new CommandQueueId(Environment.CurrentManagedThreadId);
