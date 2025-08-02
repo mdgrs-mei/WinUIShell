@@ -8,7 +8,8 @@ internal static class EventCallback
         object target,
         string eventName,
         string eventArgsTypeName,
-        int queueThreadId,
+        EventCallbackThreadingMode threadingMode,
+        int mainThreadId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -31,7 +32,8 @@ internal static class EventCallback
         var callbackCreator = callbackCreatorGeneric.MakeGenericMethod(eventArgsType);
 
         var callback = callbackCreator.Invoke(null, [
-            queueThreadId,
+            threadingMode,
+            mainThreadId,
             eventListId,
             eventId,
             disabledControlsWhileProcessing])!;
@@ -47,7 +49,8 @@ internal static class EventCallback
     }
 
     public static Action<object, TEventArgs> Create<TEventArgs>(
-        int queueThreadId,
+        EventCallbackThreadingMode threadingMode,
+        int mainThreadId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -72,20 +75,34 @@ internal static class EventCallback
             }
 
             var senderId = ObjectStore.Get().GetId(sender);
-            var queueId = new CommandQueueId(queueThreadId);
+            var queueId = new CommandQueueId(mainThreadId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 queueId,
                 $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
                 eventArgs);
 
-            await CommandClient.Get().InvokeMethodWaitAsync(
+            var invokeTask = CommandClient.Get().InvokeMethodWaitAsync(
                 queueId,
                 new ObjectId(eventListId),
                 "Invoke",
                 eventId,
                 senderId,
                 eventArgsId);
+
+            if (threadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
+            {
+                while (!invokeTask.IsCompleted)
+                {
+                    CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
+                    Thread.Sleep(4);
+                }
+                CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
+            }
+            else
+            {
+                await invokeTask;
+            }
 
             CommandClient.Get().DestroyObject(eventArgsId);
 

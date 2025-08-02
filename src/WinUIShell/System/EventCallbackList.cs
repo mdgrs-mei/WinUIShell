@@ -21,20 +21,22 @@ internal sealed class EventCallbackList : WinUIShellObject
         if (eventCallback is null)
             return;
 
+        var copiedEventCallback = eventCallback.Copy();
+
         int eventId = 0;
         lock (_callbacks)
         {
             eventId = _callbacks.Count;
-            _callbacks.Add(eventCallback);
+            _callbacks.Add(copiedEventCallback);
         }
 
         ObjectId[]? disabledControlIds = null;
-        if (eventCallback.DisabledControlsWhileProcessing is not null)
+        if (copiedEventCallback.DisabledControlsWhileProcessing is not null)
         {
-            disabledControlIds = new ObjectId[eventCallback.DisabledControlsWhileProcessing.Length];
-            for (int i = 0; i<eventCallback.DisabledControlsWhileProcessing.Length; ++i)
+            disabledControlIds = new ObjectId[copiedEventCallback.DisabledControlsWhileProcessing.Length];
+            for (int i = 0; i < copiedEventCallback.DisabledControlsWhileProcessing.Length; ++i)
             {
-                disabledControlIds[i] = eventCallback.DisabledControlsWhileProcessing[i].Id;
+                disabledControlIds[i] = copiedEventCallback.DisabledControlsWhileProcessing[i].Id;
             }
         }
 
@@ -44,6 +46,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             targetObjectId,
             eventName,
             eventArgsTypeName,
+            copiedEventCallback.ThreadingMode,
             Environment.CurrentManagedThreadId,
             Id.Id,
             eventId,

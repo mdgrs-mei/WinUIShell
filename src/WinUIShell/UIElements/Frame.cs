@@ -90,6 +90,7 @@ public class Frame : ContentControl
         NavigationCacheMode cacheMode,
         EventCallback onLoaded)
     {
+        ArgumentNullException.ThrowIfNull(onLoaded);
         PageStore.Get().RegisterLoaded(pageName, onLoaded);
         return CommandClient.Get().InvokeStaticMethodAndGetResult<bool>(
             _accessorClassName,
