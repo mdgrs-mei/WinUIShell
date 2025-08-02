@@ -100,10 +100,9 @@ public class Window : WinUIShellObject
 
     public void WaitForClosed()
     {
-        CommandQueueId queueId = new(Environment.CurrentManagedThreadId);
         while (!IsClosed || !IsAllClosedCallbacksInvoked())
         {
-            CommandServer.Get().ProcessCommands(queueId);
+            Engine.Update();
             Thread.Sleep(8);
         }
     }

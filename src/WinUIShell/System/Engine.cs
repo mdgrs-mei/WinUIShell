@@ -6,7 +6,8 @@ namespace WinUIShell;
 
 public static class Engine
 {
-    private static readonly ThreadLocal<bool> _isStarted = new(() => false);
+    private static readonly ThreadLocal<bool> _isThisThreadStarted = new(() => false);
+    private static readonly ThreadLocal<bool> _isThisThreadInUpdate = new(() => false);
     private static readonly object _lock = new();
     private static int _mainThreadId = Constants.InvalidThreadId;
     private static string _upstreamPipeName = "";
@@ -15,7 +16,7 @@ public static class Engine
 
     public static void Start(string serverExePath)
     {
-        if (_isStarted.Value)
+        if (_isThisThreadStarted.Value)
             return;
 
         lock (_lock)
@@ -40,15 +41,15 @@ public static class Engine
 
         InitTimerEvent();
 
-        _isStarted.Value = true;
+        _isThisThreadStarted.Value = true;
     }
 
     public static void Stop()
     {
-        if (!_isStarted.Value)
+        if (!_isThisThreadStarted.Value)
             return;
 
-        _isStarted.Value = false;
+        _isThisThreadStarted.Value = false;
 
         TermTimerEvent();
 
@@ -106,14 +107,14 @@ public static class Engine
     private static void InitTimerEvent()
     {
         // Use script block to make the timer action run on this thread.
-        // It looks like ScriptBlocks can call a private version of Runspace.DefaultRunspace.Events.SubscribeEvent that has 'shouldQueueAndProcessInExecutionThread' parameter.
+        // It looks like only ScriptBlocks can call a private version of Runspace.DefaultRunspace.Events.SubscribeEvent that has 'shouldQueueAndProcessInExecutionThread' parameter.
         var script = @"
 $script:engineUpdateTimer = New-Object Timers.Timer
 $script:engineUpdateTimer.Interval = 8
 $script:engineUpdateTimer.AutoReset = $false
 $script:engineUpdateTimer.Enabled = $true
 $script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdateTimer -EventName 'Elapsed' -Action {
-    [WinUIShell.Engine]::Update()
+    [WinUIShell.Engine]::IdleUpdate()
     $engineUpdateTimer = $Sender
     $engineUpdateTimer.Start()
 }
@@ -131,12 +132,36 @@ $script:engineUpdateJob.StopJob()
         _ = scriptBlock.Invoke();
     }
 
-    public static void Update()
+    public static void IdleUpdate()
     {
-        if (!_isStarted.Value)
+        if (!_isThisThreadStarted.Value)
+            return;
+
+        // Do not run commands inside other event callbacks.
+        if (_isThisThreadInUpdate.Value)
             return;
 
         var queueId = new CommandQueueId(Environment.CurrentManagedThreadId);
         CommandServer.Get().ProcessCommands(queueId);
+    }
+
+    internal static void Update()
+    {
+        if (!_isThisThreadStarted.Value)
+            return;
+
+        var queueId = new CommandQueueId(Environment.CurrentManagedThreadId);
+        if (!_isThisThreadInUpdate.Value)
+        {
+            // Root update.
+            _isThisThreadInUpdate.Value = true;
+            CommandServer.Get().ProcessCommands(queueId);
+            _isThisThreadInUpdate.Value = false;
+        }
+        else
+        {
+            // Recursive update.
+            CommandServer.Get().ProcessCommands(queueId);
+        }
     }
 }
