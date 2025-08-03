@@ -95,7 +95,7 @@ internal static class EventCallback
                 while (!invokeTask.IsCompleted)
                 {
                     App.ProcessCommands();
-                    Thread.Sleep(2);
+                    Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
                 }
                 App.ProcessCommands();
             }

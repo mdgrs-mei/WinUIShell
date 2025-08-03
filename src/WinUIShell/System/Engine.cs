@@ -110,7 +110,7 @@ public static class Engine
         // It looks like only ScriptBlocks can call a private version of Runspace.DefaultRunspace.Events.SubscribeEvent that has 'shouldQueueAndProcessInExecutionThread' parameter.
         var script = @"
 $script:engineUpdateTimer = New-Object Timers.Timer
-$script:engineUpdateTimer.Interval = 8
+$script:engineUpdateTimer.Interval = {0}
 $script:engineUpdateTimer.AutoReset = $false
 $script:engineUpdateTimer.Enabled = $true
 $script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdateTimer -EventName 'Elapsed' -Action {
@@ -119,6 +119,11 @@ $script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdate
     $engineUpdateTimer.Start()
 }
 ";
+        script = script.Replace(
+            "{0}",
+            Constants.ClientTimerEventCommandPolingIntervalMillisecond.ToString(),
+            StringComparison.Ordinal);
+
         var scriptBlock = ScriptBlock.Create(script);
         _ = scriptBlock.Invoke();
     }

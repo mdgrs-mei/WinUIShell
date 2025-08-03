@@ -21,7 +21,7 @@ public partial class App : Application
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         _updateTimer = DispatcherQueue.GetForCurrentThread().CreateTimer();
-        _updateTimer.Interval = TimeSpan.FromMicroseconds(16);
+        _updateTimer.Interval = TimeSpan.FromMicroseconds(Constants.ServerCommandPolingIntervalMillisecond);
         _updateTimer.IsRepeating = false;
         _updateTimer.Tick += (sender, eventArgs) =>
         {
