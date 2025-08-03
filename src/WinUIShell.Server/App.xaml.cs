@@ -100,7 +100,6 @@ public partial class App : Application
         return _parentProcess.HasExited;
     }
 
-
     private bool Update()
     {
         if (ParentProcessExited())
@@ -110,6 +109,12 @@ public partial class App : Application
             return false;
         }
 
+        ProcessCommands();
+        return true;
+    }
+
+    public static void ProcessCommands()
+    {
         try
         {
             CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
@@ -126,7 +131,6 @@ public partial class App : Application
                 CommandClient.Get().WriteError($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
             }
         }
-        return true;
     }
 }
 #pragma warning restore CA1515

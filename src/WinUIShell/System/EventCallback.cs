@@ -21,7 +21,7 @@ public class EventCallback
     internal EventCallback Copy()
     {
         EventCallback e = (EventCallback)MemberwiseClone();
-        if (ThreadingMode == EventCallbackThreadingMode.ThreadPool && ScriptBlock is not null)
+        if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI && ScriptBlock is not null)
         {
             e.ScriptBlock = ScriptBlock.Create(ScriptBlock.ToString());
         }

@@ -94,10 +94,10 @@ internal static class EventCallback
             {
                 while (!invokeTask.IsCompleted)
                 {
-                    CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
-                    Thread.Sleep(4);
+                    App.ProcessCommands();
+                    Thread.Sleep(2);
                 }
-                CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
+                App.ProcessCommands();
             }
             else
             {

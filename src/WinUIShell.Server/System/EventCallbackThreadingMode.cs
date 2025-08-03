@@ -4,5 +4,5 @@ public enum EventCallbackThreadingMode
 {
     MainThreadAsyncUI,
     MainThreadSyncUI,
-    ThreadPool,
+    ThreadPoolAsyncUI,
 }
