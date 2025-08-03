@@ -9,7 +9,8 @@ internal sealed class PageStore : Singleton<PageStore>
     {
         public string Name { get; set; } = "";
         public Type? Type { get; set; }
-        public int CallbackQueueThreadId { get; set; }
+        public EventCallbackThreadingMode OnLoadedCallbackThreadingMode { get; set; }
+        public int OnLoadedCallbackMainThreadId { get; set; }
         public NavigationCacheMode NavigationCacheMode { get; set; }
     }
 
@@ -40,13 +41,18 @@ internal sealed class PageStore : Singleton<PageStore>
         }
     }
 
-    public Type RegisterPageProperty(string pageName, int callbackQueueThreadId, NavigationCacheMode navigationCacheMode)
+    public Type RegisterPageProperty(
+        string pageName,
+        EventCallbackThreadingMode onLoadedCallbackThreadingMode,
+        int onLoadedCallbackMainThreadId,
+        NavigationCacheMode navigationCacheMode)
     {
         lock (_remainingPageTypes)
         {
             if (_assignedPages.TryGetValue(pageName, out var pageProperty))
             {
-                pageProperty.CallbackQueueThreadId = callbackQueueThreadId;
+                pageProperty.OnLoadedCallbackThreadingMode = onLoadedCallbackThreadingMode;
+                pageProperty.OnLoadedCallbackMainThreadId = onLoadedCallbackMainThreadId;
                 pageProperty.NavigationCacheMode = navigationCacheMode;
                 return pageProperty.Type!;
             }
@@ -57,7 +63,8 @@ internal sealed class PageStore : Singleton<PageStore>
                 {
                     Name = pageName,
                     Type = newPageType,
-                    CallbackQueueThreadId = callbackQueueThreadId,
+                    OnLoadedCallbackThreadingMode = onLoadedCallbackThreadingMode,
+                    OnLoadedCallbackMainThreadId = onLoadedCallbackMainThreadId,
                     NavigationCacheMode = navigationCacheMode
                 };
                 return newPageType;

@@ -96,6 +96,7 @@ public class Frame : ContentControl
             _accessorClassName,
             nameof(Navigate),
             Id,
+            onLoaded.ThreadingMode,
             Environment.CurrentManagedThreadId,
             pageName,
             transitionOverride?.Id,

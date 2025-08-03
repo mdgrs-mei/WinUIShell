@@ -7,12 +7,17 @@ internal static class FrameAccessor
 {
     public static bool Navigate(
         Frame frame,
-        int queueThreadId,
+        EventCallbackThreadingMode onLoadedCallbackThreadingMode,
+        int onLoadedCallbackMainThreadId,
         string pageName,
         NavigationTransitionInfo? transitionOverride,
         NavigationCacheMode navigationCacheMode)
     {
-        var pageType = PageStore.Get().RegisterPageProperty(pageName, queueThreadId, navigationCacheMode);
+        var pageType = PageStore.Get().RegisterPageProperty(
+            pageName,
+            onLoadedCallbackThreadingMode,
+            onLoadedCallbackMainThreadId,
+            navigationCacheMode);
         return frame.Navigate(pageType, null, transitionOverride);
     }
 

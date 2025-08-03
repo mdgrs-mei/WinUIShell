@@ -23,7 +23,7 @@ public interface IPage
         return async (object sender, RoutedEventArgs eventArgs) =>
         {
             var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
-            var queueId = new CommandQueueId(pageProperty.CallbackQueueThreadId);
+            var queueId = new CommandQueueId(pageProperty.OnLoadedCallbackMainThreadId);
 
             page.Id = CommandClient.Get().CreateObjectWithId(
                 queueId,
@@ -35,13 +35,27 @@ public interface IPage
                 "WinUIShell.RoutedEventArgs, WinUIShell",
                 eventArgs);
 
-            await CommandClient.Get().InvokeStaticMethodWaitAsync(
+            var invokeTask = CommandClient.Get().InvokeStaticMethodWaitAsync(
                 queueId,
                 "WinUIShell.PageStore, WinUIShell",
                 "OnLoaded",
                 pageProperty.Name,
                 page.Id,
                 eventArgsId);
+
+            if (pageProperty.OnLoadedCallbackThreadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
+            {
+                while (!invokeTask.IsCompleted)
+                {
+                    App.ProcessCommands();
+                    Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
+                }
+                App.ProcessCommands();
+            }
+            else
+            {
+                await invokeTask;
+            }
 
             CommandClient.Get().DestroyObject(eventArgsId);
         };
