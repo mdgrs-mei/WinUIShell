@@ -10,7 +10,13 @@ public class Window : WinUIShellObject
     private bool _isActivateCalled;
     private bool _isCloseCalled;
     private bool IsTerminated { get => _isActivateCalled && (_isCloseCalled || IsClosed); }
-    internal bool IsClosed { get; set; } = true;
+
+    private int _isClosed = 1;
+    internal bool IsClosed
+    {
+        get => Interlocked.CompareExchange(ref _isClosed, 0, 0) > 0;
+        private set => Interlocked.Exchange(ref _isClosed, value ? 1 : 0);
+    }
 
     public AppWindow AppWindow
     {
@@ -102,7 +108,7 @@ public class Window : WinUIShellObject
         while (!IsClosed || !IsAllClosedCallbacksInvoked())
         {
             Engine.UpdateThread();
-            Thread.Sleep(8);
+            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
         }
     }
 

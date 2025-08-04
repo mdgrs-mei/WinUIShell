@@ -4,7 +4,12 @@ namespace WinUIShell;
 
 public class EventCallback
 {
-    internal bool IsInvoked { get; private set; }
+    private int _isInvoked;
+    internal bool IsInvoked
+    {
+        get => Interlocked.CompareExchange(ref _isInvoked, 0, 0) > 0;
+        private set => Interlocked.Exchange(ref _isInvoked, value ? 1 : 0);
+    }
 
     public ScriptBlock? ScriptBlock { get; set; }
 
