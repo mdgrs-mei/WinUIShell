@@ -36,9 +36,4 @@ public class EventCallback
         }
         IsInvoked = true;
     }
-
-    internal void ClearIsInvoked()
-    {
-        IsInvoked = false;
-    }
 }

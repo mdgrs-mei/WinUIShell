@@ -55,29 +55,28 @@ internal sealed class EventCallbackList : WinUIShellObject
 
     public void Invoke(int eventId, object? sender, object? eventArgs)
     {
-        if (eventId < 0 || eventId >= _callbacks.Count)
+        EventCallback? callback = null;
+        lock (_callbacks)
         {
-            return;
+            if (eventId < 0 || eventId >= _callbacks.Count)
+            {
+                return;
+            }
+            callback = _callbacks[eventId];
         }
-        _callbacks[eventId].Invoke(sender, eventArgs);
-    }
-
-    public void ClearIsInvoked()
-    {
-        foreach (var callback in _callbacks)
-        {
-            callback.ClearIsInvoked();
-        }
+        callback.Invoke(sender, eventArgs);
     }
 
     public bool IsAllInvoked()
     {
-        foreach (var callback in _callbacks)
+        lock (_callbacks)
         {
-            if (!callback.IsInvoked)
-                return false;
+            foreach (var callback in _callbacks)
+            {
+                if (!callback.IsInvoked)
+                    return false;
+            }
+            return true;
         }
-
-        return true;
     }
 }

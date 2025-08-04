@@ -63,7 +63,6 @@ public class Window : WinUIShellObject
 
         _isActivateCalled = true;
         IsClosed = false;
-        ClearClosedCallbackStates();
         CommandClient.Get().InvokeMethod(Id, nameof(Activate));
     }
 
@@ -105,11 +104,6 @@ public class Window : WinUIShellObject
             Engine.UpdateThread();
             Thread.Sleep(8);
         }
-    }
-
-    private void ClearClosedCallbackStates()
-    {
-        _closedCallbacks.ClearIsInvoked();
     }
 
     private bool IsAllClosedCallbacksInvoked()
