@@ -5,6 +5,7 @@ public enum CommandQueueType
 {
     Immediate,
     MainThread,
+    ThreadPool,
     ThreadId
 }
 
@@ -48,4 +49,5 @@ public class CommandQueueId
 
     public static readonly CommandQueueId Immediate = new(CommandQueueType.Immediate);
     public static readonly CommandQueueId MainThread = new(CommandQueueType.MainThread);
+    public static readonly CommandQueueId ThreadPool = new(CommandQueueType.ThreadPool);
 }

@@ -1,4 +1,8 @@
 
+param(
+    [bool]$UseTimerEvent = $true
+)
+
 $netVersion = 'net8.0'
 $serverTarget = 'net8.0-windows10.0.18362.0'
 
@@ -7,7 +11,8 @@ $server = "$PSScriptRoot/bin/$serverTarget/WinUIShell.Server.exe"
 
 Import-Module $dll
 
-[WinUIShell.Engine]::InitThread($server)
+$modulePath = $MyInvocation.MyCommand.Path
+[WinUIShell.Engine]::InitThread($server, $host, $modulePath, $UseTimerEvent)
 
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     [WinUIShell.Engine]::TermThread()

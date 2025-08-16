@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
+using System.Management.Automation.Host;
 using WinUIShell.Common;
 
 namespace WinUIShell;
@@ -8,13 +9,19 @@ public static class Engine
 {
     private static readonly ThreadLocal<bool> _isThisThreadInitialized = new(() => false);
     private static readonly ThreadLocal<bool> _isThisThreadInUpdate = new(() => false);
+    private static readonly ThreadLocal<bool> _useTimerEvent = new(() => true);
     private static readonly object _lock = new();
     private static int _mainThreadId = Constants.InvalidThreadId;
     private static string _upstreamPipeName = "";
     private static string _downstreamPipeName = "";
     private static Process? _serverProcess;
+    private static readonly CommandThreadPool _commandThreadPool = new();
 
-    public static void InitThread(string serverExePath)
+    public static void InitThread(
+        string serverExePath,
+        PSHost? streamingHost,
+        string modulePath,
+        bool useTimerEvent)
     {
         if (_isThisThreadInitialized.Value)
             return;
@@ -23,6 +30,9 @@ public static class Engine
         {
             if (_mainThreadId == Constants.InvalidThreadId)
             {
+#if DEBUG
+                //System.Diagnostics.Debugger.Launch();
+#endif
                 InitPipeNames();
                 try
                 {
@@ -36,10 +46,15 @@ public static class Engine
                     throw;
                 }
                 _mainThreadId = Environment.CurrentManagedThreadId;
+                InitCommandThreadPool(streamingHost, modulePath);
             }
         }
 
-        InitTimerEvent();
+        _useTimerEvent.Value = useTimerEvent;
+        if (useTimerEvent)
+        {
+            InitTimerEvent();
+        }
 
         _isThisThreadInitialized.Value = true;
     }
@@ -51,12 +66,16 @@ public static class Engine
 
         _isThisThreadInitialized.Value = false;
 
-        TermTimerEvent();
+        if (_useTimerEvent.Value)
+        {
+            TermTimerEvent();
+        }
 
         lock (_lock)
         {
             if (Environment.CurrentManagedThreadId == _mainThreadId)
             {
+                TermCommandThreadPool();
                 TermConnection();
                 StopServerProcess();
                 _mainThreadId = Constants.InvalidThreadId;
@@ -89,6 +108,7 @@ public static class Engine
             return;
 
         _serverProcess.Kill();
+        _serverProcess = null;
     }
 
     private static void InitConnection()
@@ -135,6 +155,21 @@ $script:engineUpdateJob.StopJob()
 ";
         var scriptBlock = ScriptBlock.Create(script);
         _ = scriptBlock.Invoke();
+    }
+
+    private static void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
+    {
+        _commandThreadPool.Init(streamingHost, modulePath);
+    }
+
+    private static void TermCommandThreadPool()
+    {
+        _commandThreadPool.Term();
+    }
+
+    public static void SetCommandThreadPoolInitializationScript(ScriptBlock? scriptBlock)
+    {
+        _commandThreadPool.SetInitializationScript(scriptBlock);
     }
 
     public static void IdleUpdateThread()

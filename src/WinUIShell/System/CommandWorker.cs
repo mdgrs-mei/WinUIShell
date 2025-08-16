@@ -1,6 +1,7 @@
 ﻿using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Management.Automation.Runspaces;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -10,16 +11,15 @@ internal sealed class CommandWorker
     private string _initializationScript = "";
     private PSHost? _streamingHost;
     private Thread? _thread;
-    private Runspace? _runspace;
-    private PowerShell? _powershell;
-    private readonly Queue<Action> _commands = [];
     private bool _stopThread;
+
+    private static readonly ThreadLocal<PowerShell?> _threadLocalPowerShell = new(() => null);
 
     public CommandWorker()
     {
     }
 
-    public void Start(PSHost streamingHost, string modulePath, string initializationScript)
+    public void Start(PSHost? streamingHost, string modulePath, string initializationScript)
     {
         _streamingHost = streamingHost;
         _modulePath = modulePath;
@@ -35,64 +35,67 @@ internal sealed class CommandWorker
 
     public void Stop()
     {
-        lock (_commands)
+        var commandQueue = CommandServer.Get().GetThreadPoolCommandQueue();
+        lock (commandQueue)
         {
             _stopThread = true;
-            Monitor.Pulse(_commands);
+            Monitor.PulseAll(commandQueue);
         }
         _thread?.Join();
-    }
-
-    public void SetInitializationScript(ScriptBlock scriptBlock)
-    {
-        _ = scriptBlock;
+        _thread = null;
     }
 
     private void ThreadEntry()
     {
-        _runspace = RunspaceFactory.CreateRunspace(_streamingHost);
-        _runspace.ThreadOptions = PSThreadOptions.UseCurrentThread;
-        _runspace.Open();
-        Runspace.DefaultRunspace = _runspace;
+        var runspace = RunspaceFactory.CreateRunspace(_streamingHost);
+        runspace.ThreadOptions = PSThreadOptions.UseCurrentThread;
+        runspace.Open();
 
-        _powershell = PowerShell.Create();
-        _powershell.Runspace = _runspace;
+        var powershell = PowerShell.Create();
+        powershell.Runspace = runspace;
+        InitRunspace(powershell);
 
-        _ = _powershell.AddScript($"Import-Module '{_modulePath}'");
-        if (!string.IsNullOrEmpty(_initializationScript))
-        {
-            _ = _powershell.AddScript(_initializationScript);
-        }
-        _ = _powershell.Invoke();
-        _powershell.Commands.Clear();
-
+        _threadLocalPowerShell.Value = powershell;
         ProcessCommands();
+        _threadLocalPowerShell.Value = null;
 
-        _powershell.Dispose();
-        _runspace.Close();
-        _runspace.Dispose();
+        powershell.Dispose();
+        runspace.Close();
+        runspace.Dispose();
     }
 
-    public void ProcessCommands()
+    private void InitRunspace(PowerShell powershell)
     {
+        _ = powershell.AddScript($"Import-Module '{_modulePath}' -ArgumentList $false");
+        if (!string.IsNullOrEmpty(_initializationScript))
+        {
+            _ = powershell.AddScript(_initializationScript);
+        }
+        _ = powershell.Invoke();
+        powershell.Commands.Clear();
+    }
+
+    private void ProcessCommands()
+    {
+        var commandQueue = CommandServer.Get().GetThreadPoolCommandQueue();
         while (true)
         {
             Action? action = null;
-            lock (_commands)
+            lock (commandQueue)
             {
-                if (_stopThread && _commands.Count == 0)
+                if (_stopThread && commandQueue.Count == 0)
                 {
                     return;
                 }
 
-                if (_commands.Count == 0)
+                if (commandQueue.Count == 0)
                 {
-                    _ = Monitor.Wait(_commands);
+                    _ = Monitor.Wait(commandQueue);
                 }
 
-                if (_commands.Count > 0)
+                if (commandQueue.Count > 0)
                 {
-                    action = _commands.Dequeue();
+                    action = commandQueue.Dequeue();
                 }
             }
 
@@ -103,12 +106,21 @@ internal sealed class CommandWorker
         }
     }
 
-    public void AddCommand(Action action)
+    public static void InvokeScriptBlock(
+        string scriptBlock,
+        object? argumentList,
+        object? sender,
+        object? eventArgs)
     {
-        lock (_commands)
-        {
-            _commands.Enqueue(action);
-            Monitor.Pulse(_commands);
-        }
+        var powershell = _threadLocalPowerShell.Value;
+        ArgumentNullException.ThrowIfNull(powershell);
+
+        _ = powershell.AddScript(scriptBlock);
+        _ = powershell.AddArgument(argumentList);
+        _ = powershell.AddArgument(sender);
+        _ = powershell.AddArgument(eventArgs);
+        _ = powershell.Invoke();
+
+        powershell.Commands.Clear();
     }
 }

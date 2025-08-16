@@ -11,6 +11,7 @@ public class EventCallback
         private set => Interlocked.Exchange(ref _isInvoked, value ? 1 : 0);
     }
 
+    private string _scriptBlockString = "";
     public ScriptBlock? ScriptBlock { get; set; }
 
     public EventCallbackThreadingMode ThreadingMode { get; set; } = EventCallbackThreadingMode.MainThreadAsyncUI;
@@ -28,7 +29,7 @@ public class EventCallback
         EventCallback e = (EventCallback)MemberwiseClone();
         if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI && ScriptBlock is not null)
         {
-            e.ScriptBlock = ScriptBlock.Create(ScriptBlock.ToString());
+            e._scriptBlockString = ScriptBlock.ToString();
         }
         return e;
     }
@@ -37,7 +38,18 @@ public class EventCallback
     {
         if (ScriptBlock is not null)
         {
-            _ = ScriptBlock.Invoke(ArgumentList, sender, eventArgs);
+            if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI)
+            {
+                CommandWorker.InvokeScriptBlock(
+                    _scriptBlockString,
+                    ArgumentList,
+                    sender,
+                    eventArgs);
+            }
+            else
+            {
+                _ = ScriptBlock.Invoke(ArgumentList, sender, eventArgs);
+            }
         }
         IsInvoked = true;
     }

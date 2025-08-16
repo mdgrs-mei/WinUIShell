@@ -75,7 +75,9 @@ internal static class EventCallback
             }
 
             var senderId = ObjectStore.Get().GetId(sender);
-            var queueId = new CommandQueueId(mainThreadId);
+            var queueId = (threadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI) ?
+                CommandQueueId.ThreadPool :
+                new CommandQueueId(mainThreadId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 queueId,
