@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
+using System.Management.Automation.Runspaces;
 using WinUIShell.Common;
 
 namespace WinUIShell;
@@ -15,6 +16,8 @@ public static class Engine
     private static string _upstreamPipeName = "";
     private static string _downstreamPipeName = "";
     private static Process? _serverProcess;
+    private static System.Timers.Timer? _eventTimer;
+    private static PSEventSubscriber? _timerEventSubscriber;
     private static readonly CommandThreadPool _commandThreadPool = new();
 
     public static void InitThread(
@@ -126,35 +129,38 @@ public static class Engine
 
     private static void InitTimerEvent()
     {
-        // Use script block to make the timer action run on this thread.
-        // It looks like only ScriptBlocks can call a private version of Runspace.DefaultRunspace.Events.SubscribeEvent that has 'shouldQueueAndProcessInExecutionThread' parameter.
-        var script = @"
-$script:engineUpdateTimer = New-Object Timers.Timer
-$script:engineUpdateTimer.Interval = {0}
-$script:engineUpdateTimer.AutoReset = $false
-$script:engineUpdateTimer.Enabled = $true
-$script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdateTimer -EventName 'Elapsed' -Action {
-    [WinUIShell.Engine]::IdleUpdateThread()
-    $engineUpdateTimer = $Sender
-    $engineUpdateTimer.Start()
-}
-";
-        script = script.Replace(
-            "{0}",
-            Constants.ClientTimerEventCommandPolingIntervalMillisecond.ToString(),
-            StringComparison.Ordinal);
+        // Register timer event to process the main command queue.
+        // The timer event fires when commands are processed on the main runspace or when waiting for user inputs in interactive sessions.
+        _eventTimer = new()
+        {
+            Interval = Constants.ClientTimerEventCommandPolingIntervalMillisecond,
+            AutoReset = false,
+            Enabled = false
+        };
 
-        var scriptBlock = ScriptBlock.Create(script);
-        _ = scriptBlock.Invoke();
+        ScriptBlock action = ScriptBlock.Create(@"
+[WinUIShell.Engine]::IdleUpdateThread()
+$engineUpdateTimer = $Sender
+$engineUpdateTimer.Start()
+"
+        );
+
+        _timerEventSubscriber = Runspace.DefaultRunspace.Events.SubscribeEvent(
+            source: _eventTimer,
+            eventName: "Elapsed",
+            sourceIdentifier: "",
+            data: null,
+            action: action,
+            supportEvent: false,
+            forwardEvent: false);
+
+        _eventTimer.Start();
     }
 
     private static void TermTimerEvent()
     {
-        var script = @"
-$script:engineUpdateJob.StopJob()
-";
-        var scriptBlock = ScriptBlock.Create(script);
-        _ = scriptBlock.Invoke();
+        _eventTimer?.Stop();
+        Runspace.DefaultRunspace.Events.UnsubscribeEvent(_timerEventSubscriber);
     }
 
     private static void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
