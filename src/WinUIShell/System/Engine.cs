@@ -8,9 +8,14 @@ namespace WinUIShell;
 
 public static class Engine
 {
-    private static readonly RunspaceLocal<bool> _isThisRunspaceInitialized = new(() => false);
-    private static readonly RunspaceLocal<bool> _isThisRunspaceInUpdate = new(() => false);
-    private static readonly RunspaceLocal<bool> _useTimerEvent = new(() => true);
+    private sealed class RunspaceState
+    {
+        public bool IsInitialized { get; set; }
+        public bool IsInUpdate { get; set; }
+        public bool UseTimerEvent { get; set; } = true;
+    }
+
+    private static readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
     private static readonly object _lock = new();
     private static int _mainRunspaceId = Constants.InvalidRunspaceId;
     private static string _upstreamPipeName = "";
@@ -26,7 +31,8 @@ public static class Engine
         string modulePath,
         bool useTimerEvent)
     {
-        if (_isThisRunspaceInitialized.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (thisRunspace.IsInitialized)
             return;
 
         lock (_lock)
@@ -53,23 +59,24 @@ public static class Engine
             }
         }
 
-        _useTimerEvent.Value = useTimerEvent;
+        thisRunspace.UseTimerEvent = useTimerEvent;
         if (useTimerEvent)
         {
             InitTimerEvent();
         }
 
-        _isThisRunspaceInitialized.Value = true;
+        thisRunspace.IsInitialized = true;
     }
 
     public static void TermRunspace()
     {
-        if (!_isThisRunspaceInitialized.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
             return;
 
-        _isThisRunspaceInitialized.Value = false;
+        thisRunspace.IsInitialized = false;
 
-        if (_useTimerEvent.Value)
+        if (thisRunspace.UseTimerEvent)
         {
             TermTimerEvent();
         }
@@ -180,11 +187,12 @@ $engineUpdateTimer.Start()
 
     public static void IdleUpdateRunspace()
     {
-        if (!_isThisRunspaceInitialized.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
             return;
 
         // Do not run commands inside other event callbacks.
-        if (_isThisRunspaceInUpdate.Value)
+        if (thisRunspace.IsInUpdate)
             return;
 
         var queueId = new CommandQueueId(Runspace.DefaultRunspace.Id);
@@ -193,16 +201,17 @@ $engineUpdateTimer.Start()
 
     internal static void UpdateRunspace()
     {
-        if (!_isThisRunspaceInitialized.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
             return;
 
         var queueId = new CommandQueueId(Runspace.DefaultRunspace.Id);
-        if (!_isThisRunspaceInUpdate.Value)
+        if (!thisRunspace.IsInUpdate)
         {
             // Root update.
-            _isThisRunspaceInUpdate.Value = true;
+            thisRunspace.IsInUpdate = true;
             CommandServer.Get().ProcessCommands(queueId);
-            _isThisRunspaceInUpdate.Value = false;
+            thisRunspace.IsInUpdate = false;
         }
         else
         {
