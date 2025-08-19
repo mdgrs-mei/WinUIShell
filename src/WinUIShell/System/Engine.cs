@@ -12,7 +12,8 @@ public static class Engine
     {
         public bool IsInitialized { get; set; }
         public bool IsInUpdate { get; set; }
-        public bool UseTimerEvent { get; set; } = true;
+        public System.Timers.Timer? EventTimer;
+        public PSEventSubscriber? TimerEventSubscriber;
     }
 
     private static readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
@@ -21,8 +22,6 @@ public static class Engine
     private static string _upstreamPipeName = "";
     private static string _downstreamPipeName = "";
     private static Process? _serverProcess;
-    private static System.Timers.Timer? _eventTimer;
-    private static PSEventSubscriber? _timerEventSubscriber;
     private static readonly CommandThreadPool _commandThreadPool = new();
 
     public static void InitRunspace(
@@ -59,7 +58,6 @@ public static class Engine
             }
         }
 
-        thisRunspace.UseTimerEvent = useTimerEvent;
         if (useTimerEvent)
         {
             InitTimerEvent();
@@ -76,10 +74,7 @@ public static class Engine
 
         thisRunspace.IsInitialized = false;
 
-        if (thisRunspace.UseTimerEvent)
-        {
-            TermTimerEvent();
-        }
+        TermTimerEvent();
 
         lock (_lock)
         {
@@ -136,9 +131,11 @@ public static class Engine
 
     private static void InitTimerEvent()
     {
+        var thisRunspace = _thisRunspace.Value;
+
         // Register timer event to process the main command queue.
         // The timer event fires when commands are processed on the main runspace or when waiting for user inputs in interactive sessions.
-        _eventTimer = new()
+        thisRunspace.EventTimer = new()
         {
             Interval = Constants.ClientTimerEventCommandPolingIntervalMillisecond,
             AutoReset = false,
@@ -152,8 +149,8 @@ $engineUpdateTimer.Start()
 "
         );
 
-        _timerEventSubscriber = Runspace.DefaultRunspace.Events.SubscribeEvent(
-            source: _eventTimer,
+        thisRunspace.TimerEventSubscriber = Runspace.DefaultRunspace.Events.SubscribeEvent(
+            source: thisRunspace.EventTimer,
             eventName: "Elapsed",
             sourceIdentifier: "",
             data: null,
@@ -161,13 +158,17 @@ $engineUpdateTimer.Start()
             supportEvent: false,
             forwardEvent: false);
 
-        _eventTimer.Start();
+        thisRunspace.EventTimer.Start();
     }
 
     private static void TermTimerEvent()
     {
-        _eventTimer?.Stop();
-        Runspace.DefaultRunspace.Events.UnsubscribeEvent(_timerEventSubscriber);
+        var thisRunspace = _thisRunspace.Value;
+        if (thisRunspace.EventTimer is null)
+            return;
+
+        thisRunspace.EventTimer.Stop();
+        Runspace.DefaultRunspace.Events.UnsubscribeEvent(thisRunspace.TimerEventSubscriber);
     }
 
     private static void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
