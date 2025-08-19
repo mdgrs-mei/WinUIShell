@@ -8,7 +8,7 @@ internal static class FrameAccessor
     public static bool Navigate(
         Frame frame,
         EventCallbackThreadingMode onLoadedCallbackThreadingMode,
-        int onLoadedCallbackMainThreadId,
+        int onLoadedCallbackRunspaceId,
         string pageName,
         NavigationTransitionInfo? transitionOverride,
         NavigationCacheMode navigationCacheMode)
@@ -16,7 +16,7 @@ internal static class FrameAccessor
         var pageType = PageStore.Get().RegisterPageProperty(
             pageName,
             onLoadedCallbackThreadingMode,
-            onLoadedCallbackMainThreadId,
+            onLoadedCallbackRunspaceId,
             navigationCacheMode);
         return frame.Navigate(pageType, null, transitionOverride);
     }

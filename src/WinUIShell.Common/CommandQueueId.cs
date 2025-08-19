@@ -6,13 +6,13 @@ public enum CommandQueueType
     Immediate,
     MainThread,
     ThreadPool,
-    ThreadId
+    RunspaceId
 }
 
 public class CommandQueueId
 {
     public CommandQueueType Type { get; set; } = CommandQueueType.MainThread;
-    public int ThreadId { get; set; } = Constants.InvalidThreadId;
+    public int RunspaceId { get; set; } = Constants.InvalidRunspaceId;
 
     public CommandQueueId()
     {
@@ -23,10 +23,10 @@ public class CommandQueueId
         Type = type;
     }
 
-    public CommandQueueId(int threadId)
+    public CommandQueueId(int runspaceId)
     {
-        Type = CommandQueueType.ThreadId;
-        ThreadId = threadId;
+        Type = CommandQueueType.RunspaceId;
+        RunspaceId = runspaceId;
     }
 
     public override bool Equals(object? obj)
@@ -39,12 +39,12 @@ public class CommandQueueId
         if (other is null)
             return false;
 
-        return (Type == other.Type) && (ThreadId == other.ThreadId);
+        return (Type == other.Type) && (RunspaceId == other.RunspaceId);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Type, ThreadId);
+        return HashCode.Combine(Type, RunspaceId);
     }
 
     public static readonly CommandQueueId Immediate = new(CommandQueueType.Immediate);

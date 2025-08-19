@@ -1,4 +1,5 @@
 ﻿using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using WinUIShell.Common;
 
 namespace WinUIShell;
@@ -97,7 +98,7 @@ public class Frame : ContentControl
             nameof(Navigate),
             Id,
             onLoaded.ThreadingMode,
-            Environment.CurrentManagedThreadId,
+            Runspace.DefaultRunspace.Id,
             pageName,
             transitionOverride?.Id,
             cacheMode);

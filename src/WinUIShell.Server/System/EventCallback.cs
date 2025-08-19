@@ -9,7 +9,7 @@ internal static class EventCallback
         string eventName,
         string eventArgsTypeName,
         EventCallbackThreadingMode threadingMode,
-        int mainThreadId,
+        int mainRunspaceId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -33,7 +33,7 @@ internal static class EventCallback
 
         var callback = callbackCreator.Invoke(null, [
             threadingMode,
-            mainThreadId,
+            mainRunspaceId,
             eventListId,
             eventId,
             disabledControlsWhileProcessing])!;
@@ -50,7 +50,7 @@ internal static class EventCallback
 
     public static Action<object, TEventArgs> Create<TEventArgs>(
         EventCallbackThreadingMode threadingMode,
-        int mainThreadId,
+        int mainRunspaceId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -77,7 +77,7 @@ internal static class EventCallback
             var senderId = ObjectStore.Get().GetId(sender);
             var queueId = (threadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI) ?
                 CommandQueueId.ThreadPool :
-                new CommandQueueId(mainThreadId);
+                new CommandQueueId(mainRunspaceId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 queueId,

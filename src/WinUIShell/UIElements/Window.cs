@@ -107,7 +107,7 @@ public class Window : WinUIShellObject
     {
         while (!IsClosed || !IsAllClosedCallbacksInvoked())
         {
-            Engine.UpdateThread();
+            Engine.UpdateRunspace();
             Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
         }
     }

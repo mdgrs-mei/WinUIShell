@@ -1,4 +1,5 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation.Runspaces;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -47,7 +48,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             eventName,
             eventArgsTypeName,
             copiedEventCallback.ThreadingMode,
-            Environment.CurrentManagedThreadId,
+            Runspace.DefaultRunspace.Id,
             Id.Id,
             eventId,
             disabledControlIds);
