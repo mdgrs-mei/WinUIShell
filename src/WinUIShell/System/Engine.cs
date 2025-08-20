@@ -6,7 +6,7 @@ using WinUIShell.Common;
 
 namespace WinUIShell;
 
-public static class Engine
+public class Engine
 {
     private sealed class RunspaceState
     {
@@ -16,15 +16,21 @@ public static class Engine
         public PSEventSubscriber? TimerEventSubscriber;
     }
 
-    private static readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
-    private static readonly object _lock = new();
-    private static int _mainRunspaceId = Constants.InvalidRunspaceId;
-    private static string _upstreamPipeName = "";
-    private static string _downstreamPipeName = "";
-    private static Process? _serverProcess;
-    private static readonly CommandThreadPool _commandThreadPool = new();
+    private readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
+    private readonly object _lock = new();
+    private int _mainRunspaceId = Constants.InvalidRunspaceId;
+    private string _upstreamPipeName = "";
+    private string _downstreamPipeName = "";
+    private Process? _serverProcess;
+    private readonly CommandThreadPool _commandThreadPool = new();
 
-    public static void InitRunspace(
+    private static readonly Engine _instance = new();
+    public static Engine Get()
+    {
+        return _instance;
+    }
+
+    public void InitRunspace(
         string serverExePath,
         PSHost? streamingHost,
         string modulePath,
@@ -39,7 +45,7 @@ public static class Engine
             if (_mainRunspaceId == Constants.InvalidRunspaceId)
             {
 #if DEBUG
-                System.Diagnostics.Debugger.Launch();
+                //System.Diagnostics.Debugger.Launch();
 #endif
                 InitPipeNames();
                 try
@@ -53,8 +59,8 @@ public static class Engine
                     Console.Error.WriteLine($"Failed to start server [{serverExePath}]");
                     throw;
                 }
-                _mainRunspaceId = Runspace.DefaultRunspace.Id;
                 InitCommandThreadPool(streamingHost, modulePath);
+                _mainRunspaceId = Runspace.DefaultRunspace.Id;
             }
         }
 
@@ -66,7 +72,7 @@ public static class Engine
         thisRunspace.IsInitialized = true;
     }
 
-    public static void TermRunspace()
+    public void TermRunspace()
     {
         var thisRunspace = _thisRunspace.Value;
         if (!thisRunspace.IsInitialized)
@@ -88,14 +94,14 @@ public static class Engine
         }
     }
 
-    private static void InitPipeNames()
+    private void InitPipeNames()
     {
         var processId = Environment.ProcessId.ToString();
         _upstreamPipeName = $"WinUIShell.ClientToServer.{processId}";
         _downstreamPipeName = $"WinUIShell.ServerToClient.{processId}";
     }
 
-    private static void StartServerProcess(string path)
+    private void StartServerProcess(string path)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -107,7 +113,7 @@ public static class Engine
         _serverProcess = Process.Start(startInfo);
     }
 
-    private static void StopServerProcess()
+    private void StopServerProcess()
     {
         if (_serverProcess is null)
             return;
@@ -116,20 +122,20 @@ public static class Engine
         _serverProcess = null;
     }
 
-    private static void InitConnection()
+    private void InitConnection()
     {
         ObjectStore.Get().SetObjectIdPrefix("c");
         CommandServer.Get().Init(_downstreamPipeName);
         CommandClient.Get().Init(_upstreamPipeName);
     }
 
-    private static void TermConnection()
+    private void TermConnection()
     {
         CommandClient.Get().Term();
         CommandServer.Get().Term();
     }
 
-    private static void InitTimerEvent()
+    private void InitTimerEvent()
     {
         var thisRunspace = _thisRunspace.Value;
 
@@ -143,7 +149,7 @@ public static class Engine
         };
 
         ScriptBlock action = ScriptBlock.Create(@"
-[WinUIShell.Engine]::IdleUpdateRunspace()
+[WinUIShell.Engine]::Get().IdleUpdateRunspace()
 $engineUpdateTimer = $Sender
 $engineUpdateTimer.Start()
 "
@@ -161,7 +167,7 @@ $engineUpdateTimer.Start()
         thisRunspace.EventTimer.Start();
     }
 
-    private static void TermTimerEvent()
+    private void TermTimerEvent()
     {
         var thisRunspace = _thisRunspace.Value;
         if (thisRunspace.EventTimer is null)
@@ -171,22 +177,22 @@ $engineUpdateTimer.Start()
         Runspace.DefaultRunspace.Events.UnsubscribeEvent(thisRunspace.TimerEventSubscriber);
     }
 
-    private static void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
+    private void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
     {
         _commandThreadPool.Init(streamingHost, modulePath);
     }
 
-    private static void TermCommandThreadPool()
+    private void TermCommandThreadPool()
     {
         _commandThreadPool.Term();
     }
 
-    public static void SetCommandThreadPoolInitializationScript(ScriptBlock? scriptBlock)
+    public void SetCommandThreadPoolInitializationScript(ScriptBlock? scriptBlock)
     {
         _commandThreadPool.SetInitializationScript(scriptBlock);
     }
 
-    public static void IdleUpdateRunspace()
+    public void IdleUpdateRunspace()
     {
         var thisRunspace = _thisRunspace.Value;
         if (!thisRunspace.IsInitialized)
@@ -200,7 +206,7 @@ $engineUpdateTimer.Start()
         CommandServer.Get().ProcessCommands(queueId);
     }
 
-    internal static void UpdateRunspace()
+    internal void UpdateRunspace()
     {
         var thisRunspace = _thisRunspace.Value;
         if (!thisRunspace.IsInitialized)
