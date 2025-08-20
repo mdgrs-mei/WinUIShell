@@ -1,5 +1,6 @@
 ﻿using System.Management.Automation;
 using System.Management.Automation.Host;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -30,7 +31,7 @@ internal sealed class CommandThreadPool
         if (_workers is not null)
             return;
 
-        _workers = new CommandWorker[2];
+        _workers = new CommandWorker[Constants.ClientCommandThreadPoolDefaultThreadCount];
         for (int i = 0; i < _workers.Length; ++i)
         {
             var worker = new CommandWorker();
