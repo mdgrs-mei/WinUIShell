@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace WinUIShell.Common;
 
 public enum CommandQueueType
@@ -6,13 +8,14 @@ public enum CommandQueueType
     Immediate,
     MainThread,
     ThreadPool,
-    RunspaceId
+    RunspaceId,
+    TemporaryQueueId
 }
 
 public class CommandQueueId
 {
     public CommandQueueType Type { get; set; } = CommandQueueType.MainThread;
-    public int RunspaceId { get; set; } = Constants.InvalidRunspaceId;
+    public int Id { get; set; }
 
     public CommandQueueId()
     {
@@ -20,13 +23,15 @@ public class CommandQueueId
 
     public CommandQueueId(CommandQueueType type)
     {
+        Debug.Assert(type is not (CommandQueueType.RunspaceId or CommandQueueType.TemporaryQueueId));
         Type = type;
     }
 
-    public CommandQueueId(int runspaceId)
+    public CommandQueueId(CommandQueueType type, int id)
     {
-        Type = CommandQueueType.RunspaceId;
-        RunspaceId = runspaceId;
+        Debug.Assert(type is CommandQueueType.RunspaceId or CommandQueueType.TemporaryQueueId);
+        Type = type;
+        Id = id;
     }
 
     public override bool Equals(object? obj)
@@ -39,12 +44,12 @@ public class CommandQueueId
         if (other is null)
             return false;
 
-        return (Type == other.Type) && (RunspaceId == other.RunspaceId);
+        return (Type == other.Type) && (Id == other.Id);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Type, RunspaceId);
+        return HashCode.Combine(Type, Id);
     }
 
     public static readonly CommandQueueId Immediate = new(CommandQueueType.Immediate);

@@ -23,7 +23,7 @@ public interface IPage
         return async (object sender, RoutedEventArgs eventArgs) =>
         {
             var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
-            var queueId = new CommandQueueId(pageProperty.OnLoadedCallbackMainRunspaceId);
+            var queueId = new CommandQueueId(CommandQueueType.RunspaceId, pageProperty.OnLoadedCallbackMainRunspaceId);
 
             page.Id = CommandClient.Get().CreateObjectWithId(
                 queueId,

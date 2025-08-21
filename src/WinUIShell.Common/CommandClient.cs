@@ -12,6 +12,7 @@ public class CommandClient : Singleton<CommandClient>
     private NamedPipeClientStream? _clientStream;
     private JsonRpc? _rpc;
     private readonly JoinableTaskFactory _joinableTaskFactory = new(new JoinableTaskContext());
+    private int _temporaryQueueId;
 
     public void Init(string pipeName)
     {
@@ -30,6 +31,21 @@ public class CommandClient : Singleton<CommandClient>
     {
         _rpc?.Dispose();
         _clientStream?.Dispose();
+    }
+
+    public CommandQueueId CreateTemporaryQueueId()
+    {
+        int id = Interlocked.Increment(ref _temporaryQueueId);
+        return new CommandQueueId(CommandQueueType.TemporaryQueueId, id);
+    }
+
+    public void ProcessTemporaryQueue(CommandQueueId queueId, CommandQueueId temporaryQueueId)
+    {
+        Debug.Assert(_rpc is not null);
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("ProcessTemporaryQueue", queueId, temporaryQueueId);
+        });
     }
 
     public ObjectId CreateObject(string typeName, object? linkedObject, params object?[] arguments)

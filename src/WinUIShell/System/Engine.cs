@@ -202,7 +202,7 @@ $engineUpdateTimer.Start()
         if (thisRunspace.IsInUpdate)
             return;
 
-        var queueId = new CommandQueueId(Runspace.DefaultRunspace.Id);
+        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
         CommandServer.Get().ProcessCommands(queueId);
     }
 
@@ -212,7 +212,7 @@ $engineUpdateTimer.Start()
         if (!thisRunspace.IsInitialized)
             return;
 
-        var queueId = new CommandQueueId(Runspace.DefaultRunspace.Id);
+        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
         if (!thisRunspace.IsInUpdate)
         {
             // Root update.

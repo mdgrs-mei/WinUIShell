@@ -118,4 +118,9 @@ public class CommandServer : Singleton<CommandServer>
         _ = _commandQueues.TryGetValue(CommandQueueId.ThreadPool, out Queue<Action>? queue);
         return queue!;
     }
+
+    public void RemoveCommandQueue(CommandQueueId queueId)
+    {
+        _ = _commandQueues.TryRemove(queueId, out _);
+    }
 }
