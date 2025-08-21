@@ -87,10 +87,10 @@ internal sealed class RpcService
             });
     }
 
-    public void DestroyObject(ObjectId id)
+    public void DestroyObject(CommandQueueId queueId, ObjectId id)
     {
         _commandServer.AddCommand(
-            CommandQueueId.MainThread,
+            queueId,
             () =>
             {
                 _ = ObjectStore.Get().UnregisterObject(id);

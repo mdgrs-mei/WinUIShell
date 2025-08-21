@@ -86,7 +86,7 @@ internal sealed class PageStore : Singleton<PageStore>
                 }
             }
 
-            throw new InvalidOperationException($"Page name not found for type [{pageType}].");
+            throw new InvalidOperationException($"Page property not found for type [{pageType}].");
         }
     }
 
@@ -99,7 +99,8 @@ internal sealed class PageStore : Singleton<PageStore>
             if (_pageInstances.TryGetValue(property.Name, out IPage? previousPage))
             {
                 // Destroy previous page instance.
-                CommandClient.Get().DestroyObject(previousPage.Id);
+                var queueId = new CommandQueueId(CommandQueueType.RunspaceId, property.OnLoadedCallbackMainRunspaceId);
+                CommandClient.Get().DestroyObject(queueId, previousPage.Id);
                 previousPage.Id = new();
             }
 

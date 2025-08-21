@@ -43,6 +43,8 @@ public interface IPage
                 page.Id,
                 eventArgsId);
 
+            CommandClient.Get().DestroyObject(queueId, eventArgsId);
+
             if (pageProperty.OnLoadedCallbackThreadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
             {
                 while (!invokeTask.IsCompleted)
@@ -56,8 +58,6 @@ public interface IPage
             {
                 await invokeTask;
             }
-
-            CommandClient.Get().DestroyObject(eventArgsId);
         };
     }
 }
