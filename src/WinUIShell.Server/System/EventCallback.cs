@@ -57,64 +57,107 @@ internal static class EventCallback
     {
         return async (object sender, TEventArgs eventArgs) =>
         {
-            List<Microsoft.UI.Xaml.Controls.Control>? disabledControls = null;
-            if (disabledControlsWhileProcessing is not null)
-            {
-                disabledControls = [];
-                foreach (var obj in disabledControlsWhileProcessing)
-                {
-                    if (obj is Microsoft.UI.Xaml.Controls.Control control)
-                    {
-                        if (control.IsEnabled)
-                        {
-                            control.IsEnabled = false;
-                            disabledControls.Add(control);
-                        }
-                    }
-                }
-            }
+            DisabledControlsHolder disabledControls = new(disabledControlsWhileProcessing);
+            disabledControls.Disable();
 
             var senderId = ObjectStore.Get().GetId(sender);
-            var queueId = (threadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI) ?
-                CommandQueueId.ThreadPool :
-                new CommandQueueId(CommandQueueType.RunspaceId, mainRunspaceId);
+            var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
+            var processingQueueId = GetProcessingQueueId(threadingMode, mainRunspaceId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
                 eventArgs);
 
             var invokeTask = CommandClient.Get().InvokeMethodWaitAsync(
-                queueId,
+                temporaryQueueId,
                 new ObjectId(eventListId),
                 "Invoke",
                 eventId,
                 senderId,
                 eventArgsId);
 
+            CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
+
             if (threadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
             {
-                while (!invokeTask.IsCompleted)
-                {
-                    App.ProcessCommands();
-                    Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
-                }
-                App.ProcessCommands();
+                BlockingWaitTask(invokeTask);
             }
             else
             {
                 await invokeTask;
             }
 
-            CommandClient.Get().DestroyObject(queueId, eventArgsId);
+            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
 
-            if (disabledControls is not null)
+            disabledControls.Enable();
+        };
+    }
+
+    public static CommandQueueId GetProcessingQueueId(EventCallbackThreadingMode threadingMode, int mainRunspaceId)
+    {
+        if (threadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI)
+        {
+            return CommandQueueId.ThreadPool;
+        }
+        else
+        {
+            return new CommandQueueId(CommandQueueType.RunspaceId, mainRunspaceId);
+        }
+    }
+
+    public static void BlockingWaitTask(Task task)
+    {
+        while (!task.IsCompleted)
+        {
+            App.ProcessCommands();
+            Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
+        }
+        App.ProcessCommands();
+    }
+
+    private sealed class DisabledControlsHolder
+    {
+        private readonly List<Microsoft.UI.Xaml.Controls.Control>? _controls;
+
+        public DisabledControlsHolder(object?[]? controls)
+        {
+            if (controls is null)
+                return;
+
+            _controls = [];
+            foreach (var obj in controls)
             {
-                foreach (var control in disabledControls)
+                if (obj is Microsoft.UI.Xaml.Controls.Control control)
                 {
-                    control.IsEnabled = true;
+                    if (control.IsEnabled)
+                    {
+                        _controls.Add(control);
+                    }
                 }
             }
-        };
+        }
+
+        public void Disable()
+        {
+            if (_controls is null)
+                return;
+
+            foreach (var control in _controls)
+            {
+                control.IsEnabled = false;
+            }
+        }
+
+        public void Enable()
+        {
+            if (_controls is null)
+                return;
+
+            foreach (var control in _controls)
+            {
+                control.IsEnabled = true;
+            }
+        }
     }
 }
