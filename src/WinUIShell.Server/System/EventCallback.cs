@@ -92,8 +92,6 @@ internal static class EventCallback
                 senderId,
                 eventArgsId);
 
-            CommandClient.Get().DestroyObject(queueId, eventArgsId);
-
             if (threadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
             {
                 while (!invokeTask.IsCompleted)
@@ -107,6 +105,8 @@ internal static class EventCallback
             {
                 await invokeTask;
             }
+
+            CommandClient.Get().DestroyObject(queueId, eventArgsId);
 
             if (disabledControls is not null)
             {

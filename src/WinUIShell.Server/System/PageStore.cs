@@ -98,10 +98,7 @@ internal sealed class PageStore : Singleton<PageStore>
         {
             if (_pageInstances.TryGetValue(property.Name, out IPage? previousPage))
             {
-                // Destroy previous page instance.
-                var queueId = new CommandQueueId(CommandQueueType.RunspaceId, property.OnLoadedCallbackMainRunspaceId);
-                CommandClient.Get().DestroyObject(queueId, previousPage.Id);
-                previousPage.Id = new();
+                IPage.Term(previousPage);
             }
 
             _pageInstances[property.Name] = page;

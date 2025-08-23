@@ -7,15 +7,25 @@ public interface IPage
 {
     ObjectId Id { get; set; }
 
-    static void Initialize<TPage>(TPage page) where TPage : Page, IPage
+    static void Init<TPage>(TPage page) where TPage : Page, IPage
     {
         ArgumentNullException.ThrowIfNull(page);
 
         PageStore.Get().RegisterPageInstance(page);
-        var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
+        var pageProperty = PageStore.Get().GetPageProperty(page.GetType());
 
         page.NavigationCacheMode = pageProperty.NavigationCacheMode;
         page.Loaded += CreateOnLoaded(page);
+    }
+
+    static void Term<TPage>(TPage page) where TPage : IPage
+    {
+        ArgumentNullException.ThrowIfNull(page);
+
+        var property = PageStore.Get().GetPageProperty(page.GetType());
+        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, property.OnLoadedCallbackMainRunspaceId);
+        CommandClient.Get().DestroyObject(queueId, page.Id);
+        page.Id = new();
     }
 
     private static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : Page, IPage
@@ -43,8 +53,6 @@ public interface IPage
                 page.Id,
                 eventArgsId);
 
-            CommandClient.Get().DestroyObject(queueId, eventArgsId);
-
             if (pageProperty.OnLoadedCallbackThreadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
             {
                 while (!invokeTask.IsCompleted)
@@ -58,6 +66,8 @@ public interface IPage
             {
                 await invokeTask;
             }
+
+            CommandClient.Get().DestroyObject(queueId, eventArgsId);
         };
     }
 }
