@@ -22,8 +22,11 @@ public interface IPage
     {
         ArgumentNullException.ThrowIfNull(page);
 
-        var property = PageStore.Get().GetPageProperty(page.GetType());
-        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, property.OnLoadedCallbackMainRunspaceId);
+        var pageProperty = PageStore.Get().GetPageProperty(page.GetType());
+        var queueId = EventCallback.GetProcessingQueueId(
+            pageProperty.OnLoadedCallbackThreadingMode,
+            pageProperty.OnLoadedCallbackMainRunspaceId);
+
         CommandClient.Get().DestroyObject(queueId, page.Id);
         page.Id = new();
     }
@@ -33,41 +36,42 @@ public interface IPage
         return async (object sender, RoutedEventArgs eventArgs) =>
         {
             var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
-            var queueId = new CommandQueueId(CommandQueueType.RunspaceId, pageProperty.OnLoadedCallbackMainRunspaceId);
+
+            var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
+            var processingQueueId = EventCallback.GetProcessingQueueId(
+                pageProperty.OnLoadedCallbackThreadingMode,
+                pageProperty.OnLoadedCallbackMainRunspaceId);
 
             page.Id = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 "WinUIShell.Page, WinUIShell",
                 page);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 "WinUIShell.RoutedEventArgs, WinUIShell",
                 eventArgs);
 
             var invokeTask = CommandClient.Get().InvokeStaticMethodWaitAsync(
-                queueId,
+                temporaryQueueId,
                 "WinUIShell.PageStore, WinUIShell",
                 "OnLoaded",
                 pageProperty.Name,
                 page.Id,
                 eventArgsId);
 
+            CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
+
             if (pageProperty.OnLoadedCallbackThreadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
             {
-                while (!invokeTask.IsCompleted)
-                {
-                    App.ProcessCommands();
-                    Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
-                }
-                App.ProcessCommands();
+                EventCallback.BlockingWaitTask(invokeTask);
             }
             else
             {
                 await invokeTask;
             }
 
-            CommandClient.Get().DestroyObject(queueId, eventArgsId);
+            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
         };
     }
 }
