@@ -47,7 +47,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             targetObjectId,
             eventName,
             eventArgsTypeName,
-            copiedEventCallback.ThreadingMode,
+            copiedEventCallback.RunspaceMode,
             Runspace.DefaultRunspace.Id,
             Id.Id,
             eventId,

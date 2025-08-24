@@ -14,7 +14,7 @@ public class EventCallback
     private string _scriptBlockString = "";
     public ScriptBlock? ScriptBlock { get; set; }
 
-    public EventCallbackThreadingMode ThreadingMode { get; set; } = EventCallbackThreadingMode.MainThreadAsyncUI;
+    public EventCallbackRunspaceMode RunspaceMode { get; set; } = EventCallbackRunspaceMode.MainRunspaceAsyncUI;
 
     public object? ArgumentList { get; set; }
 
@@ -27,7 +27,7 @@ public class EventCallback
     internal EventCallback Copy()
     {
         EventCallback e = (EventCallback)MemberwiseClone();
-        if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI && ScriptBlock is not null)
+        if (RunspaceMode == EventCallbackRunspaceMode.RunspacePoolAsyncUI && ScriptBlock is not null)
         {
             e._scriptBlockString = ScriptBlock.ToString();
         }
@@ -38,7 +38,7 @@ public class EventCallback
     {
         if (ScriptBlock is not null)
         {
-            if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI)
+            if (RunspaceMode == EventCallbackRunspaceMode.RunspacePoolAsyncUI)
             {
                 CommandWorker.InvokeEventCallback(
                     _scriptBlockString,

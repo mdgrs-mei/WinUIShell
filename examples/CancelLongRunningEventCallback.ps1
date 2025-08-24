@@ -9,7 +9,7 @@ $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
 $win.AppWindow.TitleBar.PreferredTheme = 'UseDefaultAppMode'
 $win.AppWindow.ResizeClient(420, 160)
 
-# Use a synchronized hashtable to store objects that are accessed from multiple threads.
+# Use a synchronized hashtable to store objects that are accessed from multiple runspaces.
 $syncHash = [Hashtable]::Synchronized(@{})
 
 $progressRing = [ProgressRing]::new()
@@ -24,7 +24,7 @@ $cancelButton.IsEnabled = $false
 $syncHash.isCancel = $false
 $syncHash.cancelButton = $cancelButton
 
-# This cancel button's callback runs on the main thread as [WinUIShell.EventCallbackThreadingMode]::MainThreadAsyncUI is the default mode.
+# This cancel button's callback runs in the main runspace as [WinUIShell.EventCallbackRunspaceMode]::MainRunspaceAsyncUI is the default mode.
 $cancelButton.AddClick({
         $syncHash.isCancel = $true
     })
@@ -33,16 +33,16 @@ $startButton = [Button]::new()
 $startButton.HorizontalAlignment = 'Stretch'
 $startButton.Content = 'Start'
 
-# Create a custom callback using the EventCallback class to control threading behavior.
+# Create a custom callback using the EventCallback class to control the runspace mode.
 $longRunningCallback = [EventCallback]::new()
 
-# ThreadPoolAsyncUI runs the callback on a background thread, allowing the cancel button's callback to run in parallel.
-$longRunningCallback.ThreadingMode = 'ThreadPoolAsyncUI'
+# RunspacePoolAsyncUI runs the callback on a background thread, allowing the cancel button's callback to run in parallel.
+$longRunningCallback.RunspaceMode = 'RunspacePoolAsyncUI'
 
-# Since the thread pool callbacks can run in parallel, disable the button to avoid being clicked multiple times.
+# Since the runspace pool callbacks can run in parallel, disable the button to avoid being clicked multiple times.
 $longRunningCallback.DisabledControlsWhileProcessing = $startButton
 
-# Pass objects via ArgumentList as Thread pool callbacks run in separate Runspaces like ThreadJobs.
+# Pass objects via ArgumentList as runspace pool callbacks run in separate runspaces like ThreadJobs.
 $longRunningCallback.ArgumentList = $syncHash
 $longRunningCallback.ScriptBlock = {
     param ($syncHash)

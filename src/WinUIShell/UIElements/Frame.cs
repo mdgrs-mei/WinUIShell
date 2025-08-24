@@ -97,7 +97,7 @@ public class Frame : ContentControl
             _accessorClassName,
             nameof(Navigate),
             Id,
-            onLoaded.ThreadingMode,
+            onLoaded.RunspaceMode,
             Runspace.DefaultRunspace.Id,
             pageName,
             transitionOverride?.Id,

@@ -24,7 +24,7 @@ public interface IPage
 
         var pageProperty = PageStore.Get().GetPageProperty(page.GetType());
         var queueId = EventCallback.GetProcessingQueueId(
-            pageProperty.OnLoadedCallbackThreadingMode,
+            pageProperty.OnLoadedCallbackRunspaceMode,
             pageProperty.OnLoadedCallbackMainRunspaceId);
 
         CommandClient.Get().DestroyObject(queueId, page.Id);
@@ -39,7 +39,7 @@ public interface IPage
 
             var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
             var processingQueueId = EventCallback.GetProcessingQueueId(
-                pageProperty.OnLoadedCallbackThreadingMode,
+                pageProperty.OnLoadedCallbackRunspaceMode,
                 pageProperty.OnLoadedCallbackMainRunspaceId);
 
             page.Id = CommandClient.Get().CreateObjectWithId(
@@ -62,7 +62,7 @@ public interface IPage
 
             CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
 
-            if (pageProperty.OnLoadedCallbackThreadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
+            if (pageProperty.OnLoadedCallbackRunspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
             {
                 EventCallback.BlockingWaitTask(invokeTask);
             }

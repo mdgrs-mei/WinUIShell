@@ -8,7 +8,7 @@ internal static class EventCallback
         object target,
         string eventName,
         string eventArgsTypeName,
-        EventCallbackThreadingMode threadingMode,
+        EventCallbackRunspaceMode runspaceMode,
         int mainRunspaceId,
         string eventListId,
         int eventId,
@@ -32,7 +32,7 @@ internal static class EventCallback
         var callbackCreator = callbackCreatorGeneric.MakeGenericMethod(eventArgsType);
 
         var callback = callbackCreator.Invoke(null, [
-            threadingMode,
+            runspaceMode,
             mainRunspaceId,
             eventListId,
             eventId,
@@ -49,7 +49,7 @@ internal static class EventCallback
     }
 
     public static Action<object, TEventArgs> Create<TEventArgs>(
-        EventCallbackThreadingMode threadingMode,
+        EventCallbackRunspaceMode runspaceMode,
         int mainRunspaceId,
         string eventListId,
         int eventId,
@@ -62,7 +62,7 @@ internal static class EventCallback
 
             var senderId = ObjectStore.Get().GetId(sender);
             var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
-            var processingQueueId = GetProcessingQueueId(threadingMode, mainRunspaceId);
+            var processingQueueId = GetProcessingQueueId(runspaceMode, mainRunspaceId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 temporaryQueueId,
@@ -79,7 +79,7 @@ internal static class EventCallback
 
             CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
 
-            if (threadingMode == EventCallbackThreadingMode.MainThreadSyncUI)
+            if (runspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
             {
                 BlockingWaitTask(invokeTask);
             }
@@ -94,9 +94,9 @@ internal static class EventCallback
         };
     }
 
-    public static CommandQueueId GetProcessingQueueId(EventCallbackThreadingMode threadingMode, int mainRunspaceId)
+    public static CommandQueueId GetProcessingQueueId(EventCallbackRunspaceMode runspaceMode, int mainRunspaceId)
     {
-        if (threadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI)
+        if (runspaceMode == EventCallbackRunspaceMode.RunspacePoolAsyncUI)
         {
             return CommandQueueId.ThreadPool;
         }
