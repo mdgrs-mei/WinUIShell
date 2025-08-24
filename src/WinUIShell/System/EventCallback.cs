@@ -40,7 +40,7 @@ public class EventCallback
         {
             if (ThreadingMode == EventCallbackThreadingMode.ThreadPoolAsyncUI)
             {
-                CommandWorker.InvokeScriptBlock(
+                CommandWorker.InvokeEventCallback(
                     _scriptBlockString,
                     ArgumentList,
                     sender,

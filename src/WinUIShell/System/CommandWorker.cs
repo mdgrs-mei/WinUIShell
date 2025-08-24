@@ -106,7 +106,7 @@ internal sealed class CommandWorker
         }
     }
 
-    public static void InvokeScriptBlock(
+    public static void InvokeEventCallback(
         string scriptBlock,
         object? argumentList,
         object? sender,
