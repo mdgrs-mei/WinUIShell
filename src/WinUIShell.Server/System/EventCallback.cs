@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using WinUIShell.Common;
 namespace WinUIShell.Server;
 
@@ -57,6 +58,8 @@ internal static class EventCallback
     {
         return async (object sender, TEventArgs eventArgs) =>
         {
+            var parentWindow = WindowStore.Get().EnterEventCallbackAndGetParentWindow(sender);
+
             DisabledControlsHolder disabledControls = new(disabledControlsWhileProcessing);
             disabledControls.Disable();
 
@@ -79,18 +82,29 @@ internal static class EventCallback
 
             CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
 
-            if (runspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
+            try
             {
-                BlockingWaitTask(invokeTask);
+                if (runspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
+                {
+                    BlockingWaitTask(invokeTask);
+                }
+                else
+                {
+                    await invokeTask;
+                }
             }
-            else
+            catch (Exception e)
             {
-                await invokeTask;
+                Debug.WriteLine("EventCallback faild:");
+                Debug.WriteLine(e);
+                CommandClient.Get().WriteError("EventCallback faild:");
+                CommandClient.Get().WriteException(e);
             }
 
             CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
-
             disabledControls.Enable();
+
+            WindowStore.Get().ExitEventCallback(parentWindow);
         };
     }
 

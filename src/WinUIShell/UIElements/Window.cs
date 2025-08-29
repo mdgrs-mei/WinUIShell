@@ -105,8 +105,14 @@ public class Window : WinUIShellObject
 
     public void WaitForClosed()
     {
-        while (!IsClosed || !IsAllClosedCallbacksInvoked())
+        if (!_isActivateCalled)
+            return;
+
+        while (true)
         {
+            if (IsClosed && IsAllClosedCallbacksInvoked())
+                return;
+
             Engine.Get().UpdateRunspace();
             Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
         }
