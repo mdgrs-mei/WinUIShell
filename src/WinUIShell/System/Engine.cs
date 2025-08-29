@@ -202,8 +202,7 @@ $engineUpdateTimer.Start()
         if (thisRunspace.IsInUpdate)
             return;
 
-        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
-        CommandServer.Get().ProcessCommands(queueId);
+        ProcessCommands();
     }
 
     internal void UpdateRunspace()
@@ -212,18 +211,35 @@ $engineUpdateTimer.Start()
         if (!thisRunspace.IsInitialized)
             return;
 
-        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
         if (!thisRunspace.IsInUpdate)
         {
             // Root update.
             thisRunspace.IsInUpdate = true;
-            CommandServer.Get().ProcessCommands(queueId);
+            ProcessCommands();
             thisRunspace.IsInUpdate = false;
         }
         else
         {
             // Recursive update.
+            ProcessCommands();
+        }
+    }
+
+    private void ProcessCommands()
+    {
+        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
+        try
+        {
             CommandServer.Get().ProcessCommands(queueId);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine("CommandServer.ProcessCommands faild:");
+            Console.Error.WriteLine($"{e.GetType().FullName}: {e.Message}");
+            if (e.InnerException is not null)
+            {
+                Console.Error.WriteLine($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
+            }
         }
     }
 }

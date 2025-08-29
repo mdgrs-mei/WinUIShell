@@ -322,4 +322,18 @@ public class CommandClient : Singleton<CommandClient>
             await _rpc.InvokeAsync("WriteError", message);
         });
     }
+
+    public void WriteException(Exception e)
+    {
+        Debug.Assert(_rpc is not null);
+
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("WriteError", $"{e.GetType().FullName}: {e.Message}");
+            if (e.InnerException is not null)
+            {
+                await _rpc.InvokeAsync("WriteError", $"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
+            }
+        });
+    }
 }

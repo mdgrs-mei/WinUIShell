@@ -123,13 +123,7 @@ public partial class App : Application
         {
             Debug.WriteLine("CommandServer.ProcessCommands faild:");
             Debug.WriteLine(e);
-
-            // Show error on the client.
-            CommandClient.Get().WriteError($"{e.GetType().FullName}: {e.Message}");
-            if (e.InnerException is not null)
-            {
-                CommandClient.Get().WriteError($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
-            }
+            CommandClient.Get().WriteException(e);
         }
     }
 }
