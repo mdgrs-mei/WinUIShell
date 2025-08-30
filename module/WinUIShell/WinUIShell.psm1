@@ -17,3 +17,8 @@ $modulePath = $MyInvocation.MyCommand.Path
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     [WinUIShell.Engine]::Get().TermRunspace()
 }
+
+$publicScripts = @(Get-ChildItem $PSScriptRoot/Public/*.ps1)
+foreach ($private:script in $publicScripts) {
+    . $script.FullName
+}

@@ -8,7 +8,7 @@ namespace WinUIShell;
 internal sealed class CommandWorker
 {
     private string _modulePath = "";
-    private string _initializationScript = "";
+    private string? _initializationScript;
     private PSHost? _streamingHost;
     private Thread? _thread;
     private bool _stopThread;
@@ -19,7 +19,7 @@ internal sealed class CommandWorker
     {
     }
 
-    public void Start(PSHost? streamingHost, string modulePath, string initializationScript)
+    public void Start(PSHost? streamingHost, string modulePath, string? initializationScript)
     {
         _streamingHost = streamingHost;
         _modulePath = modulePath;

@@ -18,7 +18,7 @@ internal sealed class CommandThreadPool
     {
         _streamingHost = streamingHost;
         _modulePath = modulePath;
-        Start("");
+        Start(null, null);
     }
 
     public void Term()
@@ -26,12 +26,13 @@ internal sealed class CommandThreadPool
         Stop();
     }
 
-    private void Start(string initializationScript)
+    private void Start(uint? threadCount, string? initializationScript)
     {
         if (_workers is not null)
             return;
 
-        _workers = new CommandWorker[Constants.ClientCommandThreadPoolDefaultThreadCount];
+        uint workerCount = threadCount ?? Constants.ClientCommandThreadPoolDefaultThreadCount;
+        _workers = new CommandWorker[workerCount];
         for (int i = 0; i < _workers.Length; ++i)
         {
             var worker = new CommandWorker();
@@ -52,9 +53,10 @@ internal sealed class CommandThreadPool
         _workers = null;
     }
 
-    public void SetInitializationScript(ScriptBlock? scriptBlock)
+    public void SetOption(uint? threadCount, ScriptBlock? initializationScriptBlock)
     {
+        string? initializationScript = initializationScriptBlock?.ToString();
         Stop();
-        Start(scriptBlock is null ? "" : scriptBlock.ToString());
+        Start(threadCount, initializationScript);
     }
 }
