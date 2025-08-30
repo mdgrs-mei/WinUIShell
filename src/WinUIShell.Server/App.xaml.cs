@@ -121,7 +121,7 @@ public partial class App : Application
         }
         catch (Exception e)
         {
-            Debug.WriteLine("CommandServer.ProcessCommands faild:");
+            Debug.WriteLine("App.ProcessCommands faild:");
             Debug.WriteLine(e);
             CommandClient.Get().WriteException(e);
         }

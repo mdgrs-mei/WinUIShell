@@ -234,7 +234,7 @@ $engineUpdateTimer.Start()
         }
         catch (Exception e)
         {
-            Console.Error.WriteLine("CommandServer.ProcessCommands faild:");
+            Console.Error.WriteLine("Engine.ProcessCommands faild:");
             Console.Error.WriteLine($"{e.GetType().FullName}: {e.Message}");
             if (e.InnerException is not null)
             {
