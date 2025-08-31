@@ -13,6 +13,9 @@ The number of runspaces in the Runspace pool.
 The ScriptBlock that is executed at the start of the runspace. This is typically used to initialize variables and functions in the runspace pool.
 There's no need to manually load WinUIShell module as it is automatically loaded at runspace initialization.
 
+.PARAMETER InitializationScriptArgumentList
+The argument list that is passed to the InitializationScript.
+
 .INPUTS
 None.
 
@@ -34,13 +37,16 @@ function Set-WUIRunspacePoolOption {
     [CmdletBinding()]
     param (
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [UInt32]$RunspaceCount = $null,
+        [UInt32]$RunspaceCount,
 
         [Parameter(ValueFromPipelineByPropertyName = $true)]
-        [ScriptBlock]$InitializationScript = $null
+        [ScriptBlock]$InitializationScript,
+
+        [Parameter(ValueFromPipelineByPropertyName = $true)]
+        [Object[]]$InitializationScriptArgumentList
     )
 
     process {
-        [WinUIShell.Engine]::Get().SetCommandThreadPoolOption($RunspaceCount, $InitializationScript)
+        [WinUIShell.Engine]::Get().SetCommandThreadPoolOption($RunspaceCount, $InitializationScript, $InitializationScriptArgumentList)
     }
 }

@@ -187,9 +187,15 @@ $engineUpdateTimer.Start()
         _commandThreadPool.Term();
     }
 
-    public void SetCommandThreadPoolOption(uint? threadCount, ScriptBlock? initializationScriptBlock)
+    public void SetCommandThreadPoolOption(
+        uint? threadCount,
+        ScriptBlock? initializationScriptBlock,
+        object?[]? initializationScriptBlockArgumentList)
     {
-        _commandThreadPool.SetOption(threadCount, initializationScriptBlock);
+        _commandThreadPool.SetOption(
+            threadCount,
+            initializationScriptBlock,
+            initializationScriptBlockArgumentList);
     }
 
     public void IdleUpdateRunspace()

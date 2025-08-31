@@ -7,6 +7,9 @@ if (-not (Get-Module WinUIShell)) {
 
 # This script runs in the global scope of each runspace in the runspace pool.
 $runspaceInitializationScript = {
+    param ($ScriptRoot)
+    "ScriptRoot: $ScriptRoot Runspace:$([runspace]::DefaultRunspace.id)" | Write-Host
+
     # Functions and variables defined here become available in each runspace.
     function SetPause($SyncHash, $IsPaused) {
         $SyncHash.isPaused = $IsPaused
@@ -19,10 +22,10 @@ $runspaceInitializationScript = {
 }
 
 # RunspaceCount defines the number of event callbacks that can run in parallel at a time.
-Set-WUIRunspacePoolOption -RunspaceCount 3 -InitializationScript $runspaceInitializationScript
+Set-WUIRunspacePoolOption -RunspaceCount 3 -InitializationScript $runspaceInitializationScript -InitializationScriptArgumentList $PSScriptRoot
 
 # Dot source the initialization script here to make the functions available in the default runspace too.
-. $runspaceInitializationScript
+. $runspaceInitializationScript $PSScriptRoot
 
 $resources = [Application]::Current.Resources
 $win = [Window]::new()

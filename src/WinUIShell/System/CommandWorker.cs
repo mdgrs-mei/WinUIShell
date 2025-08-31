@@ -9,6 +9,7 @@ internal sealed class CommandWorker
 {
     private string _modulePath = "";
     private string? _initializationScript;
+    private object?[]? _initializationScriptArgumentList;
     private PSHost? _streamingHost;
     private Thread? _thread;
     private bool _stopThread;
@@ -19,11 +20,16 @@ internal sealed class CommandWorker
     {
     }
 
-    public void Start(PSHost? streamingHost, string modulePath, string? initializationScript)
+    public void Start(
+        PSHost? streamingHost,
+        string modulePath,
+        string? initializationScript,
+        object?[]? initializationScriptArgumentList)
     {
         _streamingHost = streamingHost;
         _modulePath = modulePath;
         _initializationScript = initializationScript;
+        _initializationScriptArgumentList = initializationScriptArgumentList;
         _stopThread = false;
 
         _thread = new Thread(new ThreadStart(ThreadEntry))
@@ -70,6 +76,14 @@ internal sealed class CommandWorker
         if (!string.IsNullOrEmpty(_initializationScript))
         {
             _ = powershell.AddScript(_initializationScript);
+
+            if (_initializationScriptArgumentList is not null)
+            {
+                foreach (var argument in _initializationScriptArgumentList)
+                {
+                    _ = powershell.AddArgument(argument);
+                }
+            }
         }
         _ = powershell.Invoke();
         powershell.Commands.Clear();
