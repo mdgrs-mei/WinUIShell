@@ -47,32 +47,12 @@ public partial class App : Application
         ObjectStore.Get().SetObjectIdPrefix("s");
         CommandServer.Get().Init(_upstreamPipeName);
         CommandClient.Get().Init(_downstreamPipeName);
-
-        // In Windows App SDK 1.7, app crashes for some objects (Window.SystemBackdrop, ProgressBar, etc.) at object access after closing the window.
-        // Skip any property or method access if XamlRoot is closed.
-        Invoker.Get().Validator = obj =>
-        {
-            if (obj is UIElement uiElement)
-            {
-                if (uiElement.XamlRoot is null)
-                    return true;
-                if (uiElement.XamlRoot.ContentIsland is null)
-                    return false;
-                return true;
-            }
-            else
-            if (obj is Window window)
-            {
-                var property = WindowStore.Get().GetWindowProperty(window);
-                if (property.IsTerminated)
-                    return false;
-            }
-            return true;
-        };
+        ObjectValidator.Init();
     }
 
     private void Term()
     {
+        ObjectValidator.Term();
         CommandClient.Get().Term();
         CommandServer.Get().Term();
     }
@@ -123,6 +103,7 @@ public partial class App : Application
         {
             Debug.WriteLine("App.ProcessCommands faild:");
             Debug.WriteLine(e);
+            CommandClient.Get().WriteError("App.ProcessCommands faild:");
             CommandClient.Get().WriteException(e);
         }
     }

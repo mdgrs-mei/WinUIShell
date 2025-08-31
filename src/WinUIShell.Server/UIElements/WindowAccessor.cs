@@ -14,12 +14,12 @@ internal static class WindowAccessor
         {
             var id = ObjectStore.Get().GetId(window);
 
+            windowStore.TerminateWindow(window);
+
             // Make sure that all running event callbacks including ones processed on the Runspace pool are completed
             // so that Window.WaitForClosed() can wait for all background event callbacks associated with the window.
             await windowStore.WaitForAllChildEventCallbacksFinishedAsync(window);
             await CommandClient.Get().SetPropertyAsync(CommandQueueId.Immediate, id, "IsClosed", true);
-
-            windowStore.TerminateWindow(window);
         };
     }
 }

@@ -61,7 +61,7 @@ internal sealed class WindowStore : Singleton<WindowStore>
 
     public Window? EnterEventCallbackAndGetParentWindow(object sender)
     {
-        Window? parentWindow = GetEventCallbackParentWindow(sender);
+        Window? parentWindow = GetParentWindow(sender);
         if (parentWindow is null)
             return null;
 
@@ -86,7 +86,7 @@ internal sealed class WindowStore : Singleton<WindowStore>
         }
     }
 
-    private Window? GetEventCallbackParentWindow(object sender)
+    public Window? GetParentWindow(object sender)
     {
         if (sender is Window w)
             return w;
