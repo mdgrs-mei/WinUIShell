@@ -7,7 +7,7 @@ Sets options for the runspace pool that processes event callbacks whose Runspace
 It's better to call this function at the beginning of a script as it recreates the runspace pool.
 
 .PARAMETER RunspaceCount
-The number of runspaces in the Runspace pool.
+The number of runspaces in the Runspace pool. The default is 2.
 
 .PARAMETER InitializationScript
 The ScriptBlock that is executed at the start of the runspace. This is typically used to initialize variables and functions in the runspace pool.
@@ -47,6 +47,12 @@ function Set-WUIRunspacePoolOption {
     )
 
     process {
-        [WinUIShell.Engine]::Get().SetCommandThreadPoolOption($RunspaceCount, $InitializationScript, $InitializationScriptArgumentList)
+        if ($PSBoundParameters.ContainsKey('RunspaceCount')) {
+            $threadCount = $RunspaceCount
+        } else {
+            $threadCount = $null
+        }
+
+        [WinUIShell.Engine]::Get().SetCommandThreadPoolOption($threadCount, $InitializationScript, $InitializationScriptArgumentList)
     }
 }
