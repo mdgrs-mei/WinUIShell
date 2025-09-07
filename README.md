@@ -191,7 +191,7 @@ $clickCallback.DisabledControlsWhileProcessing = $button
 
 It is a good practice to set the `DisabledControlsWhileProcessing` for long-running callbacks to avoid unintuitive queuing.
 
-There is one callback queue per runspace where WinUIShell module is loaded, and callbacks in the queue are typically processed inside `$win.WaitForClosed()`.
+There is one callback queue per runspace where WinUIShell module is loaded, and callbacks in the queue are typically processed inside `$win.WaitForClosed()`. Please see [MultipleRunspaces.ps1](./examples/MultipleRunspaces.ps1) for an example of multi-runspace scenario.
 
 ### MainRunspaceSyncUI
 
