@@ -13,10 +13,12 @@ public class CommandServer : Singleton<CommandServer>
     private readonly object _rpcInitLock = new();
     private readonly JoinableTaskFactory _joinableTaskFactory = new(new JoinableTaskContext());
 
-    private readonly ConcurrentDictionary<CommandQueueId, ConcurrentQueue<Action>> _commandQueues = new();
+    private readonly ConcurrentDictionary<CommandQueueId, Queue<Action>> _commandQueues = new();
 
     public void Init(string pipeName)
     {
+        InitThreadPoolCommandQueue();
+
         _pipeName = pipeName;
         _thread = new Thread(new ThreadStart(ServerThreadEntry))
         {
@@ -72,19 +74,53 @@ public class CommandServer : Singleton<CommandServer>
             return;
         }
 
-        var queue = _commandQueues.GetOrAdd(queueId, (key) => new ConcurrentQueue<Action>());
-        queue.Enqueue(action);
+        var queue = _commandQueues.GetOrAdd(queueId, (key) => new Queue<Action>());
+        lock (queue)
+        {
+            queue.Enqueue(action);
+            if (queueId.Equals(CommandQueueId.ThreadPool))
+            {
+                // Commands in the ThreadPool queue are expected to be processed by waiting threads.
+                // Other queues are expected to use polling.
+                Monitor.PulseAll(queue);
+            }
+        }
     }
 
     public void ProcessCommands(CommandQueueId queueId)
     {
-        _ = _commandQueues.TryGetValue(queueId, out ConcurrentQueue<Action>? queue);
+        _ = _commandQueues.TryGetValue(queueId, out Queue<Action>? queue);
         if (queue is null)
             return;
 
-        while (queue.TryDequeue(out Action? action))
+        while (true)
         {
+            Action? action = null;
+            lock (queue)
+            {
+                if (queue.Count == 0)
+                    return;
+
+                action = queue.Dequeue();
+            }
             action();
         }
+    }
+
+    private void InitThreadPoolCommandQueue()
+    {
+        _ = _commandQueues.GetOrAdd(CommandQueueId.ThreadPool, (key) => new Queue<Action>());
+    }
+
+    // Returns ThreadPool queue for processing commands outside.
+    public Queue<Action> GetThreadPoolCommandQueue()
+    {
+        _ = _commandQueues.TryGetValue(CommandQueueId.ThreadPool, out Queue<Action>? queue);
+        return queue!;
+    }
+
+    public void RemoveCommandQueue(CommandQueueId queueId)
+    {
+        _ = _commandQueues.TryRemove(queueId, out _);
     }
 }

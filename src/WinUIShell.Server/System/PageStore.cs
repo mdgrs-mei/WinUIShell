@@ -9,7 +9,8 @@ internal sealed class PageStore : Singleton<PageStore>
     {
         public string Name { get; set; } = "";
         public Type? Type { get; set; }
-        public int CallbackQueueThreadId { get; set; }
+        public EventCallbackRunspaceMode OnLoadedCallbackRunspaceMode { get; set; }
+        public int OnLoadedCallbackMainRunspaceId { get; set; }
         public NavigationCacheMode NavigationCacheMode { get; set; }
     }
 
@@ -40,13 +41,18 @@ internal sealed class PageStore : Singleton<PageStore>
         }
     }
 
-    public Type RegisterPageProperty(string pageName, int callbackQueueThreadId, NavigationCacheMode navigationCacheMode)
+    public Type RegisterPageProperty(
+        string pageName,
+        EventCallbackRunspaceMode onLoadedCallbackRunspaceMode,
+        int onLoadedCallbackMainRunspaceId,
+        NavigationCacheMode navigationCacheMode)
     {
         lock (_remainingPageTypes)
         {
             if (_assignedPages.TryGetValue(pageName, out var pageProperty))
             {
-                pageProperty.CallbackQueueThreadId = callbackQueueThreadId;
+                pageProperty.OnLoadedCallbackRunspaceMode = onLoadedCallbackRunspaceMode;
+                pageProperty.OnLoadedCallbackMainRunspaceId = onLoadedCallbackMainRunspaceId;
                 pageProperty.NavigationCacheMode = navigationCacheMode;
                 return pageProperty.Type!;
             }
@@ -57,7 +63,8 @@ internal sealed class PageStore : Singleton<PageStore>
                 {
                     Name = pageName,
                     Type = newPageType,
-                    CallbackQueueThreadId = callbackQueueThreadId,
+                    OnLoadedCallbackRunspaceMode = onLoadedCallbackRunspaceMode,
+                    OnLoadedCallbackMainRunspaceId = onLoadedCallbackMainRunspaceId,
                     NavigationCacheMode = navigationCacheMode
                 };
                 return newPageType;
@@ -79,7 +86,7 @@ internal sealed class PageStore : Singleton<PageStore>
                 }
             }
 
-            throw new InvalidOperationException($"Page name not found for type [{pageType}].");
+            throw new InvalidOperationException($"Page property not found for type [{pageType}].");
         }
     }
 
@@ -91,9 +98,7 @@ internal sealed class PageStore : Singleton<PageStore>
         {
             if (_pageInstances.TryGetValue(property.Name, out IPage? previousPage))
             {
-                // Destroy previous page instance.
-                CommandClient.Get().DestroyObject(previousPage.Id);
-                previousPage.Id = new();
+                IPage.Term(previousPage);
             }
 
             _pageInstances[property.Name] = page;

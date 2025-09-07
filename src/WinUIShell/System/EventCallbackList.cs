@@ -1,4 +1,5 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation.Runspaces;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -21,20 +22,22 @@ internal sealed class EventCallbackList : WinUIShellObject
         if (eventCallback is null)
             return;
 
+        var copiedEventCallback = eventCallback.Copy();
+
         int eventId = 0;
         lock (_callbacks)
         {
             eventId = _callbacks.Count;
-            _callbacks.Add(eventCallback);
+            _callbacks.Add(copiedEventCallback);
         }
 
         ObjectId[]? disabledControlIds = null;
-        if (eventCallback.DisabledControlsWhileProcessing is not null)
+        if (copiedEventCallback.DisabledControlsWhileProcessing is not null)
         {
-            disabledControlIds = new ObjectId[eventCallback.DisabledControlsWhileProcessing.Length];
-            for (int i = 0; i<eventCallback.DisabledControlsWhileProcessing.Length; ++i)
+            disabledControlIds = new ObjectId[copiedEventCallback.DisabledControlsWhileProcessing.Length];
+            for (int i = 0; i < copiedEventCallback.DisabledControlsWhileProcessing.Length; ++i)
             {
-                disabledControlIds[i] = eventCallback.DisabledControlsWhileProcessing[i].Id;
+                disabledControlIds[i] = copiedEventCallback.DisabledControlsWhileProcessing[i].Id;
             }
         }
 
@@ -44,7 +47,8 @@ internal sealed class EventCallbackList : WinUIShellObject
             targetObjectId,
             eventName,
             eventArgsTypeName,
-            Environment.CurrentManagedThreadId,
+            copiedEventCallback.RunspaceMode,
+            Runspace.DefaultRunspace.Id,
             Id.Id,
             eventId,
             disabledControlIds);
@@ -52,29 +56,28 @@ internal sealed class EventCallbackList : WinUIShellObject
 
     public void Invoke(int eventId, object? sender, object? eventArgs)
     {
-        if (eventId < 0 || eventId >= _callbacks.Count)
+        EventCallback? callback = null;
+        lock (_callbacks)
         {
-            return;
+            if (eventId < 0 || eventId >= _callbacks.Count)
+            {
+                return;
+            }
+            callback = _callbacks[eventId];
         }
-        _callbacks[eventId].Invoke(sender, eventArgs);
-    }
-
-    public void ClearIsInvoked()
-    {
-        foreach (var callback in _callbacks)
-        {
-            callback.ClearIsInvoked();
-        }
+        callback.Invoke(sender, eventArgs);
     }
 
     public bool IsAllInvoked()
     {
-        foreach (var callback in _callbacks)
+        lock (_callbacks)
         {
-            if (!callback.IsInvoked)
-                return false;
+            foreach (var callback in _callbacks)
+            {
+                if (!callback.IsInvoked)
+                    return false;
+            }
+            return true;
         }
-
-        return true;
     }
 }

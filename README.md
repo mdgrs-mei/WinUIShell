@@ -138,6 +138,85 @@ $win.WaitForClosed()
 
 You can use any UI element that is available in Windows App SDK but it has to be a type that is supported in WinUIShell to get the object or access properties in PowerShell. It throws an error when calling `FindName` if the type is not supported by WinUIShell.
 
+## Event Callback
+
+Event callbacks are script blocks that are invoked when UI events are fired. You can register them with `Add*` methods of UI elements. The typical example is the click event of a button:
+
+```powershell
+$button = [Button]::new()
+$argumentList = 1, 2
+$button.AddClick({
+    param ($argumentList, $s, $e)
+    Write-Host "ArgumentList: $argumentList"
+    Write-Host "Sender: $s"
+    Write-Host "EventArgs: $e"
+}, $argumentList)
+```
+
+The same code can also be written using the `EventCallback` class. It allows you to customize the callback behavior:
+
+```powershell
+$button = [Button]::new()
+$clickCallback = [EventCallback]::new()
+$clickCallback.RunspaceMode = 'RunspacePoolAsyncUI'
+$clickCallback.DisabledControlsWhileProcessing = $button
+$clickCallback.ArgumentList = 1, 2
+$clickCallback.ScriptBlock = {
+    param ($argumentList, $s, $e)
+    Write-Host "ArgumentList: $argumentList"
+    Write-Host "Sender: $s"
+    Write-Host "EventArgs: $e"
+}
+$button.AddClick($clickCallback)
+```
+
+The `RunspaceMode` property controls where and how the script block runs.
+
+```powershell
+$clickCallback.RunspaceMode = 'RunspacePoolAsyncUI'
+```
+
+There are three runspace modes, `MainRunspaceAsyncUI`, `MainRunspaceSyncUI`, and `RunspacePoolAsyncUI`.
+
+### MainRunspaceAsyncUI (Default)
+
+The default value of `RunspaceMode` is `MainRunspaceAsyncUI` which means that the script block runs in the runspace where the script block is created (Main runspace). The script block can be a bound script block and sees the global or script scope variables in the runspace.
+
+`AsyncUI` means that the callbacks do not block the UI thread on the server side. Even if a callback takes long time to finish, the UI stays responsive. If a button is pressed while the previous callback is running, the new callback is queued and processed after the previous one completes. If this behavior is not desirable, you can specify controls that are disabled on the server side while the event callback is running:
+
+
+```powershell
+$clickCallback.DisabledControlsWhileProcessing = $button
+```
+
+It is a good practice to set the `DisabledControlsWhileProcessing` for long-running callbacks to avoid unintuitive queuing.
+
+There is one callback queue per runspace where WinUIShell module is loaded, and callbacks in the queue are typically processed inside `$win.WaitForClosed()`. Please see [MultipleRunspaces.ps1](./examples/MultipleRunspaces.ps1) for an example of multi-runspace scenario.
+
+### MainRunspaceSyncUI
+
+Callbacks in `MainRunspaceSyncUI` mode run in the main runspace just like those with `MainRunspaceAsyncUI`, but they block the UI thread on the server side until they complete. Because they block the UI thread, it is guaranteed that no other events are triggered while the callback is running (No need to set `DisabledControlsWhileProcessing`).
+
+Some callbacks need to run in `MainRunspaceSyncUI` mode to work properly. `BeforeTextChanging` event callback of the `TextBox` requires this mode for example. See [TextBoxValidation.ps1](./examples/TextBoxValidation.ps1) as a use case.
+
+### RunspacePoolAsyncUI
+
+Callbacks in `RunspacePoolAsyncUI` mode are handled in parallel by multiple runspaces in the runspace pool. This mode is ideal for long-running callbacks that must keep other callbacks responsive during execution. You can specify the number of runspaces in the pool and the script block that defines the global variables and functions in the runspaces:
+
+```powershell
+Set-WUIRunspacePoolOption -RunspaceCount 5 -InitializationScript {
+    param ($ScriptRoot)
+    $globalVar = 'Global variable in the runspace.'
+    function GlobalFunction() {
+        'Global function in the runspace.'
+    }
+} -InitializationScriptArgumentList $PSScriptRoot
+```
+
+Note that the WinUIShell module is automatically loaded in each runspace.
+
+Since the callbacks are executed in parallel, you should pass variables via `ArgumentList` and handle thread safety just as you would with `Start-ThreadJob`. See [CancelLongRunningEventCallback.ps1](./examples/CancelLongRunningEventCallback.ps1) as a basic example, and [MultipleProgressBars.ps1](./examples/MultipleProgressBars.ps1) as an example of multiple concurrent tasks.
+
 ## Major Limitations
 
 - Not all UI elements are supported yet

@@ -1,27 +1,52 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
+using System.Management.Automation.Host;
+using System.Management.Automation.Runspaces;
 using WinUIShell.Common;
 
 namespace WinUIShell;
 
-public static class Engine
+public class Engine
 {
-    private static readonly ThreadLocal<bool> _isStarted = new(() => false);
-    private static readonly object _lock = new();
-    private static int _mainThreadId = Constants.InvalidThreadId;
-    private static string _upstreamPipeName = "";
-    private static string _downstreamPipeName = "";
-    private static Process? _serverProcess;
-
-    public static void Start(string serverExePath)
+    private sealed class RunspaceState
     {
-        if (_isStarted.Value)
+        public bool IsInitialized { get; set; }
+        public bool IsInUpdate { get; set; }
+        public System.Timers.Timer? EventTimer;
+        public PSEventSubscriber? TimerEventSubscriber;
+    }
+
+    private readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
+    private readonly object _lock = new();
+    private int _mainRunspaceId = Constants.InvalidRunspaceId;
+    private string _upstreamPipeName = "";
+    private string _downstreamPipeName = "";
+    private Process? _serverProcess;
+    private readonly CommandThreadPool _commandThreadPool = new();
+
+    private static readonly Engine _instance = new();
+    public static Engine Get()
+    {
+        return _instance;
+    }
+
+    public void InitRunspace(
+        string serverExePath,
+        PSHost? streamingHost,
+        string modulePath,
+        bool useTimerEvent)
+    {
+        var thisRunspace = _thisRunspace.Value;
+        if (thisRunspace.IsInitialized)
             return;
 
         lock (_lock)
         {
-            if (_mainThreadId == Constants.InvalidThreadId)
+            if (_mainRunspaceId == Constants.InvalidRunspaceId)
             {
+#if DEBUG
+                //System.Diagnostics.Debugger.Launch();
+#endif
                 InitPipeNames();
                 try
                 {
@@ -34,43 +59,49 @@ public static class Engine
                     Console.Error.WriteLine($"Failed to start server [{serverExePath}]");
                     throw;
                 }
-                _mainThreadId = Environment.CurrentManagedThreadId;
+                InitCommandThreadPool(streamingHost, modulePath);
+                _mainRunspaceId = Runspace.DefaultRunspace.Id;
             }
         }
 
-        InitTimerEvent();
+        if (useTimerEvent)
+        {
+            InitTimerEvent();
+        }
 
-        _isStarted.Value = true;
+        thisRunspace.IsInitialized = true;
     }
 
-    public static void Stop()
+    public void TermRunspace()
     {
-        if (!_isStarted.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
             return;
 
-        _isStarted.Value = false;
+        thisRunspace.IsInitialized = false;
 
         TermTimerEvent();
 
         lock (_lock)
         {
-            if (Environment.CurrentManagedThreadId == _mainThreadId)
+            if (Runspace.DefaultRunspace.Id == _mainRunspaceId)
             {
+                TermCommandThreadPool();
                 TermConnection();
                 StopServerProcess();
-                _mainThreadId = Constants.InvalidThreadId;
+                _mainRunspaceId = Constants.InvalidRunspaceId;
             }
         }
     }
 
-    private static void InitPipeNames()
+    private void InitPipeNames()
     {
         var processId = Environment.ProcessId.ToString();
         _upstreamPipeName = $"WinUIShell.ClientToServer.{processId}";
         _downstreamPipeName = $"WinUIShell.ServerToClient.{processId}";
     }
 
-    private static void StartServerProcess(string path)
+    private void StartServerProcess(string path)
     {
         var startInfo = new ProcessStartInfo
         {
@@ -82,61 +113,139 @@ public static class Engine
         _serverProcess = Process.Start(startInfo);
     }
 
-    private static void StopServerProcess()
+    private void StopServerProcess()
     {
         if (_serverProcess is null)
             return;
 
         _serverProcess.Kill();
+        _serverProcess = null;
     }
 
-    private static void InitConnection()
+    private void InitConnection()
     {
         ObjectStore.Get().SetObjectIdPrefix("c");
         CommandServer.Get().Init(_downstreamPipeName);
         CommandClient.Get().Init(_upstreamPipeName);
     }
 
-    private static void TermConnection()
+    private void TermConnection()
     {
         CommandClient.Get().Term();
         CommandServer.Get().Term();
     }
 
-    private static void InitTimerEvent()
+    private void InitTimerEvent()
     {
-        // Use script block to make the timer action run on this thread.
-        // It looks like ScriptBlocks can call a private version of Runspace.DefaultRunspace.Events.SubscribeEvent that has 'shouldQueueAndProcessInExecutionThread' parameter.
-        var script = @"
-$script:engineUpdateTimer = New-Object Timers.Timer
-$script:engineUpdateTimer.Interval = 8
-$script:engineUpdateTimer.AutoReset = $false
-$script:engineUpdateTimer.Enabled = $true
-$script:engineUpdateJob = Register-ObjectEvent -InputObject $script:engineUpdateTimer -EventName 'Elapsed' -Action {
-    [WinUIShell.Engine]::Update()
-    $engineUpdateTimer = $Sender
-    $engineUpdateTimer.Start()
-}
-";
-        var scriptBlock = ScriptBlock.Create(script);
-        _ = scriptBlock.Invoke();
+        var thisRunspace = _thisRunspace.Value;
+
+        // Register timer event to process the main command queue.
+        // The timer event fires when commands are processed on the main runspace or when waiting for user inputs in interactive sessions.
+        thisRunspace.EventTimer = new()
+        {
+            Interval = Constants.ClientTimerEventCommandPolingIntervalMillisecond,
+            AutoReset = false,
+            Enabled = false
+        };
+
+        ScriptBlock action = ScriptBlock.Create(@"
+[WinUIShell.Engine]::Get().IdleUpdateRunspace()
+$engineUpdateTimer = $Sender
+$engineUpdateTimer.Start()
+"
+        );
+
+        thisRunspace.TimerEventSubscriber = Runspace.DefaultRunspace.Events.SubscribeEvent(
+            source: thisRunspace.EventTimer,
+            eventName: "Elapsed",
+            sourceIdentifier: "",
+            data: null,
+            action: action,
+            supportEvent: false,
+            forwardEvent: false);
+
+        thisRunspace.EventTimer.Start();
     }
 
-    private static void TermTimerEvent()
+    private void TermTimerEvent()
     {
-        var script = @"
-$script:engineUpdateJob.StopJob()
-";
-        var scriptBlock = ScriptBlock.Create(script);
-        _ = scriptBlock.Invoke();
-    }
-
-    public static void Update()
-    {
-        if (!_isStarted.Value)
+        var thisRunspace = _thisRunspace.Value;
+        if (thisRunspace.EventTimer is null)
             return;
 
-        var queueId = new CommandQueueId(Environment.CurrentManagedThreadId);
-        CommandServer.Get().ProcessCommands(queueId);
+        thisRunspace.EventTimer.Stop();
+        Runspace.DefaultRunspace.Events.UnsubscribeEvent(thisRunspace.TimerEventSubscriber);
+    }
+
+    private void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
+    {
+        _commandThreadPool.Init(streamingHost, modulePath);
+    }
+
+    private void TermCommandThreadPool()
+    {
+        _commandThreadPool.Term();
+    }
+
+    public void SetCommandThreadPoolOption(
+        uint? threadCount,
+        ScriptBlock? initializationScriptBlock,
+        object?[]? initializationScriptBlockArgumentList)
+    {
+        _commandThreadPool.SetOption(
+            threadCount,
+            initializationScriptBlock,
+            initializationScriptBlockArgumentList);
+    }
+
+    public void IdleUpdateRunspace()
+    {
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
+            return;
+
+        // Do not run commands inside other event callbacks.
+        if (thisRunspace.IsInUpdate)
+            return;
+
+        ProcessCommands();
+    }
+
+    internal void UpdateRunspace()
+    {
+        var thisRunspace = _thisRunspace.Value;
+        if (!thisRunspace.IsInitialized)
+            return;
+
+        if (!thisRunspace.IsInUpdate)
+        {
+            // Root update.
+            thisRunspace.IsInUpdate = true;
+            ProcessCommands();
+            thisRunspace.IsInUpdate = false;
+        }
+        else
+        {
+            // Recursive update.
+            ProcessCommands();
+        }
+    }
+
+    private void ProcessCommands()
+    {
+        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
+        try
+        {
+            CommandServer.Get().ProcessCommands(queueId);
+        }
+        catch (Exception e)
+        {
+            Console.Error.WriteLine("Engine.ProcessCommands faild:");
+            Console.Error.WriteLine($"{e.GetType().FullName}: {e.Message}");
+            if (e.InnerException is not null)
+            {
+                Console.Error.WriteLine($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
+            }
+        }
     }
 }

@@ -7,15 +7,28 @@ public interface IPage
 {
     ObjectId Id { get; set; }
 
-    static void Initialize<TPage>(TPage page) where TPage : Page, IPage
+    static void Init<TPage>(TPage page) where TPage : Page, IPage
     {
         ArgumentNullException.ThrowIfNull(page);
 
         PageStore.Get().RegisterPageInstance(page);
-        var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
+        var pageProperty = PageStore.Get().GetPageProperty(page.GetType());
 
         page.NavigationCacheMode = pageProperty.NavigationCacheMode;
         page.Loaded += CreateOnLoaded(page);
+    }
+
+    static void Term<TPage>(TPage page) where TPage : IPage
+    {
+        ArgumentNullException.ThrowIfNull(page);
+
+        var pageProperty = PageStore.Get().GetPageProperty(page.GetType());
+        var queueId = EventCallback.GetProcessingQueueId(
+            pageProperty.OnLoadedCallbackRunspaceMode,
+            pageProperty.OnLoadedCallbackMainRunspaceId);
+
+        CommandClient.Get().DestroyObject(queueId, page.Id);
+        page.Id = new();
     }
 
     private static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : Page, IPage
@@ -23,27 +36,42 @@ public interface IPage
         return async (object sender, RoutedEventArgs eventArgs) =>
         {
             var pageProperty = PageStore.Get().GetPageProperty(typeof(TPage));
-            var queueId = new CommandQueueId(pageProperty.CallbackQueueThreadId);
+
+            var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
+            var processingQueueId = EventCallback.GetProcessingQueueId(
+                pageProperty.OnLoadedCallbackRunspaceMode,
+                pageProperty.OnLoadedCallbackMainRunspaceId);
 
             page.Id = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 "WinUIShell.Page, WinUIShell",
                 page);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 "WinUIShell.RoutedEventArgs, WinUIShell",
                 eventArgs);
 
-            await CommandClient.Get().InvokeStaticMethodWaitAsync(
-                queueId,
+            var invokeTask = CommandClient.Get().InvokeStaticMethodWaitAsync(
+                temporaryQueueId,
                 "WinUIShell.PageStore, WinUIShell",
                 "OnLoaded",
                 pageProperty.Name,
                 page.Id,
                 eventArgsId);
 
-            CommandClient.Get().DestroyObject(eventArgsId);
+            CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
+
+            if (pageProperty.OnLoadedCallbackRunspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
+            {
+                EventCallback.BlockingWaitTask(invokeTask);
+            }
+            else
+            {
+                await invokeTask;
+            }
+
+            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
         };
     }
 }

@@ -1,4 +1,8 @@
 
+param(
+    [bool]$UseTimerEvent = $true
+)
+
 $netVersion = 'net8.0'
 $serverTarget = 'net8.0-windows10.0.18362.0'
 
@@ -7,8 +11,14 @@ $server = "$PSScriptRoot/bin/$serverTarget/WinUIShell.Server.exe"
 
 Import-Module $dll
 
-[WinUIShell.Engine]::Start($server)
+$modulePath = $MyInvocation.MyCommand.Path
+[WinUIShell.Engine]::Get().InitRunspace($server, $host, $modulePath, $UseTimerEvent)
 
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
-    [WinUIShell.Engine]::Stop()
+    [WinUIShell.Engine]::Get().TermRunspace()
+}
+
+$publicScripts = @(Get-ChildItem $PSScriptRoot/Public/*.ps1)
+foreach ($private:script in $publicScripts) {
+    . $script.FullName
 }

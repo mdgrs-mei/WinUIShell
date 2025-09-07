@@ -1,17 +1,21 @@
 ﻿
+using System.Diagnostics;
+
 namespace WinUIShell.Common;
 
 public enum CommandQueueType
 {
     Immediate,
     MainThread,
-    ThreadId
+    ThreadPool,
+    RunspaceId,
+    TemporaryQueueId
 }
 
 public class CommandQueueId
 {
     public CommandQueueType Type { get; set; } = CommandQueueType.MainThread;
-    public int ThreadId { get; set; } = Constants.InvalidThreadId;
+    public int Id { get; set; }
 
     public CommandQueueId()
     {
@@ -19,13 +23,15 @@ public class CommandQueueId
 
     public CommandQueueId(CommandQueueType type)
     {
+        Debug.Assert(type is not (CommandQueueType.RunspaceId or CommandQueueType.TemporaryQueueId));
         Type = type;
     }
 
-    public CommandQueueId(int threadId)
+    public CommandQueueId(CommandQueueType type, int id)
     {
-        Type = CommandQueueType.ThreadId;
-        ThreadId = threadId;
+        Debug.Assert(type is CommandQueueType.RunspaceId or CommandQueueType.TemporaryQueueId);
+        Type = type;
+        Id = id;
     }
 
     public override bool Equals(object? obj)
@@ -38,14 +44,15 @@ public class CommandQueueId
         if (other is null)
             return false;
 
-        return (Type == other.Type) && (ThreadId == other.ThreadId);
+        return (Type == other.Type) && (Id == other.Id);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Type, ThreadId);
+        return HashCode.Combine(Type, Id);
     }
 
     public static readonly CommandQueueId Immediate = new(CommandQueueType.Immediate);
     public static readonly CommandQueueId MainThread = new(CommandQueueType.MainThread);
+    public static readonly CommandQueueId ThreadPool = new(CommandQueueType.ThreadPool);
 }

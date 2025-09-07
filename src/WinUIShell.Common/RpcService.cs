@@ -9,6 +9,17 @@ internal sealed class RpcService
         _commandServer = commandServer;
     }
 
+    public void ProcessTemporaryQueue(CommandQueueId queueId, CommandQueueId temporaryQueueId)
+    {
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                _commandServer.ProcessCommands(temporaryQueueId);
+                _commandServer.RemoveCommandQueue(temporaryQueueId);
+            });
+    }
+
     public void CreateObject(CommandQueueId queueId, ObjectId id, string typeName, RpcValue[]? rpcArguments)
     {
         _commandServer.AddCommand(
@@ -76,10 +87,10 @@ internal sealed class RpcService
             });
     }
 
-    public void DestroyObject(ObjectId id)
+    public void DestroyObject(CommandQueueId queueId, ObjectId id)
     {
         _commandServer.AddCommand(
-            CommandQueueId.MainThread,
+            queueId,
             () =>
             {
                 _ = ObjectStore.Get().UnregisterObject(id);

@@ -10,7 +10,13 @@ public class Window : WinUIShellObject
     private bool _isActivateCalled;
     private bool _isCloseCalled;
     private bool IsTerminated { get => _isActivateCalled && (_isCloseCalled || IsClosed); }
-    internal bool IsClosed { get; set; } = true;
+
+    private int _isClosed = 1;
+    internal bool IsClosed
+    {
+        get => Interlocked.CompareExchange(ref _isClosed, 0, 0) > 0;
+        private set => Interlocked.Exchange(ref _isClosed, value ? 1 : 0);
+    }
 
     public AppWindow AppWindow
     {
@@ -63,7 +69,6 @@ public class Window : WinUIShellObject
 
         _isActivateCalled = true;
         IsClosed = false;
-        ClearClosedCallbackStates();
         CommandClient.Get().InvokeMethod(Id, nameof(Activate));
     }
 
@@ -100,17 +105,17 @@ public class Window : WinUIShellObject
 
     public void WaitForClosed()
     {
-        CommandQueueId queueId = new(Environment.CurrentManagedThreadId);
-        while (!IsClosed || !IsAllClosedCallbacksInvoked())
-        {
-            CommandServer.Get().ProcessCommands(queueId);
-            Thread.Sleep(8);
-        }
-    }
+        if (!_isActivateCalled)
+            return;
 
-    private void ClearClosedCallbackStates()
-    {
-        _closedCallbacks.ClearIsInvoked();
+        while (true)
+        {
+            if (IsClosed && IsAllClosedCallbacksInvoked())
+                return;
+
+            Engine.Get().UpdateRunspace();
+            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+        }
     }
 
     private bool IsAllClosedCallbacksInvoked()

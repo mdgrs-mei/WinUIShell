@@ -21,7 +21,7 @@ public partial class App : Application
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         _updateTimer = DispatcherQueue.GetForCurrentThread().CreateTimer();
-        _updateTimer.Interval = TimeSpan.FromMicroseconds(16);
+        _updateTimer.Interval = TimeSpan.FromMicroseconds(Constants.ServerCommandPolingIntervalMillisecond);
         _updateTimer.IsRepeating = false;
         _updateTimer.Tick += (sender, eventArgs) =>
         {
@@ -47,32 +47,12 @@ public partial class App : Application
         ObjectStore.Get().SetObjectIdPrefix("s");
         CommandServer.Get().Init(_upstreamPipeName);
         CommandClient.Get().Init(_downstreamPipeName);
-
-        // In Windows App SDK 1.7, app crashes for some objects (Window.SystemBackdrop, ProgressBar, etc.) at object access after closing the window.
-        // Skip any property or method access if XamlRoot is closed.
-        Invoker.Get().Validator = obj =>
-        {
-            if (obj is UIElement uiElement)
-            {
-                if (uiElement.XamlRoot is null)
-                    return true;
-                if (uiElement.XamlRoot.ContentIsland is null)
-                    return false;
-                return true;
-            }
-            else
-            if (obj is Window window)
-            {
-                var property = WindowStore.Get().GetWindowProperty(window);
-                if (property.IsTerminated)
-                    return false;
-            }
-            return true;
-        };
+        ObjectValidator.Init();
     }
 
     private void Term()
     {
+        ObjectValidator.Term();
         CommandClient.Get().Term();
         CommandServer.Get().Term();
     }
@@ -100,7 +80,6 @@ public partial class App : Application
         return _parentProcess.HasExited;
     }
 
-
     private bool Update()
     {
         if (ParentProcessExited())
@@ -110,23 +89,23 @@ public partial class App : Application
             return false;
         }
 
+        ProcessCommands();
+        return true;
+    }
+
+    public static void ProcessCommands()
+    {
         try
         {
             CommandServer.Get().ProcessCommands(CommandQueueId.MainThread);
         }
         catch (Exception e)
         {
-            Debug.WriteLine("CommandServer.ProcessCommands faild:");
+            Debug.WriteLine("App.ProcessCommands faild:");
             Debug.WriteLine(e);
-
-            // Show error on the client.
-            CommandClient.Get().WriteError($"{e.GetType().FullName}: {e.Message}");
-            if (e.InnerException is not null)
-            {
-                CommandClient.Get().WriteError($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
-            }
+            CommandClient.Get().WriteError("App.ProcessCommands faild:");
+            CommandClient.Get().WriteException(e);
         }
-        return true;
     }
 }
 #pragma warning restore CA1515

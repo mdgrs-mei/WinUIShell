@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using WinUIShell.Common;
 namespace WinUIShell.Server;
 
@@ -8,7 +9,8 @@ internal static class EventCallback
         object target,
         string eventName,
         string eventArgsTypeName,
-        int queueThreadId,
+        EventCallbackRunspaceMode runspaceMode,
+        int mainRunspaceId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
@@ -31,7 +33,8 @@ internal static class EventCallback
         var callbackCreator = callbackCreatorGeneric.MakeGenericMethod(eventArgsType);
 
         var callback = callbackCreator.Invoke(null, [
-            queueThreadId,
+            runspaceMode,
+            mainRunspaceId,
             eventListId,
             eventId,
             disabledControlsWhileProcessing])!;
@@ -47,55 +50,128 @@ internal static class EventCallback
     }
 
     public static Action<object, TEventArgs> Create<TEventArgs>(
-        int queueThreadId,
+        EventCallbackRunspaceMode runspaceMode,
+        int mainRunspaceId,
         string eventListId,
         int eventId,
         object?[]? disabledControlsWhileProcessing)
     {
         return async (object sender, TEventArgs eventArgs) =>
         {
-            List<Microsoft.UI.Xaml.Controls.Control>? disabledControls = null;
-            if (disabledControlsWhileProcessing is not null)
-            {
-                disabledControls = [];
-                foreach (var obj in disabledControlsWhileProcessing)
-                {
-                    if (obj is Microsoft.UI.Xaml.Controls.Control control)
-                    {
-                        if (control.IsEnabled)
-                        {
-                            control.IsEnabled = false;
-                            disabledControls.Add(control);
-                        }
-                    }
-                }
-            }
+            var parentWindow = WindowStore.Get().EnterEventCallbackAndGetParentWindow(sender);
+
+            DisabledControlsHolder disabledControls = new(disabledControlsWhileProcessing);
+            disabledControls.Disable();
 
             var senderId = ObjectStore.Get().GetId(sender);
-            var queueId = new CommandQueueId(queueThreadId);
+            var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
+            var processingQueueId = GetProcessingQueueId(runspaceMode, mainRunspaceId);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
-                queueId,
+                temporaryQueueId,
                 $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
                 eventArgs);
 
-            await CommandClient.Get().InvokeMethodWaitAsync(
-                queueId,
+            var invokeTask = CommandClient.Get().InvokeMethodWaitAsync(
+                temporaryQueueId,
                 new ObjectId(eventListId),
                 "Invoke",
                 eventId,
                 senderId,
                 eventArgsId);
 
-            CommandClient.Get().DestroyObject(eventArgsId);
+            CommandClient.Get().ProcessTemporaryQueue(processingQueueId, temporaryQueueId);
 
-            if (disabledControls is not null)
+            try
             {
-                foreach (var control in disabledControls)
+                if (runspaceMode == EventCallbackRunspaceMode.MainRunspaceSyncUI)
                 {
-                    control.IsEnabled = true;
+                    BlockingWaitTask(invokeTask);
+                }
+                else
+                {
+                    await invokeTask;
                 }
             }
+            catch (Exception e)
+            {
+                Debug.WriteLine("EventCallback faild:");
+                Debug.WriteLine(e);
+                CommandClient.Get().WriteError("EventCallback faild:");
+                CommandClient.Get().WriteException(e);
+            }
+
+            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
+            disabledControls.Enable();
+
+            WindowStore.Get().ExitEventCallback(parentWindow);
         };
+    }
+
+    public static CommandQueueId GetProcessingQueueId(EventCallbackRunspaceMode runspaceMode, int mainRunspaceId)
+    {
+        if (runspaceMode == EventCallbackRunspaceMode.RunspacePoolAsyncUI)
+        {
+            return CommandQueueId.ThreadPool;
+        }
+        else
+        {
+            return new CommandQueueId(CommandQueueType.RunspaceId, mainRunspaceId);
+        }
+    }
+
+    public static void BlockingWaitTask(Task task)
+    {
+        while (!task.IsCompleted)
+        {
+            App.ProcessCommands();
+            Thread.Sleep(Constants.ServerSyncUICommandPolingIntervalMillisecond);
+        }
+        App.ProcessCommands();
+    }
+
+    private sealed class DisabledControlsHolder
+    {
+        private readonly List<Microsoft.UI.Xaml.Controls.Control>? _controls;
+
+        public DisabledControlsHolder(object?[]? controls)
+        {
+            if (controls is null)
+                return;
+
+            _controls = [];
+            foreach (var obj in controls)
+            {
+                if (obj is Microsoft.UI.Xaml.Controls.Control control)
+                {
+                    if (control.IsEnabled)
+                    {
+                        _controls.Add(control);
+                    }
+                }
+            }
+        }
+
+        public void Disable()
+        {
+            if (_controls is null)
+                return;
+
+            foreach (var control in _controls)
+            {
+                control.IsEnabled = false;
+            }
+        }
+
+        public void Enable()
+        {
+            if (_controls is null)
+                return;
+
+            foreach (var control in _controls)
+            {
+                control.IsEnabled = true;
+            }
+        }
     }
 }

@@ -10,6 +10,6 @@ public partial class Page03 : Page, IPage
     public Page03()
     {
         InitializeComponent();
-        IPage.Initialize(this);
+        IPage.Init(this);
     }
 }

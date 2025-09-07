@@ -9,7 +9,8 @@ internal sealed class PageStore : Singleton<PageStore>
 
     public void RegisterLoaded(string pageName, EventCallback callback)
     {
-        _ = _loadedCallbacks.AddOrUpdate(pageName, callback, (key, oldValue) => callback);
+        var copiedCallback = callback.Copy();
+        _ = _loadedCallbacks.AddOrUpdate(pageName, copiedCallback, (key, oldValue) => copiedCallback);
     }
 
     public static void OnLoaded(string pageName, Page page, RoutedEventArgs eventArgs)
