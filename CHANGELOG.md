@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.0] - 2025-09-07
+
+### Added
+
+- Added `RunspaceMode` property to `EventCallback` class
+- Added `Set-WUIRunspacePoolOption` function
+
+### Changed
+
+- `*EventArgs` classes now inherit from `WinUIShellObject` which has `Id` property
+- Changed the constructor of `Page` class from internal to public
+
+### Fixed
+
+- Fixed a bug where event callbacks did not fire sometimes on the PowerShell Extension terminal in VSCode
+
 ## [0.5.0] - 2025-07-26
 
 ### Added
