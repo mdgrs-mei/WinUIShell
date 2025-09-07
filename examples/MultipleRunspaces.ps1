@@ -5,20 +5,22 @@ if (-not (Get-Module WinUIShell)) {
 
 $modulePath = (Get-Module WinUIShell).Path
 
+"Main Runspace ID [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
 $win = [Window]::new()
-$win.Title = 'Multi Threading'
+$win.Title = 'Multiple Runspaces'
 $win.AppWindow.ResizeClient(420, 240)
 $win.AddClosed({
-        Write-Host ('Main window closed [{0}]' -f ([Environment]::CurrentManagedThreadId))
+        # This callback is processed in the runspace where it's added, the main runspace.
+        "Main window closed [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
     })
 
 $button = [Button]::new()
-$button.Content = 'MainThread'
+$button.Content = 'Main Runspace'
 $clickCount = 0
-Write-Host ('Main Thread ID [{0}]' -f ([Environment]::CurrentManagedThreadId))
 $button.AddClick({
+        # The callback here sees the global or script scoped variables in the main runspace.
         $script:clickCount++
-        $button.Content = 'MainThread[{0}][{1}]' -f ([Environment]::CurrentManagedThreadId), $script:clickCount
+        $button.Content = "Main Runspace[$([Runspace]::DefaultRunspace.Id)][$($script:clickCount)]"
     })
 
 $panel = [StackPanel]::new()
@@ -29,24 +31,26 @@ $win.Content = $panel
 $win.Activate()
 
 $threadJob = Start-ThreadJob -ScriptBlock {
-    param ($modulePath)
-    Write-Host ('Sub Thread ID [{0}]' -f ([Environment]::CurrentManagedThreadId))
-    Import-Module $modulePath
+    param ($ModulePath)
+    # By importing the WinUIShell module, the event callback processor for this runspace is also created.
+    Import-Module $ModulePath
 
+    "Sub Runspace ID [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
     $win = [WinUIShell.Window]::new()
-    $win.Title = 'Multi Threading'
+    $win.Title = 'Multiple Runspaces'
     $win.AppWindow.ResizeClient(420, 240)
     $win.AddClosed({
-            Write-Host ('Sub window closed [{0}]' -f ([Environment]::CurrentManagedThreadId))
+            # This callback is processed in the runspace where it's added, the sub runspace.
+            "Sub window closed [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
         })
 
     $button = [WinUIShell.Button]::new()
-    $button.Content = 'SubThread'
+    $button.Content = 'Sub Runspace'
     $button.AddClick({
-            $button.Content = 'SubThread[{0}] - Doing a long task' -f ([Environment]::CurrentManagedThreadId)
-            # Doing a long task
+            # Long-running tasks here do not block the button click on the main window as this callback is processed independent of the main runspace.
+            $button.Content = "Sub Runspace[$([Runspace]::DefaultRunspace.Id)] - Doing a long task"
             Start-Sleep -Seconds 5
-            $button.Content = 'SubThread[{0}] - Done' -f ([Environment]::CurrentManagedThreadId)
+            $button.Content = "Sub Runspace[$([Runspace]::DefaultRunspace.Id)] - Done"
         })
 
     $panel = [WinUIShell.StackPanel]::new()
@@ -55,8 +59,11 @@ $threadJob = Start-ThreadJob -ScriptBlock {
 
     $win.Content = $panel
     $win.Activate()
+
+    # Callbacks in the sub runspace are processed here.
     $win.WaitForClosed()
 } -ArgumentList $modulePath -StreamingHost $host
 
+# Callbacks in the main runspace are processed here.
 $win.WaitForClosed()
 Wait-Job $threadJob | Out-Null
