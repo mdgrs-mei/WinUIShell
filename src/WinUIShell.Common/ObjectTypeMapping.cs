@@ -35,6 +35,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.HyperlinkButton, WinUIShell", "Microsoft.UI.Xaml.Controls.HyperlinkButton, Microsoft.WinUI"),
         ("WinUIShell.IconElement, WinUIShell", "Microsoft.UI.Xaml.Controls.IconElement, Microsoft.WinUI"),
         ("WinUIShell.IconSource, WinUIShell", "Microsoft.UI.Xaml.Controls.IconSource, Microsoft.WinUI"),
+        ("WinUIShell.ItemCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemCollection, Microsoft.WinUI"),
+        ("WinUIShell.ItemsControl, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemsControl, Microsoft.WinUI"),
         ("WinUIShell.MenuFlyout, WinUIShell", "Microsoft.UI.Xaml.Controls.MenuFlyout, Microsoft.WinUI"),
         ("WinUIShell.MenuFlyoutItem, WinUIShell", "Microsoft.UI.Xaml.Controls.MenuFlyoutItem, Microsoft.WinUI"),
         ("WinUIShell.MenuFlyoutItemBase, WinUIShell", "Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase, Microsoft.WinUI"),

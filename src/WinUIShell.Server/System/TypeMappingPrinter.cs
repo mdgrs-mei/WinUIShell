@@ -43,6 +43,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyout));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItem));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase));
