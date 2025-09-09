@@ -70,6 +70,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.RowDefinition));
         Print(typeof(Microsoft.UI.Xaml.Controls.RowDefinitionCollection));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollView));
+        Print(typeof(Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.Selector));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.SolidColorBrush));
         Print(typeof(Microsoft.UI.Xaml.Controls.StackPanel));

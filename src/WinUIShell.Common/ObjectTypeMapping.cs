@@ -62,6 +62,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.RowDefinition, WinUIShell", "Microsoft.UI.Xaml.Controls.RowDefinition, Microsoft.WinUI"),
         ("WinUIShell.RowDefinitionCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.RowDefinitionCollection, Microsoft.WinUI"),
         ("WinUIShell.ScrollView, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollView, Microsoft.WinUI"),
+        ("WinUIShell.SelectionChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs, Microsoft.WinUI"),
+        ("WinUIShell.Selector, WinUIShell", "Microsoft.UI.Xaml.Controls.Primitives.Selector, Microsoft.WinUI"),
         ("WinUIShell.SlideNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo, Microsoft.WinUI"),
         ("WinUIShell.SolidColorBrush, WinUIShell", "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI"),
         ("WinUIShell.StackPanel, WinUIShell", "Microsoft.UI.Xaml.Controls.StackPanel, Microsoft.WinUI"),
