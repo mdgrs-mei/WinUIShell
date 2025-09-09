@@ -1,10 +1,11 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
 public class ListViewBase : Selector
 {
-    //private readonly EventCallbackList _callbacks = new();
+    private readonly EventCallbackList _callbacks = new();
 
     public bool CanDragItems
     {
@@ -149,22 +150,20 @@ public class ListViewBase : Selector
     {
     }
 
-    /*
-    public void AddSelectionChanged(ScriptBlock scriptBlock, object? argumentList = null)
+    public void AddItemClick(ScriptBlock scriptBlock, object? argumentList = null)
     {
-        AddSelectionChanged(new EventCallback
+        AddItemClick(new EventCallback
         {
             ScriptBlock = scriptBlock,
             ArgumentList = argumentList
         });
     }
-    public void AddSelectionChanged(EventCallback eventCallback)
+    public void AddItemClick(EventCallback eventCallback)
     {
         _callbacks.Add(
             Id,
-            "SelectionChanged",
-            ObjectTypeMapping.Get().GetTargetTypeName<SelectionChangedEventArgs>(),
+            "ItemClick",
+            ObjectTypeMapping.Get().GetTargetTypeName<ItemClickEventArgs>(),
             eventCallback);
     }
-    */
 }
