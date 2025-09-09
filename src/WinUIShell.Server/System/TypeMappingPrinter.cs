@@ -44,7 +44,9 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
+        Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewBase));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyout));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItem));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase));
@@ -109,7 +111,10 @@ internal static class TypeMappingPrinter
         Print(typeof(Windows.UI.Text.FontStyle));
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));
         Print(typeof(Microsoft.UI.Xaml.HorizontalAlignment));
+        Print(typeof(Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger));
         Print(typeof(Microsoft.UI.Xaml.LineStackingStrategy));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewReorderMode));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewSelectionMode));
         Print(typeof(Microsoft.UI.Composition.SystemBackdrops.MicaKind));
         Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationCacheMode));
         Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationMode));

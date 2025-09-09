@@ -57,7 +57,6 @@ public class Selector : ItemsControl
         set => PropertyAccessor.Set(Id, nameof(SelectedValuePath), value);
     }
 
-
     internal Selector()
     {
     }
