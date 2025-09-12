@@ -141,6 +141,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.TextWrapping));
         Print(typeof(Microsoft.UI.Windowing.TitleBarTheme));
         Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
+        Print(typeof(Microsoft.UI.Xaml.Visibility));
         Debug.WriteLine("----");
     }
 
