@@ -150,6 +150,21 @@ public class ListViewBase : Selector
     {
     }
 
+    public void ScrollIntoView(object item)
+    {
+        CommandClient.Get().InvokeMethod(
+            Id,
+            nameof(ScrollIntoView),
+            item);
+    }
+
+    public void SelectAll()
+    {
+        CommandClient.Get().InvokeMethod(
+            Id,
+            nameof(SelectAll));
+    }
+
     public void AddItemClick(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddItemClick(new EventCallback
