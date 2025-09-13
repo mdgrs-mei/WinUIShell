@@ -35,6 +35,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.ScrollingRailMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingRailMode, Microsoft.WinUI"),
         ("WinUIShell.ScrollingScrollBarVisibility, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility, Microsoft.WinUI"),
         ("WinUIShell.ScrollingScrollMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollMode, Microsoft.WinUI"),
+        ("WinUIShell.SelectionMode, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionMode, Microsoft.WinUI"),
         ("WinUIShell.SlideNavigationTransitionEffect, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect, Microsoft.WinUI"),
         ("WinUIShell.Symbol, WinUIShell", "Microsoft.UI.Xaml.Controls.Symbol, Microsoft.WinUI"),
         ("WinUIShell.TextAlignment, WinUIShell", "Microsoft.UI.Xaml.TextAlignment, Microsoft.WinUI"),

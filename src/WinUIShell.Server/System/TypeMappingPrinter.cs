@@ -51,6 +51,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
         Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListBox));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListView));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewBase));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyout));
@@ -137,6 +138,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingRailMode));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollMode));
+        Print(typeof(Microsoft.UI.Xaml.Controls.SelectionMode));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect));
         Print(typeof(Microsoft.UI.Xaml.Controls.Symbol));
         Print(typeof(Microsoft.UI.Xaml.TextAlignment));

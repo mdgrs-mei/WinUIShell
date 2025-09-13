@@ -43,6 +43,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.ItemCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemCollection, Microsoft.WinUI"),
         ("WinUIShell.ItemIndexRange, WinUIShell", "Microsoft.UI.Xaml.Data.ItemIndexRange, Microsoft.WinUI"),
         ("WinUIShell.ItemsControl, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemsControl, Microsoft.WinUI"),
+        ("WinUIShell.ListBox, WinUIShell", "Microsoft.UI.Xaml.Controls.ListBox, Microsoft.WinUI"),
         ("WinUIShell.ListView, WinUIShell", "Microsoft.UI.Xaml.Controls.ListView, Microsoft.WinUI"),
         ("WinUIShell.ListViewBase, WinUIShell", "Microsoft.UI.Xaml.Controls.ListViewBase, Microsoft.WinUI"),
         ("WinUIShell.MenuFlyout, WinUIShell", "Microsoft.UI.Xaml.Controls.MenuFlyout, Microsoft.WinUI"),
