@@ -23,13 +23,13 @@ $text.HorizontalAlignment = 'Center'
 $text.VerticalAlignment = 'Center'
 [Grid]::SetRow($text, 1)
 
+$row0 = [RowDefinition]::new()
+$row0.Height = [GridLength]::Auto
 $row1 = [RowDefinition]::new()
-$row1.Height = [GridLength]::Auto
-$row2 = [RowDefinition]::new()
-$row2.Height = [GridLength]::new(1, 'Star')
+$row1.Height = [GridLength]::new(1, 'Star')
 $grid = [Grid]::new()
+$grid.RowDefinitions.Add($row0)
 $grid.RowDefinitions.Add($row1)
-$grid.RowDefinitions.Add($row2)
 $grid.Children.Add($titleBar)
 $grid.Children.Add($text)
 
