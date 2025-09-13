@@ -6,9 +6,11 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
 
     private readonly List<(string, string)> _list = [
         ("WinUIShell.BackgroundSizing, WinUIShell", "Microsoft.UI.Xaml.Controls.BackgroundSizing, Microsoft.WinUI"),
+        ("WinUIShell.BitmapCreateOptions, WinUIShell", "Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions, Microsoft.WinUI"),
         ("WinUIShell.CandidateWindowAlignment, WinUIShell", "Microsoft.UI.Xaml.Controls.CandidateWindowAlignment, Microsoft.WinUI"),
         ("WinUIShell.CharacterCasing, WinUIShell", "Microsoft.UI.Xaml.Controls.CharacterCasing, Microsoft.WinUI"),
         ("WinUIShell.CompactOverlaySize, WinUIShell", "Microsoft.UI.Windowing.CompactOverlaySize, Microsoft.InteractiveExperiences.Projection"),
+        ("WinUIShell.DecodePixelType, WinUIShell", "Microsoft.UI.Xaml.Media.Imaging.DecodePixelType, Microsoft.WinUI"),
         ("WinUIShell.ElementTheme, WinUIShell", "Microsoft.UI.Xaml.ElementTheme, Microsoft.WinUI"),
         ("WinUIShell.EventCallbackRunspaceMode, WinUIShell", "WinUIShell.Server.EventCallbackRunspaceMode, WinUIShell.Server"),
         ("WinUIShell.FontStretch, WinUIShell", "Windows.UI.Text.FontStretch, Microsoft.Windows.SDK.NET"),

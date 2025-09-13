@@ -17,6 +17,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Windowing.AppWindow));
         Print(typeof(Microsoft.UI.Windowing.AppWindowPresenter));
         Print(typeof(Microsoft.UI.Windowing.AppWindowTitleBar));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapImage));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapSource));
         Print(typeof(Microsoft.UI.Xaml.Media.Brush));
         Print(typeof(Microsoft.UI.Xaml.Controls.Button));
         Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.ButtonBase));
@@ -43,6 +45,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ImageIcon));
+        Print(typeof(Microsoft.UI.Xaml.Media.ImageSource));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemClickEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
         Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
@@ -104,9 +108,11 @@ internal static class TypeMappingPrinter
     {
         Debug.WriteLine("----");
         Print(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions));
         Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
         Print(typeof(Microsoft.UI.Xaml.ElementTheme));
         Print(typeof(EventCallbackRunspaceMode));
         Print(typeof(Windows.UI.Text.FontStretch));
@@ -149,6 +155,6 @@ internal static class TypeMappingPrinter
     {
         var fullname = type.FullName;
         var assemblyName = type.Assembly.GetName().Name;
-        Debug.WriteLine($"(\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"),");
+        Debug.WriteLine($"        (\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"),");
     }
 }
