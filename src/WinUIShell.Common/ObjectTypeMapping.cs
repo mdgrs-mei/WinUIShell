@@ -34,6 +34,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.FullScreenPresenter, WinUIShell", "Microsoft.UI.Windowing.FullScreenPresenter, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.Grid, WinUIShell", "Microsoft.UI.Xaml.Controls.Grid, Microsoft.WinUI"),
         ("WinUIShell.GridLength, WinUIShell", "Microsoft.UI.Xaml.GridLength, Microsoft.WinUI"),
+        ("WinUIShell.GridView, WinUIShell", "Microsoft.UI.Xaml.Controls.GridView, Microsoft.WinUI"),
         ("WinUIShell.HyperlinkButton, WinUIShell", "Microsoft.UI.Xaml.Controls.HyperlinkButton, Microsoft.WinUI"),
         ("WinUIShell.IconElement, WinUIShell", "Microsoft.UI.Xaml.Controls.IconElement, Microsoft.WinUI"),
         ("WinUIShell.IconSource, WinUIShell", "Microsoft.UI.Xaml.Controls.IconSource, Microsoft.WinUI"),

@@ -42,6 +42,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Windowing.FullScreenPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.Grid));
         Print(typeof(Microsoft.UI.Xaml.GridLength));
+        Print(typeof(Microsoft.UI.Xaml.Controls.GridView));
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
