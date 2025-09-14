@@ -1,9 +1,12 @@
-﻿using WinUIShell.Common;
+﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
 public class UIElement : WinUIShellObject
 {
+    private readonly EventCallbackList _callbacks = new();
+
     public bool AllowDrop
     {
         get => PropertyAccessor.Get<bool>(Id, nameof(AllowDrop))!;
@@ -41,5 +44,22 @@ public class UIElement : WinUIShellObject
     internal UIElement(ObjectId id)
         : base(id)
     {
+    }
+
+    public void AddKeyDown(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddKeyDown(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddKeyDown(EventCallback eventCallback)
+    {
+        _callbacks.Add(
+            Id,
+            "KeyDown",
+            ObjectTypeMapping.Get().GetTargetTypeName<KeyRoutedEventArgs>(),
+            eventCallback);
     }
 }

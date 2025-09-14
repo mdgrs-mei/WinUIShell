@@ -48,6 +48,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.TextWrapping, WinUIShell", "Microsoft.UI.Xaml.TextWrapping, Microsoft.WinUI"),
         ("WinUIShell.TitleBarTheme, WinUIShell", "Microsoft.UI.Windowing.TitleBarTheme, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.VerticalAlignment, WinUIShell", "Microsoft.UI.Xaml.VerticalAlignment, Microsoft.WinUI"),
+        ("WinUIShell.VirtualKey, WinUIShell", "Windows.System.VirtualKey, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.Visibility, WinUIShell", "Microsoft.UI.Xaml.Visibility, Microsoft.WinUI"),
     ];
 

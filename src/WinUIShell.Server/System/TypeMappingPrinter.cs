@@ -54,6 +54,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
         Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
+        Print(typeof(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListBox));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListView));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewBase));
@@ -154,6 +155,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.TextWrapping));
         Print(typeof(Microsoft.UI.Windowing.TitleBarTheme));
         Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
+        Print(typeof(Windows.System.VirtualKey));
         Print(typeof(Microsoft.UI.Xaml.Visibility));
         Debug.WriteLine("----");
     }
