@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0] - 2025-09-14
+
+### Added
+
+- Added `ListView`
+- Added `ListBox`
+- Added `GridView`
+- Added `ImageIcon`
+- Added `BitmapImage`
+
 ## [0.6.0] - 2025-09-07
 
 ### Added
