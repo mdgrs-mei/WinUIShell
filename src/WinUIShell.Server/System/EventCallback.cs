@@ -67,9 +67,10 @@ internal static class EventCallback
             var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
             var processingQueueId = GetProcessingQueueId(runspaceMode, mainRunspaceId);
 
+            var eventArgsTypeName = (eventArgs is object) ? "WinUIShellObject" : typeof(TEventArgs).Name;
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 temporaryQueueId,
-                $"WinUIShell.{typeof(TEventArgs).Name}, WinUIShell",
+                $"WinUIShell.{eventArgsTypeName}, WinUIShell",
                 eventArgs);
 
             var invokeTask = CommandClient.Get().InvokeMethodWaitAsync(
