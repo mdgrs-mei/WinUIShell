@@ -6,16 +6,21 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
 
     private readonly List<(string, string)> _list = [
         ("WinUIShell.BackgroundSizing, WinUIShell", "Microsoft.UI.Xaml.Controls.BackgroundSizing, Microsoft.WinUI"),
+        ("WinUIShell.BitmapCreateOptions, WinUIShell", "Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions, Microsoft.WinUI"),
         ("WinUIShell.CandidateWindowAlignment, WinUIShell", "Microsoft.UI.Xaml.Controls.CandidateWindowAlignment, Microsoft.WinUI"),
         ("WinUIShell.CharacterCasing, WinUIShell", "Microsoft.UI.Xaml.Controls.CharacterCasing, Microsoft.WinUI"),
         ("WinUIShell.CompactOverlaySize, WinUIShell", "Microsoft.UI.Windowing.CompactOverlaySize, Microsoft.InteractiveExperiences.Projection"),
+        ("WinUIShell.DecodePixelType, WinUIShell", "Microsoft.UI.Xaml.Media.Imaging.DecodePixelType, Microsoft.WinUI"),
         ("WinUIShell.ElementTheme, WinUIShell", "Microsoft.UI.Xaml.ElementTheme, Microsoft.WinUI"),
         ("WinUIShell.EventCallbackRunspaceMode, WinUIShell", "WinUIShell.Server.EventCallbackRunspaceMode, WinUIShell.Server"),
         ("WinUIShell.FontStretch, WinUIShell", "Windows.UI.Text.FontStretch, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.FontStyle, WinUIShell", "Windows.UI.Text.FontStyle, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.GridUnitType, WinUIShell", "Microsoft.UI.Xaml.GridUnitType, Microsoft.WinUI"),
         ("WinUIShell.HorizontalAlignment, WinUIShell", "Microsoft.UI.Xaml.HorizontalAlignment, Microsoft.WinUI"),
+        ("WinUIShell.IncrementalLoadingTrigger, WinUIShell", "Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger, Microsoft.WinUI"),
         ("WinUIShell.LineStackingStrategy, WinUIShell", "Microsoft.UI.Xaml.LineStackingStrategy, Microsoft.WinUI"),
+        ("WinUIShell.ListViewReorderMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ListViewReorderMode, Microsoft.WinUI"),
+        ("WinUIShell.ListViewSelectionMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ListViewSelectionMode, Microsoft.WinUI"),
         ("WinUIShell.MicaKind, WinUIShell", "Microsoft.UI.Composition.SystemBackdrops.MicaKind, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.NavigationCacheMode, WinUIShell", "Microsoft.UI.Xaml.Navigation.NavigationCacheMode, Microsoft.WinUI"),
         ("WinUIShell.NavigationMode, WinUIShell", "Microsoft.UI.Xaml.Navigation.NavigationMode, Microsoft.WinUI"),
@@ -30,6 +35,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.ScrollingRailMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingRailMode, Microsoft.WinUI"),
         ("WinUIShell.ScrollingScrollBarVisibility, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility, Microsoft.WinUI"),
         ("WinUIShell.ScrollingScrollMode, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollingScrollMode, Microsoft.WinUI"),
+        ("WinUIShell.SelectionMode, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionMode, Microsoft.WinUI"),
         ("WinUIShell.SlideNavigationTransitionEffect, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect, Microsoft.WinUI"),
         ("WinUIShell.Symbol, WinUIShell", "Microsoft.UI.Xaml.Controls.Symbol, Microsoft.WinUI"),
         ("WinUIShell.TextAlignment, WinUIShell", "Microsoft.UI.Xaml.TextAlignment, Microsoft.WinUI"),
@@ -40,6 +46,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.TextWrapping, WinUIShell", "Microsoft.UI.Xaml.TextWrapping, Microsoft.WinUI"),
         ("WinUIShell.TitleBarTheme, WinUIShell", "Microsoft.UI.Windowing.TitleBarTheme, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.VerticalAlignment, WinUIShell", "Microsoft.UI.Xaml.VerticalAlignment, Microsoft.WinUI"),
+        ("WinUIShell.Visibility, WinUIShell", "Microsoft.UI.Xaml.Visibility, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()

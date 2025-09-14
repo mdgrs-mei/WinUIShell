@@ -17,6 +17,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Windowing.AppWindow));
         Print(typeof(Microsoft.UI.Windowing.AppWindowPresenter));
         Print(typeof(Microsoft.UI.Windowing.AppWindowTitleBar));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapImage));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapSource));
         Print(typeof(Microsoft.UI.Xaml.Media.Brush));
         Print(typeof(Microsoft.UI.Xaml.Controls.Button));
         Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.ButtonBase));
@@ -40,9 +42,19 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Windowing.FullScreenPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.Grid));
         Print(typeof(Microsoft.UI.Xaml.GridLength));
+        Print(typeof(Microsoft.UI.Xaml.Controls.GridView));
         Print(typeof(Microsoft.UI.Xaml.Controls.HyperlinkButton));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconElement));
         Print(typeof(Microsoft.UI.Xaml.Controls.IconSource));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ImageIcon));
+        Print(typeof(Microsoft.UI.Xaml.Media.ImageSource));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ItemClickEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
+        Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListBox));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListView));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewBase));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyout));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItem));
         Print(typeof(Microsoft.UI.Xaml.Controls.MenuFlyoutItemBase));
@@ -68,6 +80,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.RowDefinition));
         Print(typeof(Microsoft.UI.Xaml.Controls.RowDefinitionCollection));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollView));
+        Print(typeof(Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.Selector));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.SolidColorBrush));
         Print(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
@@ -96,16 +110,21 @@ internal static class TypeMappingPrinter
     {
         Debug.WriteLine("----");
         Print(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions));
         Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
+        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
         Print(typeof(Microsoft.UI.Xaml.ElementTheme));
         Print(typeof(EventCallbackRunspaceMode));
         Print(typeof(Windows.UI.Text.FontStretch));
         Print(typeof(Windows.UI.Text.FontStyle));
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));
         Print(typeof(Microsoft.UI.Xaml.HorizontalAlignment));
+        Print(typeof(Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger));
         Print(typeof(Microsoft.UI.Xaml.LineStackingStrategy));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewReorderMode));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewSelectionMode));
         Print(typeof(Microsoft.UI.Composition.SystemBackdrops.MicaKind));
         Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationCacheMode));
         Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationMode));
@@ -120,6 +139,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingRailMode));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility));
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollMode));
+        Print(typeof(Microsoft.UI.Xaml.Controls.SelectionMode));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect));
         Print(typeof(Microsoft.UI.Xaml.Controls.Symbol));
         Print(typeof(Microsoft.UI.Xaml.TextAlignment));
@@ -130,6 +150,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.TextWrapping));
         Print(typeof(Microsoft.UI.Windowing.TitleBarTheme));
         Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
+        Print(typeof(Microsoft.UI.Xaml.Visibility));
         Debug.WriteLine("----");
     }
 
@@ -137,6 +158,6 @@ internal static class TypeMappingPrinter
     {
         var fullname = type.FullName;
         var assemblyName = type.Assembly.GetName().Name;
-        Debug.WriteLine($"(\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"),");
+        Debug.WriteLine($"        (\"WinUIShell.{type.Name}, WinUIShell\", \"{fullname}, {assemblyName}\"),");
     }
 }
