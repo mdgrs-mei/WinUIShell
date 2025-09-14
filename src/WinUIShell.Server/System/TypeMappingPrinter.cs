@@ -26,6 +26,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Colors));
         Print(typeof(Microsoft.UI.Xaml.Controls.ColumnDefinition));
         Print(typeof(Microsoft.UI.Xaml.Controls.ColumnDefinitionCollection));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBox));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlayPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.ContentControl));
         Print(typeof(Microsoft.UI.Xaml.Controls.Control));
@@ -113,6 +115,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions));
         Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
         Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
         Print(typeof(Microsoft.UI.Xaml.ElementTheme));
@@ -122,6 +125,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));
         Print(typeof(Microsoft.UI.Xaml.HorizontalAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger));
+        Print(typeof(Microsoft.UI.Xaml.Controls.LightDismissOverlayMode));
         Print(typeof(Microsoft.UI.Xaml.LineStackingStrategy));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewReorderMode));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewSelectionMode));

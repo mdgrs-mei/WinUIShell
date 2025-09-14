@@ -18,6 +18,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.Colors, WinUIShell", "Microsoft.UI.Colors, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ColumnDefinition, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinition, Microsoft.WinUI"),
         ("WinUIShell.ColumnDefinitionCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinitionCollection, Microsoft.WinUI"),
+        ("WinUIShell.ComboBox, WinUIShell", "Microsoft.UI.Xaml.Controls.ComboBox, Microsoft.WinUI"),
+        ("WinUIShell.ComboBoxTextSubmittedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.CompactOverlayPresenter, WinUIShell", "Microsoft.UI.Windowing.CompactOverlayPresenter, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ContentControl, WinUIShell", "Microsoft.UI.Xaml.Controls.ContentControl, Microsoft.WinUI"),
         ("WinUIShell.Control, WinUIShell", "Microsoft.UI.Xaml.Controls.Control, Microsoft.WinUI"),
@@ -113,10 +115,15 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
 
     public string GetTargetTypeName<T>()
     {
-        var type = typeof(T);
+        Type type = typeof(T);
         var typeName = type.FullName;
         var assemblyName = type.Assembly.GetName().Name;
         var sourceTypeName = $"{typeName}, {assemblyName}";
+
+        if (type == typeof(object))
+        {
+            return sourceTypeName;
+        }
 
         _ = TryGetValue(sourceTypeName, out string? targetTypeName);
         if (targetTypeName is null)
