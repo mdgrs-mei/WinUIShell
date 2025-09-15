@@ -18,6 +18,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.Colors, WinUIShell", "Microsoft.UI.Colors, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ColumnDefinition, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinition, Microsoft.WinUI"),
         ("WinUIShell.ColumnDefinitionCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.ColumnDefinitionCollection, Microsoft.WinUI"),
+        ("WinUIShell.ComboBox, WinUIShell", "Microsoft.UI.Xaml.Controls.ComboBox, Microsoft.WinUI"),
+        ("WinUIShell.ComboBoxTextSubmittedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.CompactOverlayPresenter, WinUIShell", "Microsoft.UI.Windowing.CompactOverlayPresenter, Microsoft.InteractiveExperiences.Projection"),
         ("WinUIShell.ContentControl, WinUIShell", "Microsoft.UI.Xaml.Controls.ContentControl, Microsoft.WinUI"),
         ("WinUIShell.Control, WinUIShell", "Microsoft.UI.Xaml.Controls.Control, Microsoft.WinUI"),
@@ -44,6 +46,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.ItemCollection, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemCollection, Microsoft.WinUI"),
         ("WinUIShell.ItemIndexRange, WinUIShell", "Microsoft.UI.Xaml.Data.ItemIndexRange, Microsoft.WinUI"),
         ("WinUIShell.ItemsControl, WinUIShell", "Microsoft.UI.Xaml.Controls.ItemsControl, Microsoft.WinUI"),
+        ("WinUIShell.KeyRoutedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Input.KeyRoutedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.ListBox, WinUIShell", "Microsoft.UI.Xaml.Controls.ListBox, Microsoft.WinUI"),
         ("WinUIShell.ListView, WinUIShell", "Microsoft.UI.Xaml.Controls.ListView, Microsoft.WinUI"),
         ("WinUIShell.ListViewBase, WinUIShell", "Microsoft.UI.Xaml.Controls.ListViewBase, Microsoft.WinUI"),
@@ -74,6 +77,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.ScrollView, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollView, Microsoft.WinUI"),
         ("WinUIShell.SelectionChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.Selector, WinUIShell", "Microsoft.UI.Xaml.Controls.Primitives.Selector, Microsoft.WinUI"),
+        ("WinUIShell.Size, WinUIShell", "Windows.Foundation.Size, WinRT.Runtime"),
         ("WinUIShell.SlideNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo, Microsoft.WinUI"),
         ("WinUIShell.SolidColorBrush, WinUIShell", "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI"),
         ("WinUIShell.StackPanel, WinUIShell", "Microsoft.UI.Xaml.Controls.StackPanel, Microsoft.WinUI"),
@@ -93,7 +97,10 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.Uri, WinUIShell", "System.Uri, System.Private.Uri"),
         ("WinUIShell.UserControl, WinUIShell", "Microsoft.UI.Xaml.Controls.UserControl, Microsoft.WinUI"),
         ("WinUIShell.Window, WinUIShell", "Microsoft.UI.Xaml.Window, Microsoft.WinUI"),
+        ("WinUIShell.WindowActivatedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowActivatedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.WindowEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowEventArgs, Microsoft.WinUI"),
+        ("WinUIShell.WindowSizeChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowSizeChangedEventArgs, Microsoft.WinUI"),
+        ("WinUIShell.WindowVisibilityChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.XamlReader, WinUIShell", "Microsoft.UI.Xaml.Markup.XamlReader, Microsoft.WinUI"),
     ];
 
@@ -113,10 +120,15 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
 
     public string GetTargetTypeName<T>()
     {
-        var type = typeof(T);
+        Type type = typeof(T);
         var typeName = type.FullName;
         var assemblyName = type.Assembly.GetName().Name;
         var sourceTypeName = $"{typeName}, {assemblyName}";
+
+        if (type == typeof(object))
+        {
+            return sourceTypeName;
+        }
 
         _ = TryGetValue(sourceTypeName, out string? targetTypeName);
         if (targetTypeName is null)

@@ -7,6 +7,7 @@ public class Window : WinUIShellObject
 {
     private const string _accessorClassName = "WinUIShell.Server.WindowAccessor, WinUIShell.Server";
     private readonly EventCallbackList _closedCallbacks = new();
+    private readonly EventCallbackList _callbacks = new();
     private bool _isActivateCalled;
     private bool _isCloseCalled;
     private bool IsTerminated { get => _isActivateCalled && (_isCloseCalled || IsClosed); }
@@ -72,6 +73,23 @@ public class Window : WinUIShellObject
         CommandClient.Get().InvokeMethod(Id, nameof(Activate));
     }
 
+    public void AddActivated(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddActivated(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddActivated(EventCallback eventCallback)
+    {
+        _callbacks.Add(
+            Id,
+            "Activated",
+            ObjectTypeMapping.Get().GetTargetTypeName<WindowActivatedEventArgs>(),
+            eventCallback);
+    }
+
     public void AddClosed(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddClosed(new EventCallback
@@ -86,6 +104,40 @@ public class Window : WinUIShellObject
             Id,
             "Closed",
             ObjectTypeMapping.Get().GetTargetTypeName<WindowEventArgs>(),
+            eventCallback);
+    }
+
+    public void AddSizeChanged(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddSizeChanged(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddSizeChanged(EventCallback eventCallback)
+    {
+        _callbacks.Add(
+            Id,
+            "SizeChanged",
+            ObjectTypeMapping.Get().GetTargetTypeName<WindowSizeChangedEventArgs>(),
+            eventCallback);
+    }
+
+    public void AddVisibilityChanged(ScriptBlock scriptBlock, object? argumentList = null)
+    {
+        AddVisibilityChanged(new EventCallback
+        {
+            ScriptBlock = scriptBlock,
+            ArgumentList = argumentList
+        });
+    }
+    public void AddVisibilityChanged(EventCallback eventCallback)
+    {
+        _callbacks.Add(
+            Id,
+            "VisibilityChanged",
+            ObjectTypeMapping.Get().GetTargetTypeName<WindowVisibilityChangedEventArgs>(),
             eventCallback);
     }
 

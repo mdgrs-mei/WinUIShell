@@ -26,6 +26,8 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Colors));
         Print(typeof(Microsoft.UI.Xaml.Controls.ColumnDefinition));
         Print(typeof(Microsoft.UI.Xaml.Controls.ColumnDefinitionCollection));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBox));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlayPresenter));
         Print(typeof(Microsoft.UI.Xaml.Controls.ContentControl));
         Print(typeof(Microsoft.UI.Xaml.Controls.Control));
@@ -52,6 +54,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemCollection));
         Print(typeof(Microsoft.UI.Xaml.Data.ItemIndexRange));
         Print(typeof(Microsoft.UI.Xaml.Controls.ItemsControl));
+        Print(typeof(Microsoft.UI.Xaml.Input.KeyRoutedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListBox));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListView));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewBase));
@@ -82,6 +85,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollView));
         Print(typeof(Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.Selector));
+        Print(typeof(Windows.Foundation.Size));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.SolidColorBrush));
         Print(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
@@ -101,7 +105,10 @@ internal static class TypeMappingPrinter
         Print(typeof(Uri));
         Print(typeof(Microsoft.UI.Xaml.Controls.UserControl));
         Print(typeof(Microsoft.UI.Xaml.Window));
+        Print(typeof(Microsoft.UI.Xaml.WindowActivatedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.WindowEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.WindowSizeChangedEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Markup.XamlReader));
         Debug.WriteLine("----");
     }
@@ -113,6 +120,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions));
         Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
+        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger));
         Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
         Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
         Print(typeof(Microsoft.UI.Xaml.ElementTheme));
@@ -122,6 +130,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));
         Print(typeof(Microsoft.UI.Xaml.HorizontalAlignment));
         Print(typeof(Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger));
+        Print(typeof(Microsoft.UI.Xaml.Controls.LightDismissOverlayMode));
         Print(typeof(Microsoft.UI.Xaml.LineStackingStrategy));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewReorderMode));
         Print(typeof(Microsoft.UI.Xaml.Controls.ListViewSelectionMode));
@@ -150,7 +159,9 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.TextWrapping));
         Print(typeof(Microsoft.UI.Windowing.TitleBarTheme));
         Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
+        Print(typeof(Windows.System.VirtualKey));
         Print(typeof(Microsoft.UI.Xaml.Visibility));
+        Print(typeof(Microsoft.UI.Xaml.WindowActivationState));
         Debug.WriteLine("----");
     }
 
