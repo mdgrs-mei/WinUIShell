@@ -50,6 +50,7 @@ internal sealed class EnumTypeMapping : Singleton<EnumTypeMapping>
         ("WinUIShell.VerticalAlignment, WinUIShell", "Microsoft.UI.Xaml.VerticalAlignment, Microsoft.WinUI"),
         ("WinUIShell.VirtualKey, WinUIShell", "Windows.System.VirtualKey, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.Visibility, WinUIShell", "Microsoft.UI.Xaml.Visibility, Microsoft.WinUI"),
+        ("WinUIShell.WindowActivationState, WinUIShell", "Microsoft.UI.Xaml.WindowActivationState, Microsoft.WinUI"),
     ];
 
     public EnumTypeMapping()

@@ -77,6 +77,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.ScrollView, WinUIShell", "Microsoft.UI.Xaml.Controls.ScrollView, Microsoft.WinUI"),
         ("WinUIShell.SelectionChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.Selector, WinUIShell", "Microsoft.UI.Xaml.Controls.Primitives.Selector, Microsoft.WinUI"),
+        ("WinUIShell.Size, WinUIShell", "Windows.Foundation.Size, WinRT.Runtime"),
         ("WinUIShell.SlideNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo, Microsoft.WinUI"),
         ("WinUIShell.SolidColorBrush, WinUIShell", "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI"),
         ("WinUIShell.StackPanel, WinUIShell", "Microsoft.UI.Xaml.Controls.StackPanel, Microsoft.WinUI"),
@@ -96,7 +97,10 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.Uri, WinUIShell", "System.Uri, System.Private.Uri"),
         ("WinUIShell.UserControl, WinUIShell", "Microsoft.UI.Xaml.Controls.UserControl, Microsoft.WinUI"),
         ("WinUIShell.Window, WinUIShell", "Microsoft.UI.Xaml.Window, Microsoft.WinUI"),
+        ("WinUIShell.WindowActivatedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowActivatedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.WindowEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowEventArgs, Microsoft.WinUI"),
+        ("WinUIShell.WindowSizeChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowSizeChangedEventArgs, Microsoft.WinUI"),
+        ("WinUIShell.WindowVisibilityChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.XamlReader, WinUIShell", "Microsoft.UI.Xaml.Markup.XamlReader, Microsoft.WinUI"),
     ];
 

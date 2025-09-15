@@ -85,6 +85,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.ScrollView));
         Print(typeof(Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.Selector));
+        Print(typeof(Windows.Foundation.Size));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.SolidColorBrush));
         Print(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
@@ -104,7 +105,10 @@ internal static class TypeMappingPrinter
         Print(typeof(Uri));
         Print(typeof(Microsoft.UI.Xaml.Controls.UserControl));
         Print(typeof(Microsoft.UI.Xaml.Window));
+        Print(typeof(Microsoft.UI.Xaml.WindowActivatedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.WindowEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.WindowSizeChangedEventArgs));
+        Print(typeof(Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Markup.XamlReader));
         Debug.WriteLine("----");
     }
@@ -157,6 +161,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
         Print(typeof(Windows.System.VirtualKey));
         Print(typeof(Microsoft.UI.Xaml.Visibility));
+        Print(typeof(Microsoft.UI.Xaml.WindowActivationState));
         Debug.WriteLine("----");
     }
 
