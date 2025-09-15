@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.0] - 2025-09-15
+
+### Added
+
+- Added `ComboBox`
+- Added `AddKeyDown` method to `UIElement`
+- Added `AddActivated`, `AddSizeChanged` and `AddVisibilityChanged` methods to `Window`
+
 ## [0.7.0] - 2025-09-14
 
 ### Added
