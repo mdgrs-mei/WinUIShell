@@ -39,7 +39,11 @@ public class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(CornerRadius), value?.Id);
     }
 
-    //public FontFamily FontFamily
+    public FontFamily FontFamily
+    {
+        get => PropertyAccessor.Get<FontFamily>(Id, nameof(FontFamily))!;
+        set => PropertyAccessor.Set(Id, nameof(FontFamily), value?.Id);
+    }
 
     public double FontSize
     {
@@ -47,9 +51,23 @@ public class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontSize), value);
     }
 
-    //public FontStretch FontStretch
-    //public FontStyle FontStyle
-    //public FontWeight FontWeight
+    public FontStretch FontStretch
+    {
+        get => PropertyAccessor.Get<FontStretch>(Id, nameof(FontStretch))!;
+        set => PropertyAccessor.Set(Id, nameof(FontStretch), value);
+    }
+
+    public FontStyle FontStyle
+    {
+        get => PropertyAccessor.Get<FontStyle>(Id, nameof(FontStyle))!;
+        set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
+    }
+
+    public FontWeight FontWeight
+    {
+        get => PropertyAccessor.Get<FontWeight>(Id, nameof(FontWeight))!;
+        set => PropertyAccessor.Set(Id, nameof(FontWeight), value?.Id);
+    }
 
     public Brush Foreground
     {
