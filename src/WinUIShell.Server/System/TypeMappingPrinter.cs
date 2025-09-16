@@ -125,6 +125,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
         Print(typeof(Microsoft.UI.Xaml.ElementTheme));
         Print(typeof(EventCallbackRunspaceMode));
+        Print(typeof(Microsoft.UI.Xaml.FocusState));
         Print(typeof(Windows.UI.Text.FontStretch));
         Print(typeof(Windows.UI.Text.FontStyle));
         Print(typeof(Microsoft.UI.Xaml.GridUnitType));
