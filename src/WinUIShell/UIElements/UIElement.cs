@@ -46,6 +46,11 @@ public class UIElement : WinUIShellObject
     {
     }
 
+    public bool Focus(FocusState value)
+    {
+        return CommandClient.Get().InvokeMethodAndGetResult<bool>(Id, nameof(Focus), value);
+    }
+
     public void AddKeyDown(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddKeyDown(new EventCallback
