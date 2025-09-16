@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0] - 2025-09-16
+
+### Added
+
+- Added `FontFamily`, `FontStretch`, `FontStyle` and `FontWeight` properties to `Control`
+- Added `Focus` method to `UIElement`
+
 ## [0.8.0] - 2025-09-15
 
 ### Added
