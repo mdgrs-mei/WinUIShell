@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
@@ -15,6 +14,7 @@ public partial class App : Application
 
     public App()
     {
+        InitializeComponent();
         Init();
     }
 
@@ -43,7 +43,6 @@ public partial class App : Application
         DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
         ParseArgs();
-        InitializeComponent();
         ObjectStore.Get().SetObjectIdPrefix("s");
         CommandServer.Get().Init(_upstreamPipeName);
         CommandClient.Get().Init(_downstreamPipeName);
