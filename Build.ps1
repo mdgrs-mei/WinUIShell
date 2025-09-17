@@ -7,7 +7,8 @@ $originalProgressPreference = $ProgressPreference
 $ProgressPreference = 'SilentlyContinue'
 
 $netVersion = 'net8.0'
-$serverTarget = 'net8.0-windows10.0.18362.0'
+$serverTarget = 'net9.0-desktop'#'net9.0-windows10.0.26100'
+$serverRid = 'win-x64'
 $copyExtensions = @('.dll', '.pdb')
 $src = "$PSScriptRoot/src"
 $coreSrc = "$src/WinUIShell"
@@ -15,11 +16,11 @@ $depSrc = "$src/WinUIShell.Common"
 $serverSrc = "$src/WinUIShell.Server"
 $corePublish = [System.IO.Path]::GetFullPath("$coreSrc/bin/$Configuration/$netVersion/publish/")
 $depPublish = [System.IO.Path]::GetFullPath("$depSrc/bin/$Configuration/$netVersion/publish/")
-$serverPublish = [System.IO.Path]::GetFullPath("$serverSrc/bin/$Configuration/$serverTarget/publish/")
+$serverPublish = [System.IO.Path]::GetFullPath("$serverSrc/bin/$Configuration/$serverTarget/$serverRid/publish/")
 
 $outDir = "$PSScriptRoot/module/WinUIShell/bin/$netVersion"
 $outDeps = "$outDir/Dependencies"
-$outServer = "$PSScriptRoot/module/WinUIShell/bin/$serverTarget"
+$outServer = "$PSScriptRoot/module/WinUIShell/bin/$serverTarget/$serverRid"
 
 function CopyFolderItems($FolderPath, $Destination) {
     if (Test-Path $Destination) {
@@ -73,7 +74,7 @@ CopyFolderItems -FolderPath $depPublish -Destination $outDeps
 
 # Build server.
 Push-Location $serverSrc
-dotnet publish -c $Configuration -o $serverPublish
+dotnet publish -c $Configuration -o $serverPublish -f $serverTarget -r $serverRid
 Pop-Location
 
 # Output.

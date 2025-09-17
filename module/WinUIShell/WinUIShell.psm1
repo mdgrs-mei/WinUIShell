@@ -4,10 +4,11 @@ param(
 )
 
 $netVersion = 'net8.0'
-$serverTarget = 'net8.0-windows10.0.18362.0'
+$serverTarget = 'net9.0-desktop'#'net9.0-windows10.0.26100'
+$serverRid = 'win-x64'
 
 $dll = "$PSScriptRoot/bin/$netVersion/WinUIShell.dll"
-$server = "$PSScriptRoot/bin/$serverTarget/WinUIShell.Server.exe"
+$server = "$PSScriptRoot/bin/$serverTarget/$serverRid/WinUIShell.Server.exe"
 
 Import-Module $dll
 
