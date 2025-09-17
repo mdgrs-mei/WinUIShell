@@ -1,7 +1,12 @@
 {
-  "profiles": {
-    "Server": {
-      "commandName": "Project"
+    "profiles": {
+        "Server (WinAppSDK)": {
+            "commandName": "Project",
+            "compatibleTargetFramework": "windows"
+        },
+        "Server (Desktop)": {
+            "commandName": "Project",
+            "compatibleTargetFramework": "desktop"
+        }
     }
-  }
 }
