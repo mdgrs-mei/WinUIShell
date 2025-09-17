@@ -1,11 +1,10 @@
-﻿using Microsoft.UI.Xaml.Navigation;
-using WinUIShell.Common;
+﻿using WinUIShell.Common;
 
 namespace WinUIShell.Server;
 
 internal sealed class PageStore : Singleton<PageStore>
 {
-    public sealed class PageProperty
+    internal sealed class PageProperty
     {
         public string Name { get; set; } = "";
         public Type? Type { get; set; }

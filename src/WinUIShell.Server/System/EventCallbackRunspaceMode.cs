@@ -1,6 +1,6 @@
 ﻿namespace WinUIShell.Server;
 
-public enum EventCallbackRunspaceMode
+internal enum EventCallbackRunspaceMode
 {
     MainRunspaceAsyncUI,
     MainRunspaceSyncUI,

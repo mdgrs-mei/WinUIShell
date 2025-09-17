@@ -1,9 +1,7 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using WinUIShell.Common;
+﻿using WinUIShell.Common;
 
 namespace WinUIShell.Server;
-public interface IPage
+internal interface IPage
 {
     ObjectId Id { get; set; }
 

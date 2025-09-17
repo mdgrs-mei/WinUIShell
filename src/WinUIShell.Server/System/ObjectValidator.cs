@@ -1,5 +1,4 @@
-﻿using Microsoft.UI.Xaml;
-using WinUIShell.Common;
+﻿using WinUIShell.Common;
 
 namespace WinUIShell.Server;
 

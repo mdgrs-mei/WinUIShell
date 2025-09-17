@@ -1,12 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
-using Microsoft.UI.Xaml;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
 
 internal sealed class WindowStore : Singleton<WindowStore>
 {
-    public sealed class WindowProperty
+    internal sealed class WindowProperty
     {
         public bool IsTerminated { get; set; }
         public int RunningEventCallbackCount { get; set; }
