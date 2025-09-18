@@ -13,7 +13,8 @@ $server = "$PSScriptRoot/bin/$serverTarget/$serverRid/WinUIShell.Server.exe"
 Import-Module $dll
 
 $modulePath = $MyInvocation.MyCommand.Path
-[WinUIShell.Engine]::Get().InitRunspace($server, $host, $modulePath, $UseTimerEvent)
+$useUno = $serverTarget.Contains('desktop')
+[WinUIShell.Engine]::Get().InitRunspace($server, $host, $modulePath, $useUno, $UseTimerEvent)
 
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     [WinUIShell.Engine]::Get().TermRunspace()

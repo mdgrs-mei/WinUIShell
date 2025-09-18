@@ -36,6 +36,12 @@ public partial class App : Application
 
     private void Init()
     {
+#if USE_UNO
+        var framework = Framework.Uno;
+#else
+        var framework = Framework.WinUI;
+#endif
+
 #if DEBUG
         //System.Diagnostics.Debugger.Launch();
         TypeMappingPrinter.Print();
@@ -43,6 +49,7 @@ public partial class App : Application
         DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
         ParseArgs();
+        ObjectTypeMapping.Get().SetFramework(framework);
         ObjectStore.Get().SetObjectIdPrefix("s");
         CommandServer.Get().Init(_upstreamPipeName);
         CommandClient.Get().Init(_downstreamPipeName);

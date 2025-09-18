@@ -34,6 +34,7 @@ public class Engine
         string serverExePath,
         PSHost? streamingHost,
         string modulePath,
+        bool useUno,
         bool useTimerEvent)
     {
         var thisRunspace = _thisRunspace.Value;
@@ -51,7 +52,7 @@ public class Engine
                 try
                 {
                     StartServerProcess(serverExePath);
-                    InitConnection();
+                    InitConnection(useUno);
                 }
                 catch (Exception)
                 {
@@ -122,8 +123,9 @@ public class Engine
         _serverProcess = null;
     }
 
-    private void InitConnection()
+    private void InitConnection(bool useUno)
     {
+        ObjectTypeMapping.Get().SetFramework(useUno ? Framework.Uno : Framework.WinUI);
         ObjectStore.Get().SetObjectIdPrefix("c");
         CommandServer.Get().Init(_downstreamPipeName);
         CommandClient.Get().Init(_upstreamPipeName);
