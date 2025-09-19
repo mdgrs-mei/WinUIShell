@@ -218,6 +218,8 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
             _map.Add(map.Item1, map.Item2);
             _map.Add(map.Item2, map.Item1);
         }
+
+        EnumTypeMapping.Get().SetFramework(framework);
     }
 
     public bool TryGetValue(string sourceTypeName, out string? targetTypeName)
