@@ -11,28 +11,20 @@ public class AppWindow : WinUIShellObject
 
     public void Resize(int width, int height)
     {
-        var sizeId = CommandClient.Get().CreateObject(
-                "Windows.Graphics.SizeInt32, Microsoft.Windows.SDK.NET",
-                null,
-                width,
-                height);
+        var size = new SizeInt32(width, height);
 
-        CommandClient.Get().InvokeMethod(Id, "Resize", sizeId);
+        CommandClient.Get().InvokeMethod(Id, "Resize", size.Id);
 
-        CommandClient.Get().DestroyObject(sizeId);
+        CommandClient.Get().DestroyObject(size.Id);
     }
 
     public void ResizeClient(int width, int height)
     {
-        var sizeId = CommandClient.Get().CreateObject(
-                "Windows.Graphics.SizeInt32, Microsoft.Windows.SDK.NET",
-                null,
-                width,
-                height);
+        var size = new SizeInt32(width, height);
 
-        CommandClient.Get().InvokeMethod(Id, "ResizeClient", sizeId);
+        CommandClient.Get().InvokeMethod(Id, "ResizeClient", size.Id);
 
-        CommandClient.Get().DestroyObject(sizeId);
+        CommandClient.Get().DestroyObject(size.Id);
     }
 
     public void SetPresenter(AppWindowPresenter presenter)

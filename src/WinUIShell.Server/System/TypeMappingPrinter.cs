@@ -86,6 +86,7 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Controls.Primitives.Selector));
         Print(typeof(Windows.Foundation.Size));
+        Print(typeof(Windows.Graphics.SizeInt32));
         Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo));
         Print(typeof(Microsoft.UI.Xaml.Media.SolidColorBrush));
         Print(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
