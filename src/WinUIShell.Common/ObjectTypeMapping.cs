@@ -78,6 +78,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
         ("WinUIShell.SelectionChangedEventArgs, WinUIShell", "Microsoft.UI.Xaml.Controls.SelectionChangedEventArgs, Microsoft.WinUI"),
         ("WinUIShell.Selector, WinUIShell", "Microsoft.UI.Xaml.Controls.Primitives.Selector, Microsoft.WinUI"),
         ("WinUIShell.Size, WinUIShell", "Windows.Foundation.Size, WinRT.Runtime"),
+        ("WinUIShell.SizeInt32, WinUIShell", "Windows.Graphics.SizeInt32, Microsoft.Windows.SDK.NET"),
         ("WinUIShell.SlideNavigationTransitionInfo, WinUIShell", "Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionInfo, Microsoft.WinUI"),
         ("WinUIShell.SolidColorBrush, WinUIShell", "Microsoft.UI.Xaml.Media.SolidColorBrush, Microsoft.WinUI"),
         ("WinUIShell.StackPanel, WinUIShell", "Microsoft.UI.Xaml.Controls.StackPanel, Microsoft.WinUI"),
