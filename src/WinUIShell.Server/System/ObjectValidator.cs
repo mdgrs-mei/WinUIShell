@@ -23,9 +23,6 @@ internal static class ObjectValidator
             if (uiElement.XamlRoot is null)
                 // This element is not added or shown in window.
                 return true;
-            if (uiElement.XamlRoot.ContentIsland is null)
-                // XamlRoot is terminated.
-                return false;
             if (WindowStore.Get().GetParentWindow(uiElement) is null)
                 // Window is Terminated.
                 return false;
