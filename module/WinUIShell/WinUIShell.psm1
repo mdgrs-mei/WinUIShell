@@ -4,7 +4,8 @@ param(
 )
 
 $netVersion = 'net8.0'
-$serverTarget = 'net9.0-desktop'#'net9.0-windows10.0.26100'
+$serverTarget = 'net9.0-desktop'
+#$serverTarget = 'net9.0-windows10.0.26100'
 $serverRid = 'win-x64'
 
 $dll = "$PSScriptRoot/bin/$netVersion/WinUIShell.dll"
