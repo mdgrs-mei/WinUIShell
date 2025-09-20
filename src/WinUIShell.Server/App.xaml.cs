@@ -6,11 +6,15 @@ namespace WinUIShell.Server;
 
 #pragma warning disable CA1515 // Consider making public types internal
 public partial class App : Application
+#pragma warning restore CA1515
 {
     private Process? _parentProcess;
     private string _upstreamPipeName = "";
     private string _downstreamPipeName = "";
     private DispatcherQueueTimer? _updateTimer;
+#pragma warning disable IDE0052 // Remove unread private members
+    private Window? _dummyWindowNotToShotdown;
+#pragma warning restore IDE0052
 
     public App()
     {
@@ -20,6 +24,10 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
+        // As DispatcherShutdownMode is not avaiable on Uno 6.2,
+        // hold a window not to shotdown on last window close.
+        _dummyWindowNotToShotdown = new Window();
+
         _updateTimer = DispatcherQueue.GetForCurrentThread().CreateTimer();
         _updateTimer.Interval = TimeSpan.FromMicroseconds(Constants.ServerCommandPolingIntervalMillisecond);
         _updateTimer.IsRepeating = false;
@@ -46,7 +54,6 @@ public partial class App : Application
         //System.Diagnostics.Debugger.Launch();
         TypeMappingPrinter.Print();
 #endif
-        DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
         ParseArgs();
         ObjectTypeMapping.Get().SetFramework(framework);
@@ -61,6 +68,7 @@ public partial class App : Application
         ObjectValidator.Term();
         CommandClient.Get().Term();
         CommandServer.Get().Term();
+        _dummyWindowNotToShotdown = null;
     }
 
     private void ParseArgs()
@@ -114,4 +122,3 @@ public partial class App : Application
         }
     }
 }
-#pragma warning restore CA1515
