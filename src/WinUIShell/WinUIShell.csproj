@@ -14,8 +14,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WinUIShell.Generator\WinUIShell.Generator.csproj">
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\WinUIShell.Common\WinUIShell.Common.csproj" />
     <PackageReference Include="System.Management.Automation" Version="7.4.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="Generator.json" />
   </ItemGroup>
 
 </Project>
