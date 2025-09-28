@@ -1,7 +1,8 @@
 {
   "profiles": {
-    "Server": {
-      "commandName": "Project"
+    "ExportApi": {
+        "commandName": "Project",
+        "commandLineArgs": "$(MSBuildProjectDirectory)\\..\\WinUIShell\\Api.json"
     }
   }
 }
