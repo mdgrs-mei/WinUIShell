@@ -1,36 +1,39 @@
-﻿using System.Text.Json;
+﻿using System.Xml.Serialization;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
 
-internal class ApiExporter : Singleton<ApiExporter>
+public class ApiExporter : Singleton<ApiExporter>
 {
-    private class Api
+#pragma warning disable CA1034 // Nested types should not be visible
+#pragma warning disable CA1002 // Do not expose generic lists
+    public class Api
     {
-        public List<EnumDef> Enums { get; set; } = [];
+        public List<EnumDef> Enums { get; } = [];
     }
 
-    private class TypeDef
+    public class TypeDef
     {
         public string Name { get; set; } = "";
         public string FullName { get; set; } = "";
         public string Namespace { get; set; } = "";
     }
 
-    private class EnumDef : TypeDef
+    public class EnumDef : TypeDef
     {
         public string UnderlyingType { get; set; } = "";
-        public List<EnumEntryDef> Items { get; set; } = [];
+        public List<EnumEntryDef> Items { get; } = [];
     }
 
-    private class EnumEntryDef
+    public class EnumEntryDef
     {
         public string Name { get; set; } = "";
         public object? Value { get; set; }
     }
+#pragma warning restore CA1002
+#pragma warning restore CA1034
 
     private readonly Api _api = new();
-    private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
 
     public void Export(string apiFilePath)
     {
@@ -85,7 +88,9 @@ internal class ApiExporter : Singleton<ApiExporter>
 
     private void ExportToFile(string filePath)
     {
-        string jsonString = JsonSerializer.Serialize(_api, _jsonOptions);
-        File.WriteAllText(filePath, jsonString);
+        var streamWriter = new StreamWriter(filePath, append: false, System.Text.Encoding.UTF8);
+        var serializer = new XmlSerializer(typeof(Api));
+        serializer.Serialize(streamWriter, _api);
+        streamWriter.Close();
     }
 }

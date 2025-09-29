@@ -2,7 +2,7 @@
   "profiles": {
     "ExportApi": {
         "commandName": "Project",
-        "commandLineArgs": "$(MSBuildProjectDirectory)\\..\\WinUIShell\\Api.json"
+        "commandLineArgs": "$(MSBuildProjectDirectory)\\..\\WinUIShell\\Api.xml"
     }
   }
 }
