@@ -22,7 +22,7 @@ public class ApiExporter : Singleton<ApiExporter>
     public class EnumDef : TypeDef
     {
         public string UnderlyingType { get; set; } = "";
-        public List<EnumEntryDef> Items { get; } = [];
+        public List<EnumEntryDef> Entries { get; } = [];
     }
 
     public class EnumEntryDef
@@ -73,12 +73,13 @@ public class ApiExporter : Singleton<ApiExporter>
             UnderlyingType = underlyingType.Name
         };
 
-        foreach (var value in Enum.GetValues(enumType))
+        foreach (var entryName in Enum.GetNames(enumType))
         {
+            var value = Enum.Parse(enumType, entryName);
             var underlyingTypeValue = Convert.ChangeType(value, underlyingType);
-            def.Items.Add(new EnumEntryDef
+            def.Entries.Add(new EnumEntryDef
             {
-                Name = value.ToString()!,
+                Name = entryName,
                 Value = underlyingTypeValue
             });
         }

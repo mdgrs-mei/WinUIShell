@@ -12,7 +12,7 @@ public class Engine
     {
         public bool IsInitialized { get; set; }
         public bool IsInUpdate { get; set; }
-        public System.Timers.Timer? EventTimer;
+        public global::System.Timers.Timer? EventTimer;
         public PSEventSubscriber? TimerEventSubscriber;
     }
 

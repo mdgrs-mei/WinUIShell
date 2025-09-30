@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class StackPanel : Panel
 {
-    public BackgroundSizing BackgroundSizing
+    public Microsoft.UI.Xaml.Controls.BackgroundSizing BackgroundSizing
     {
-        get => PropertyAccessor.Get<BackgroundSizing>(Id, nameof(BackgroundSizing))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.BackgroundSizing>(Id, nameof(BackgroundSizing))!;
         set => PropertyAccessor.Set(Id, nameof(BackgroundSizing), value);
     }
 
