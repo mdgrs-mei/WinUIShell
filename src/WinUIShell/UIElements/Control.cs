@@ -1,7 +1,9 @@
 ﻿using WinUIShell.Common;
 namespace WinUIShell;
 
+#pragma warning disable CA1724 
 public class Control : FrameworkElement
+#pragma warning restore CA1724
 {
     public Brush Background
     {
