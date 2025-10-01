@@ -7,7 +7,6 @@ internal static class TypeMappingPrinter
     public static void Print()
     {
         PrintObjectMapping();
-        PrintEnumMapping();
     }
 
     private static void PrintObjectMapping()
@@ -111,59 +110,6 @@ internal static class TypeMappingPrinter
         Print(typeof(Microsoft.UI.Xaml.WindowSizeChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs));
         Print(typeof(Microsoft.UI.Xaml.Markup.XamlReader));
-        Debug.WriteLine("----");
-    }
-
-    private static void PrintEnumMapping()
-    {
-        Debug.WriteLine("----");
-        Print(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing));
-        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions));
-        Print(typeof(Microsoft.UI.Xaml.Controls.CandidateWindowAlignment));
-        Print(typeof(Microsoft.UI.Xaml.Controls.CharacterCasing));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger));
-        Print(typeof(Microsoft.UI.Windowing.CompactOverlaySize));
-        Print(typeof(Microsoft.UI.Xaml.Media.Imaging.DecodePixelType));
-        Print(typeof(Microsoft.UI.Xaml.ElementTheme));
-        Print(typeof(EventCallbackRunspaceMode));
-        Print(typeof(Microsoft.UI.Xaml.FocusState));
-        Print(typeof(Windows.UI.Text.FontStretch));
-        Print(typeof(Windows.UI.Text.FontStyle));
-        Print(typeof(Microsoft.UI.Xaml.GridUnitType));
-        Print(typeof(Microsoft.UI.Xaml.HorizontalAlignment));
-        Print(typeof(Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger));
-        Print(typeof(Microsoft.UI.Xaml.Controls.LightDismissOverlayMode));
-        Print(typeof(Microsoft.UI.Xaml.LineStackingStrategy));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewReorderMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ListViewSelectionMode));
-        Print(typeof(Microsoft.UI.Composition.SystemBackdrops.MicaKind));
-        Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationCacheMode));
-        Print(typeof(Microsoft.UI.Xaml.Navigation.NavigationMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewBackButtonVisible));
-        Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode));
-        Print(typeof(Microsoft.UI.Xaml.OpticalMarginAlignment));
-        Print(typeof(Microsoft.UI.Xaml.Controls.Orientation));
-        Print(typeof(Microsoft.UI.Windowing.OverlappedPresenterState));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingChainMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingContentOrientation));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingRailMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility));
-        Print(typeof(Microsoft.UI.Xaml.Controls.ScrollingScrollMode));
-        Print(typeof(Microsoft.UI.Xaml.Controls.SelectionMode));
-        Print(typeof(Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect));
-        Print(typeof(Microsoft.UI.Xaml.Controls.Symbol));
-        Print(typeof(Microsoft.UI.Xaml.TextAlignment));
-        Print(typeof(Windows.UI.Text.TextDecorations));
-        Print(typeof(Microsoft.UI.Xaml.TextLineBounds));
-        Print(typeof(Microsoft.UI.Xaml.TextReadingOrder));
-        Print(typeof(Microsoft.UI.Xaml.TextTrimming));
-        Print(typeof(Microsoft.UI.Xaml.TextWrapping));
-        Print(typeof(Microsoft.UI.Windowing.TitleBarTheme));
-        Print(typeof(Microsoft.UI.Xaml.VerticalAlignment));
-        Print(typeof(Windows.System.VirtualKey));
-        Print(typeof(Microsoft.UI.Xaml.Visibility));
-        Print(typeof(Microsoft.UI.Xaml.WindowActivationState));
         Debug.WriteLine("----");
     }
 
