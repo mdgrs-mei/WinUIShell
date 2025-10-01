@@ -74,7 +74,7 @@ public class Frame : ContentControl
     public bool Navigate(
         string pageName,
         NavigationTransitionInfo? transitionOverride,
-        NavigationCacheMode cacheMode,
+        Microsoft.UI.Xaml.Navigation.NavigationCacheMode cacheMode,
         ScriptBlock onLoaded,
         object? onLoadedArgumentList = null)
     {
@@ -88,7 +88,7 @@ public class Frame : ContentControl
     public bool Navigate(
         string pageName,
         NavigationTransitionInfo? transitionOverride,
-        NavigationCacheMode cacheMode,
+        Microsoft.UI.Xaml.Navigation.NavigationCacheMode cacheMode,
         EventCallback onLoaded)
     {
         ArgumentNullException.ThrowIfNull(onLoaded);

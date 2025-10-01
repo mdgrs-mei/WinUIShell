@@ -31,9 +31,9 @@ public class UIElement : WinUIShellObject
         set => PropertyAccessor.Set(Id, nameof(RasterizationScale), value);
     }
 
-    public Visibility Visibility
+    public Microsoft.UI.Xaml.Visibility Visibility
     {
-        get => PropertyAccessor.Get<Visibility>(Id, nameof(Visibility))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Visibility>(Id, nameof(Visibility))!;
         set => PropertyAccessor.Set(Id, nameof(Visibility), value);
     }
 

@@ -15,16 +15,16 @@ public class KeyRoutedEventArgs : RoutedEventArgs
         set => PropertyAccessor.SetAndWait(Id, nameof(Handled), value);
     }
 
-    public VirtualKey Key
+    public Windows.System.VirtualKey Key
     {
-        get => PropertyAccessor.Get<VirtualKey>(Id, nameof(Key))!;
+        get => PropertyAccessor.Get<Windows.System.VirtualKey>(Id, nameof(Key))!;
     }
 
     //public CorePhysicalKeyStatus KeyStatus => IKeyRoutedEventArgsMethods.get_KeyStatus(_objRef_global__Microsoft_UI_Xaml_Input_IKeyRoutedEventArgs);
 
-    public VirtualKey OriginalKey
+    public Windows.System.VirtualKey OriginalKey
     {
-        get => PropertyAccessor.Get<VirtualKey>(Id, nameof(OriginalKey))!;
+        get => PropertyAccessor.Get<Windows.System.VirtualKey>(Id, nameof(OriginalKey))!;
     }
 
     internal KeyRoutedEventArgs(ObjectId id)

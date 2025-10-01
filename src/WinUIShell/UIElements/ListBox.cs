@@ -9,9 +9,9 @@ public class ListBox : Selector
         get => PropertyAccessor.Get<WinUIShellObjectList<object>>(Id, nameof(SelectedItems))!;
     }
 
-    public SelectionMode SelectionMode
+    public Microsoft.UI.Xaml.Controls.SelectionMode SelectionMode
     {
-        get => PropertyAccessor.Get<SelectionMode>(Id, nameof(SelectionMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.SelectionMode>(Id, nameof(SelectionMode))!;
         set => PropertyAccessor.Set(Id, nameof(SelectionMode), value);
     }
 

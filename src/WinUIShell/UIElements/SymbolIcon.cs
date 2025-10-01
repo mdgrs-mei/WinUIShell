@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class SymbolIcon : IconElement
 {
-    public Symbol Symbol
+    public Microsoft.UI.Xaml.Controls.Symbol Symbol
     {
-        get => PropertyAccessor.Get<Symbol>(Id, nameof(Symbol))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.Symbol>(Id, nameof(Symbol))!;
         set => PropertyAccessor.Set(Id, nameof(Symbol), value);
     }
 
@@ -17,7 +17,7 @@ public class SymbolIcon : IconElement
             this);
     }
 
-    public SymbolIcon(Symbol symbol)
+    public SymbolIcon(Microsoft.UI.Xaml.Controls.Symbol symbol)
     {
         Id = CommandClient.Get().CreateObject(
             ObjectTypeMapping.Get().GetTargetTypeName<SymbolIcon>(),

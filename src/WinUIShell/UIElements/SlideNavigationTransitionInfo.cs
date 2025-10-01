@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class SlideNavigationTransitionInfo : NavigationTransitionInfo
 {
-    public SlideNavigationTransitionEffect Effect
+    public Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect Effect
     {
-        get => PropertyAccessor.Get<SlideNavigationTransitionEffect>(Id, nameof(Effect))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Media.Animation.SlideNavigationTransitionEffect>(Id, nameof(Effect))!;
         set => PropertyAccessor.Set(Id, nameof(Effect), value);
     }
 

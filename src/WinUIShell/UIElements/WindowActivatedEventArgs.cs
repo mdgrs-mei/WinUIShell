@@ -10,9 +10,9 @@ public class WindowActivatedEventArgs : WinUIShellObject
         set => PropertyAccessor.SetAndWait(Id, nameof(Handled), value);
     }
 
-    public WindowActivationState WindowActivationState
+    public Microsoft.UI.Xaml.WindowActivationState WindowActivationState
     {
-        get => PropertyAccessor.Get<WindowActivationState>(Id, nameof(WindowActivationState))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.WindowActivationState>(Id, nameof(WindowActivationState))!;
     }
 
     internal WindowActivatedEventArgs(ObjectId id)

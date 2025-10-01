@@ -65,9 +65,9 @@ public class ComboBox : Selector
         set => PropertyAccessor.Set(Id, nameof(IsTextSearchEnabled), value);
     }
 
-    public LightDismissOverlayMode LightDismissOverlayMode
+    public Microsoft.UI.Xaml.Controls.LightDismissOverlayMode LightDismissOverlayMode
     {
-        get => PropertyAccessor.Get<LightDismissOverlayMode>(Id, nameof(LightDismissOverlayMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.LightDismissOverlayMode>(Id, nameof(LightDismissOverlayMode))!;
         set => PropertyAccessor.Set(Id, nameof(LightDismissOverlayMode), value);
     }
 
@@ -96,9 +96,9 @@ public class ComboBox : Selector
 
     //public DataTemplate SelectionBoxItemTemplate => IComboBoxMethods.get_SelectionBoxItemTemplate(_objRef_global__Microsoft_UI_Xaml_Controls_IComboBox);
 
-    public ComboBoxSelectionChangedTrigger SelectionChangedTrigger
+    public Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger SelectionChangedTrigger
     {
-        get => PropertyAccessor.Get<ComboBoxSelectionChangedTrigger>(Id, nameof(SelectionChangedTrigger))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger>(Id, nameof(SelectionChangedTrigger))!;
         set => PropertyAccessor.Set(Id, nameof(SelectionChangedTrigger), value);
     }
 

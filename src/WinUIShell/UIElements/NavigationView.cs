@@ -28,9 +28,9 @@ public class NavigationView : ContentControl
     }
 
     //public UIElement ContentOverlay
-    public NavigationViewDisplayMode DisplayMode
+    public Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode DisplayMode
     {
-        get => PropertyAccessor.Get<NavigationViewDisplayMode>(Id, nameof(DisplayMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.NavigationViewDisplayMode>(Id, nameof(DisplayMode))!;
     }
 
     public double ExpandedModeThresholdWidth
@@ -59,9 +59,9 @@ public class NavigationView : ContentControl
     }
 
     //public DataTemplate HeaderTemplate
-    public NavigationViewBackButtonVisible IsBackButtonVisible
+    public Microsoft.UI.Xaml.Controls.NavigationViewBackButtonVisible IsBackButtonVisible
     {
-        get => PropertyAccessor.Get<NavigationViewBackButtonVisible>(Id, nameof(IsBackButtonVisible))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.NavigationViewBackButtonVisible>(Id, nameof(IsBackButtonVisible))!;
         set => PropertyAccessor.Set(Id, nameof(IsBackButtonVisible), value);
     }
 
@@ -116,9 +116,9 @@ public class NavigationView : ContentControl
     //public NavigationViewOverflowLabelMode OverflowLabelMode
     //public UIElement PaneCustomContent
 
-    public NavigationViewPaneDisplayMode PaneDisplayMode
+    public Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode PaneDisplayMode
     {
-        get => PropertyAccessor.Get<NavigationViewPaneDisplayMode>(Id, nameof(PaneDisplayMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode>(Id, nameof(PaneDisplayMode))!;
         set => PropertyAccessor.Set(Id, nameof(PaneDisplayMode), value);
     }
 

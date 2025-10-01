@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class SymbolIconSource : IconSource
 {
-    public Symbol Symbol
+    public Microsoft.UI.Xaml.Controls.Symbol Symbol
     {
-        get => PropertyAccessor.Get<Symbol>(Id, nameof(Symbol))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.Symbol>(Id, nameof(Symbol))!;
         set => PropertyAccessor.Set(Id, nameof(Symbol), value);
     }
 

@@ -28,9 +28,9 @@ public class StackPanel : Panel
         set => PropertyAccessor.Set(Id, nameof(CornerRadius), value?.Id);
     }
 
-    public Orientation Orientation
+    public Microsoft.UI.Xaml.Controls.Orientation Orientation
     {
-        get => PropertyAccessor.Get<Orientation>(Id, nameof(Orientation))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.Orientation>(Id, nameof(Orientation))!;
         set => PropertyAccessor.Set(Id, nameof(Orientation), value);
     }
 

@@ -10,9 +10,9 @@ public class BitmapImage : BitmapSource
         set => PropertyAccessor.Set(Id, nameof(AutoPlay), value);
     }
 
-    public BitmapCreateOptions CreateOptions
+    public Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions CreateOptions
     {
-        get => PropertyAccessor.Get<BitmapCreateOptions>(Id, nameof(CreateOptions))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions>(Id, nameof(CreateOptions))!;
         set => PropertyAccessor.Set(Id, nameof(CreateOptions), value);
     }
 
@@ -22,9 +22,9 @@ public class BitmapImage : BitmapSource
         set => PropertyAccessor.Set(Id, nameof(DecodePixelHeight), value);
     }
 
-    public DecodePixelType DecodePixelType
+    public Microsoft.UI.Xaml.Media.Imaging.DecodePixelType DecodePixelType
     {
-        get => PropertyAccessor.Get<DecodePixelType>(Id, nameof(DecodePixelType))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Media.Imaging.DecodePixelType>(Id, nameof(DecodePixelType))!;
         set => PropertyAccessor.Set(Id, nameof(DecodePixelType), value);
     }
 

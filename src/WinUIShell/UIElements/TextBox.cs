@@ -28,9 +28,9 @@ public class TextBox : Control
         get => PropertyAccessor.Get<bool>(Id, nameof(CanUndo))!;
     }
 
-    public CharacterCasing CharacterCasing
+    public Microsoft.UI.Xaml.Controls.CharacterCasing CharacterCasing
     {
-        get => PropertyAccessor.Get<CharacterCasing>(Id, nameof(CharacterCasing))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.CharacterCasing>(Id, nameof(CharacterCasing))!;
         set => PropertyAccessor.Set(Id, nameof(CharacterCasing), value);
     }
 
@@ -50,9 +50,9 @@ public class TextBox : Control
         }
     }
 
-    public CandidateWindowAlignment DesiredCandidateWindowAlignment
+    public Microsoft.UI.Xaml.Controls.CandidateWindowAlignment DesiredCandidateWindowAlignment
     {
-        get => PropertyAccessor.Get<CandidateWindowAlignment>(Id, nameof(DesiredCandidateWindowAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.CandidateWindowAlignment>(Id, nameof(DesiredCandidateWindowAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(DesiredCandidateWindowAlignment), value);
     }
 
@@ -72,9 +72,9 @@ public class TextBox : Control
         }
     }
 
-    public TextAlignment HorizontalTextAlignment
+    public Microsoft.UI.Xaml.TextAlignment HorizontalTextAlignment
     {
-        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(HorizontalTextAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextAlignment>(Id, nameof(HorizontalTextAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalTextAlignment), value);
     }
 
@@ -168,21 +168,21 @@ public class TextBox : Control
         set => PropertyAccessor.Set(Id, nameof(Text), value);
     }
 
-    public TextAlignment TextAlignment
+    public Microsoft.UI.Xaml.TextAlignment TextAlignment
     {
-        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(TextAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextAlignment>(Id, nameof(TextAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(TextAlignment), value);
     }
 
-    public TextReadingOrder TextReadingOrder
+    public Microsoft.UI.Xaml.TextReadingOrder TextReadingOrder
     {
-        get => PropertyAccessor.Get<TextReadingOrder>(Id, nameof(TextReadingOrder))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextReadingOrder>(Id, nameof(TextReadingOrder))!;
         set => PropertyAccessor.Set(Id, nameof(TextReadingOrder), value);
     }
 
-    public TextWrapping TextWrapping
+    public Microsoft.UI.Xaml.TextWrapping TextWrapping
     {
-        get => PropertyAccessor.Get<TextWrapping>(Id, nameof(TextWrapping))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextWrapping>(Id, nameof(TextWrapping))!;
         set => PropertyAccessor.Set(Id, nameof(TextWrapping), value);
     }
 

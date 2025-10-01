@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class CompactOverlayPresenter : AppWindowPresenter
 {
-    public CompactOverlaySize InitialSize
+    public Microsoft.UI.Windowing.CompactOverlaySize InitialSize
     {
-        get => PropertyAccessor.Get<CompactOverlaySize>(Id, nameof(InitialSize));
+        get => PropertyAccessor.Get<Microsoft.UI.Windowing.CompactOverlaySize>(Id, nameof(InitialSize));
         set => PropertyAccessor.Set(Id, nameof(InitialSize), value);
     }
 

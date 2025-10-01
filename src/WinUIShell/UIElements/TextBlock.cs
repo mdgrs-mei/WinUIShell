@@ -29,15 +29,15 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontSize), value);
     }
 
-    public FontStretch FontStretch
+    public Windows.UI.Text.FontStretch FontStretch
     {
-        get => PropertyAccessor.Get<FontStretch>(Id, nameof(FontStretch))!;
+        get => PropertyAccessor.Get<Windows.UI.Text.FontStretch>(Id, nameof(FontStretch))!;
         set => PropertyAccessor.Set(Id, nameof(FontStretch), value);
     }
 
-    public FontStyle FontStyle
+    public Windows.UI.Text.FontStyle FontStyle
     {
-        get => PropertyAccessor.Get<FontStyle>(Id, nameof(FontStyle))!;
+        get => PropertyAccessor.Get<Windows.UI.Text.FontStyle>(Id, nameof(FontStyle))!;
         set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
     }
 
@@ -53,9 +53,9 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Foreground), value?.Id);
     }
 
-    public TextAlignment HorizontalTextAlignment
+    public Microsoft.UI.Xaml.TextAlignment HorizontalTextAlignment
     {
-        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(HorizontalTextAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextAlignment>(Id, nameof(HorizontalTextAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalTextAlignment), value);
     }
 
@@ -90,9 +90,9 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(LineHeight), value);
     }
 
-    public LineStackingStrategy LineStackingStrategy
+    public Microsoft.UI.Xaml.LineStackingStrategy LineStackingStrategy
     {
-        get => PropertyAccessor.Get<LineStackingStrategy>(Id, nameof(LineStackingStrategy))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.LineStackingStrategy>(Id, nameof(LineStackingStrategy))!;
         set => PropertyAccessor.Set(Id, nameof(LineStackingStrategy), value);
     }
 
@@ -102,9 +102,9 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(MaxLines), value);
     }
 
-    public OpticalMarginAlignment OpticalMarginAlignment
+    public Microsoft.UI.Xaml.OpticalMarginAlignment OpticalMarginAlignment
     {
-        get => PropertyAccessor.Get<OpticalMarginAlignment>(Id, nameof(OpticalMarginAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.OpticalMarginAlignment>(Id, nameof(OpticalMarginAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(OpticalMarginAlignment), value);
     }
 
@@ -136,41 +136,41 @@ public class TextBlock : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Text), value);
     }
 
-    public TextAlignment TextAlignment
+    public Microsoft.UI.Xaml.TextAlignment TextAlignment
     {
-        get => PropertyAccessor.Get<TextAlignment>(Id, nameof(TextAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextAlignment>(Id, nameof(TextAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(TextAlignment), value);
     }
 
-    public TextDecorations TextDecorations
+    public Windows.UI.Text.TextDecorations TextDecorations
     {
-        get => PropertyAccessor.Get<TextDecorations>(Id, nameof(TextDecorations))!;
+        get => PropertyAccessor.Get<Windows.UI.Text.TextDecorations>(Id, nameof(TextDecorations))!;
         set => PropertyAccessor.Set(Id, nameof(TextDecorations), value);
     }
 
     //public IList<TextHighlighter> TextHighlighters
 
-    public TextLineBounds TextLineBounds
+    public Microsoft.UI.Xaml.TextLineBounds TextLineBounds
     {
-        get => PropertyAccessor.Get<TextLineBounds>(Id, nameof(TextLineBounds))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextLineBounds>(Id, nameof(TextLineBounds))!;
         set => PropertyAccessor.Set(Id, nameof(TextLineBounds), value);
     }
 
-    public TextReadingOrder TextReadingOrder
+    public Microsoft.UI.Xaml.TextReadingOrder TextReadingOrder
     {
-        get => PropertyAccessor.Get<TextReadingOrder>(Id, nameof(TextReadingOrder))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextReadingOrder>(Id, nameof(TextReadingOrder))!;
         set => PropertyAccessor.Set(Id, nameof(TextReadingOrder), value);
     }
 
-    public TextTrimming TextTrimming
+    public Microsoft.UI.Xaml.TextTrimming TextTrimming
     {
-        get => PropertyAccessor.Get<TextTrimming>(Id, nameof(TextTrimming))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextTrimming>(Id, nameof(TextTrimming))!;
         set => PropertyAccessor.Set(Id, nameof(TextTrimming), value);
     }
 
-    public TextWrapping TextWrapping
+    public Microsoft.UI.Xaml.TextWrapping TextWrapping
     {
-        get => PropertyAccessor.Get<TextWrapping>(Id, nameof(TextWrapping))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.TextWrapping>(Id, nameof(TextWrapping))!;
         set => PropertyAccessor.Set(Id, nameof(TextWrapping), value);
     }
 

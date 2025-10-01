@@ -9,9 +9,9 @@ public class NavigationEventArgs : WinUIShellObject
         get => PropertyAccessor.Get<object>(Id, nameof(Content));
     }
 
-    public NavigationMode NavigationMode
+    public Microsoft.UI.Xaml.Navigation.NavigationMode NavigationMode
     {
-        get => PropertyAccessor.Get<NavigationMode>(Id, nameof(NavigationMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Navigation.NavigationMode>(Id, nameof(NavigationMode))!;
     }
 
     public NavigationTransitionInfo? NavigationTransitionInfo

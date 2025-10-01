@@ -69,9 +69,9 @@ public class ListViewBase : Selector
         set => PropertyAccessor.Set(Id, nameof(IncrementalLoadingThreshold), value);
     }
 
-    public IncrementalLoadingTrigger IncrementalLoadingTrigger
+    public Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger IncrementalLoadingTrigger
     {
-        get => PropertyAccessor.Get<IncrementalLoadingTrigger>(Id, nameof(IncrementalLoadingTrigger))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger>(Id, nameof(IncrementalLoadingTrigger))!;
         set => PropertyAccessor.Set(Id, nameof(IncrementalLoadingTrigger), value);
     }
 
@@ -105,9 +105,9 @@ public class ListViewBase : Selector
         set => PropertyAccessor.Set(Id, nameof(IsZoomedInView), value);
     }
 
-    public ListViewReorderMode ReorderMode
+    public Microsoft.UI.Xaml.Controls.ListViewReorderMode ReorderMode
     {
-        get => PropertyAccessor.Get<ListViewReorderMode>(Id, nameof(ReorderMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ListViewReorderMode>(Id, nameof(ReorderMode))!;
         set => PropertyAccessor.Set(Id, nameof(ReorderMode), value);
     }
 
@@ -121,9 +121,9 @@ public class ListViewBase : Selector
         get => PropertyAccessor.Get<WinUIShellObjectReadOnlyList<ItemIndexRange>>(Id, nameof(SelectedRanges))!;
     }
 
-    public ListViewSelectionMode SelectionMode
+    public Microsoft.UI.Xaml.Controls.ListViewSelectionMode SelectionMode
     {
-        get => PropertyAccessor.Get<ListViewSelectionMode>(Id, nameof(SelectionMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ListViewSelectionMode>(Id, nameof(SelectionMode))!;
         set => PropertyAccessor.Set(Id, nameof(SelectionMode), value);
     }
 

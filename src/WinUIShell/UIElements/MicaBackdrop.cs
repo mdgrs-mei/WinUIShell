@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class MicaBackdrop : SystemBackdrop
 {
-    public MicaKind Kind
+    public Microsoft.UI.Composition.SystemBackdrops.MicaKind Kind
     {
-        get => PropertyAccessor.Get<MicaKind>(Id, nameof(Kind))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Composition.SystemBackdrops.MicaKind>(Id, nameof(Kind))!;
         set => PropertyAccessor.Set(Id, nameof(Kind), value);
     }
 

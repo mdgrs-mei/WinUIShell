@@ -9,9 +9,9 @@ public class GridLength : WinUIShellObject
         get => PropertyAccessor.Get<double>(Id, nameof(Value))!;
     }
 
-    public GridUnitType GridUnitType
+    public Microsoft.UI.Xaml.GridUnitType GridUnitType
     {
-        get => PropertyAccessor.Get<GridUnitType>(Id, nameof(GridUnitType))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.GridUnitType>(Id, nameof(GridUnitType))!;
     }
 
     public bool IsAbsolute
@@ -37,11 +37,11 @@ public class GridLength : WinUIShellObject
     }
 
     public GridLength(double pixels)
-        : this(pixels, GridUnitType.Pixel)
+        : this(pixels, Microsoft.UI.Xaml.GridUnitType.Pixel)
     {
     }
 
-    public GridLength(double value, GridUnitType type)
+    public GridLength(double value, Microsoft.UI.Xaml.GridUnitType type)
     {
         Id = CommandClient.Get().CreateObject(
             ObjectTypeMapping.Get().GetTargetTypeName<GridLength>(),

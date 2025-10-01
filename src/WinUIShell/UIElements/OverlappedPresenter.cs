@@ -68,9 +68,9 @@ public class OverlappedPresenter : AppWindowPresenter
         set => PropertyAccessor.Set(Id, nameof(PreferredMinimumWidth), value);
     }
 
-    public OverlappedPresenterState State
+    public Microsoft.UI.Windowing.OverlappedPresenterState State
     {
-        get => PropertyAccessor.Get<OverlappedPresenterState>(Id, nameof(State))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Windowing.OverlappedPresenterState>(Id, nameof(State))!;
     }
 
     public OverlappedPresenter()

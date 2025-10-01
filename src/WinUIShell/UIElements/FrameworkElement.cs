@@ -21,15 +21,15 @@ public class FrameworkElement : UIElement
         set => PropertyAccessor.Set(Id, nameof(Name), value);
     }
 
-    public HorizontalAlignment HorizontalAlignment
+    public Microsoft.UI.Xaml.HorizontalAlignment HorizontalAlignment
     {
-        get => PropertyAccessor.Get<HorizontalAlignment>(Id, nameof(HorizontalAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.HorizontalAlignment>(Id, nameof(HorizontalAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalAlignment), value);
     }
 
-    public ElementTheme RequestedTheme
+    public Microsoft.UI.Xaml.ElementTheme RequestedTheme
     {
-        get => PropertyAccessor.Get<ElementTheme>(Id, nameof(RequestedTheme))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.ElementTheme>(Id, nameof(RequestedTheme))!;
         set => PropertyAccessor.Set(Id, nameof(RequestedTheme), value);
     }
 
@@ -55,9 +55,9 @@ public class FrameworkElement : UIElement
         }
     }
 
-    public VerticalAlignment VerticalAlignment
+    public Microsoft.UI.Xaml.VerticalAlignment VerticalAlignment
     {
-        get => PropertyAccessor.Get<VerticalAlignment>(Id, nameof(VerticalAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.VerticalAlignment>(Id, nameof(VerticalAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalAlignment), value);
     }
 

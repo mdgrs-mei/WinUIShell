@@ -15,9 +15,9 @@ public class ScrollView : Control
         set => PropertyAccessor.Set(Id, nameof(Content), value?.Id);
     }
 
-    public ScrollingContentOrientation ContentOrientation
+    public Microsoft.UI.Xaml.Controls.ScrollingContentOrientation ContentOrientation
     {
-        get => PropertyAccessor.Get<ScrollingContentOrientation>(Id, nameof(ContentOrientation))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingContentOrientation>(Id, nameof(ContentOrientation))!;
         set => PropertyAccessor.Set(Id, nameof(ContentOrientation), value);
     }
 
@@ -28,27 +28,27 @@ public class ScrollView : Control
     //public double HorizontalAnchorRatio
     //public double HorizontalOffset
 
-    public ScrollingScrollBarVisibility HorizontalScrollBarVisibility
+    public Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility HorizontalScrollBarVisibility
     {
-        get => PropertyAccessor.Get<ScrollingScrollBarVisibility>(Id, nameof(HorizontalScrollBarVisibility))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility>(Id, nameof(HorizontalScrollBarVisibility))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalScrollBarVisibility), value);
     }
 
-    public ScrollingChainMode HorizontalScrollChainMode
+    public Microsoft.UI.Xaml.Controls.ScrollingChainMode HorizontalScrollChainMode
     {
-        get => PropertyAccessor.Get<ScrollingChainMode>(Id, nameof(HorizontalScrollChainMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingChainMode>(Id, nameof(HorizontalScrollChainMode))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalScrollChainMode), value);
     }
 
-    public ScrollingScrollMode HorizontalScrollMode
+    public Microsoft.UI.Xaml.Controls.ScrollingScrollMode HorizontalScrollMode
     {
-        get => PropertyAccessor.Get<ScrollingScrollMode>(Id, nameof(HorizontalScrollMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingScrollMode>(Id, nameof(HorizontalScrollMode))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalScrollMode), value);
     }
 
-    public ScrollingRailMode HorizontalScrollRailMode
+    public Microsoft.UI.Xaml.Controls.ScrollingRailMode HorizontalScrollRailMode
     {
-        get => PropertyAccessor.Get<ScrollingRailMode>(Id, nameof(HorizontalScrollRailMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingRailMode>(Id, nameof(HorizontalScrollRailMode))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalScrollRailMode), value);
     }
 
@@ -62,27 +62,27 @@ public class ScrollView : Control
     //public double VerticalAnchorRatio
     //public double VerticalOffset
 
-    public ScrollingScrollBarVisibility VerticalScrollBarVisibility
+    public Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility VerticalScrollBarVisibility
     {
-        get => PropertyAccessor.Get<ScrollingScrollBarVisibility>(Id, nameof(VerticalScrollBarVisibility))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingScrollBarVisibility>(Id, nameof(VerticalScrollBarVisibility))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalScrollBarVisibility), value);
     }
 
-    public ScrollingChainMode VerticalScrollChainMode
+    public Microsoft.UI.Xaml.Controls.ScrollingChainMode VerticalScrollChainMode
     {
-        get => PropertyAccessor.Get<ScrollingChainMode>(Id, nameof(VerticalScrollChainMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingChainMode>(Id, nameof(VerticalScrollChainMode))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalScrollChainMode), value);
     }
 
-    public ScrollingScrollMode VerticalScrollMode
+    public Microsoft.UI.Xaml.Controls.ScrollingScrollMode VerticalScrollMode
     {
-        get => PropertyAccessor.Get<ScrollingScrollMode>(Id, nameof(VerticalScrollMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingScrollMode>(Id, nameof(VerticalScrollMode))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalScrollMode), value);
     }
 
-    public ScrollingRailMode VerticalScrollRailMode
+    public Microsoft.UI.Xaml.Controls.ScrollingRailMode VerticalScrollRailMode
     {
-        get => PropertyAccessor.Get<ScrollingRailMode>(Id, nameof(VerticalScrollRailMode))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.Controls.ScrollingRailMode>(Id, nameof(VerticalScrollRailMode))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalScrollRailMode), value);
     }
 

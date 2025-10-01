@@ -53,15 +53,15 @@ public class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(FontSize), value);
     }
 
-    public FontStretch FontStretch
+    public Windows.UI.Text.FontStretch FontStretch
     {
-        get => PropertyAccessor.Get<FontStretch>(Id, nameof(FontStretch))!;
+        get => PropertyAccessor.Get<Windows.UI.Text.FontStretch>(Id, nameof(FontStretch))!;
         set => PropertyAccessor.Set(Id, nameof(FontStretch), value);
     }
 
-    public FontStyle FontStyle
+    public Windows.UI.Text.FontStyle FontStyle
     {
-        get => PropertyAccessor.Get<FontStyle>(Id, nameof(FontStyle))!;
+        get => PropertyAccessor.Get<Windows.UI.Text.FontStyle>(Id, nameof(FontStyle))!;
         set => PropertyAccessor.Set(Id, nameof(FontStyle), value);
     }
 
@@ -77,9 +77,9 @@ public class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Foreground), value?.Id);
     }
 
-    public HorizontalAlignment HorizontalContentAlignment
+    public Microsoft.UI.Xaml.HorizontalAlignment HorizontalContentAlignment
     {
-        get => PropertyAccessor.Get<HorizontalAlignment>(Id, nameof(HorizontalContentAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.HorizontalAlignment>(Id, nameof(HorizontalContentAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(HorizontalContentAlignment), value);
     }
 
@@ -113,9 +113,9 @@ public class Control : FrameworkElement
         set => PropertyAccessor.Set(Id, nameof(Padding), value?.Id);
     }
 
-    public VerticalAlignment VerticalContentAlignment
+    public Microsoft.UI.Xaml.VerticalAlignment VerticalContentAlignment
     {
-        get => PropertyAccessor.Get<VerticalAlignment>(Id, nameof(VerticalContentAlignment))!;
+        get => PropertyAccessor.Get<Microsoft.UI.Xaml.VerticalAlignment>(Id, nameof(VerticalContentAlignment))!;
         set => PropertyAccessor.Set(Id, nameof(VerticalContentAlignment), value);
     }
 

@@ -4,9 +4,9 @@ namespace WinUIShell;
 
 public class AppWindowTitleBar : WinUIShellObject
 {
-    public TitleBarTheme PreferredTheme
+    public Microsoft.UI.Windowing.TitleBarTheme PreferredTheme
     {
-        get => PropertyAccessor.Get<TitleBarTheme>(Id, nameof(PreferredTheme));
+        get => PropertyAccessor.Get<Microsoft.UI.Windowing.TitleBarTheme>(Id, nameof(PreferredTheme));
         set => PropertyAccessor.Set(Id, nameof(PreferredTheme), value);
     }
 
