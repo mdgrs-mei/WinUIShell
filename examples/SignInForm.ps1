@@ -9,7 +9,7 @@ $win.Title = 'Hello from PowerShell!'
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
 $win.AppWindow.ResizeClient(420, 420)
 
-$icon = [SymbolIcon]::new([Symbol]::Globe)
+$icon = [SymbolIcon]::new([Microsoft.UI.Xaml.Controls.Symbol]::Globe)
 
 $title = [TextBlock]::new()
 $title.Text = 'Sign In'

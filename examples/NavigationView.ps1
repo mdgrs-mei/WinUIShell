@@ -82,7 +82,7 @@ function Navigate($pageName, $recommendedNavigationTransitionInfo) {
     $onLoadedArgumentList = $pageName
 
     # Page instance is created only once per page name. Cached pages are used from the second navigation.
-    $cacheMode = [NavigationCacheMode]::Enabled
+    $cacheMode = [Microsoft.UI.Xaml.Navigation.NavigationCacheMode]::Enabled
 
     # You can change the transition animation by setting [DrillInNavigationTransitionInfo]::new() etc.
     $transition = $recommendedNavigationTransitionInfo
