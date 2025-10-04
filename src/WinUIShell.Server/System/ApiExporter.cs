@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Reflection;
+using System.Xml.Serialization;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
@@ -10,6 +11,7 @@ public class ApiExporter : Singleton<ApiExporter>
     public class Api
     {
         public List<EnumDef> Enums { get; } = [];
+        public List<ObjectDef> Objects { get; } = [];
     }
 
     public class TypeDef
@@ -30,6 +32,21 @@ public class ApiExporter : Singleton<ApiExporter>
         public string Name { get; set; } = "";
         public object? Value { get; set; }
     }
+
+    public class ObjectDef : TypeDef
+    {
+        public List<PropertyDef> StaticProperties { get; } = [];
+        public List<PropertyDef> InstanceProperties { get; } = [];
+    }
+
+    public class PropertyDef
+    {
+        public string Name { get; set; } = "";
+        public string Type { get; set; } = "";
+        public bool CanRead { get; set; }
+        public bool CanWrite { get; set; }
+    }
+
 #pragma warning restore CA1002
 #pragma warning restore CA1034
 
@@ -38,6 +55,7 @@ public class ApiExporter : Singleton<ApiExporter>
     public void Export(string apiFilePath)
     {
         AddEnums();
+        AddObjects();
         ExportToFile(apiFilePath);
     }
 
@@ -85,6 +103,46 @@ public class ApiExporter : Singleton<ApiExporter>
         }
 
         _api.Enums.Add(def);
+    }
+
+    private void AddObjects()
+    {
+        AddObject(typeof(Microsoft.UI.Xaml.Application));
+        AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
+        AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
+    }
+
+    private void AddObject(Type objectType)
+    {
+        var assembly = objectType.Assembly;
+        var def = new ObjectDef
+        {
+            Name = objectType.Name,
+            FullName = $"{objectType.FullName}, {assembly.GetName().Name}",
+            Namespace = objectType.Namespace!,
+        };
+
+        foreach (var propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Static))
+        {
+            def.StaticProperties.Add(GetPropertyDef(propertyInfo));
+        }
+        foreach (var propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
+        }
+
+        _api.Objects.Add(def);
+    }
+
+    private PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
+    {
+        return new PropertyDef
+        {
+            Name = propertyInfo.Name,
+            Type = propertyInfo.PropertyType.FullName!,
+            CanRead = propertyInfo.CanRead,
+            CanWrite = propertyInfo.CanWrite
+        };
     }
 
     private void ExportToFile(string filePath)
