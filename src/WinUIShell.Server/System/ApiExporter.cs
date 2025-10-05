@@ -66,6 +66,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.Application));
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
+        AddObject(typeof(System.Uri));
     }
 
     private void AddObject(Type objectType)

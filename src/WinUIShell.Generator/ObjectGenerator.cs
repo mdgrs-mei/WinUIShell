@@ -29,13 +29,16 @@ internal static class ObjectGenerator
                     {
                     }
 
-
                 """);
 
             foreach (var property in objectDef.StaticProperties)
             {
                 var propertyType = new ArgumentType(property.Type);
+                if (!propertyType.IsSupported)
+                    continue;
+
                 _ = sourceCode.Append($$"""
+
                         public static {{propertyType.Name}}{{(propertyType.IsNullable ? "?" : "")}} {{property.Name}}
                         {
 
@@ -64,10 +67,60 @@ internal static class ObjectGenerator
 
                 _ = sourceCode.Append("    }\r\n");
             }
+
+            foreach (var property in objectDef.InstanceProperties)
+            {
+                var propertyType = new ArgumentType(property.Type);
+                if (!propertyType.IsSupported)
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public {{propertyType.Name}}{{(propertyType.IsNullable ? "?" : "")}} {{property.Name}}
+                        {
+
+                    """);
+
+                if (property.CanRead)
+                {
+                    _ = sourceCode.Append($$"""
+                                get => PropertyAccessor.Get<{{propertyType.Name}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    _ = sourceCode.Append($$"""
+                                set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{GenerateValueString(propertyType)}});
+
+                        """);
+                }
+
+                _ = sourceCode.Append("    }\r\n");
+            }
+
             _ = sourceCode.Append("}\r\n");
 
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
         }
-
     }
+
+    private static string GenerateValueString(ArgumentType argumentType)
+    {
+        if (argumentType.IsValueType)
+        {
+            return "value";
+        }
+        else
+        if (argumentType.IsObject)
+        {
+            return "(value is WinUIShellObject v ? v.Id : value)";
+        }
+        else
+        {
+            return "value.Id";
+        }
+    }
+
 }
