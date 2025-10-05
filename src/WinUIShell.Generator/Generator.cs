@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Xml.Serialization;
 using Microsoft.CodeAnalysis;
 
 namespace WinUIShell.Generator;
@@ -7,30 +6,6 @@ namespace WinUIShell.Generator;
 [Generator(LanguageNames.CSharp)]
 public class Generator : IIncrementalGenerator
 {
-    public class Api
-    {
-        public List<EnumDef> Enums { get; set; } = [];
-    }
-
-    public class TypeDef
-    {
-        public string Name { get; set; } = "";
-        public string FullName { get; set; } = "";
-        public string Namespace { get; set; } = "";
-    }
-
-    public class EnumDef : TypeDef
-    {
-        public string UnderlyingType { get; set; } = "";
-        public List<EnumEntryDef> Entries { get; set; } = [];
-    }
-
-    public class EnumEntryDef
-    {
-        public string Name { get; set; } = "";
-        public object? Value { get; set; }
-    }
-
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         context.RegisterPostInitializationOutput((postInitContext) =>
@@ -49,9 +24,7 @@ public class Generator : IIncrementalGenerator
             if (text is null)
                 return;
 
-            var stringReader = new StringReader(text.ToString());
-            var serializer = new XmlSerializer(typeof(Api));
-            var api = (Api)serializer.Deserialize(stringReader);
+            var api = Api.Load(text.ToString());
             if (api is null)
                 return;
 
@@ -63,7 +36,7 @@ public class Generator : IIncrementalGenerator
             else
             {
                 GenerateEnums(sourceProductionContext, api);
-                GenerateObjects(sourceProductionContext, api);
+                ObjectGenerator.Generate(sourceProductionContext, api);
             }
         });
     }
@@ -141,12 +114,7 @@ public class Generator : IIncrementalGenerator
         }
     }
 
-    private static void GenerateObjects(SourceProductionContext sourceProductionContext, Api api)
-    {
-
-    }
-
-    private static string GetTargetNamespace(string serverNamespace)
+    internal static string GetTargetNamespace(string serverNamespace)
     {
         return serverNamespace == "WinUIShell.Server" ? "WinUIShell" : $"WinUIShell.{serverNamespace}";
     }

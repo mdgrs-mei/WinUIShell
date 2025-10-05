@@ -6,50 +6,6 @@ namespace WinUIShell.Server;
 
 public class ApiExporter : Singleton<ApiExporter>
 {
-#pragma warning disable CA1034 // Nested types should not be visible
-#pragma warning disable CA1002 // Do not expose generic lists
-    public class Api
-    {
-        public List<EnumDef> Enums { get; } = [];
-        public List<ObjectDef> Objects { get; } = [];
-    }
-
-    public class TypeDef
-    {
-        public string Name { get; set; } = "";
-        public string FullName { get; set; } = "";
-        public string Namespace { get; set; } = "";
-    }
-
-    public class EnumDef : TypeDef
-    {
-        public string UnderlyingType { get; set; } = "";
-        public List<EnumEntryDef> Entries { get; } = [];
-    }
-
-    public class EnumEntryDef
-    {
-        public string Name { get; set; } = "";
-        public object? Value { get; set; }
-    }
-
-    public class ObjectDef : TypeDef
-    {
-        public List<PropertyDef> StaticProperties { get; } = [];
-        public List<PropertyDef> InstanceProperties { get; } = [];
-    }
-
-    public class PropertyDef
-    {
-        public string Name { get; set; } = "";
-        public string Type { get; set; } = "";
-        public bool CanRead { get; set; }
-        public bool CanWrite { get; set; }
-    }
-
-#pragma warning restore CA1002
-#pragma warning restore CA1034
-
     private readonly Api _api = new();
 
     public void Export(string apiFilePath)
@@ -83,7 +39,7 @@ public class ApiExporter : Singleton<ApiExporter>
         var assembly = enumType.Assembly;
         var underlyingType = Enum.GetUnderlyingType(enumType);
 
-        var def = new EnumDef
+        var def = new Api.EnumDef
         {
             Name = enumType.Name,
             FullName = $"{enumType.FullName}, {assembly.GetName().Name}",
@@ -95,7 +51,7 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             var value = Enum.Parse(enumType, entryName);
             var underlyingTypeValue = Convert.ChangeType(value, underlyingType);
-            def.Entries.Add(new EnumEntryDef
+            def.Entries.Add(new Api.EnumEntryDef
             {
                 Name = entryName,
                 Value = underlyingTypeValue
@@ -115,7 +71,7 @@ public class ApiExporter : Singleton<ApiExporter>
     private void AddObject(Type objectType)
     {
         var assembly = objectType.Assembly;
-        var def = new ObjectDef
+        var def = new Api.ObjectDef
         {
             Name = objectType.Name,
             FullName = $"{objectType.FullName}, {assembly.GetName().Name}",
@@ -134,15 +90,35 @@ public class ApiExporter : Singleton<ApiExporter>
         _api.Objects.Add(def);
     }
 
-    private PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
+    private Api.PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
     {
-        return new PropertyDef
+        var propertyType = propertyInfo.PropertyType;
+        var argumentType = new Api.ArgumentType
+        {
+            Name = propertyType.ToString(),
+            IsNullable = IsNullable(propertyInfo),
+            IsEnum = propertyType.IsEnum
+        };
+
+        return new Api.PropertyDef
         {
             Name = propertyInfo.Name,
-            Type = propertyInfo.PropertyType.FullName!,
+            Type = argumentType,
             CanRead = propertyInfo.CanRead,
             CanWrite = propertyInfo.CanWrite
         };
+    }
+
+    private static bool IsNullable(PropertyInfo propertyInfo)
+    {
+        var nullabilityInfoContext = new NullabilityInfoContext();
+        var nullability = nullabilityInfoContext.Create(propertyInfo);
+        if (nullability.WriteState == NullabilityState.Nullable || nullability.ReadState == NullabilityState.Nullable)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void ExportToFile(string filePath)

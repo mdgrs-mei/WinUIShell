@@ -52141,7 +52141,11 @@
       <StaticProperties>
         <PropertyDef>
           <Name>Current</Name>
-          <Type>Microsoft.UI.Xaml.Application</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.Application</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
@@ -52149,37 +52153,61 @@
       <InstanceProperties>
         <PropertyDef>
           <Name>DebugSettings</Name>
-          <Type>Microsoft.UI.Xaml.DebugSettings</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.DebugSettings</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>DispatcherShutdownMode</Name>
-          <Type>Microsoft.UI.Xaml.DispatcherShutdownMode</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.DispatcherShutdownMode</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>FocusVisualKind</Name>
-          <Type>Microsoft.UI.Xaml.FocusVisualKind</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.FocusVisualKind</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>HighContrastAdjustment</Name>
-          <Type>Microsoft.UI.Xaml.ApplicationHighContrastAdjustment</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.ApplicationHighContrastAdjustment</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>RequestedTheme</Name>
-          <Type>Microsoft.UI.Xaml.ApplicationTheme</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.ApplicationTheme</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Resources</Name>
-          <Type>Microsoft.UI.Xaml.ResourceDictionary</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
@@ -52193,43 +52221,71 @@
       <InstanceProperties>
         <PropertyDef>
           <Name>EnableFrameRateCounter</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>FailFastOnErrors</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>IsBindingTracingEnabled</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>IsTextPerformanceVisualizationEnabled</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>IsXamlResourceReferenceTracingEnabled</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>LayoutCycleDebugBreakLevel</Name>
-          <Type>Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>LayoutCycleTracingLevel</Name>
-          <Type>Microsoft.UI.Xaml.LayoutCycleTracingLevel</Type>
+          <Type>
+            <Name>Microsoft.UI.Xaml.LayoutCycleTracingLevel</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>true</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
@@ -52243,61 +52299,101 @@
       <InstanceProperties>
         <PropertyDef>
           <Name>Keys</Name>
-          <Type>System.Collections.Generic.ICollection`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</Type>
+          <Type>
+            <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Values</Name>
-          <Type>System.Collections.Generic.ICollection`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</Type>
+          <Type>
+            <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Count</Name>
-          <Type>System.Int32</Type>
+          <Type>
+            <Name>System.Int32</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>IsReadOnly</Name>
-          <Type>System.Boolean</Type>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Item</Name>
-          <Type>System.Object</Type>
+          <Type>
+            <Name>System.Object</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>MergedDictionaries</Name>
-          <Type>System.Collections.Generic.IList`1[[Microsoft.UI.Xaml.ResourceDictionary, Microsoft.WinUI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=de31ebe4ad15742b]]</Type>
+          <Type>
+            <Name>System.Collections.Generic.IList`1[Microsoft.UI.Xaml.ResourceDictionary]</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Source</Name>
-          <Type>System.Uri</Type>
+          <Type>
+            <Name>System.Uri</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>ThemeDictionaries</Name>
-          <Type>System.Collections.Generic.IDictionary`2[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</Type>
+          <Type>
+            <Name>System.Collections.Generic.IDictionary`2[System.Object,System.Object]</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>Dispatcher</Name>
-          <Type>Windows.UI.Core.CoreDispatcher</Type>
+          <Type>
+            <Name>Windows.UI.Core.CoreDispatcher</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
         <PropertyDef>
           <Name>DispatcherQueue</Name>
-          <Type>Microsoft.UI.Dispatching.DispatcherQueue</Type>
+          <Type>
+            <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+          </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
