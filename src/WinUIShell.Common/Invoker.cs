@@ -115,6 +115,16 @@ public class Invoker : Singleton<Invoker>
         SetPropertyOrField(obj, obj.GetType(), propertyName, value);
     }
 
+    public void SetStaticProperty(string className, string propertyName, object? value)
+    {
+        var classType = Type.GetType(className);
+        if (classType == null)
+        {
+            throw new InvalidOperationException($"Type [{className}] not found.");
+        }
+        SetPropertyOrField(null, classType, propertyName, value);
+    }
+
     public object? GetProperty(object obj, string propertyName)
     {
         ArgumentNullException.ThrowIfNull(obj);

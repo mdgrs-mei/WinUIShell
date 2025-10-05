@@ -47,6 +47,11 @@ internal static class PropertyAccessor
         }
     }
 
+    public static void SetStatic(string className, string propertyName, object? value)
+    {
+        CommandClient.Get().SetStaticProperty(className, propertyName, value);
+    }
+
     public static T? GetStatic<T>(string className, string propertyName)
     {
         try

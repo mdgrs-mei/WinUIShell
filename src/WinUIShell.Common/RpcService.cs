@@ -250,6 +250,17 @@ internal sealed class RpcService
         return taskCompletion.Task;
     }
 
+    public void SetStaticProperty(CommandQueueId queueId, string className, string propertyName, RpcValue rpcValue)
+    {
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                var value = RpcValueConverter.ConvertRpcValueTo<object>(rpcValue);
+                Invoker.Get().SetStaticProperty(className, propertyName, value);
+            });
+    }
+
     public Task<RpcValue> GetPropertyAsync(ObjectId id, string propertyName)
     {
         var taskCompletion = new TaskCompletionSource<RpcValue>();

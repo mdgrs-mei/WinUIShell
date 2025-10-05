@@ -50,17 +50,18 @@ internal static class ObjectGenerator
 
                         """);
                 }
-                /*
+
                 if (property.CanWrite)
                 {
                     _ = sourceCode.Append($$"""
-                            set => PropertyAccessor.SetStatic(
-                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                nameof({{property.Name}}),
-                                value);
+                                set => PropertyAccessor.SetStatic(
+                                    ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                    nameof({{property.Name}}),
+                                    value);
+
                         """);
                 }
-                */
+
                 _ = sourceCode.Append("    }\r\n");
             }
             _ = sourceCode.Append("}\r\n");

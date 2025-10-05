@@ -267,6 +267,21 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
+    public void SetStaticProperty(string className, string propertyName, object? value)
+    {
+        SetStaticProperty(CommandQueueId.MainThread, className, propertyName, value);
+    }
+
+    public void SetStaticProperty(CommandQueueId queueId, string className, string propertyName, object? value)
+    {
+        Debug.Assert(_rpc is not null);
+
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("SetStaticProperty", queueId, className, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
+        });
+    }
+
     public T? GetProperty<T>(ObjectId id, string propertyName)
     {
         Debug.Assert(_rpc is not null);
