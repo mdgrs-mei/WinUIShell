@@ -119,7 +119,7 @@ internal static class ObjectGenerator
         }
         else
         {
-            return "value.Id";
+            return "value?.Id";
         }
     }
 
