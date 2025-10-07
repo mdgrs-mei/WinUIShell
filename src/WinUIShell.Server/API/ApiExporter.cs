@@ -21,6 +21,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddEnumsInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
         AddEnumsInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
         AddEnum(typeof(EventCallbackRunspaceMode));
+        AddEnum(typeof(UriHostNameType));
     }
 
     private void AddEnumsInAssembly(Type representativeTypeInAssembly)
@@ -66,7 +67,9 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.Application));
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
-        AddObject(typeof(System.Uri));
+        AddObject(typeof(Uri));
+        AddObject(typeof(Windows.UI.Core.CoreDispatcher));
+        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
     }
 
     private void AddObject(Type objectType)

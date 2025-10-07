@@ -52132,6 +52132,34 @@
         </EnumEntryDef>
       </Entries>
     </EnumDef>
+    <EnumDef>
+      <Name>UriHostNameType</Name>
+      <FullName>System.UriHostNameType, System.Private.Uri</FullName>
+      <Namespace>System</Namespace>
+      <UnderlyingType>Int32</UnderlyingType>
+      <Entries>
+        <EnumEntryDef>
+          <Name>Unknown</Name>
+          <Value xsi:type="xsd:int">0</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>Basic</Name>
+          <Value xsi:type="xsd:int">1</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>Dns</Name>
+          <Value xsi:type="xsd:int">2</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>IPv4</Name>
+          <Value xsi:type="xsd:int">3</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>IPv6</Name>
+          <Value xsi:type="xsd:int">4</Value>
+        </EnumEntryDef>
+      </Entries>
+    </EnumDef>
   </Enums>
   <Objects>
     <ObjectDef>
@@ -52666,6 +52694,55 @@
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
+          </Type>
+          <CanRead>true</CanRead>
+          <CanWrite>false</CanWrite>
+        </PropertyDef>
+      </InstanceProperties>
+    </ObjectDef>
+    <ObjectDef>
+      <Name>CoreDispatcher</Name>
+      <FullName>Windows.UI.Core.CoreDispatcher, Microsoft.Windows.SDK.NET</FullName>
+      <Namespace>Windows.UI.Core</Namespace>
+      <StaticProperties />
+      <InstanceProperties>
+        <PropertyDef>
+          <Name>CurrentPriority</Name>
+          <Type>
+            <Name>Windows.UI.Core.CoreDispatcherPriority</Name>
+            <IsNullable>false</IsNullable>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
+          </Type>
+          <CanRead>true</CanRead>
+          <CanWrite>true</CanWrite>
+        </PropertyDef>
+        <PropertyDef>
+          <Name>HasThreadAccess</Name>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
+          </Type>
+          <CanRead>true</CanRead>
+          <CanWrite>false</CanWrite>
+        </PropertyDef>
+      </InstanceProperties>
+    </ObjectDef>
+    <ObjectDef>
+      <Name>DispatcherQueue</Name>
+      <FullName>Microsoft.UI.Dispatching.DispatcherQueue, Microsoft.InteractiveExperiences.Projection</FullName>
+      <Namespace>Microsoft.UI.Dispatching</Namespace>
+      <StaticProperties />
+      <InstanceProperties>
+        <PropertyDef>
+          <Name>HasThreadAccess</Name>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
