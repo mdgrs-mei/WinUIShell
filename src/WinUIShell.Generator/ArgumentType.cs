@@ -4,7 +4,8 @@ internal class ArgumentType
 {
     public string Name { get; internal set; } = "";
     public bool IsNullable { get; internal set; }
-    public bool IsValueType { get; internal set; }
+    public bool IsPrimitiveType { get; internal set; }
+    public bool IsArray { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsSupported { get; internal set; } = true;
 
@@ -37,33 +38,32 @@ internal class ArgumentType
     public ArgumentType(Api.ArgumentType apiArgumentType)
     {
         var serverTypeName = apiArgumentType.Name;
+        IsPrimitiveType = apiArgumentType.IsValueType;
+        IsArray = apiArgumentType.IsArray;
 
         if (serverTypeName.StartsWith("WinUIShell.Server"))
         {
             Name = serverTypeName.Replace("WinUIShell.Server", "WinUIShell");
-            IsValueType = apiArgumentType.IsEnum;
         }
         else
         if (serverTypeName == "System.Object")
         {
             Name = "object";
-            IsValueType = false;
             IsObject = true;
         }
         else
         if (TryReplaceSystemType(serverTypeName, out var systemTypeName))
         {
             Name = systemTypeName!;
-            IsValueType = true;
+            IsPrimitiveType = true;
         }
         else
         {
             Name = $"WinUIShell.{serverTypeName}";
-            IsValueType = apiArgumentType.IsEnum;
             IsSupported = IsSupportedType(serverTypeName);
         }
 
-        IsNullable = IsNullable || !IsValueType;
+        IsNullable = IsNullable || !IsPrimitiveType;
     }
 
     private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)

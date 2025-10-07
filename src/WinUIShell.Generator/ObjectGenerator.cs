@@ -108,7 +108,7 @@ internal static class ObjectGenerator
 
     private static string GenerateValueString(ArgumentType argumentType)
     {
-        if (argumentType.IsValueType)
+        if (argumentType.IsPrimitiveType)
         {
             return "value";
         }

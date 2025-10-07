@@ -98,7 +98,8 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             Name = propertyType.ToString(),
             IsNullable = IsNullable(propertyInfo),
-            IsEnum = propertyType.IsEnum
+            IsValueType = propertyType.IsValueType,
+            IsArray = propertyType.IsArray,
         };
 
         return new Api.PropertyDef

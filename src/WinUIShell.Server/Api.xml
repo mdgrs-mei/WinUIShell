@@ -52144,7 +52144,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.Application</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52156,7 +52157,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.DebugSettings</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52166,7 +52168,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.DispatcherShutdownMode</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52176,7 +52179,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.FocusVisualKind</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52186,7 +52190,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ApplicationHighContrastAdjustment</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52196,7 +52201,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ApplicationTheme</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52206,7 +52212,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52224,7 +52231,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52234,7 +52242,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52244,7 +52253,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52254,7 +52264,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52264,7 +52275,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52274,7 +52286,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52284,7 +52297,8 @@
           <Type>
             <Name>Microsoft.UI.Xaml.LayoutCycleTracingLevel</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52302,7 +52316,8 @@
           <Type>
             <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52312,7 +52327,8 @@
           <Type>
             <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52322,7 +52338,8 @@
           <Type>
             <Name>System.Int32</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52332,7 +52349,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52342,7 +52360,8 @@
           <Type>
             <Name>System.Object</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52352,7 +52371,8 @@
           <Type>
             <Name>System.Collections.Generic.IList`1[Microsoft.UI.Xaml.ResourceDictionary]</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52362,7 +52382,8 @@
           <Type>
             <Name>System.Uri</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52372,7 +52393,8 @@
           <Type>
             <Name>System.Collections.Generic.IDictionary`2[System.Object,System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52382,7 +52404,8 @@
           <Type>
             <Name>Windows.UI.Core.CoreDispatcher</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52392,7 +52415,8 @@
           <Type>
             <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52410,7 +52434,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52420,7 +52445,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52430,7 +52456,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52440,7 +52467,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52450,7 +52478,8 @@
           <Type>
             <Name>System.UriHostNameType</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>true</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52460,7 +52489,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52470,7 +52500,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52480,7 +52511,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52490,7 +52522,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52500,7 +52533,8 @@
           <Type>
             <Name>System.String[]</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>true</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52510,7 +52544,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52520,7 +52555,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52530,7 +52566,8 @@
           <Type>
             <Name>System.Int32</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52540,7 +52577,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52550,7 +52588,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52560,7 +52599,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52570,7 +52610,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52580,7 +52621,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52590,7 +52632,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52600,7 +52643,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52610,7 +52654,8 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>true</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52620,7 +52665,8 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
+            <IsValueType>false</IsValueType>
+            <IsArray>false</IsArray>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>

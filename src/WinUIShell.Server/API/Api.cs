@@ -44,7 +44,8 @@ public class Api
     {
         public string Name { get; set; } = "";
         public bool IsNullable { get; set; }
-        public bool IsEnum { get; set; }
+        public bool IsValueType { get; set; }
+        public bool IsArray { get; set; }
     }
 #pragma warning restore CA1002
 #pragma warning restore CA1034
