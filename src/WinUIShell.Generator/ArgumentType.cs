@@ -1,4 +1,6 @@
-﻿namespace WinUIShell.Generator;
+﻿using WinUIShell.Server;
+
+namespace WinUIShell.Generator;
 
 internal class ArgumentType
 {

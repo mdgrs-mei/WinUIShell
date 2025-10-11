@@ -1,5 +1,7 @@
 ﻿using System.Text;
+using System.Xml.Serialization;
 using Microsoft.CodeAnalysis;
+using WinUIShell.Server;
 
 namespace WinUIShell.Generator;
 
@@ -24,7 +26,7 @@ public class Generator : IIncrementalGenerator
             if (text is null)
                 return;
 
-            var api = Api.Load(text.ToString());
+            var api = LoadApi(text.ToString());
             if (api is null)
                 return;
 
@@ -39,6 +41,14 @@ public class Generator : IIncrementalGenerator
                 ObjectGenerator.Generate(sourceProductionContext, api);
             }
         });
+    }
+
+    private static Api LoadApi(string content)
+    {
+        var stringReader = new StringReader(content);
+        var serializer = new XmlSerializer(typeof(Api));
+        var api = (Api)serializer.Deserialize(stringReader);
+        return api;
     }
 
     private static void GenerateEnumTypeMapping(SourceProductionContext sourceProductionContext, Api api)

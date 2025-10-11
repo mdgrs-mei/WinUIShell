@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+    <Compile Include="..\WinUIShell.Server\API\Api.cs" />
   </ItemGroup>
 </Project>
