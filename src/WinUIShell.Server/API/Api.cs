@@ -30,6 +30,9 @@ public class Api
     {
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
+        public List<MethodDef> Constructors { get; } = [];
+        public List<MethodDef> StaticMethods { get; } = [];
+        public List<MethodDef> InstanceMethods { get; } = [];
     }
 
     public class PropertyDef
@@ -46,7 +49,24 @@ public class Api
         public bool IsNullable { get; set; }
         public bool IsValueType { get; set; }
         public bool IsArray { get; set; }
+        public bool IsByRef { get; set; }
+        public bool IsIn { get; set; }
+        public bool IsOut { get; set; }
     }
+
+    public class MethodDef
+    {
+        public string? Name { get; set; }
+        public ArgumentType? ReturnType { get; set; }
+        public List<ParameterDef> Parameters { get; } = [];
+    }
+
+    public class ParameterDef
+    {
+        public string? Name { get; set; } = "";
+        public ArgumentType Type { get; set; } = new();
+    }
+
 #pragma warning restore CA1002
 #pragma warning restore CA1034
 }

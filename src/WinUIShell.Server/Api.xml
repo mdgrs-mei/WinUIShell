@@ -52174,6 +52174,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52187,6 +52190,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52198,6 +52204,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52209,6 +52218,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52220,6 +52232,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52231,6 +52246,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52242,11 +52260,21 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors>
+        <MethodDef>
+          <Parameters />
+        </MethodDef>
+      </Constructors>
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>DebugSettings</Name>
@@ -52261,6 +52289,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52272,6 +52303,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52283,6 +52317,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52294,6 +52331,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52305,6 +52345,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52316,6 +52359,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52327,11 +52373,17 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>ResourceDictionary</Name>
@@ -52346,6 +52398,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52357,6 +52412,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52368,6 +52426,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52379,6 +52440,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52390,6 +52454,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52401,6 +52468,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52412,6 +52482,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52423,6 +52496,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52434,6 +52510,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52445,11 +52524,21 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors>
+        <MethodDef>
+          <Parameters />
+        </MethodDef>
+      </Constructors>
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>Uri</Name>
@@ -52464,6 +52553,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52475,6 +52567,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52486,6 +52581,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52497,6 +52595,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52508,6 +52609,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52519,6 +52623,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52530,6 +52637,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52541,6 +52651,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52552,6 +52665,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52563,6 +52679,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>true</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52574,6 +52693,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52585,6 +52707,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52596,6 +52721,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52607,6 +52735,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52618,6 +52749,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52629,6 +52763,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52640,6 +52777,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52651,6 +52791,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52662,6 +52805,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52673,6 +52819,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52684,6 +52833,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52695,11 +52847,214 @@
             <IsNullable>false</IsNullable>
             <IsValueType>false</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>uriString</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>uriString</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>dontEscape</Name>
+              <Type>
+                <Name>System.Boolean</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>true</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>baseUri</Name>
+              <Type>
+                <Name>System.Uri</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>relativeUri</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>true</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>dontEscape</Name>
+              <Type>
+                <Name>System.Boolean</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>true</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>uriString</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>uriKind</Name>
+              <Type>
+                <Name>System.UriKind</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>true</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>uriString</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>creationOptions</Name>
+              <Type>
+                <Name>System.UriCreationOptions</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>true</IsByRef>
+                <IsIn>true</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>baseUri</Name>
+              <Type>
+                <Name>System.Uri</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>relativeUri</Name>
+              <Type>
+                <Name>System.String</Name>
+                <IsNullable>true</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+        <MethodDef>
+          <Parameters>
+            <ParameterDef>
+              <Name>baseUri</Name>
+              <Type>
+                <Name>System.Uri</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+            <ParameterDef>
+              <Name>relativeUri</Name>
+              <Type>
+                <Name>System.Uri</Name>
+                <IsNullable>false</IsNullable>
+                <IsValueType>false</IsValueType>
+                <IsArray>false</IsArray>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+              </Type>
+            </ParameterDef>
+          </Parameters>
+        </MethodDef>
+      </Constructors>
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>CoreDispatcher</Name>
@@ -52714,6 +53069,9 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52725,11 +53083,17 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>DispatcherQueue</Name>
@@ -52744,11 +53108,17 @@
             <IsNullable>false</IsNullable>
             <IsValueType>true</IsValueType>
             <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
         </PropertyDef>
       </InstanceProperties>
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods />
     </ObjectDef>
   </Objects>
 </Api>

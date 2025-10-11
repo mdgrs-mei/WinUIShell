@@ -91,6 +91,19 @@ public class ApiExporter : Singleton<ApiExporter>
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
 
+        var constructors = objectType.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var constructor in constructors)
+        {
+            var methodDef = new Api.MethodDef();
+            var parameters = constructor.GetParameters();
+            foreach (var parameter in parameters)
+            {
+                methodDef.Parameters.Add(GetParameterDef(parameter));
+            }
+
+            def.Constructors.Add(methodDef);
+        }
+
         _api.Objects.Add(def);
     }
 
@@ -100,7 +113,7 @@ public class ApiExporter : Singleton<ApiExporter>
         var argumentType = new Api.ArgumentType
         {
             Name = propertyType.ToString(),
-            IsNullable = IsNullable(propertyInfo),
+            IsNullable = Reflection.IsNullable(propertyInfo),
             IsValueType = propertyType.IsValueType,
             IsArray = propertyType.IsArray,
         };
@@ -114,16 +127,25 @@ public class ApiExporter : Singleton<ApiExporter>
         };
     }
 
-    private static bool IsNullable(PropertyInfo propertyInfo)
+    private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)
     {
-        var nullabilityInfoContext = new NullabilityInfoContext();
-        var nullability = nullabilityInfoContext.Create(propertyInfo);
-        if (nullability.WriteState == NullabilityState.Nullable || nullability.ReadState == NullabilityState.Nullable)
+        var type = parameterInfo.ParameterType;
+        var argumentType = new Api.ArgumentType
         {
-            return true;
-        }
+            Name = type.ToString().Replace("&", "", StringComparison.Ordinal),
+            IsNullable = Reflection.IsNullable(parameterInfo),
+            IsValueType = type.IsValueType,
+            IsArray = type.IsArray,
+            IsByRef = type.IsByRef,
+            IsIn = parameterInfo.IsIn,
+            IsOut = parameterInfo.IsOut,
+        };
 
-        return false;
+        return new Api.ParameterDef
+        {
+            Name = parameterInfo.Name,
+            Type = argumentType,
+        };
     }
 
     private void ExportToFile(string filePath)
