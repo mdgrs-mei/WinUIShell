@@ -93,17 +93,22 @@ public class ApiExporter : Singleton<ApiExporter>
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
 
-        var constructors = objectType.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var constructor in constructors)
+        foreach (var constructor in objectType.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
         {
-            var methodDef = new Api.MethodDef();
-            var parameters = constructor.GetParameters();
-            foreach (var parameter in parameters)
-            {
-                methodDef.Parameters.Add(GetParameterDef(parameter));
-            }
+            def.Constructors.Add(GetConstructorDef(constructor));
+        }
 
-            def.Constructors.Add(methodDef);
+        foreach (var staticMethod in objectType.GetMethods(BindingFlags.Public | BindingFlags.Static))
+        {
+            if (IsIgnoredMethod(staticMethod))
+                continue;
+            def.StaticMethods.Add(GetMethodDef(staticMethod));
+        }
+        foreach (var instanceMethod in objectType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+        {
+            if (IsIgnoredMethod(instanceMethod))
+                continue;
+            def.InstanceMethods.Add(GetMethodDef(instanceMethod));
         }
 
         _api.Objects.Add(def);
@@ -129,6 +134,45 @@ public class ApiExporter : Singleton<ApiExporter>
         };
     }
 
+    private Api.MethodDef GetConstructorDef(ConstructorInfo constructorInfo)
+    {
+        var methodDef = new Api.MethodDef();
+        var parameters = constructorInfo.GetParameters();
+        foreach (var parameter in parameters)
+        {
+            methodDef.Parameters.Add(GetParameterDef(parameter));
+        }
+        return methodDef;
+    }
+
+    private Api.MethodDef GetMethodDef(MethodInfo methodInfo)
+    {
+        var returnType = methodInfo.ReturnType;
+        var returnParameter = methodInfo.ReturnParameter;
+
+        var methodDef = new Api.MethodDef
+        {
+            Name = methodInfo.Name,
+            ReturnType = new Api.ArgumentType
+            {
+                Name = returnType.ToString(),
+                IsNullable = Reflection.IsNullable(returnParameter),
+                IsEnum = returnType.IsEnum,
+                IsArray = returnType.IsArray,
+                IsByRef = returnType.IsByRef,
+                IsIn = returnParameter.IsIn,
+                IsOut = returnParameter.IsOut,
+            }
+        };
+
+        var parameters = methodInfo.GetParameters();
+        foreach (var parameter in parameters)
+        {
+            methodDef.Parameters.Add(GetParameterDef(parameter));
+        }
+        return methodDef;
+    }
+
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)
     {
         var type = parameterInfo.ParameterType;
@@ -148,6 +192,11 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = parameterInfo.Name,
             Type = argumentType,
         };
+    }
+
+    private bool IsIgnoredMethod(MethodInfo methodInfo)
+    {
+        return methodInfo.IsSpecialName;
     }
 
     private void ExportToFile(string filePath)
