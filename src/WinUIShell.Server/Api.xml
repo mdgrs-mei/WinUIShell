@@ -52160,6 +52160,26 @@
         </EnumEntryDef>
       </Entries>
     </EnumDef>
+    <EnumDef>
+      <Name>UriKind</Name>
+      <FullName>System.UriKind, System.Private.Uri</FullName>
+      <Namespace>System</Namespace>
+      <UnderlyingType>Int32</UnderlyingType>
+      <Entries>
+        <EnumEntryDef>
+          <Name>RelativeOrAbsolute</Name>
+          <Value xsi:type="xsd:int">0</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>Absolute</Name>
+          <Value xsi:type="xsd:int">1</Value>
+        </EnumEntryDef>
+        <EnumEntryDef>
+          <Name>Relative</Name>
+          <Value xsi:type="xsd:int">2</Value>
+        </EnumEntryDef>
+      </Entries>
+    </EnumDef>
   </Enums>
   <Objects>
     <ObjectDef>
@@ -52172,7 +52192,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.Application</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52188,7 +52208,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.DebugSettings</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52202,7 +52222,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.DispatcherShutdownMode</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52216,7 +52236,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.FocusVisualKind</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52230,7 +52250,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ApplicationHighContrastAdjustment</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52244,7 +52264,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ApplicationTheme</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52258,7 +52278,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52287,7 +52307,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52301,7 +52321,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52315,7 +52335,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52329,7 +52349,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52343,7 +52363,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52357,7 +52377,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52371,7 +52391,7 @@
           <Type>
             <Name>Microsoft.UI.Xaml.LayoutCycleTracingLevel</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52396,7 +52416,7 @@
           <Type>
             <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52410,7 +52430,7 @@
           <Type>
             <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52424,7 +52444,7 @@
           <Type>
             <Name>System.Int32</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52438,7 +52458,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52452,7 +52472,7 @@
           <Type>
             <Name>System.Object</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52466,7 +52486,7 @@
           <Type>
             <Name>System.Collections.Generic.IList`1[Microsoft.UI.Xaml.ResourceDictionary]</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52480,7 +52500,7 @@
           <Type>
             <Name>System.Uri</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52494,7 +52514,7 @@
           <Type>
             <Name>System.Collections.Generic.IDictionary`2[System.Object,System.Object]</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52508,7 +52528,7 @@
           <Type>
             <Name>Windows.UI.Core.CoreDispatcher</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52522,7 +52542,7 @@
           <Type>
             <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52551,7 +52571,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52565,7 +52585,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52579,7 +52599,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52593,7 +52613,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52607,7 +52627,7 @@
           <Type>
             <Name>System.UriHostNameType</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52621,7 +52641,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52635,7 +52655,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52649,7 +52669,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52663,7 +52683,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52677,7 +52697,7 @@
           <Type>
             <Name>System.String[]</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>true</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52691,7 +52711,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52705,7 +52725,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52719,7 +52739,7 @@
           <Type>
             <Name>System.Int32</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52733,7 +52753,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52747,7 +52767,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52761,7 +52781,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52775,7 +52795,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52789,7 +52809,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52803,7 +52823,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52817,7 +52837,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52831,7 +52851,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52845,7 +52865,7 @@
           <Type>
             <Name>System.String</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>false</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -52863,7 +52883,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52879,7 +52899,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52891,7 +52911,7 @@
               <Type>
                 <Name>System.Boolean</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>true</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52907,7 +52927,7 @@
               <Type>
                 <Name>System.Uri</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52919,7 +52939,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>true</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52931,7 +52951,7 @@
               <Type>
                 <Name>System.Boolean</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>true</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52947,7 +52967,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52959,7 +52979,7 @@
               <Type>
                 <Name>System.UriKind</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>true</IsValueType>
+                <IsEnum>true</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52975,7 +52995,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -52987,7 +53007,7 @@
               <Type>
                 <Name>System.UriCreationOptions</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>true</IsByRef>
                 <IsIn>true</IsIn>
@@ -53003,7 +53023,7 @@
               <Type>
                 <Name>System.Uri</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -53015,7 +53035,7 @@
               <Type>
                 <Name>System.String</Name>
                 <IsNullable>true</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -53031,7 +53051,7 @@
               <Type>
                 <Name>System.Uri</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -53043,7 +53063,7 @@
               <Type>
                 <Name>System.Uri</Name>
                 <IsNullable>false</IsNullable>
-                <IsValueType>false</IsValueType>
+                <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
@@ -53053,6 +53073,31 @@
           </Parameters>
         </MethodDef>
       </Constructors>
+      <StaticMethods />
+      <InstanceMethods />
+    </ObjectDef>
+    <ObjectDef>
+      <Name>UriCreationOptions</Name>
+      <FullName>System.UriCreationOptions, System.Private.Uri</FullName>
+      <Namespace>System</Namespace>
+      <StaticProperties />
+      <InstanceProperties>
+        <PropertyDef>
+          <Name>DangerousDisablePathAndQueryCanonicalization</Name>
+          <Type>
+            <Name>System.Boolean</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+          </Type>
+          <CanRead>true</CanRead>
+          <CanWrite>true</CanWrite>
+        </PropertyDef>
+      </InstanceProperties>
+      <Constructors />
       <StaticMethods />
       <InstanceMethods />
     </ObjectDef>
@@ -53067,7 +53112,7 @@
           <Type>
             <Name>Windows.UI.Core.CoreDispatcherPriority</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>true</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -53081,7 +53126,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
@@ -53106,7 +53151,7 @@
           <Type>
             <Name>System.Boolean</Name>
             <IsNullable>false</IsNullable>
-            <IsValueType>true</IsValueType>
+            <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>

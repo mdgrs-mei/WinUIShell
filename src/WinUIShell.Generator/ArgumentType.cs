@@ -4,9 +4,9 @@ namespace WinUIShell.Generator;
 
 internal class ArgumentType
 {
-    private string _name = "";
+    private readonly string _name = "";
     public bool IsNullable { get; internal set; }
-    public bool IsPrimitiveType { get; internal set; }
+    public bool IsRpcSupportedType { get; internal set; }
     public bool IsArray { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsSupported { get; internal set; } = true;
@@ -40,7 +40,7 @@ internal class ArgumentType
     public ArgumentType(Api.ArgumentType apiArgumentType)
     {
         var serverTypeName = apiArgumentType.Name;
-        IsPrimitiveType = apiArgumentType.IsValueType;
+        IsRpcSupportedType = apiArgumentType.IsEnum;
         IsArray = apiArgumentType.IsArray;
 
         if (serverTypeName.StartsWith("WinUIShell.Server"))
@@ -57,7 +57,7 @@ internal class ArgumentType
         if (TryReplaceSystemType(serverTypeName, out var systemTypeName))
         {
             _name = systemTypeName!;
-            IsPrimitiveType = true;
+            IsRpcSupportedType = true;
         }
         else
         {
@@ -65,7 +65,7 @@ internal class ArgumentType
             IsSupported = IsSupportedType(serverTypeName);
         }
 
-        IsNullable = IsNullable || !IsPrimitiveType;
+        IsNullable = IsNullable || !IsRpcSupportedType;
     }
 
     private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)
@@ -102,5 +102,22 @@ internal class ArgumentType
     public string GetTypeExpression()
     {
         return $"{_name}{(IsNullable ? "?" : "")}";
+    }
+
+    public string GetValueExpression()
+    {
+        if (IsRpcSupportedType)
+        {
+            return "value";
+        }
+        else
+        if (IsObject)
+        {
+            return "(value is WinUIShellObject v ? v.Id : value)";
+        }
+        else
+        {
+            return "value?.Id";
+        }
     }
 }

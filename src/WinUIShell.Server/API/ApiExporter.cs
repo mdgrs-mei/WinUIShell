@@ -22,6 +22,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddEnumsInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
         AddEnum(typeof(EventCallbackRunspaceMode));
         AddEnum(typeof(UriHostNameType));
+        AddEnum(typeof(UriKind));
     }
 
     private void AddEnumsInAssembly(Type representativeTypeInAssembly)
@@ -68,6 +69,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
         AddObject(typeof(Uri));
+        AddObject(typeof(UriCreationOptions));
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
     }
@@ -114,7 +116,7 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             Name = propertyType.ToString(),
             IsNullable = Reflection.IsNullable(propertyInfo),
-            IsValueType = propertyType.IsValueType,
+            IsEnum = propertyType.IsEnum,
             IsArray = propertyType.IsArray,
         };
 
@@ -134,7 +136,7 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             Name = type.ToString().Replace("&", "", StringComparison.Ordinal),
             IsNullable = Reflection.IsNullable(parameterInfo),
-            IsValueType = type.IsValueType,
+            IsEnum = type.IsEnum,
             IsArray = type.IsArray,
             IsByRef = type.IsByRef,
             IsIn = parameterInfo.IsIn,

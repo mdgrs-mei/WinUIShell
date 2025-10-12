@@ -128,7 +128,7 @@ internal static class ObjectGenerator
                 if (property.CanWrite)
                 {
                     _ = sourceCode.Append($$"""
-                                set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{GenerateValueString(propertyType)}});
+                                set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{propertyType.GetValueExpression()}});
 
                         """);
                 }
@@ -141,22 +141,4 @@ internal static class ObjectGenerator
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
         }
     }
-
-    private static string GenerateValueString(ArgumentType argumentType)
-    {
-        if (argumentType.IsPrimitiveType)
-        {
-            return "value";
-        }
-        else
-        if (argumentType.IsObject)
-        {
-            return "(value is WinUIShellObject v ? v.Id : value)";
-        }
-        else
-        {
-            return "value?.Id";
-        }
-    }
-
 }

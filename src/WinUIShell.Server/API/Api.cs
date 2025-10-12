@@ -47,7 +47,7 @@ public class Api
     {
         public string Name { get; set; } = "";
         public bool IsNullable { get; set; }
-        public bool IsValueType { get; set; }
+        public bool IsEnum { get; set; }
         public bool IsArray { get; set; }
         public bool IsByRef { get; set; }
         public bool IsIn { get; set; }
