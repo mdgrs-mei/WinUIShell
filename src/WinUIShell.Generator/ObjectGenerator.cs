@@ -136,9 +136,77 @@ internal static class ObjectGenerator
                 _ = sourceCode.Append("    }\r\n");
             }
 
+            foreach (var method in objectDef.StaticMethods)
+            {
+                if (!IsParametersAllSupported(method.Parameters))
+                    continue;
+
+                var returnType = new ArgumentType(method.ReturnType!);
+                if (returnType.IsVoid)
+                {
+                    _ = sourceCode.Append($$"""
+
+                        public static void {{method.Name}}({{GetParametersExpression(method.Parameters)}})
+                        {
+                            CommandClient.Get().InvokeStaticMethod(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{method.Name}}){{GetArgumentsExpression(method.Parameters)}});
+                        }
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
+
+                        public static {{returnType.GetTypeExpression()}} {{method.Name}}({{GetParametersExpression(method.Parameters)}})
+                        {
+                            return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{method.Name}}){{GetArgumentsExpression(method.Parameters)}});
+                        }
+
+                    """);
+                }
+            }
+
             _ = sourceCode.Append("}\r\n");
 
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
         }
+    }
+
+    private static string GetParametersExpression(List<Api.ParameterDef> parameters)
+    {
+        StringBuilder builder = new();
+        string commaSpace = "";
+        foreach (var parameter in parameters)
+        {
+            var parameterType = new ArgumentType(parameter.Type);
+            _ = builder.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
+            commaSpace = ", ";
+        }
+        return builder.ToString();
+    }
+
+    private static string GetArgumentsExpression(List<Api.ParameterDef> parameters)
+    {
+        StringBuilder builder = new();
+        foreach (var parameter in parameters)
+        {
+            _ = builder.Append($", {parameter.Name}");
+        }
+        return builder.ToString();
+    }
+
+    private static bool IsParametersAllSupported(List<Api.ParameterDef> parameters)
+    {
+        foreach (var parameter in parameters)
+        {
+            var parameterType = new ArgumentType(parameter.Type);
+            if (!parameterType.IsSupported)
+                return false;
+        }
+        return true;
     }
 }

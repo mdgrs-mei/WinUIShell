@@ -9,6 +9,7 @@ internal class ArgumentType
     public bool IsRpcSupportedType { get; internal set; }
     public bool IsArray { get; internal set; }
     public bool IsObject { get; internal set; }
+    public bool IsVoid { get; internal set; }
     public bool IsSupported { get; internal set; } = true;
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
@@ -27,7 +28,6 @@ internal class ArgumentType
         ("System.Int16", "short"),
         ("System.UInt16", "ushort"),
         ("System.String", "string"),
-        ("System.Void", "void")
     ];
 
     private static readonly List<string> _unsupportedTypes =
@@ -35,6 +35,7 @@ internal class ArgumentType
         "System.Collections.Generic.ICollection",
         "System.Collections.Generic.IList",
         "System.Collections.Generic.IDictionary",
+        "System.IntPtr",
     ];
 
     public ArgumentType(Api.ArgumentType apiArgumentType)
@@ -52,6 +53,13 @@ internal class ArgumentType
         {
             _name = "object";
             IsObject = true;
+        }
+        else
+        if (serverTypeName == "System.Void")
+        {
+            _name = "void";
+            IsVoid = true;
+            IsRpcSupportedType = true;
         }
         else
         if (TryReplaceSystemType(serverTypeName, out var systemTypeName))
