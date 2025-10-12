@@ -4,7 +4,7 @@ namespace WinUIShell.Generator;
 
 internal class ArgumentType
 {
-    public string Name { get; internal set; } = "";
+    private string _name = "";
     public bool IsNullable { get; internal set; }
     public bool IsPrimitiveType { get; internal set; }
     public bool IsArray { get; internal set; }
@@ -45,23 +45,23 @@ internal class ArgumentType
 
         if (serverTypeName.StartsWith("WinUIShell.Server"))
         {
-            Name = serverTypeName.Replace("WinUIShell.Server", "WinUIShell");
+            _name = serverTypeName.Replace("WinUIShell.Server", "WinUIShell");
         }
         else
         if (serverTypeName == "System.Object")
         {
-            Name = "object";
+            _name = "object";
             IsObject = true;
         }
         else
         if (TryReplaceSystemType(serverTypeName, out var systemTypeName))
         {
-            Name = systemTypeName!;
+            _name = systemTypeName!;
             IsPrimitiveType = true;
         }
         else
         {
-            Name = $"WinUIShell.{serverTypeName}";
+            _name = $"WinUIShell.{serverTypeName}";
             IsSupported = IsSupportedType(serverTypeName);
         }
 
@@ -92,5 +92,15 @@ internal class ArgumentType
             }
         }
         return true;
+    }
+
+    public string GetName()
+    {
+        return _name;
+    }
+
+    public string GetTypeExpression()
+    {
+        return $"{_name}{(IsNullable ? "?" : "")}";
     }
 }

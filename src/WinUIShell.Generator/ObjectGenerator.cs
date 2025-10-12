@@ -32,6 +32,41 @@ internal static class ObjectGenerator
 
                 """);
 
+            foreach (var constructor in objectDef.Constructors)
+            {
+                _ = sourceCode.Append($$"""
+
+                        public {{objectDef.Name}}(
+                    """);
+
+
+                string commaSpace = "";
+                foreach (var parameter in constructor.Parameters)
+                {
+                    var parameterType = new ArgumentType(parameter.Type);
+                    _ = sourceCode.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
+                    commaSpace = ", ";
+                }
+
+                _ = sourceCode.Append($$"""
+                    )
+                        {
+                            Id = CommandClient.Get().CreateObject(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                this
+                    """);
+
+                foreach (var parameter in constructor.Parameters)
+                {
+                    _ = sourceCode.Append($",\r\n            {parameter.Name}");
+                }
+                _ = sourceCode.Append($$"""
+                    );
+                        }
+
+                    """);
+            }
+
             foreach (var property in objectDef.StaticProperties)
             {
                 var propertyType = new ArgumentType(property.Type);
@@ -40,7 +75,7 @@ internal static class ObjectGenerator
 
                 _ = sourceCode.Append($$"""
 
-                        public static {{propertyType.Name}}{{(propertyType.IsNullable ? "?" : "")}} {{property.Name}}
+                        public static {{propertyType.GetTypeExpression()}} {{property.Name}}
                         {
 
                     """);
@@ -48,7 +83,7 @@ internal static class ObjectGenerator
                 if (property.CanRead)
                 {
                     _ = sourceCode.Append($$"""
-                                get => PropertyAccessor.GetStatic<{{propertyType.Name}}>(
+                                get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}>(
                                     ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
                                     nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
 
@@ -77,7 +112,7 @@ internal static class ObjectGenerator
 
                 _ = sourceCode.Append($$"""
 
-                        public {{propertyType.Name}}{{(propertyType.IsNullable ? "?" : "")}} {{property.Name}}
+                        public {{propertyType.GetTypeExpression()}} {{property.Name}}
                         {
 
                     """);
@@ -85,7 +120,7 @@ internal static class ObjectGenerator
                 if (property.CanRead)
                 {
                     _ = sourceCode.Append($$"""
-                                get => PropertyAccessor.Get<{{propertyType.Name}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+                                get => PropertyAccessor.Get<{{propertyType.GetName()}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
 
                         """);
                 }
