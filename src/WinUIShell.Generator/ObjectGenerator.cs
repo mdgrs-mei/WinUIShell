@@ -34,34 +34,16 @@ internal static class ObjectGenerator
 
             foreach (var constructor in objectDef.Constructors)
             {
-                _ = sourceCode.Append($$"""
-
-                        public {{objectDef.Name}}(
-                    """);
-
-
-                string commaSpace = "";
-                foreach (var parameter in constructor.Parameters)
-                {
-                    var parameterType = new ArgumentType(parameter.Type);
-                    _ = sourceCode.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
-                    commaSpace = ", ";
-                }
+                if (!IsParametersAllSupported(constructor.Parameters))
+                    continue;
 
                 _ = sourceCode.Append($$"""
-                    )
+
+                        public {{objectDef.Name}}({{GetParametersExpression(constructor.Parameters)}})
                         {
                             Id = CommandClient.Get().CreateObject(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                this
-                    """);
-
-                foreach (var parameter in constructor.Parameters)
-                {
-                    _ = sourceCode.Append($",\r\n            {parameter.Name}");
-                }
-                _ = sourceCode.Append($$"""
-                    );
+                                this{{GetArgumentsExpression(constructor.Parameters)}});
                         }
 
                     """);
