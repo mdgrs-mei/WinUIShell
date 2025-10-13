@@ -162,7 +162,8 @@ public class ApiExporter : Singleton<ApiExporter>
                 IsByRef = returnType.IsByRef,
                 IsIn = returnParameter.IsIn,
                 IsOut = returnParameter.IsOut,
-            }
+            },
+            IsGenericMethod = methodInfo.IsGenericMethod
         };
 
         var parameters = methodInfo.GetParameters();

@@ -52291,6 +52291,7 @@
       <Constructors>
         <MethodDef>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -52306,6 +52307,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>true</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Start</Name>
@@ -52332,6 +52334,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52370,6 +52373,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52420,6 +52424,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -52446,6 +52451,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52474,6 +52480,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -52500,6 +52507,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -52513,6 +52521,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Exit</Name>
@@ -52526,6 +52535,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -52539,6 +52549,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -52552,6 +52563,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -52687,6 +52699,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52715,6 +52728,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -52741,6 +52755,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -52754,6 +52769,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -52767,6 +52783,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -52780,6 +52797,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -52933,6 +52951,7 @@
       <Constructors>
         <MethodDef>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -52961,6 +52980,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52989,6 +53009,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -53015,6 +53036,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -53028,6 +53050,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -53066,6 +53089,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ContainsKey</Name>
@@ -53092,6 +53116,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Remove</Name>
@@ -53118,6 +53143,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryGetValue</Name>
@@ -53156,6 +53182,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -53182,6 +53209,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Clear</Name>
@@ -53195,6 +53223,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Contains</Name>
@@ -53221,6 +53250,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>CopyTo</Name>
@@ -53259,6 +53289,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetEnumerator</Name>
@@ -53272,6 +53303,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -53298,6 +53330,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetValue</Name>
@@ -53324,6 +53357,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>SetValue</Name>
@@ -53362,6 +53396,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ClearValue</Name>
@@ -53388,6 +53423,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ReadLocalValue</Name>
@@ -53414,6 +53450,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetAnimationBaseValue</Name>
@@ -53440,6 +53477,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>RegisterPropertyChangedCallback</Name>
@@ -53478,6 +53516,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>UnregisterPropertyChangedCallback</Name>
@@ -53516,6 +53555,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -53529,6 +53569,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -53542,6 +53583,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -53876,6 +53918,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -53904,6 +53947,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -53944,6 +53988,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -53972,6 +54017,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54000,6 +54046,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54028,6 +54075,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54056,6 +54104,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -54084,6 +54133,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>HexEscape</Name>
@@ -54110,6 +54160,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>HexUnescape</Name>
@@ -54148,6 +54199,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>IsHexEncoding</Name>
@@ -54186,6 +54238,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>CheckSchemeName</Name>
@@ -54212,6 +54265,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>IsHexDigit</Name>
@@ -54238,6 +54292,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>FromHex</Name>
@@ -54264,6 +54319,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54314,6 +54370,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54364,6 +54421,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54414,6 +54472,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54464,6 +54523,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Compare</Name>
@@ -54538,6 +54598,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedUriString</Name>
@@ -54576,6 +54637,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>UnescapeDataString</Name>
@@ -54602,6 +54664,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>EscapeUriString</Name>
@@ -54628,6 +54691,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>EscapeDataString</Name>
@@ -54654,6 +54718,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -54682,6 +54747,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -54695,6 +54761,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -54708,6 +54775,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryFormat</Name>
@@ -54746,6 +54814,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -54772,6 +54841,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelativeUri</Name>
@@ -54798,6 +54868,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelative</Name>
@@ -54824,6 +54895,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetComponents</Name>
@@ -54862,6 +54934,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedOriginalString</Name>
@@ -54875,6 +54948,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>IsBaseOf</Name>
@@ -54901,6 +54975,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -54914,6 +54989,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -54966,6 +55042,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -54979,6 +55056,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -54992,6 +55070,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -55005,6 +55084,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -55070,6 +55150,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -55098,6 +55179,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55124,6 +55206,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -55137,6 +55220,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ProcessEvents</Name>
@@ -55163,6 +55247,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>RunAsync</Name>
@@ -55201,6 +55286,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>RunIdleAsync</Name>
@@ -55227,6 +55313,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -55240,6 +55327,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -55266,6 +55354,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>StopProcessEvents</Name>
@@ -55279,6 +55368,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryRunAsync</Name>
@@ -55317,6 +55407,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryRunIdleAsync</Name>
@@ -55343,6 +55434,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -55356,6 +55448,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -55369,6 +55462,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -55407,6 +55501,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>true</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetForCurrentThread</Name>
@@ -55420,6 +55515,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -55446,6 +55542,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -55474,6 +55571,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55500,6 +55598,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -55513,6 +55612,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>CreateTimer</Name>
@@ -55526,6 +55626,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -55552,6 +55653,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -55590,6 +55692,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>EnqueueEventLoopExit</Name>
@@ -55603,6 +55706,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>EnsureSystemDispatcherQueue</Name>
@@ -55616,6 +55720,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -55629,6 +55734,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -55667,6 +55773,7 @@
               </Type>
             </ParameterDef>
           </Parameters>
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>GetType</Name>
@@ -55680,6 +55787,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -55693,6 +55801,7 @@
             <IsOut>false</IsOut>
           </ReturnType>
           <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>

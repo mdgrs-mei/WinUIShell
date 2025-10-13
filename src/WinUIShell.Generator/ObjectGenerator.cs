@@ -32,18 +32,19 @@ internal static class ObjectGenerator
 
                 """);
 
-            foreach (var constructor in objectDef.Constructors)
+            foreach (var constructorDef in objectDef.Constructors)
             {
-                if (!IsParametersAllSupported(constructor.Parameters))
+                var method = new Method(constructorDef);
+                if (!method.IsSupported())
                     continue;
 
                 _ = sourceCode.Append($$"""
 
-                        public {{objectDef.Name}}({{GetParametersExpression(constructor.Parameters)}})
+                        public {{objectDef.Name}}({{method.GetParametersExpression()}})
                         {
                             Id = CommandClient.Get().CreateObject(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                this{{GetArgumentsExpression(constructor.Parameters)}});
+                                this{{method.GetArgumentsExpression()}});
                         }
 
                     """);
@@ -118,21 +119,22 @@ internal static class ObjectGenerator
                 _ = sourceCode.Append("    }\r\n");
             }
 
-            foreach (var method in objectDef.StaticMethods)
+            foreach (var methodDef in objectDef.StaticMethods)
             {
-                if (!IsParametersAllSupported(method.Parameters))
+                var method = new Method(methodDef);
+                if (!method.IsSupported())
                     continue;
 
-                var returnType = new ArgumentType(method.ReturnType!);
+                var returnType = method.ReturnType!;
                 if (returnType.IsVoid)
                 {
                     _ = sourceCode.Append($$"""
 
-                        public static void {{method.Name}}({{GetParametersExpression(method.Parameters)}})
+                        public static void {{method.GetName()}}({{method.GetParametersExpression()}})
                         {
                             CommandClient.Get().InvokeStaticMethod(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                nameof({{method.Name}}){{GetArgumentsExpression(method.Parameters)}});
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
                         }
 
                     """);
@@ -141,11 +143,11 @@ internal static class ObjectGenerator
                 {
                     _ = sourceCode.Append($$"""
 
-                        public static {{returnType.GetTypeExpression()}} {{method.Name}}({{GetParametersExpression(method.Parameters)}})
+                        public static {{returnType.GetTypeExpression()}} {{method.GetName()}}({{method.GetParametersExpression()}})
                         {
                             return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                nameof({{method.Name}}){{GetArgumentsExpression(method.Parameters)}});
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
                         }
 
                     """);
@@ -156,39 +158,5 @@ internal static class ObjectGenerator
 
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
         }
-    }
-
-    private static string GetParametersExpression(List<Api.ParameterDef> parameters)
-    {
-        StringBuilder builder = new();
-        string commaSpace = "";
-        foreach (var parameter in parameters)
-        {
-            var parameterType = new ArgumentType(parameter.Type);
-            _ = builder.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
-            commaSpace = ", ";
-        }
-        return builder.ToString();
-    }
-
-    private static string GetArgumentsExpression(List<Api.ParameterDef> parameters)
-    {
-        StringBuilder builder = new();
-        foreach (var parameter in parameters)
-        {
-            _ = builder.Append($", {parameter.Name}");
-        }
-        return builder.ToString();
-    }
-
-    private static bool IsParametersAllSupported(List<Api.ParameterDef> parameters)
-    {
-        foreach (var parameter in parameters)
-        {
-            var parameterType = new ArgumentType(parameter.Type);
-            if (!parameterType.IsSupported)
-                return false;
-        }
-        return true;
     }
 }

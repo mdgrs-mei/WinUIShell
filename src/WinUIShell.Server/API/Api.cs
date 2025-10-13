@@ -59,6 +59,7 @@ public class Api
         public string? Name { get; set; }
         public ArgumentType? ReturnType { get; set; }
         public List<ParameterDef> Parameters { get; } = [];
+        public bool IsGenericMethod { get; set; }
     }
 
     public class ParameterDef
