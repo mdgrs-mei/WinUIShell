@@ -70,10 +70,10 @@ internal class ArgumentType
         else
         {
             _name = $"WinUIShell.{serverTypeName}";
-            IsSupported = IsSupportedType(serverTypeName);
         }
 
         IsNullable = IsNullable || !IsRpcSupportedType;
+        IsSupported = IsSupportedType(serverTypeName) && !apiArgumentType.IsDelegate;
     }
 
     private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)

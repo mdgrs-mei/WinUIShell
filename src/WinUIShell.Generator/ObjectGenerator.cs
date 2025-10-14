@@ -147,7 +147,7 @@ internal static class ObjectGenerator
                         {
                             return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                         }
 
                     """);

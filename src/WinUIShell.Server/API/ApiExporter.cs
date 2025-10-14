@@ -23,6 +23,9 @@ public class ApiExporter : Singleton<ApiExporter>
         AddEnum(typeof(EventCallbackRunspaceMode));
         AddEnum(typeof(UriHostNameType));
         AddEnum(typeof(UriKind));
+        AddEnum(typeof(UriComponents));
+        AddEnum(typeof(UriFormat));
+        AddEnum(typeof(StringComparison));
     }
 
     private void AddEnumsInAssembly(Type representativeTypeInAssembly)
@@ -188,6 +191,7 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = name,
             IsEnum = type.IsEnum,
             IsArray = type.IsArray,
+            IsDelegate = typeof(Delegate).IsAssignableFrom(type),
             IsByRef = type.IsByRef,
         };
     }
