@@ -117,13 +117,8 @@ public class ApiExporter : Singleton<ApiExporter>
     private Api.PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
     {
         var propertyType = propertyInfo.PropertyType;
-        var argumentType = new Api.ArgumentType
-        {
-            Name = propertyType.ToString(),
-            IsNullable = Reflection.IsNullable(propertyInfo),
-            IsEnum = propertyType.IsEnum,
-            IsArray = propertyType.IsArray,
-        };
+        var argumentType = GetArgumentType(propertyType);
+        argumentType.IsNullable = Reflection.IsNullable(propertyInfo);
 
         return new Api.PropertyDef
         {
@@ -147,22 +142,16 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private Api.MethodDef GetMethodDef(MethodInfo methodInfo)
     {
-        var returnType = methodInfo.ReturnType;
         var returnParameter = methodInfo.ReturnParameter;
+        var returnType = GetArgumentType(methodInfo.ReturnType);
+        returnType.IsNullable = Reflection.IsNullable(returnParameter);
+        returnType.IsIn = returnParameter.IsIn;
+        returnType.IsOut = returnParameter.IsOut;
 
         var methodDef = new Api.MethodDef
         {
             Name = methodInfo.Name,
-            ReturnType = new Api.ArgumentType
-            {
-                Name = returnType.ToString(),
-                IsNullable = Reflection.IsNullable(returnParameter),
-                IsEnum = returnType.IsEnum,
-                IsArray = returnType.IsArray,
-                IsByRef = returnType.IsByRef,
-                IsIn = returnParameter.IsIn,
-                IsOut = returnParameter.IsOut,
-            },
+            ReturnType = returnType,
             IsGenericMethod = methodInfo.IsGenericMethod
         };
 
@@ -177,21 +166,29 @@ public class ApiExporter : Singleton<ApiExporter>
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)
     {
         var type = parameterInfo.ParameterType;
-        var argumentType = new Api.ArgumentType
-        {
-            Name = type.ToString().Replace("&", "", StringComparison.Ordinal),
-            IsNullable = Reflection.IsNullable(parameterInfo),
-            IsEnum = type.IsEnum,
-            IsArray = type.IsArray,
-            IsByRef = type.IsByRef,
-            IsIn = parameterInfo.IsIn,
-            IsOut = parameterInfo.IsOut,
-        };
+        var argumentType = GetArgumentType(type);
+        argumentType.IsNullable = Reflection.IsNullable(parameterInfo);
+        argumentType.IsIn = parameterInfo.IsIn;
+        argumentType.IsOut = parameterInfo.IsOut;
 
         return new Api.ParameterDef
         {
             Name = parameterInfo.Name,
             Type = argumentType,
+        };
+    }
+
+    private Api.ArgumentType GetArgumentType(Type type)
+    {
+        string name = type.ToString().Replace("&", "", StringComparison.Ordinal);
+        name = name.Replace("[]", "", StringComparison.Ordinal);
+
+        return new Api.ArgumentType
+        {
+            Name = name,
+            IsEnum = type.IsEnum,
+            IsArray = type.IsArray,
+            IsByRef = type.IsByRef,
         };
     }
 

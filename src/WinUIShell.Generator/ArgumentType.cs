@@ -80,7 +80,7 @@ internal class ArgumentType
     {
         foreach (var (FullName, ShortName) in _systemTypes)
         {
-            if (typeName.Contains(FullName))
+            if (typeName == FullName)
             {
                 systemTypeName = typeName.Replace(FullName, ShortName);
                 return true;

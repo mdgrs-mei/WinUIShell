@@ -53267,7 +53267,7 @@
             <ParameterDef>
               <Name>array</Name>
               <Type>
-                <Name>System.Collections.Generic.KeyValuePair`2[System.Object,System.Object][]</Name>
+                <Name>System.Collections.Generic.KeyValuePair`2[System.Object,System.Object]</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>true</IsArray>
@@ -53722,7 +53722,7 @@
         <PropertyDef>
           <Name>Segments</Name>
           <Type>
-            <Name>System.String[]</Name>
+            <Name>System.String</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>true</IsArray>
