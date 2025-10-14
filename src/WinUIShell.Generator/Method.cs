@@ -68,7 +68,8 @@ internal class Method
         StringBuilder builder = new();
         foreach (var parameter in _methodDef.Parameters)
         {
-            _ = builder.Append($", {parameter.Name}");
+            var argumentType = new ArgumentType(parameter.Type);
+            _ = builder.Append($", {argumentType.GetArgumentExpression(parameter.Name!)}");
         }
         return builder.ToString();
     }

@@ -128,4 +128,21 @@ internal class ArgumentType
             return "value?.Id";
         }
     }
+
+    public string GetArgumentExpression(string variableName)
+    {
+        if (IsRpcSupportedType)
+        {
+            return variableName;
+        }
+        else
+        if (IsObject)
+        {
+            return $"({variableName} is WinUIShellObject v ? v.Id : {variableName})";
+        }
+        else
+        {
+            return $"{variableName}?.Id";
+        }
+    }
 }

@@ -154,6 +154,41 @@ internal static class ObjectGenerator
                 }
             }
 
+            foreach (var methodDef in objectDef.InstanceMethods)
+            {
+                var method = new Method(methodDef);
+                if (!method.IsSupported())
+                    continue;
+
+                var returnType = method.ReturnType!;
+                if (returnType.IsVoid)
+                {
+                    _ = sourceCode.Append($$"""
+
+                        public void {{method.GetName()}}({{method.GetParametersExpression()}})
+                        {
+                            CommandClient.Get().InvokeMethod(
+                                Id,
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                        }
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
+
+                        public {{returnType.GetTypeExpression()}} {{method.GetName()}}({{method.GetParametersExpression()}})
+                        {
+                            return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
+                                Id,
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                        }
+
+                    """);
+                }
+            }
+
             _ = sourceCode.Append("}\r\n");
 
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
