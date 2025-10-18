@@ -185,17 +185,56 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private Api.ArgumentType GetArgumentType(Type type)
     {
-        string name = type.ToString().Replace("&", "", StringComparison.Ordinal);
-        name = name.Replace("[]", "", StringComparison.Ordinal);
-
-        return new Api.ArgumentType
+        var name = GetArgumentTypeName(type);
+        var argumentType = new Api.ArgumentType
         {
             Name = name,
+            IsNullable = Reflection.IsNullable(type),
             IsEnum = type.IsEnum,
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
             IsByRef = type.IsByRef,
+            IsGenericType = type.IsGenericType
         };
+
+        if (type.IsArray)
+        {
+            var elementType = type.GetElementType();
+            argumentType.ElementType = GetArgumentType(elementType!);
+        }
+
+        if (type.IsGenericType)
+        {
+            foreach (var genericTypeArgument in type.GenericTypeArguments)
+            {
+                argumentType.GenericTypeArguments.Add(GetArgumentType(genericTypeArgument));
+            }
+        }
+
+        return argumentType;
+    }
+
+    private string GetArgumentTypeName(Type type)
+    {
+        if (type.IsArray)
+        {
+            return "Array";
+        }
+
+        // Remove ByRef expression.
+        string name = type.ToString().Replace("&", "", StringComparison.Ordinal);
+
+        // Remove Array expression.
+        name = name.Replace("[]", "", StringComparison.Ordinal);
+
+        // Remove Generic expression.
+        var genericSeparator = name.IndexOf('`', StringComparison.Ordinal);
+        if (genericSeparator >= 0)
+        {
+            name = name[..genericSeparator];
+        }
+
+        return name;
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)

@@ -5,12 +5,18 @@ namespace WinUIShell.Generator;
 internal class ArgumentType
 {
     private readonly string _name = "";
+    private readonly Api.ArgumentType _apiArgumentType;
+    private readonly ArgumentType? _elementType;
+    private readonly List<ArgumentType>? _genericTypeArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
-    public bool IsArray { get; internal set; }
+    public bool IsArray
+    {
+        get => _apiArgumentType.IsArray;
+    }
+
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
-    public bool IsSupported { get; internal set; } = true;
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -40,9 +46,10 @@ internal class ArgumentType
 
     public ArgumentType(Api.ArgumentType apiArgumentType)
     {
+        _apiArgumentType = apiArgumentType;
+
         var serverTypeName = apiArgumentType.Name;
         IsRpcSupportedType = apiArgumentType.IsEnum;
-        IsArray = apiArgumentType.IsArray;
 
         if (serverTypeName.StartsWith("WinUIShell.Server"))
         {
@@ -72,8 +79,20 @@ internal class ArgumentType
             _name = $"WinUIShell.{serverTypeName}";
         }
 
-        IsNullable = IsNullable || !IsRpcSupportedType;
-        IsSupported = IsSupportedType(serverTypeName) && !apiArgumentType.IsDelegate;
+        IsNullable = apiArgumentType.IsNullable || !IsRpcSupportedType;
+
+        if (apiArgumentType.ElementType is not null)
+        {
+            _elementType = new ArgumentType(apiArgumentType.ElementType);
+        }
+        if (apiArgumentType.GenericTypeArguments.Count > 0)
+        {
+            _genericTypeArguments = [];
+            foreach (var genericTypeArgument in apiArgumentType.GenericTypeArguments)
+            {
+                _genericTypeArguments.Add(new ArgumentType(genericTypeArgument));
+            }
+        }
     }
 
     private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)
@@ -102,14 +121,36 @@ internal class ArgumentType
         return true;
     }
 
+    public bool IsSupported()
+    {
+        if (!IsSupportedType(_apiArgumentType.Name))
+            return false;
+
+        if (_apiArgumentType.IsDelegate)
+            return false;
+
+        return true;
+    }
+
     public string GetName()
     {
+        if (_elementType is not null)
+        {
+            return $"{_elementType.GetName()}[]";
+        }
+
+        if (_genericTypeArguments is not null)
+        {
+            var genericTypeArgumentsNames = _genericTypeArguments.Select(t => t.GetName());
+            return $"{_name}<{string.Join(", ", genericTypeArgumentsNames)}>";
+        }
+
         return _name;
     }
 
     public string GetTypeExpression()
     {
-        return $"{_name}{(IsNullable ? "?" : "")}";
+        return $"{GetName()}{(IsNullable ? "?" : "")}";
     }
 
     public string GetValueExpression()

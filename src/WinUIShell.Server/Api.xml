@@ -52326,6 +52326,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52343,6 +52345,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52358,6 +52362,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52373,6 +52379,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52388,6 +52396,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52403,6 +52413,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52418,6 +52430,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52443,6 +52457,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
@@ -52460,6 +52476,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52473,6 +52491,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52491,6 +52511,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52504,6 +52526,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -52517,6 +52541,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52535,6 +52561,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52548,6 +52576,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -52561,6 +52591,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -52574,6 +52606,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52592,6 +52626,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52605,6 +52641,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52625,6 +52663,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52638,6 +52678,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52656,6 +52698,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52669,6 +52713,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52687,6 +52733,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -52704,6 +52752,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -52729,6 +52779,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52744,6 +52796,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52759,6 +52813,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52774,6 +52830,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52789,6 +52847,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52804,6 +52864,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52819,6 +52881,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -52837,6 +52901,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52850,6 +52916,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52870,6 +52938,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52883,6 +52953,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52901,6 +52973,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -52914,6 +52988,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -52932,6 +53008,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -52949,7 +53027,7 @@
         <PropertyDef>
           <Name>Keys</Name>
           <Type>
-            <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
+            <Name>System.Collections.Generic.ICollection</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -52957,6 +53035,21 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Object</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52964,7 +53057,7 @@
         <PropertyDef>
           <Name>Values</Name>
           <Type>
-            <Name>System.Collections.Generic.ICollection`1[System.Object]</Name>
+            <Name>System.Collections.Generic.ICollection</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -52972,6 +53065,21 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Object</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -52987,6 +53095,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53002,6 +53112,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53017,6 +53129,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -53024,7 +53138,7 @@
         <PropertyDef>
           <Name>MergedDictionaries</Name>
           <Type>
-            <Name>System.Collections.Generic.IList`1[Microsoft.UI.Xaml.ResourceDictionary]</Name>
+            <Name>System.Collections.Generic.IList</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -53032,6 +53146,21 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53047,6 +53176,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -53054,7 +53185,7 @@
         <PropertyDef>
           <Name>ThemeDictionaries</Name>
           <Type>
-            <Name>System.Collections.Generic.IDictionary`2[System.Object,System.Object]</Name>
+            <Name>System.Collections.Generic.IDictionary</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -53062,6 +53193,33 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Object</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+              <ArgumentType>
+                <Name>System.Object</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53077,6 +53235,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53092,6 +53252,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53117,6 +53279,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53130,6 +53294,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53150,6 +53316,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53163,6 +53331,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53181,6 +53351,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53194,6 +53366,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53212,6 +53386,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -53229,6 +53405,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53242,6 +53420,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53255,6 +53435,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53273,6 +53455,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53286,6 +53470,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53304,6 +53490,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53317,6 +53505,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53335,6 +53525,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -53348,6 +53540,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53361,6 +53555,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53379,12 +53575,14 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
               <Name>item</Name>
               <Type>
-                <Name>System.Collections.Generic.KeyValuePair`2[System.Object,System.Object]</Name>
+                <Name>System.Collections.Generic.KeyValuePair</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
@@ -53392,6 +53590,33 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>true</IsGenericType>
+                <GenericTypeArguments>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                </GenericTypeArguments>
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53410,6 +53635,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -53427,12 +53654,14 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
               <Name>item</Name>
               <Type>
-                <Name>System.Collections.Generic.KeyValuePair`2[System.Object,System.Object]</Name>
+                <Name>System.Collections.Generic.KeyValuePair</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
@@ -53440,6 +53669,33 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>true</IsGenericType>
+                <GenericTypeArguments>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                </GenericTypeArguments>
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53458,12 +53714,14 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
               <Name>array</Name>
               <Type>
-                <Name>System.Collections.Generic.KeyValuePair`2[System.Object,System.Object]</Name>
+                <Name>Array</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>true</IsArray>
@@ -53471,6 +53729,45 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <ElementType>
+                  <Name>System.Collections.Generic.KeyValuePair</Name>
+                  <IsNullable>false</IsNullable>
+                  <IsEnum>false</IsEnum>
+                  <IsArray>false</IsArray>
+                  <IsDelegate>false</IsDelegate>
+                  <IsByRef>false</IsByRef>
+                  <IsIn>false</IsIn>
+                  <IsOut>false</IsOut>
+                  <IsGenericType>true</IsGenericType>
+                  <GenericTypeArguments>
+                    <ArgumentType>
+                      <Name>System.Object</Name>
+                      <IsNullable>false</IsNullable>
+                      <IsEnum>false</IsEnum>
+                      <IsArray>false</IsArray>
+                      <IsDelegate>false</IsDelegate>
+                      <IsByRef>false</IsByRef>
+                      <IsIn>false</IsIn>
+                      <IsOut>false</IsOut>
+                      <IsGenericType>false</IsGenericType>
+                      <GenericTypeArguments />
+                    </ArgumentType>
+                    <ArgumentType>
+                      <Name>System.Object</Name>
+                      <IsNullable>false</IsNullable>
+                      <IsEnum>false</IsEnum>
+                      <IsArray>false</IsArray>
+                      <IsDelegate>false</IsDelegate>
+                      <IsByRef>false</IsByRef>
+                      <IsIn>false</IsIn>
+                      <IsOut>false</IsOut>
+                      <IsGenericType>false</IsGenericType>
+                      <GenericTypeArguments />
+                    </ArgumentType>
+                  </GenericTypeArguments>
+                </ElementType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53484,6 +53781,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53494,7 +53793,7 @@
         <MethodDef>
           <Name>GetEnumerator</Name>
           <ReturnType>
-            <Name>System.Collections.Generic.IEnumerator`1[System.Collections.Generic.KeyValuePair`2[System.Object,System.Object]]</Name>
+            <Name>System.Collections.Generic.IEnumerator</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -53502,6 +53801,46 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Collections.Generic.KeyValuePair</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>true</IsGenericType>
+                <GenericTypeArguments>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                  <ArgumentType>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                </GenericTypeArguments>
+              </ArgumentType>
+            </GenericTypeArguments>
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -53527,6 +53866,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53542,6 +53883,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53557,6 +53900,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53572,6 +53917,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53587,6 +53934,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53602,6 +53951,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53617,6 +53968,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53632,6 +53985,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53647,6 +54002,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53654,7 +54011,7 @@
         <PropertyDef>
           <Name>Segments</Name>
           <Type>
-            <Name>System.String</Name>
+            <Name>Array</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>true</IsArray>
@@ -53662,6 +54019,20 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <ElementType>
+              <Name>System.String</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <GenericTypeArguments />
+            </ElementType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53677,6 +54048,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53692,6 +54065,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53707,6 +54082,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53722,6 +54099,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53737,6 +54116,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53752,6 +54133,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53767,6 +54150,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53782,6 +54167,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53797,6 +54184,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53812,6 +54201,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53827,6 +54218,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53842,6 +54235,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -53861,6 +54256,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53881,6 +54278,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53894,6 +54293,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53914,6 +54315,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53927,6 +54330,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53940,6 +54345,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53960,6 +54367,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -53973,6 +54382,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -53993,6 +54404,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54006,6 +54419,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>true</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54026,6 +54441,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54039,6 +54456,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54059,6 +54478,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54072,6 +54493,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54092,6 +54515,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54105,6 +54530,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54123,6 +54550,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54136,6 +54565,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54154,6 +54585,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54167,6 +54600,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54180,6 +54615,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54198,6 +54635,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54211,6 +54650,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54224,6 +54665,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54242,6 +54685,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54255,6 +54700,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54273,6 +54720,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54286,6 +54735,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54304,6 +54755,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54317,6 +54770,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54335,6 +54790,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54348,6 +54805,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54361,6 +54820,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54374,6 +54835,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54392,6 +54855,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54405,6 +54870,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54418,6 +54885,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>true</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54431,6 +54900,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54449,6 +54920,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54462,6 +54935,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54475,6 +54950,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54488,6 +54965,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54506,6 +54985,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54519,6 +55000,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54532,6 +55015,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54545,6 +55030,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54563,6 +55050,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54576,6 +55065,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54589,6 +55080,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54602,6 +55095,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54615,6 +55110,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54628,6 +55125,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54646,6 +55145,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54659,6 +55160,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54672,6 +55175,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54690,6 +55195,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54703,6 +55210,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54721,6 +55230,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54734,6 +55245,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54752,6 +55265,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54765,6 +55280,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54785,6 +55302,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54798,6 +55317,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54816,6 +55337,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -54833,6 +55356,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -54850,12 +55375,14 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
               <Name>destination</Name>
               <Type>
-                <Name>System.Span`1[System.Char]</Name>
+                <Name>System.Span</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
@@ -54863,6 +55390,21 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>true</IsGenericType>
+                <GenericTypeArguments>
+                  <ArgumentType>
+                    <Name>System.Char</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <GenericTypeArguments />
+                  </ArgumentType>
+                </GenericTypeArguments>
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -54876,6 +55418,8 @@
                 <IsByRef>true</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>true</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54894,6 +55438,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54907,6 +55453,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54925,6 +55473,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54938,6 +55488,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54956,6 +55508,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -54969,6 +55523,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -54987,6 +55543,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55000,6 +55558,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -55013,6 +55573,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55031,6 +55593,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55048,6 +55612,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55061,6 +55627,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55087,6 +55655,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -55113,6 +55683,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
@@ -55128,6 +55700,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -55146,6 +55720,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55159,6 +55735,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55179,6 +55757,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55192,6 +55772,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55210,6 +55792,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55223,6 +55807,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55241,6 +55827,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55258,6 +55846,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55271,6 +55861,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55289,6 +55881,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55302,6 +55896,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -55315,6 +55911,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55333,6 +55931,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55346,6 +55946,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55364,6 +55966,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55381,6 +55985,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55394,6 +56000,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55412,6 +56020,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55421,7 +56031,7 @@
         <MethodDef>
           <Name>TryRunAsync</Name>
           <ReturnType>
-            <Name>Windows.Foundation.IAsyncOperation`1[System.Boolean]</Name>
+            <Name>Windows.Foundation.IAsyncOperation</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -55429,6 +56039,21 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Boolean</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55442,6 +56067,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -55455,6 +56082,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55465,7 +56094,7 @@
         <MethodDef>
           <Name>TryRunIdleAsync</Name>
           <ReturnType>
-            <Name>Windows.Foundation.IAsyncOperation`1[System.Boolean]</Name>
+            <Name>Windows.Foundation.IAsyncOperation</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -55473,6 +56102,21 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <GenericTypeArguments>
+              <ArgumentType>
+                <Name>System.Boolean</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
+              </ArgumentType>
+            </GenericTypeArguments>
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55486,6 +56130,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55512,6 +56158,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
@@ -55530,6 +56178,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
@@ -55547,6 +56197,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55564,6 +56216,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55577,6 +56231,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55597,6 +56253,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55610,6 +56268,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55628,6 +56288,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55641,6 +56303,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55659,6 +56323,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55676,6 +56342,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55693,6 +56361,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55706,6 +56376,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55724,6 +56396,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55737,6 +56411,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -55750,6 +56426,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>
@@ -55768,6 +56446,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55785,6 +56465,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55802,6 +56484,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -55819,6 +56503,8 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <GenericTypeArguments />
           </ReturnType>
           <Parameters>
             <ParameterDef>
@@ -55832,6 +56518,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
             <ParameterDef>
@@ -55845,6 +56533,8 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <GenericTypeArguments />
               </Type>
             </ParameterDef>
           </Parameters>

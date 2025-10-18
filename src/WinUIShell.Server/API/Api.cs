@@ -53,6 +53,9 @@ public class Api
         public bool IsByRef { get; set; }
         public bool IsIn { get; set; }
         public bool IsOut { get; set; }
+        public bool IsGenericType { get; set; }
+        public ArgumentType? ElementType { get; set; }
+        public List<ArgumentType> GenericTypeArguments { get; } = [];
     }
 
     public class MethodDef

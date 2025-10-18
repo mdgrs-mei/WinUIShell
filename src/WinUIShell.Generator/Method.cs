@@ -34,14 +34,14 @@ internal class Method
 
         if (ReturnType is not null)
         {
-            if (!ReturnType.IsSupported)
+            if (!ReturnType.IsSupported())
                 return false;
         }
 
         foreach (var parameter in _methodDef.Parameters)
         {
             var parameterType = new ArgumentType(parameter.Type);
-            if (!parameterType.IsSupported)
+            if (!parameterType.IsSupported())
                 return false;
         }
         return true;

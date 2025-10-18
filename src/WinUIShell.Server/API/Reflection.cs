@@ -27,4 +27,9 @@ internal static class Reflection
 
         return false;
     }
+
+    public static bool IsNullable(Type type)
+    {
+        return Nullable.GetUnderlyingType(type) is not null;
+    }
 }

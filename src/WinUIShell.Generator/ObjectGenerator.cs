@@ -53,7 +53,7 @@ internal static class ObjectGenerator
             foreach (var property in objectDef.StaticProperties)
             {
                 var propertyType = new ArgumentType(property.Type);
-                if (!propertyType.IsSupported)
+                if (!propertyType.IsSupported())
                     continue;
 
                 _ = sourceCode.Append($$"""
@@ -90,7 +90,7 @@ internal static class ObjectGenerator
             foreach (var property in objectDef.InstanceProperties)
             {
                 var propertyType = new ArgumentType(property.Type);
-                if (!propertyType.IsSupported)
+                if (!propertyType.IsSupported())
                     continue;
 
                 _ = sourceCode.Append($$"""
