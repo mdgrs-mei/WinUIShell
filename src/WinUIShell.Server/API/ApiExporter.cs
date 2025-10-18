@@ -155,7 +155,9 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             Name = methodInfo.Name,
             ReturnType = returnType,
-            IsGenericMethod = methodInfo.IsGenericMethod
+            IsGenericMethod = methodInfo.IsGenericMethod,
+            IsVirtual = methodInfo.IsVirtual,
+            IsAbstruct = methodInfo.IsAbstract,
         };
 
         var parameters = methodInfo.GetParameters();
@@ -198,7 +200,9 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)
     {
-        return methodInfo.IsSpecialName;
+        bool isNotOverridden = methodInfo.DeclaringType != methodInfo.ReflectedType;
+        bool isHiddenMethodsLikeGetterSetter = methodInfo.IsSpecialName;
+        return isNotOverridden || isHiddenMethodsLikeGetterSetter;
     }
 
     private void ExportToFile(string filePath)

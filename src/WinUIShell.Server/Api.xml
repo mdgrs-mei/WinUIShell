@@ -52427,6 +52427,8 @@
         <MethodDef>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -52444,6 +52446,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Start</Name>
@@ -52473,6 +52477,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52515,6 +52521,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52570,6 +52578,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -52599,6 +52609,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52630,6 +52642,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -52659,6 +52673,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -52674,6 +52690,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Exit</Name>
@@ -52689,36 +52707,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -52864,6 +52854,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52895,6 +52887,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -52924,6 +52918,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -52939,36 +52935,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -53133,6 +53101,8 @@
         <MethodDef>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -53164,6 +53134,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -53195,6 +53167,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -53224,6 +53198,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -53239,6 +53215,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -53281,6 +53259,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>ContainsKey</Name>
@@ -53310,6 +53290,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Remove</Name>
@@ -53339,6 +53321,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryGetValue</Name>
@@ -53381,6 +53365,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -53410,6 +53396,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Clear</Name>
@@ -53425,6 +53413,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Contains</Name>
@@ -53454,6 +53444,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>CopyTo</Name>
@@ -53496,6 +53488,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetEnumerator</Name>
@@ -53511,307 +53505,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>Equals</Name>
-          <ReturnType>
-            <Name>System.Boolean</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>other</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyObject</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetValue</Name>
-          <ReturnType>
-            <Name>System.Object</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>SetValue</Name>
-          <ReturnType>
-            <Name>System.Void</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-            <ParameterDef>
-              <Name>value</Name>
-              <Type>
-                <Name>System.Object</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ClearValue</Name>
-          <ReturnType>
-            <Name>System.Void</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ReadLocalValue</Name>
-          <ReturnType>
-            <Name>System.Object</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetAnimationBaseValue</Name>
-          <ReturnType>
-            <Name>System.Object</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>RegisterPropertyChangedCallback</Name>
-          <ReturnType>
-            <Name>System.Int64</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-            <ParameterDef>
-              <Name>callback</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyPropertyChangedCallback</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>true</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>UnregisterPropertyChangedCallback</Name>
-          <ReturnType>
-            <Name>System.Void</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>dp</Name>
-              <Type>
-                <Name>Microsoft.UI.Xaml.DependencyProperty</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-            <ParameterDef>
-              <Name>token</Name>
-              <Type>
-                <Name>System.Int64</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -54170,6 +53865,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54201,6 +53898,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54245,6 +53944,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54276,6 +53977,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54307,6 +54010,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54338,6 +54043,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -54369,6 +54076,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -54400,6 +54109,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>HexEscape</Name>
@@ -54429,6 +54140,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>HexUnescape</Name>
@@ -54471,6 +54184,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>IsHexEncoding</Name>
@@ -54513,6 +54228,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>CheckSchemeName</Name>
@@ -54542,6 +54259,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>IsHexDigit</Name>
@@ -54571,6 +54290,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>FromHex</Name>
@@ -54600,6 +54321,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54655,6 +54378,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54710,6 +54435,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54765,6 +54492,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -54820,6 +54549,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Compare</Name>
@@ -54901,6 +54632,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedUriString</Name>
@@ -54943,6 +54676,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>UnescapeDataString</Name>
@@ -54972,6 +54707,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>EscapeUriString</Name>
@@ -55001,6 +54738,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>EscapeDataString</Name>
@@ -55030,6 +54769,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -55061,6 +54802,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -55076,6 +54819,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -55091,6 +54836,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryFormat</Name>
@@ -55133,6 +54880,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55162,6 +54911,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelativeUri</Name>
@@ -55191,6 +54942,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelative</Name>
@@ -55220,6 +54973,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetComponents</Name>
@@ -55262,6 +55017,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedOriginalString</Name>
@@ -55277,6 +55034,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>IsBaseOf</Name>
@@ -55306,21 +55065,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -55348,82 +55094,7 @@
       </InstanceProperties>
       <Constructors />
       <StaticMethods />
-      <InstanceMethods>
-        <MethodDef>
-          <Name>Equals</Name>
-          <ReturnType>
-            <Name>System.Boolean</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters>
-            <ParameterDef>
-              <Name>obj</Name>
-              <Type>
-                <Name>System.Object</Name>
-                <IsNullable>true</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-              </Type>
-            </ParameterDef>
-          </Parameters>
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetHashCode</Name>
-          <ReturnType>
-            <Name>System.Int32</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-      </InstanceMethods>
+      <InstanceMethods />
     </ObjectDef>
     <ObjectDef>
       <Name>CoreDispatcher</Name>
@@ -55492,6 +55163,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -55523,6 +55196,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55552,6 +55227,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -55567,6 +55244,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>ProcessEvents</Name>
@@ -55596,6 +55275,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>RunAsync</Name>
@@ -55638,6 +55319,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>RunIdleAsync</Name>
@@ -55667,6 +55350,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -55682,6 +55367,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -55711,6 +55398,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>StopProcessEvents</Name>
@@ -55726,6 +55415,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryRunAsync</Name>
@@ -55768,6 +55459,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryRunIdleAsync</Name>
@@ -55797,36 +55490,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -55868,6 +55533,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetForCurrentThread</Name>
@@ -55883,6 +55550,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -55912,6 +55581,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -55943,6 +55614,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55972,6 +55645,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -55987,6 +55662,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>true</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>CreateTimer</Name>
@@ -56002,6 +55679,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -56031,6 +55710,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -56073,6 +55754,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>EnqueueEventLoopExit</Name>
@@ -56088,6 +55771,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>EnsureSystemDispatcherQueue</Name>
@@ -56103,6 +55788,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -56118,6 +55805,8 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -56160,36 +55849,8 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>GetType</Name>
-          <ReturnType>
-            <Name>System.Type</Name>
-            <IsNullable>false</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
-        </MethodDef>
-        <MethodDef>
-          <Name>ToString</Name>
-          <ReturnType>
-            <Name>System.String</Name>
-            <IsNullable>true</IsNullable>
-            <IsEnum>false</IsEnum>
-            <IsArray>false</IsArray>
-            <IsDelegate>false</IsDelegate>
-            <IsByRef>false</IsByRef>
-            <IsIn>false</IsIn>
-            <IsOut>false</IsOut>
-          </ReturnType>
-          <Parameters />
-          <IsGenericMethod>false</IsGenericMethod>
+          <IsVirtual>false</IsVirtual>
+          <IsAbstruct>false</IsAbstruct>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>

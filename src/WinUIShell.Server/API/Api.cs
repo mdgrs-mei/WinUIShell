@@ -61,6 +61,8 @@ public class Api
         public ArgumentType? ReturnType { get; set; }
         public List<ParameterDef> Parameters { get; } = [];
         public bool IsGenericMethod { get; set; }
+        public bool IsVirtual { get; set; }
+        public bool IsAbstruct { get; set; }
     }
 
     public class ParameterDef

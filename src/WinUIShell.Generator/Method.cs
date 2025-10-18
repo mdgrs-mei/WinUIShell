@@ -11,6 +11,8 @@ internal class Method
     private static readonly List<string> _unsupportedMethodNames =
     [
         "Equals",
+        "GetHashCode",
+        "GetType",
     ];
 
     public Method(Api.MethodDef methodDef)
@@ -30,6 +32,12 @@ internal class Method
                 return false;
         }
 
+        if (ReturnType is not null)
+        {
+            if (!ReturnType.IsSupported)
+                return false;
+        }
+
         foreach (var parameter in _methodDef.Parameters)
         {
             var parameterType = new ArgumentType(parameter.Type);
@@ -42,6 +50,11 @@ internal class Method
     public string GetName()
     {
         return _methodDef.Name!;
+    }
+
+    public string GetSignatureExpression()
+    {
+        return $"{(_methodDef.IsVirtual ? "override " : "")}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()

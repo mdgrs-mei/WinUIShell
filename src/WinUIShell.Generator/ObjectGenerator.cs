@@ -130,7 +130,7 @@ internal static class ObjectGenerator
                 {
                     _ = sourceCode.Append($$"""
 
-                        public static void {{method.GetName()}}({{method.GetParametersExpression()}})
+                        public static {{method.GetSignatureExpression()}}
                         {
                             CommandClient.Get().InvokeStaticMethod(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
@@ -143,7 +143,7 @@ internal static class ObjectGenerator
                 {
                     _ = sourceCode.Append($$"""
 
-                        public static {{returnType.GetTypeExpression()}} {{method.GetName()}}({{method.GetParametersExpression()}})
+                        public static {{method.GetSignatureExpression()}}
                         {
                             return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
@@ -165,7 +165,7 @@ internal static class ObjectGenerator
                 {
                     _ = sourceCode.Append($$"""
 
-                        public void {{method.GetName()}}({{method.GetParametersExpression()}})
+                        public {{method.GetSignatureExpression()}}
                         {
                             CommandClient.Get().InvokeMethod(
                                 Id,
@@ -178,7 +178,7 @@ internal static class ObjectGenerator
                 {
                     _ = sourceCode.Append($$"""
 
-                        public {{returnType.GetTypeExpression()}} {{method.GetName()}}({{method.GetParametersExpression()}})
+                        public {{method.GetSignatureExpression()}}
                         {
                             return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                                 Id,
