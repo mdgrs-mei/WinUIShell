@@ -75,39 +75,48 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(UriCreationOptions));
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
+        AddObject(typeof(KeyValuePair<,>));
     }
 
-    private void AddObject(Type objectType)
+    private void AddObject(Type type)
     {
-        var assembly = objectType.Assembly;
+        var assembly = type.Assembly;
         var def = new Api.ObjectDef
         {
-            Name = objectType.Name,
-            FullName = $"{objectType.FullName}, {assembly.GetName().Name}",
-            Namespace = objectType.Namespace!,
+            Name = GetObjectTypeName(type),
+            FullName = $"{type.FullName}, {assembly.GetName().Name}",
+            Namespace = type.Namespace!,
         };
 
-        foreach (var propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Static))
+        if (type.IsGenericTypeDefinition)
+        {
+            foreach (var genericParameter in type.GetGenericArguments())
+            {
+                def.GenericParameterTypes.Add(GetArgumentType(genericParameter));
+            }
+        }
+
+        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static))
         {
             def.StaticProperties.Add(GetPropertyDef(propertyInfo));
         }
-        foreach (var propertyInfo in objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
 
-        foreach (var constructor in objectType.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
         {
             def.Constructors.Add(GetConstructorDef(constructor));
         }
 
-        foreach (var staticMethod in objectType.GetMethods(BindingFlags.Public | BindingFlags.Static))
+        foreach (var staticMethod in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
         {
             if (IsIgnoredMethod(staticMethod))
                 continue;
             def.StaticMethods.Add(GetMethodDef(staticMethod));
         }
-        foreach (var instanceMethod in objectType.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var instanceMethod in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
         {
             if (IsIgnoredMethod(instanceMethod))
                 continue;
@@ -194,9 +203,17 @@ public class ApiExporter : Singleton<ApiExporter>
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
             IsByRef = type.IsByRef,
-            IsGenericType = type.IsGenericType
+            IsGenericType = type.IsGenericType,
+            IsGenericTypeParameter = type.IsGenericTypeParameter,
+            IsGenericMethodParameter = type.IsGenericMethodParameter,
         };
 
+        if (type.IsByRef)
+        {
+            var elementType = type.GetElementType();
+            argumentType.ElementType = GetArgumentType(elementType!);
+        }
+        else
         if (type.IsArray)
         {
             var elementType = type.GetElementType();
@@ -205,7 +222,7 @@ public class ApiExporter : Singleton<ApiExporter>
 
         if (type.IsGenericType)
         {
-            foreach (var genericTypeArgument in type.GenericTypeArguments)
+            foreach (var genericTypeArgument in type.GetGenericArguments())
             {
                 argumentType.GenericTypeArguments.Add(GetArgumentType(genericTypeArgument));
             }
@@ -216,24 +233,33 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private string GetArgumentTypeName(Type type)
     {
+        if (type.IsByRef)
+        {
+            return "ByRef";
+        }
         if (type.IsArray)
         {
             return "Array";
         }
 
-        // Remove ByRef expression.
-        string name = type.ToString().Replace("&", "", StringComparison.Ordinal);
+        string name = type.ToString();
+        name = RemoveGenericExpression(name);
 
-        // Remove Array expression.
-        name = name.Replace("[]", "", StringComparison.Ordinal);
+        return name;
+    }
 
-        // Remove Generic expression.
+    private string GetObjectTypeName(Type type)
+    {
+        return RemoveGenericExpression(type.Name);
+    }
+
+    private string RemoveGenericExpression(string name)
+    {
         var genericSeparator = name.IndexOf('`', StringComparison.Ordinal);
         if (genericSeparator >= 0)
         {
-            name = name[..genericSeparator];
+            return name[..genericSeparator];
         }
-
         return name;
     }
 

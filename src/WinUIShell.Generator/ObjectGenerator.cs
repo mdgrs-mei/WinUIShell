@@ -23,6 +23,27 @@ internal static class ObjectGenerator
 
                 namespace {{ns}};
 
+
+                """);
+
+            if (objectDef.GenericParameterTypes.Count > 0)
+            {
+                var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
+                var genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
+
+                _ = sourceCode.Append($$"""
+                public class {{objectDef.Name}}{{genericParameterExpression}} : WinUIShellObject
+                {
+                    internal {{objectDef.Name}}(ObjectId id)
+                      : base(id)
+                    {
+                    }
+
+                """);
+            }
+            else
+            {
+                _ = sourceCode.Append($$"""
                 public class {{objectDef.Name}} : WinUIShellObject
                 {
                     internal {{objectDef.Name}}(ObjectId id)
@@ -31,6 +52,7 @@ internal static class ObjectGenerator
                     }
 
                 """);
+            }
 
             foreach (var constructorDef in objectDef.Constructors)
             {

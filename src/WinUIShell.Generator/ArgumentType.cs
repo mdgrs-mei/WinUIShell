@@ -10,11 +10,6 @@ internal class ArgumentType
     private readonly List<ArgumentType>? _genericTypeArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
-    public bool IsArray
-    {
-        get => _apiArgumentType.IsArray;
-    }
-
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
 
@@ -51,6 +46,11 @@ internal class ArgumentType
         var serverTypeName = apiArgumentType.Name;
         IsRpcSupportedType = apiArgumentType.IsEnum;
 
+        if (_apiArgumentType.IsGenericTypeParameter || _apiArgumentType.ElementType is not null)
+        {
+            _name = serverTypeName;
+        }
+        else
         if (serverTypeName.StartsWith("WinUIShell.Server"))
         {
             _name = serverTypeName.Replace("WinUIShell.Server", "WinUIShell");
@@ -123,6 +123,9 @@ internal class ArgumentType
 
     public bool IsSupported()
     {
+        if (IsGenericParameter())
+            return true;
+
         if (!IsSupportedType(_apiArgumentType.Name))
             return false;
 
@@ -132,11 +135,20 @@ internal class ArgumentType
         return true;
     }
 
+    public bool IsGenericParameter()
+    {
+        return _apiArgumentType.IsGenericTypeParameter || _apiArgumentType.IsGenericMethodParameter;
+    }
+
     public string GetName()
     {
         if (_elementType is not null)
         {
-            return $"{_elementType.GetName()}[]";
+            if (_apiArgumentType.IsArray)
+            {
+                return $"{_elementType.GetName()}[]";
+            }
+            return _elementType.GetName();
         }
 
         if (_genericTypeArguments is not null)
@@ -150,7 +162,25 @@ internal class ArgumentType
 
     public string GetTypeExpression()
     {
-        return $"{GetName()}{(IsNullable ? "?" : "")}";
+        string refExpression = "";
+        if (_apiArgumentType.IsByRef)
+        {
+            if (_apiArgumentType.IsIn)
+            {
+                refExpression = "in ";
+            }
+            else
+            if (_apiArgumentType.IsOut)
+            {
+                refExpression = "out ";
+            }
+            else
+            {
+                refExpression = "ref ";
+            }
+        }
+
+        return $"{refExpression}{GetName()}{(IsNullable ? "?" : "")}";
     }
 
     public string GetValueExpression()
@@ -160,7 +190,7 @@ internal class ArgumentType
             return "value";
         }
         else
-        if (IsObject)
+        if (IsObject || IsGenericParameter())
         {
             return "(value is WinUIShellObject v ? v.Id : value)";
         }
@@ -172,12 +202,17 @@ internal class ArgumentType
 
     public string GetArgumentExpression(string variableName)
     {
+        if (_apiArgumentType.IsByRef)
+        {
+            return _elementType!.GetArgumentExpression(variableName);
+        }
+        else
         if (IsRpcSupportedType)
         {
             return variableName;
         }
         else
-        if (IsObject)
+        if (IsObject || IsGenericParameter())
         {
             return $"({variableName} is WinUIShellObject v ? v.Id : {variableName})";
         }

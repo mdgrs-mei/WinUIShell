@@ -28,6 +28,7 @@ public class Api
 
     public class ObjectDef : TypeDef
     {
+        public List<ArgumentType> GenericParameterTypes { get; } = [];
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
         public List<MethodDef> Constructors { get; } = [];
@@ -54,6 +55,8 @@ public class Api
         public bool IsIn { get; set; }
         public bool IsOut { get; set; }
         public bool IsGenericType { get; set; }
+        public bool IsGenericTypeParameter { get; set; }
+        public bool IsGenericMethodParameter { get; set; }
         public ArgumentType? ElementType { get; set; }
         public List<ArgumentType> GenericTypeArguments { get; } = [];
     }
