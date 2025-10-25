@@ -123,6 +123,13 @@ internal class ArgumentType
 
     public bool IsSupported()
     {
+#if false
+        if (_apiArgumentType.IsArray)
+            return false;
+
+        if (IsRefOrOut())
+            return false;
+#endif
         if (IsGenericParameter())
             return true;
 
@@ -135,7 +142,12 @@ internal class ArgumentType
         return true;
     }
 
-    public bool IsGenericParameter()
+    private bool IsRefOrOut()
+    {
+        return _apiArgumentType.IsOut || (_apiArgumentType.IsByRef && !_apiArgumentType.IsIn);
+    }
+
+    private bool IsGenericParameter()
     {
         return _apiArgumentType.IsGenericTypeParameter || _apiArgumentType.IsGenericMethodParameter;
     }
