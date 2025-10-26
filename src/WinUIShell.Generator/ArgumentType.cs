@@ -10,6 +10,7 @@ internal class ArgumentType
     private readonly List<ArgumentType>? _genericTypeArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
+    public bool IsSystemInterface { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
 
@@ -33,10 +34,16 @@ internal class ArgumentType
 
     private static readonly List<string> _unsupportedTypes =
     [
+        "System.IntPtr",
+        "Microsoft.UI.Xaml.DependencyObject",
+        "WinRT.IWinRTObject",
+    ];
+
+    private static readonly List<string> _supportedSystemInterfaces =
+    [
         "System.Collections.Generic.ICollection",
         "System.Collections.Generic.IList",
         "System.Collections.Generic.IDictionary",
-        "System.IntPtr",
     ];
 
     public ArgumentType(Api.ArgumentType apiArgumentType)
@@ -45,6 +52,10 @@ internal class ArgumentType
 
         var serverTypeName = apiArgumentType.Name;
         IsRpcSupportedType = apiArgumentType.IsEnum;
+        if (_apiArgumentType.IsInterface && serverTypeName.StartsWith("System."))
+        {
+            IsSystemInterface = true;
+        }
 
         if (_apiArgumentType.IsGenericTypeParameter || _apiArgumentType.ElementType is not null)
         {
@@ -109,18 +120,6 @@ internal class ArgumentType
         return false;
     }
 
-    private static bool IsSupportedType(string typeName)
-    {
-        foreach (var unsupportedType in _unsupportedTypes)
-        {
-            if (typeName.StartsWith(unsupportedType))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public bool IsSupported()
     {
 #if false
@@ -133,13 +132,23 @@ internal class ArgumentType
         if (IsGenericParameter())
             return true;
 
-        if (!IsSupportedType(_apiArgumentType.Name))
+        if (IsUnsupportedType())
             return false;
 
-        if (_apiArgumentType.IsDelegate)
+        if (IsUnsupportedSystemInterface())
             return false;
 
         return true;
+    }
+
+    private bool IsUnsupportedType()
+    {
+        return _unsupportedTypes.Contains(_apiArgumentType.Name) || _apiArgumentType.IsDelegate;
+    }
+
+    private bool IsUnsupportedSystemInterface()
+    {
+        return IsSystemInterface && !_supportedSystemInterfaces.Contains(_apiArgumentType.Name);
     }
 
     private bool IsRefOrOut()

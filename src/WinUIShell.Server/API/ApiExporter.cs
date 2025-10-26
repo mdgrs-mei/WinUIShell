@@ -76,6 +76,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
         AddObject(typeof(KeyValuePair<,>));
+        AddObject(typeof(System.Collections.IEnumerator));
     }
 
     private void AddObject(Type type)
@@ -86,7 +87,18 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = GetObjectTypeName(type),
             FullName = $"{type.FullName}, {assembly.GetName().Name}",
             Namespace = type.Namespace!,
+            IsInterface = type.IsInterface,
         };
+
+        if (type.BaseType != typeof(object) && type.BaseType is not null)
+        {
+            def.BaseType = GetArgumentType(type.BaseType);
+        }
+
+        foreach (var interfaceType in type.GetInterfaces())
+        {
+            def.Interfaces.Add(GetArgumentType(interfaceType));
+        }
 
         if (type.IsGenericTypeDefinition)
         {
@@ -206,6 +218,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsGenericType = type.IsGenericType,
             IsGenericTypeParameter = type.IsGenericTypeParameter,
             IsGenericMethodParameter = type.IsGenericMethodParameter,
+            IsInterface = type.IsInterface,
         };
 
         if (type.IsByRef)

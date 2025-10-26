@@ -26,13 +26,31 @@ internal static class ObjectGenerator
 
                 """);
 
+            StringBuilder baseTypeExpression = new(" : WinUIShellObject");
+            if (objectDef.BaseType is not null)
+            {
+                var type = new ArgumentType(objectDef.BaseType);
+                if (type.IsSupported())
+                {
+                    _ = baseTypeExpression.Append($", {type.GetName()}");
+                }
+            }
+            foreach (var interfaceType in objectDef.Interfaces)
+            {
+                var type = new ArgumentType(interfaceType);
+                if (type.IsSupported())
+                {
+                    _ = baseTypeExpression.Append($", {type.GetName()}");
+                }
+            }
+
             if (objectDef.GenericParameterTypes.Count > 0)
             {
                 var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
                 var genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
 
                 _ = sourceCode.Append($$"""
-                public class {{objectDef.Name}}{{genericParameterExpression}} : WinUIShellObject
+                public class {{objectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
                 {
                     internal {{objectDef.Name}}(ObjectId id)
                       : base(id)
@@ -44,7 +62,7 @@ internal static class ObjectGenerator
             else
             {
                 _ = sourceCode.Append($$"""
-                public class {{objectDef.Name}} : WinUIShellObject
+                public class {{objectDef.Name}}{{baseTypeExpression}}
                 {
                     internal {{objectDef.Name}}(ObjectId id)
                       : base(id)

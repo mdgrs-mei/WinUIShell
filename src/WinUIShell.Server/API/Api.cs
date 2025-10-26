@@ -28,6 +28,9 @@ public class Api
 
     public class ObjectDef : TypeDef
     {
+        public bool IsInterface { get; set; }
+        public ArgumentType? BaseType { get; set; }
+        public List<ArgumentType> Interfaces { get; } = [];
         public List<ArgumentType> GenericParameterTypes { get; } = [];
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
@@ -57,6 +60,7 @@ public class Api
         public bool IsGenericType { get; set; }
         public bool IsGenericTypeParameter { get; set; }
         public bool IsGenericMethodParameter { get; set; }
+        public bool IsInterface { get; set; }
         public ArgumentType? ElementType { get; set; }
         public List<ArgumentType> GenericTypeArguments { get; } = [];
     }

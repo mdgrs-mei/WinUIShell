@@ -52314,6 +52314,115 @@
       <Name>Application</Name>
       <FullName>Microsoft.UI.Xaml.Application, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
+      <IsInterface>false</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>Microsoft.UI.Xaml.IApplicationOverrides</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>WinRT.IWinRTObject</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Microsoft.UI.Xaml.Application</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties>
         <PropertyDef>
@@ -52330,6 +52439,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52351,6 +52461,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52370,6 +52481,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52389,6 +52501,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52408,6 +52521,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52427,6 +52541,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52446,6 +52561,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52475,6 +52591,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>true</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -52496,6 +52613,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52513,6 +52631,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52535,6 +52654,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52552,6 +52672,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52569,6 +52690,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52591,6 +52713,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52608,6 +52731,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52625,6 +52749,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52642,6 +52767,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52664,6 +52790,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52681,6 +52808,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52705,6 +52833,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52722,6 +52851,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52744,6 +52874,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52761,6 +52892,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -52783,6 +52915,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -52804,6 +52937,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -52817,6 +52951,100 @@
       <Name>DebugSettings</Name>
       <FullName>Microsoft.UI.Xaml.DebugSettings, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
+      <IsInterface>false</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>WinRT.IWinRTObject</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Microsoft.UI.Xaml.DebugSettings</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -52834,6 +53062,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52853,6 +53082,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52872,6 +53102,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52891,6 +53122,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52910,6 +53142,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52929,6 +53162,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52948,6 +53182,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -52970,6 +53205,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -52987,6 +53223,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53011,6 +53248,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53028,6 +53266,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53050,6 +53289,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53067,6 +53307,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53089,6 +53330,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -53102,6 +53344,331 @@
       <Name>ResourceDictionary</Name>
       <FullName>Microsoft.UI.Xaml.ResourceDictionary, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
+      <IsInterface>false</IsInterface>
+      <BaseType>
+        <Name>Microsoft.UI.Xaml.DependencyObject</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </BaseType>
+      <Interfaces>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>WinRT.IWinRTObject</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Microsoft.UI.Xaml.DependencyObject</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Collections.Generic.IDictionary</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>System.Object</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+            <ArgumentType>
+              <Name>System.Object</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Collections.Generic.ICollection</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>System.Collections.Generic.KeyValuePair</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>true</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments>
+                <ArgumentType>
+                  <Name>System.Object</Name>
+                  <IsNullable>false</IsNullable>
+                  <IsEnum>false</IsEnum>
+                  <IsArray>false</IsArray>
+                  <IsDelegate>false</IsDelegate>
+                  <IsByRef>false</IsByRef>
+                  <IsIn>false</IsIn>
+                  <IsOut>false</IsOut>
+                  <IsGenericType>false</IsGenericType>
+                  <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                  <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
+                  <GenericTypeArguments />
+                </ArgumentType>
+                <ArgumentType>
+                  <Name>System.Object</Name>
+                  <IsNullable>false</IsNullable>
+                  <IsEnum>false</IsEnum>
+                  <IsArray>false</IsArray>
+                  <IsDelegate>false</IsDelegate>
+                  <IsByRef>false</IsByRef>
+                  <IsIn>false</IsIn>
+                  <IsOut>false</IsOut>
+                  <IsGenericType>false</IsGenericType>
+                  <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                  <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
+                  <GenericTypeArguments />
+                </ArgumentType>
+              </GenericTypeArguments>
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Collections.Generic.IEnumerable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>System.Collections.Generic.KeyValuePair</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>true</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments>
+                <ArgumentType>
+                  <Name>System.Object</Name>
+                  <IsNullable>false</IsNullable>
+                  <IsEnum>false</IsEnum>
+                  <IsArray>false</IsArray>
+                  <IsDelegate>false</IsDelegate>
+                  <IsByRef>false</IsByRef>
+                  <IsIn>false</IsIn>
+                  <IsOut>false</IsOut>
+                  <IsGenericType>false</IsGenericType>
+                  <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                  <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
+                  <GenericTypeArguments />
+                </ArgumentType>
+                <ArgumentType>
+                  <Name>System.Object</Name>
+                  <IsNullable>false</IsNullable>
+                  <IsEnum>false</IsEnum>
+                  <IsArray>false</IsArray>
+                  <IsDelegate>false</IsDelegate>
+                  <IsByRef>false</IsByRef>
+                  <IsIn>false</IsIn>
+                  <IsOut>false</IsOut>
+                  <IsGenericType>false</IsGenericType>
+                  <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                  <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
+                  <GenericTypeArguments />
+                </ArgumentType>
+              </GenericTypeArguments>
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Collections.IEnumerable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -53119,6 +53686,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Object</Name>
@@ -53132,6 +53700,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -53153,6 +53722,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Object</Name>
@@ -53166,6 +53736,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -53187,6 +53758,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53206,6 +53778,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53225,6 +53798,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53244,6 +53818,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
@@ -53257,6 +53832,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -53278,6 +53854,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53297,6 +53874,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Object</Name>
@@ -53310,6 +53888,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
               <ArgumentType>
@@ -53324,6 +53903,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -53345,6 +53925,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53364,6 +53945,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -53393,6 +53975,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53410,6 +53993,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53434,6 +54018,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53451,6 +54036,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53473,6 +54059,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53490,6 +54077,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53512,6 +54100,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -53533,6 +54122,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53550,6 +54140,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53567,6 +54158,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53589,6 +54181,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53606,6 +54199,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53628,6 +54222,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53645,6 +54240,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53667,6 +54263,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53684,6 +54281,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53701,6 +54299,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Object</Name>
                   <IsNullable>false</IsNullable>
@@ -53713,6 +54312,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -53737,6 +54337,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53754,6 +54355,7 @@
                 <IsGenericType>true</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
                   <ArgumentType>
                     <Name>System.Object</Name>
@@ -53767,6 +54369,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                   <ArgumentType>
@@ -53781,6 +54384,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                 </GenericTypeArguments>
@@ -53805,6 +54409,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -53826,6 +54431,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53843,6 +54449,7 @@
                 <IsGenericType>true</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
                   <ArgumentType>
                     <Name>System.Object</Name>
@@ -53856,6 +54463,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                   <ArgumentType>
@@ -53870,6 +54478,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                 </GenericTypeArguments>
@@ -53894,6 +54503,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -53911,6 +54521,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Collections.Generic.KeyValuePair</Name>
                   <IsNullable>false</IsNullable>
@@ -53923,6 +54534,7 @@
                   <IsGenericType>true</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments>
                     <ArgumentType>
                       <Name>System.Object</Name>
@@ -53936,6 +54548,7 @@
                       <IsGenericType>false</IsGenericType>
                       <IsGenericTypeParameter>false</IsGenericTypeParameter>
                       <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                      <IsInterface>false</IsInterface>
                       <GenericTypeArguments />
                     </ArgumentType>
                     <ArgumentType>
@@ -53950,6 +54563,7 @@
                       <IsGenericType>false</IsGenericType>
                       <IsGenericTypeParameter>false</IsGenericTypeParameter>
                       <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                      <IsInterface>false</IsInterface>
                       <GenericTypeArguments />
                     </ArgumentType>
                   </GenericTypeArguments>
@@ -53971,6 +54585,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -53993,6 +54608,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Collections.Generic.KeyValuePair</Name>
@@ -54006,6 +54622,7 @@
                 <IsGenericType>true</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
                   <ArgumentType>
                     <Name>System.Object</Name>
@@ -54019,6 +54636,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                   <ArgumentType>
@@ -54033,6 +54651,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                 </GenericTypeArguments>
@@ -54050,6 +54669,54 @@
       <Name>Uri</Name>
       <FullName>System.Uri, System.Private.Uri</FullName>
       <Namespace>System</Namespace>
+      <IsInterface>false</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>System.ISpanFormattable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IFormattable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.Serialization.ISerializable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -54067,6 +54734,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54086,6 +54754,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54105,6 +54774,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54124,6 +54794,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54143,6 +54814,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54162,6 +54834,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54181,6 +54854,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54200,6 +54874,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54219,6 +54894,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54238,6 +54914,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <ElementType>
               <Name>System.String</Name>
               <IsNullable>false</IsNullable>
@@ -54250,6 +54927,7 @@
               <IsGenericType>false</IsGenericType>
               <IsGenericTypeParameter>false</IsGenericTypeParameter>
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
               <GenericTypeArguments />
             </ElementType>
             <GenericTypeArguments />
@@ -54271,6 +54949,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54290,6 +54969,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54309,6 +54989,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54328,6 +55009,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54347,6 +55029,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54366,6 +55049,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54385,6 +55069,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54404,6 +55089,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54423,6 +55109,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54442,6 +55129,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54461,6 +55149,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54480,6 +55169,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -54503,6 +55193,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54527,6 +55218,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54544,6 +55236,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54568,6 +55261,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54585,6 +55279,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54602,6 +55297,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54626,6 +55322,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54643,6 +55340,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54667,6 +55365,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54684,6 +55383,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.UriCreationOptions</Name>
                   <IsNullable>false</IsNullable>
@@ -54696,6 +55396,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -54722,6 +55423,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54739,6 +55441,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54763,6 +55466,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54780,6 +55484,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54804,6 +55509,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -54821,6 +55527,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54843,6 +55550,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -54860,6 +55568,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54882,6 +55591,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -54899,6 +55609,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54916,6 +55627,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Int32</Name>
                   <IsNullable>false</IsNullable>
@@ -54928,6 +55640,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -54952,6 +55665,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -54969,6 +55683,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -54986,6 +55701,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55008,6 +55724,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55025,6 +55742,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55047,6 +55765,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55064,6 +55783,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55086,6 +55806,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55103,6 +55824,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55125,6 +55847,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55142,6 +55865,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55159,6 +55883,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55176,6 +55901,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Uri</Name>
                   <IsNullable>false</IsNullable>
@@ -55188,6 +55914,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55212,6 +55939,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55229,6 +55957,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55246,6 +55975,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.UriCreationOptions</Name>
                   <IsNullable>false</IsNullable>
@@ -55258,6 +55988,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55277,6 +56008,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Uri</Name>
                   <IsNullable>false</IsNullable>
@@ -55289,6 +56021,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55313,6 +56046,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55330,6 +56064,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55347,6 +56082,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55364,6 +56100,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Uri</Name>
                   <IsNullable>false</IsNullable>
@@ -55376,6 +56113,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55400,6 +56138,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55417,6 +56156,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55434,6 +56174,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55451,6 +56192,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Uri</Name>
                   <IsNullable>false</IsNullable>
@@ -55463,6 +56205,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55487,6 +56230,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55504,6 +56248,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55521,6 +56266,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55538,6 +56284,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55555,6 +56302,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55572,6 +56320,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55594,6 +56343,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55611,6 +56361,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55628,6 +56379,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55650,6 +56402,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55667,6 +56420,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55689,6 +56443,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55706,6 +56461,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55728,6 +56484,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55745,6 +56502,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55769,6 +56527,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55786,6 +56545,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55808,6 +56568,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -55829,6 +56590,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -55850,6 +56612,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55867,6 +56630,7 @@
                 <IsGenericType>true</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
                   <ArgumentType>
                     <Name>System.Char</Name>
@@ -55880,6 +56644,7 @@
                     <IsGenericType>false</IsGenericType>
                     <IsGenericTypeParameter>false</IsGenericTypeParameter>
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
                   </ArgumentType>
                 </GenericTypeArguments>
@@ -55899,6 +56664,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>System.Int32</Name>
                   <IsNullable>false</IsNullable>
@@ -55911,6 +56677,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>false</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -55935,6 +56702,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55952,6 +56720,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -55974,6 +56743,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -55991,6 +56761,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56013,6 +56784,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56030,6 +56802,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56052,6 +56825,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56069,6 +56843,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56086,6 +56861,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56108,6 +56884,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56129,6 +56906,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56146,6 +56924,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56160,6 +56939,23 @@
       <Name>UriCreationOptions</Name>
       <FullName>System.UriCreationOptions, System.Private.Uri</FullName>
       <Namespace>System</Namespace>
+      <IsInterface>false</IsInterface>
+      <BaseType>
+        <Name>System.ValueType</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </BaseType>
+      <Interfaces />
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -56177,6 +56973,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -56191,6 +56988,115 @@
       <Name>CoreDispatcher</Name>
       <FullName>Windows.UI.Core.CoreDispatcher, Microsoft.Windows.SDK.NET</FullName>
       <Namespace>Windows.UI.Core</Namespace>
+      <IsInterface>false</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>Windows.UI.Core.ICoreAcceleratorKeys</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>WinRT.IWinRTObject</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Windows.UI.Core.CoreDispatcher</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -56208,6 +57114,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -56227,6 +57134,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -56249,6 +57157,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56266,6 +57175,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56290,6 +57200,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56307,6 +57218,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56329,6 +57241,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56346,6 +57259,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56368,6 +57282,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56389,6 +57304,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56406,6 +57322,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56428,6 +57345,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56445,6 +57363,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56462,6 +57381,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56484,6 +57404,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56501,6 +57422,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56523,6 +57445,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56544,6 +57467,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56561,6 +57485,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56583,6 +57508,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56604,6 +57530,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Boolean</Name>
@@ -56617,6 +57544,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -56636,6 +57564,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56653,6 +57582,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56675,6 +57605,7 @@
             <IsGenericType>true</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <ArgumentType>
                 <Name>System.Boolean</Name>
@@ -56688,6 +57619,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </ArgumentType>
             </GenericTypeArguments>
@@ -56707,6 +57639,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56721,6 +57654,100 @@
       <Name>DispatcherQueue</Name>
       <FullName>Microsoft.UI.Dispatching.DispatcherQueue, Microsoft.InteractiveExperiences.Projection</FullName>
       <Namespace>Microsoft.UI.Dispatching</Namespace>
+      <IsInterface>false</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>WinRT.IWinRTObject</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.IEquatable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>true</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments>
+            <ArgumentType>
+              <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
+              <IsNullable>false</IsNullable>
+              <IsEnum>false</IsEnum>
+              <IsArray>false</IsArray>
+              <IsDelegate>false</IsDelegate>
+              <IsByRef>false</IsByRef>
+              <IsIn>false</IsIn>
+              <IsOut>false</IsOut>
+              <IsGenericType>false</IsGenericType>
+              <IsGenericTypeParameter>false</IsGenericTypeParameter>
+              <IsGenericMethodParameter>false</IsGenericMethodParameter>
+              <IsInterface>false</IsInterface>
+              <GenericTypeArguments />
+            </ArgumentType>
+          </GenericTypeArguments>
+        </ArgumentType>
+      </Interfaces>
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -56738,6 +57765,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -56760,6 +57788,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>true</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56781,6 +57810,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56802,6 +57832,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56819,6 +57850,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56843,6 +57875,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56860,6 +57893,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56882,6 +57916,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56899,6 +57934,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -56921,6 +57957,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56942,6 +57979,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -56963,6 +58001,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -56980,6 +58019,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57002,6 +58042,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -57019,6 +58060,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57036,6 +58078,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57058,6 +58101,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -57079,6 +58123,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -57100,6 +58145,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -57121,6 +58167,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -57138,6 +58185,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57155,6 +58203,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57169,6 +58218,23 @@
       <Name>KeyValuePair</Name>
       <FullName>System.Collections.Generic.KeyValuePair`2, System.Private.CoreLib</FullName>
       <Namespace>System.Collections.Generic</Namespace>
+      <IsInterface>false</IsInterface>
+      <BaseType>
+        <Name>System.ValueType</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </BaseType>
+      <Interfaces />
       <GenericParameterTypes>
         <ArgumentType>
           <Name>TKey</Name>
@@ -57182,6 +58248,7 @@
           <IsGenericType>false</IsGenericType>
           <IsGenericTypeParameter>true</IsGenericTypeParameter>
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>false</IsInterface>
           <GenericTypeArguments />
         </ArgumentType>
         <ArgumentType>
@@ -57196,6 +58263,7 @@
           <IsGenericType>false</IsGenericType>
           <IsGenericTypeParameter>true</IsGenericTypeParameter>
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>false</IsInterface>
           <GenericTypeArguments />
         </ArgumentType>
       </GenericParameterTypes>
@@ -57215,6 +58283,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>true</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -57234,6 +58303,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>true</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -57257,6 +58327,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>true</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57274,6 +58345,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>true</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
               </Type>
             </ParameterDef>
@@ -57299,6 +58371,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -57320,6 +58393,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters>
@@ -57337,6 +58411,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>TKey</Name>
                   <IsNullable>false</IsNullable>
@@ -57349,6 +58424,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>true</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -57368,6 +58444,7 @@
                 <IsGenericType>false</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
                 <ElementType>
                   <Name>TValue</Name>
                   <IsNullable>false</IsNullable>
@@ -57380,6 +58457,7 @@
                   <IsGenericType>false</IsGenericType>
                   <IsGenericTypeParameter>true</IsGenericTypeParameter>
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                  <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
                 </ElementType>
                 <GenericTypeArguments />
@@ -57396,6 +58474,8 @@
       <Name>IEnumerator</Name>
       <FullName>System.Collections.IEnumerator, System.Private.CoreLib</FullName>
       <Namespace>System.Collections</Namespace>
+      <IsInterface>true</IsInterface>
+      <Interfaces />
       <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
@@ -57413,6 +58493,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </Type>
           <CanRead>true</CanRead>
@@ -57436,6 +58517,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
@@ -57457,6 +58539,7 @@
             <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
             <GenericTypeArguments />
           </ReturnType>
           <Parameters />
