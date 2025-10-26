@@ -6,6 +6,7 @@ namespace WinUIShell.Generator;
 internal class Method
 {
     private readonly Api.MethodDef _methodDef;
+    private readonly Api.ObjectDef _objectDef;
     public ArgumentType? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =
@@ -15,9 +16,10 @@ internal class Method
         "GetType",
     ];
 
-    public Method(Api.MethodDef methodDef)
+    public Method(Api.MethodDef methodDef, Api.ObjectDef objectDef)
     {
         _methodDef = methodDef;
+        _objectDef = objectDef;
         ReturnType = methodDef.ReturnType is null ? null : new ArgumentType(methodDef.ReturnType);
     }
 
@@ -54,7 +56,8 @@ internal class Method
 
     public string GetSignatureExpression()
     {
-        return $"{(_methodDef.IsVirtual ? "override " : "")}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        string overrideExpression = (_methodDef.IsVirtual && !_objectDef.IsInterface) ? "override " : "";
+        return $"{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()
