@@ -28,345 +28,354 @@ internal static class ObjectGenerator
 
             if (objectDef.IsInterface)
             {
-                string genericParameterExpression = "";
-                if (objectDef.GenericParameterTypes.Count > 0)
-                {
-                    var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
-                    genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
-                }
-
-                bool isSystemInterface = objectDef.IsInterface && objectDef.Namespace.StartsWith("System.");
-                StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{objectDef.Namespace}.{objectDef.Name}{genericParameterExpression}" : "");
-                foreach (var interfaceType in objectDef.Interfaces)
-                {
-                    var type = new ArgumentType(interfaceType);
-                    if (type.IsSupported())
-                    {
-                        if (baseTypeExpression.Length == 0)
-                        {
-                            _ = baseTypeExpression.Append(" : ");
-                        }
-                        else
-                        {
-                            _ = baseTypeExpression.Append(", ");
-                        }
-                        _ = baseTypeExpression.Append(type.GetName());
-                    }
-                }
-
-                _ = sourceCode.Append($$"""
-                    public interface {{objectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
-                    {
-                    """);
-
-                if (!isSystemInterface)
-                {
-
-                    foreach (var constructorDef in objectDef.Constructors)
-                    {
-                        var method = new Method(constructorDef, objectDef);
-                        if (!method.IsSupported())
-                            continue;
-
-                        _ = sourceCode.Append($$"""
-
-                            public {{objectDef.Name}}({{method.GetParametersExpression()}});
-
-                        """);
-                    }
-
-                    foreach (var property in objectDef.StaticProperties)
-                    {
-                        var propertyType = new ArgumentType(property.Type);
-                        if (!propertyType.IsSupported())
-                            continue;
-
-                        _ = sourceCode.Append($$"""
-
-                            public static {{propertyType.GetTypeExpression()}} {{property.Name}}
-                            {
-
-                        """);
-
-                        if (property.CanRead)
-                        {
-                            _ = sourceCode.Append($$"""
-                                    get;
-
-                            """);
-                        }
-
-                        if (property.CanWrite)
-                        {
-                            _ = sourceCode.Append($$"""
-                                    set;
-
-                            """);
-                        }
-
-                        _ = sourceCode.Append("    }\r\n");
-                    }
-
-                    foreach (var property in objectDef.InstanceProperties)
-                    {
-                        var propertyType = new ArgumentType(property.Type);
-                        if (!propertyType.IsSupported())
-                            continue;
-
-                        _ = sourceCode.Append($$"""
-
-                            public {{propertyType.GetTypeExpression()}} {{property.Name}}
-                            {
-
-                        """);
-
-                        if (property.CanRead)
-                        {
-                            _ = sourceCode.Append($$"""
-                                    get;
-
-                            """);
-                        }
-
-                        if (property.CanWrite)
-                        {
-                            _ = sourceCode.Append($$"""
-                                    set;
-
-                            """);
-                        }
-
-                        _ = sourceCode.Append("    }\r\n");
-                    }
-
-                    foreach (var methodDef in objectDef.StaticMethods)
-                    {
-                        var method = new Method(methodDef, objectDef);
-                        if (!method.IsSupported())
-                            continue;
-
-                        _ = sourceCode.Append($$"""
-
-                            public static {{method.GetSignatureExpression()}};
-
-                        """);
-                    }
-
-                    foreach (var methodDef in objectDef.InstanceMethods)
-                    {
-                        var method = new Method(methodDef, objectDef);
-                        if (!method.IsSupported())
-                            continue;
-
-                        _ = sourceCode.Append($$"""
-
-                            public {{method.GetSignatureExpression()}};
-
-                        """);
-
-                    }
-                }
-                _ = sourceCode.Append("}\r\n");
+                GenerateInterface(sourceCode, objectDef);
             }
             else
             {
-                string genericParameterExpression = "";
-                if (objectDef.GenericParameterTypes.Count > 0)
-                {
-                    var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
-                    genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
-                }
-
-                StringBuilder baseTypeExpression = new(" : WinUIShellObject");
-                if (objectDef.BaseType is not null)
-                {
-                    var type = new ArgumentType(objectDef.BaseType);
-                    if (type.IsSupported())
-                    {
-                        _ = baseTypeExpression.Append($", {type.GetName()}");
-                    }
-                }
-                foreach (var interfaceType in objectDef.Interfaces)
-                {
-                    var type = new ArgumentType(interfaceType);
-                    if (type.IsSupported())
-                    {
-                        _ = baseTypeExpression.Append($", {type.GetName()}");
-                    }
-                }
-
-                _ = sourceCode.Append($$"""
-                    public class {{objectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
-                    {
-                        internal {{objectDef.Name}}(ObjectId id)
-                            : base(id)
-                        {
-                        }
-
-                    """);
-
-
-                foreach (var constructorDef in objectDef.Constructors)
-                {
-                    var method = new Method(constructorDef, objectDef);
-                    if (!method.IsSupported())
-                        continue;
-
-                    _ = sourceCode.Append($$"""
-
-                            public {{objectDef.Name}}({{method.GetParametersExpression()}})
-                            {
-                                Id = CommandClient.Get().CreateObject(
-                                    ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                    this{{method.GetArgumentsExpression()}});
-                            }
-
-                        """);
-                }
-
-                foreach (var property in objectDef.StaticProperties)
-                {
-                    var propertyType = new ArgumentType(property.Type);
-                    if (!propertyType.IsSupported())
-                        continue;
-
-                    _ = sourceCode.Append($$"""
-
-                            public static {{propertyType.GetTypeExpression()}} {{property.Name}}
-                            {
-
-                        """);
-
-                    if (property.CanRead)
-                    {
-                        _ = sourceCode.Append($$"""
-                                    get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}>(
-                                        ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                        nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
-
-                            """);
-                    }
-
-                    if (property.CanWrite)
-                    {
-                        _ = sourceCode.Append($$"""
-                                    set => PropertyAccessor.SetStatic(
-                                        ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                        nameof({{property.Name}}),
-                                        value);
-
-                            """);
-                    }
-
-                    _ = sourceCode.Append("    }\r\n");
-                }
-
-                foreach (var property in objectDef.InstanceProperties)
-                {
-                    var propertyType = new ArgumentType(property.Type);
-                    if (!propertyType.IsSupported())
-                        continue;
-
-                    _ = sourceCode.Append($$"""
-
-                            public {{propertyType.GetTypeExpression()}} {{property.Name}}
-                            {
-
-                        """);
-
-                    if (property.CanRead)
-                    {
-                        _ = sourceCode.Append($$"""
-                                    get => PropertyAccessor.Get<{{propertyType.GetName()}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
-
-                            """);
-                    }
-
-                    if (property.CanWrite)
-                    {
-                        _ = sourceCode.Append($$"""
-                                    set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{propertyType.GetValueExpression()}});
-
-                            """);
-                    }
-
-                    _ = sourceCode.Append("    }\r\n");
-                }
-
-                foreach (var methodDef in objectDef.StaticMethods)
-                {
-                    var method = new Method(methodDef, objectDef);
-                    if (!method.IsSupported())
-                        continue;
-
-                    var returnType = method.ReturnType!;
-                    if (returnType.IsVoid)
-                    {
-                        _ = sourceCode.Append($$"""
-
-                            public static {{method.GetSignatureExpression()}}
-                            {
-                                CommandClient.Get().InvokeStaticMethod(
-                                    ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                    nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
-                            }
-
-                        """);
-                    }
-                    else
-                    {
-                        _ = sourceCode.Append($$"""
-
-                            public static {{method.GetSignatureExpression()}}
-                            {
-                                return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
-                                    ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
-                                    nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
-                            }
-
-                        """);
-                    }
-                }
-
-                foreach (var methodDef in objectDef.InstanceMethods)
-                {
-                    var method = new Method(methodDef, objectDef);
-                    if (!method.IsSupported())
-                        continue;
-
-                    var returnType = method.ReturnType!;
-                    if (returnType.IsVoid)
-                    {
-                        _ = sourceCode.Append($$"""
-
-                            public {{method.GetSignatureExpression()}}
-                            {
-                                CommandClient.Get().InvokeMethod(
-                                    Id,
-                                    nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
-                            }
-
-                        """);
-                    }
-                    else
-                    {
-                        _ = sourceCode.Append($$"""
-
-                            public {{method.GetSignatureExpression()}}
-                            {
-                                return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
-                                    Id,
-                                    nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
-                            }
-
-                        """);
-                    }
-                }
-
-                _ = sourceCode.Append("}\r\n");
+                GenerateClass(sourceCode, objectDef);
             }
 
             sourceProductionContext.AddSource($"WinUIShell.{objectDef.Namespace}.{objectDef.Name}.g.cs", sourceCode.ToString());
         }
+    }
+
+    public static void GenerateInterface(StringBuilder sourceCode, Api.ObjectDef objectDef)
+    {
+        string genericParameterExpression = "";
+        if (objectDef.GenericParameterTypes.Count > 0)
+        {
+            var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
+            genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
+        }
+
+        bool isSystemInterface = objectDef.IsInterface && objectDef.Namespace.StartsWith("System.");
+        StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{objectDef.Namespace}.{objectDef.Name}{genericParameterExpression}" : "");
+        foreach (var interfaceType in objectDef.Interfaces)
+        {
+            var type = new ArgumentType(interfaceType);
+            if (type.IsSupported())
+            {
+                if (baseTypeExpression.Length == 0)
+                {
+                    _ = baseTypeExpression.Append(" : ");
+                }
+                else
+                {
+                    _ = baseTypeExpression.Append(", ");
+                }
+                _ = baseTypeExpression.Append(type.GetName());
+            }
+        }
+
+        _ = sourceCode.Append($$"""
+            public interface {{objectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
+            {
+            """);
+
+        if (!isSystemInterface)
+        {
+
+            foreach (var constructorDef in objectDef.Constructors)
+            {
+                var method = new Method(constructorDef, objectDef);
+                if (!method.IsSupported())
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public {{objectDef.Name}}({{method.GetParametersExpression()}});
+
+                    """);
+            }
+
+            foreach (var property in objectDef.StaticProperties)
+            {
+                var propertyType = new ArgumentType(property.Type);
+                if (!propertyType.IsSupported())
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public static {{propertyType.GetTypeExpression()}} {{property.Name}}
+                        {
+
+                    """);
+
+                if (property.CanRead)
+                {
+                    _ = sourceCode.Append($$"""
+                                get;
+
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    _ = sourceCode.Append($$"""
+                                set;
+
+                        """);
+                }
+
+                _ = sourceCode.Append("    }\r\n");
+            }
+
+            foreach (var property in objectDef.InstanceProperties)
+            {
+                var propertyType = new ArgumentType(property.Type);
+                if (!propertyType.IsSupported())
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public {{propertyType.GetTypeExpression()}} {{property.Name}}
+                        {
+
+                    """);
+
+                if (property.CanRead)
+                {
+                    _ = sourceCode.Append($$"""
+                                get;
+
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    _ = sourceCode.Append($$"""
+                                set;
+
+                        """);
+                }
+
+                _ = sourceCode.Append("    }\r\n");
+            }
+
+            foreach (var methodDef in objectDef.StaticMethods)
+            {
+                var method = new Method(methodDef, objectDef);
+                if (!method.IsSupported())
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public static {{method.GetSignatureExpression()}};
+
+                    """);
+            }
+
+            foreach (var methodDef in objectDef.InstanceMethods)
+            {
+                var method = new Method(methodDef, objectDef);
+                if (!method.IsSupported())
+                    continue;
+
+                _ = sourceCode.Append($$"""
+
+                        public {{method.GetSignatureExpression()}};
+
+                    """);
+            }
+        }
+        _ = sourceCode.Append("}\r\n");
+    }
+
+    public static void GenerateClass(StringBuilder sourceCode, Api.ObjectDef objectDef)
+    {
+        string genericParameterExpression = "";
+        if (objectDef.GenericParameterTypes.Count > 0)
+        {
+            var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
+            genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
+        }
+
+        StringBuilder baseTypeExpression = new(" : WinUIShellObject");
+        if (objectDef.BaseType is not null)
+        {
+            var type = new ArgumentType(objectDef.BaseType);
+            if (type.IsSupported())
+            {
+                _ = baseTypeExpression.Append($", {type.GetName()}");
+            }
+        }
+        foreach (var interfaceType in objectDef.Interfaces)
+        {
+            var type = new ArgumentType(interfaceType);
+            if (type.IsSupported())
+            {
+                _ = baseTypeExpression.Append($", {type.GetName()}");
+            }
+        }
+
+        _ = sourceCode.Append($$"""
+            public class {{objectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
+            {
+                internal {{objectDef.Name}}(ObjectId id)
+                    : base(id)
+                {
+                }
+
+            """);
+
+
+        foreach (var constructorDef in objectDef.Constructors)
+        {
+            var method = new Method(constructorDef, objectDef);
+            if (!method.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    public {{objectDef.Name}}({{method.GetParametersExpression()}})
+                    {
+                        Id = CommandClient.Get().CreateObject(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                            this{{method.GetArgumentsExpression()}});
+                    }
+
+                """);
+        }
+
+        foreach (var property in objectDef.StaticProperties)
+        {
+            var propertyType = new ArgumentType(property.Type);
+            if (!propertyType.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    public static {{propertyType.GetTypeExpression()}} {{property.Name}}
+                    {
+
+                """);
+
+            if (property.CanRead)
+            {
+                _ = sourceCode.Append($$"""
+                            get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}>(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+
+                    """);
+            }
+
+            if (property.CanWrite)
+            {
+                _ = sourceCode.Append($$"""
+                            set => PropertyAccessor.SetStatic(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{property.Name}}),
+                                value);
+
+                    """);
+            }
+
+            _ = sourceCode.Append("    }\r\n");
+        }
+
+        foreach (var property in objectDef.InstanceProperties)
+        {
+            var propertyType = new ArgumentType(property.Type);
+            if (!propertyType.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    public {{propertyType.GetTypeExpression()}} {{property.Name}}
+                    {
+
+                """);
+
+            if (property.CanRead)
+            {
+                _ = sourceCode.Append($$"""
+                            get => PropertyAccessor.Get<{{propertyType.GetName()}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+
+                    """);
+            }
+
+            if (property.CanWrite)
+            {
+                _ = sourceCode.Append($$"""
+                            set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{propertyType.GetValueExpression()}});
+
+                    """);
+            }
+
+            _ = sourceCode.Append("    }\r\n");
+        }
+
+        foreach (var methodDef in objectDef.StaticMethods)
+        {
+            var method = new Method(methodDef, objectDef);
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                _ = sourceCode.Append($$"""
+
+                        public static {{method.GetSignatureExpression()}}
+                        {
+                            CommandClient.Get().InvokeStaticMethod(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                        }
+
+                    """);
+            }
+            else
+            {
+                _ = sourceCode.Append($$"""
+
+                        public static {{method.GetSignatureExpression()}}
+                        {
+                            return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
+                                ObjectTypeMapping.Get().GetTargetTypeName<{{objectDef.Name}}>(),
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                        }
+
+                    """);
+            }
+        }
+
+        foreach (var methodDef in objectDef.InstanceMethods)
+        {
+            var method = new Method(methodDef, objectDef);
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                _ = sourceCode.Append($$"""
+
+                        public {{method.GetSignatureExpression()}}
+                        {
+                            CommandClient.Get().InvokeMethod(
+                                Id,
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                        }
+
+                    """);
+            }
+            else
+            {
+                _ = sourceCode.Append($$"""
+
+                        public {{method.GetSignatureExpression()}}
+                        {
+                            return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
+                                Id,
+                                nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                        }
+
+                    """);
+            }
+        }
+
+        _ = sourceCode.Append("}\r\n");
     }
 }
