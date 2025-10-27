@@ -77,6 +77,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
         AddObject(typeof(KeyValuePair<,>));
         AddObject(typeof(System.Collections.IEnumerator));
+        AddObject(typeof(IEnumerator<>));
     }
 
     private void AddObject(Type type)

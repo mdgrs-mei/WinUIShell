@@ -58549,5 +58549,86 @@
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
+    <ObjectDef>
+      <Name>IEnumerator</Name>
+      <FullName>System.Collections.Generic.IEnumerator`1, System.Private.CoreLib</FullName>
+      <Namespace>System.Collections.Generic</Namespace>
+      <IsInterface>true</IsInterface>
+      <Interfaces>
+        <ArgumentType>
+          <Name>System.IDisposable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+        <ArgumentType>
+          <Name>System.Collections.IEnumerator</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+      </Interfaces>
+      <GenericParameterTypes>
+        <ArgumentType>
+          <Name>T</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>true</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>false</IsInterface>
+          <GenericTypeArguments />
+        </ArgumentType>
+      </GenericParameterTypes>
+      <StaticProperties />
+      <InstanceProperties>
+        <PropertyDef>
+          <Name>Current</Name>
+          <Type>
+            <Name>T</Name>
+            <IsNullable>true</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>true</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
+            <GenericTypeArguments />
+          </Type>
+          <CanRead>true</CanRead>
+          <CanWrite>false</CanWrite>
+        </PropertyDef>
+      </InstanceProperties>
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods />
+    </ObjectDef>
   </Objects>
 </Api>
