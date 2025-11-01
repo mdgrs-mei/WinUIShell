@@ -3,10 +3,10 @@ using WinUIShell.Server;
 
 namespace WinUIShell.Generator;
 
-internal class Method
+internal class MethodDef
 {
-    private readonly Api.MethodDef _methodDef;
-    private readonly Api.ObjectDef _objectDef;
+    private readonly Api.MethodDef _apiMethodDef;
+    private readonly ObjectDef _objectDef;
     public TypeDef? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =
@@ -16,21 +16,21 @@ internal class Method
         "GetType",
     ];
 
-    public Method(Api.MethodDef methodDef, Api.ObjectDef objectDef)
+    public MethodDef(Api.MethodDef apiMethodDef, ObjectDef objectDef)
     {
-        _methodDef = methodDef;
+        _apiMethodDef = apiMethodDef;
         _objectDef = objectDef;
-        ReturnType = methodDef.ReturnType is null ? null : new TypeDef(methodDef.ReturnType);
+        ReturnType = apiMethodDef.ReturnType is null ? null : new TypeDef(apiMethodDef.ReturnType);
     }
 
     public bool IsSupported()
     {
-        if (_methodDef.IsGenericMethod)
+        if (_apiMethodDef.IsGenericMethod)
             return false;
 
-        if (!string.IsNullOrEmpty(_methodDef.Name))
+        if (!string.IsNullOrEmpty(_apiMethodDef.Name))
         {
-            if (_unsupportedMethodNames.Contains(_methodDef.Name!))
+            if (_unsupportedMethodNames.Contains(_apiMethodDef.Name!))
                 return false;
         }
 
@@ -40,7 +40,7 @@ internal class Method
                 return false;
         }
 
-        foreach (var parameter in _methodDef.Parameters)
+        foreach (var parameter in _apiMethodDef.Parameters)
         {
             var parameterType = new TypeDef(parameter.Type);
             if (!parameterType.IsSupported())
@@ -51,23 +51,23 @@ internal class Method
 
     public string GetName()
     {
-        return _methodDef.Name!;
+        return _apiMethodDef.Name!;
     }
 
     public string GetSignatureExpression()
     {
-        string overrideExpression = (_methodDef.IsVirtual && !_objectDef.Type.IsInterface) ? "override " : "";
+        string overrideExpression = (_apiMethodDef.IsVirtual && !_objectDef.Type.IsInterface) ? "override " : "";
         return $"{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()
     {
-        if (_methodDef.Parameters.Count == 0)
+        if (_apiMethodDef.Parameters.Count == 0)
             return "";
 
         StringBuilder builder = new();
         string commaSpace = "";
-        foreach (var parameter in _methodDef.Parameters)
+        foreach (var parameter in _apiMethodDef.Parameters)
         {
             var parameterType = new TypeDef(parameter.Type);
             _ = builder.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
@@ -78,11 +78,11 @@ internal class Method
 
     public string GetArgumentsExpression()
     {
-        if (_methodDef.Parameters.Count == 0)
+        if (_apiMethodDef.Parameters.Count == 0)
             return "";
 
         StringBuilder builder = new();
-        foreach (var parameter in _methodDef.Parameters)
+        foreach (var parameter in _apiMethodDef.Parameters)
         {
             var typeDef = new TypeDef(parameter.Type);
             _ = builder.Append($", {typeDef.GetArgumentExpression(parameter.Name!)}");

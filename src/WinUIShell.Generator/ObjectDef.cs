@@ -6,20 +6,21 @@ namespace WinUIShell.Generator;
 internal class ObjectDef
 {
     private readonly Api.ObjectDef _apiObjectDef;
-    private readonly TypeDef _type;
     private readonly TypeDef? _baseType;
 
     private readonly List<TypeDef> _interfaces = [];
     private readonly List<PropertyDef> _staticProperties = [];
     private readonly List<PropertyDef> _instanceProperties = [];
-    private readonly List<Method> _constructors = [];
-    private readonly List<Method> _staticMethods = [];
-    private readonly List<Method> _instanceMethods = [];
+    private readonly List<MethodDef> _constructors = [];
+    private readonly List<MethodDef> _staticMethods = [];
+    private readonly List<MethodDef> _instanceMethods = [];
+
+    public TypeDef Type { get; }
 
     public ObjectDef(Api.ObjectDef apiObjectDef)
     {
         _apiObjectDef = apiObjectDef;
-        _type = new TypeDef(_apiObjectDef.Type);
+        Type = new TypeDef(_apiObjectDef.Type);
         if (_apiObjectDef.BaseType is not null)
         {
             _baseType = new TypeDef(_apiObjectDef.BaseType);
@@ -39,15 +40,15 @@ internal class ObjectDef
         }
         foreach (var constructor in _apiObjectDef.Constructors)
         {
-            _constructors.Add(new Method(constructor, _apiObjectDef));
+            _constructors.Add(new MethodDef(constructor, this));
         }
         foreach (var method in _apiObjectDef.StaticMethods)
         {
-            _staticMethods.Add(new Method(method, _apiObjectDef));
+            _staticMethods.Add(new MethodDef(method, this));
         }
         foreach (var method in _apiObjectDef.InstanceMethods)
         {
-            _instanceMethods.Add(new Method(method, _apiObjectDef));
+            _instanceMethods.Add(new MethodDef(method, this));
         }
     }
 
@@ -79,7 +80,7 @@ internal class ObjectDef
 
                 """);
 
-        if (_type.IsInterface)
+        if (Type.IsInterface)
         {
             GenerateInterface(sourceCode);
         }
@@ -93,8 +94,8 @@ internal class ObjectDef
 
     private void GenerateInterface(StringBuilder sourceCode)
     {
-        string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
-        StringBuilder baseTypeExpression = new(_type.IsSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+        StringBuilder baseTypeExpression = new(Type.IsSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
         foreach (var interfaceType in _interfaces)
         {
             if (interfaceType.IsSupported())
@@ -116,7 +117,7 @@ internal class ObjectDef
             {
             """);
 
-        if (!_type.IsSystemInterface)
+        if (!Type.IsSystemInterface)
         {
             foreach (var method in _constructors)
             {
@@ -221,7 +222,7 @@ internal class ObjectDef
 
     private void GenerateClass(StringBuilder sourceCode)
     {
-        string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
 
         StringBuilder baseTypeExpression = new(" : WinUIShellObject");
         if (_baseType is not null && _baseType.IsSupported())
