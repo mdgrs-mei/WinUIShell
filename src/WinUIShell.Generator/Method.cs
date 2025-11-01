@@ -7,7 +7,7 @@ internal class Method
 {
     private readonly Api.MethodDef _methodDef;
     private readonly Api.ObjectDef _objectDef;
-    public ArgumentType? ReturnType { get; }
+    public TypeDef? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =
     [
@@ -20,7 +20,7 @@ internal class Method
     {
         _methodDef = methodDef;
         _objectDef = objectDef;
-        ReturnType = methodDef.ReturnType is null ? null : new ArgumentType(methodDef.ReturnType);
+        ReturnType = methodDef.ReturnType is null ? null : new TypeDef(methodDef.ReturnType);
     }
 
     public bool IsSupported()
@@ -42,7 +42,7 @@ internal class Method
 
         foreach (var parameter in _methodDef.Parameters)
         {
-            var parameterType = new ArgumentType(parameter.Type);
+            var parameterType = new TypeDef(parameter.Type);
             if (!parameterType.IsSupported())
                 return false;
         }
@@ -69,7 +69,7 @@ internal class Method
         string commaSpace = "";
         foreach (var parameter in _methodDef.Parameters)
         {
-            var parameterType = new ArgumentType(parameter.Type);
+            var parameterType = new TypeDef(parameter.Type);
             _ = builder.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
             commaSpace = ", ";
         }
@@ -84,8 +84,8 @@ internal class Method
         StringBuilder builder = new();
         foreach (var parameter in _methodDef.Parameters)
         {
-            var argumentType = new ArgumentType(parameter.Type);
-            _ = builder.Append($", {argumentType.GetArgumentExpression(parameter.Name!)}");
+            var typeDef = new TypeDef(parameter.Type);
+            _ = builder.Append($", {typeDef.GetArgumentExpression(parameter.Name!)}");
         }
         return builder.ToString();
     }

@@ -52,7 +52,7 @@ internal static class ObjectGenerator
         StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{objectDef.Namespace}.{objectDef.Name}{genericParameterExpression}" : "");
         foreach (var interfaceType in objectDef.Interfaces)
         {
-            var type = new ArgumentType(interfaceType);
+            var type = new TypeDef(interfaceType);
             if (type.IsSupported())
             {
                 if (baseTypeExpression.Length == 0)
@@ -89,7 +89,7 @@ internal static class ObjectGenerator
 
             foreach (var property in objectDef.StaticProperties)
             {
-                var propertyType = new ArgumentType(property.Type);
+                var propertyType = new TypeDef(property.Type);
                 if (!propertyType.IsSupported())
                     continue;
 
@@ -121,7 +121,7 @@ internal static class ObjectGenerator
 
             foreach (var property in objectDef.InstanceProperties)
             {
-                var propertyType = new ArgumentType(property.Type);
+                var propertyType = new TypeDef(property.Type);
                 if (!propertyType.IsSupported())
                     continue;
 
@@ -192,7 +192,7 @@ internal static class ObjectGenerator
         StringBuilder baseTypeExpression = new(" : WinUIShellObject");
         if (objectDef.BaseType is not null)
         {
-            var type = new ArgumentType(objectDef.BaseType);
+            var type = new TypeDef(objectDef.BaseType);
             if (type.IsSupported())
             {
                 _ = baseTypeExpression.Append($", {type.GetName()}");
@@ -200,7 +200,7 @@ internal static class ObjectGenerator
         }
         foreach (var interfaceType in objectDef.Interfaces)
         {
-            var type = new ArgumentType(interfaceType);
+            var type = new TypeDef(interfaceType);
             if (type.IsSupported())
             {
                 _ = baseTypeExpression.Append($", {type.GetName()}");
@@ -238,7 +238,7 @@ internal static class ObjectGenerator
 
         foreach (var property in objectDef.StaticProperties)
         {
-            var propertyType = new ArgumentType(property.Type);
+            var propertyType = new TypeDef(property.Type);
             if (!propertyType.IsSupported())
                 continue;
 
@@ -275,7 +275,7 @@ internal static class ObjectGenerator
 
         foreach (var property in objectDef.InstanceProperties)
         {
-            var propertyType = new ArgumentType(property.Type);
+            var propertyType = new TypeDef(property.Type);
             if (!propertyType.IsSupported())
                 continue;
 

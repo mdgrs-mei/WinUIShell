@@ -2,12 +2,12 @@
 
 namespace WinUIShell.Generator;
 
-internal class ArgumentType
+internal class TypeDef
 {
     private readonly string _name = "";
-    private readonly Api.ArgumentType _apiArgumentType;
-    private readonly ArgumentType? _elementType;
-    private readonly List<ArgumentType>? _genericTypeArguments;
+    private readonly Api.TypeDef _apiTypeDef;
+    private readonly TypeDef? _elementType;
+    private readonly List<TypeDef>? _genericTypeArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
     public bool IsSystemInterface { get; internal set; }
@@ -46,18 +46,18 @@ internal class ArgumentType
         "System.Collections.Generic.IDictionary",
     ];
 
-    public ArgumentType(Api.ArgumentType apiArgumentType)
+    public TypeDef(Api.TypeDef apiTypeDef)
     {
-        _apiArgumentType = apiArgumentType;
+        _apiTypeDef = apiTypeDef;
 
-        var serverTypeName = apiArgumentType.Name;
-        IsRpcSupportedType = apiArgumentType.IsEnum;
-        if (_apiArgumentType.IsInterface && serverTypeName.StartsWith("System."))
+        var serverTypeName = apiTypeDef.Name;
+        IsRpcSupportedType = apiTypeDef.IsEnum;
+        if (_apiTypeDef.IsInterface && serverTypeName.StartsWith("System."))
         {
             IsSystemInterface = true;
         }
 
-        if (_apiArgumentType.IsGenericTypeParameter || _apiArgumentType.ElementType is not null)
+        if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.ElementType is not null)
         {
             _name = serverTypeName;
         }
@@ -90,18 +90,18 @@ internal class ArgumentType
             _name = $"WinUIShell.{serverTypeName}";
         }
 
-        IsNullable = apiArgumentType.IsNullable || !IsRpcSupportedType;
+        IsNullable = apiTypeDef.IsNullable || !IsRpcSupportedType;
 
-        if (apiArgumentType.ElementType is not null)
+        if (apiTypeDef.ElementType is not null)
         {
-            _elementType = new ArgumentType(apiArgumentType.ElementType);
+            _elementType = new TypeDef(apiTypeDef.ElementType);
         }
-        if (apiArgumentType.GenericTypeArguments.Count > 0)
+        if (apiTypeDef.GenericTypeArguments.Count > 0)
         {
             _genericTypeArguments = [];
-            foreach (var genericTypeArgument in apiArgumentType.GenericTypeArguments)
+            foreach (var genericTypeArgument in apiTypeDef.GenericTypeArguments)
             {
-                _genericTypeArguments.Add(new ArgumentType(genericTypeArgument));
+                _genericTypeArguments.Add(new TypeDef(genericTypeArgument));
             }
         }
     }
@@ -123,7 +123,7 @@ internal class ArgumentType
     public bool IsSupported()
     {
 #if false
-        if (_apiArgumentType.IsArray)
+        if (_apiTypeDef.IsArray)
             return false;
 
         if (IsRefOrOut())
@@ -143,29 +143,29 @@ internal class ArgumentType
 
     private bool IsUnsupportedType()
     {
-        return _unsupportedTypes.Contains(_apiArgumentType.Name) || _apiArgumentType.IsDelegate;
+        return _unsupportedTypes.Contains(_apiTypeDef.Name) || _apiTypeDef.IsDelegate;
     }
 
     private bool IsUnsupportedSystemInterface()
     {
-        return IsSystemInterface && !_supportedSystemInterfaces.Contains(_apiArgumentType.Name);
+        return IsSystemInterface && !_supportedSystemInterfaces.Contains(_apiTypeDef.Name);
     }
 
     private bool IsRefOrOut()
     {
-        return _apiArgumentType.IsOut || (_apiArgumentType.IsByRef && !_apiArgumentType.IsIn);
+        return _apiTypeDef.IsOut || (_apiTypeDef.IsByRef && !_apiTypeDef.IsIn);
     }
 
     private bool IsGenericParameter()
     {
-        return _apiArgumentType.IsGenericTypeParameter || _apiArgumentType.IsGenericMethodParameter;
+        return _apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter;
     }
 
     public string GetName()
     {
         if (_elementType is not null)
         {
-            if (_apiArgumentType.IsArray)
+            if (_apiTypeDef.IsArray)
             {
                 return $"{_elementType.GetName()}[]";
             }
@@ -184,14 +184,14 @@ internal class ArgumentType
     public string GetTypeExpression()
     {
         string refExpression = "";
-        if (_apiArgumentType.IsByRef)
+        if (_apiTypeDef.IsByRef)
         {
-            if (_apiArgumentType.IsIn)
+            if (_apiTypeDef.IsIn)
             {
                 refExpression = "in ";
             }
             else
-            if (_apiArgumentType.IsOut)
+            if (_apiTypeDef.IsOut)
             {
                 refExpression = "out ";
             }
@@ -223,7 +223,7 @@ internal class ArgumentType
 
     public string GetArgumentExpression(string variableName)
     {
-        if (_apiArgumentType.IsByRef)
+        if (_apiTypeDef.IsByRef)
         {
             return _elementType!.GetArgumentExpression(variableName);
         }

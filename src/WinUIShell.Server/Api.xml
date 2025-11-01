@@ -52330,7 +52330,7 @@
         <GenericTypeArguments />
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>Microsoft.UI.Xaml.IApplicationOverrides</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52344,8 +52344,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52359,8 +52359,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>WinRT.IWinRTObject</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52374,8 +52374,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52389,8 +52389,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52404,8 +52404,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52419,7 +52419,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Microsoft.UI.Xaml.Application</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -52433,9 +52433,9 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties>
         <PropertyDef>
@@ -52980,7 +52980,7 @@
         <GenericTypeArguments />
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -52994,8 +52994,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>WinRT.IWinRTObject</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53009,8 +53009,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53024,8 +53024,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53039,8 +53039,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53054,7 +53054,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Microsoft.UI.Xaml.DebugSettings</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53068,9 +53068,9 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>
@@ -53401,7 +53401,7 @@
         <GenericTypeArguments />
       </BaseType>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53415,8 +53415,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>WinRT.IWinRTObject</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53430,8 +53430,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53445,8 +53445,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53460,8 +53460,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53475,7 +53475,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Microsoft.UI.Xaml.DependencyObject</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53489,10 +53489,10 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Collections.Generic.IDictionary</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53506,7 +53506,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>System.Object</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53520,8 +53520,8 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
-            <ArgumentType>
+            </TypeDef>
+            <TypeDef>
               <Name>System.Object</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53535,10 +53535,10 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Collections.Generic.ICollection</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53552,7 +53552,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>System.Collections.Generic.KeyValuePair</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53566,7 +53566,7 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments>
-                <ArgumentType>
+                <TypeDef>
                   <Name>System.Object</Name>
                   <IsNullable>false</IsNullable>
                   <IsEnum>false</IsEnum>
@@ -53580,8 +53580,8 @@
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
                   <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
-                </ArgumentType>
-                <ArgumentType>
+                </TypeDef>
+                <TypeDef>
                   <Name>System.Object</Name>
                   <IsNullable>false</IsNullable>
                   <IsEnum>false</IsEnum>
@@ -53595,12 +53595,12 @@
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
                   <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
-                </ArgumentType>
+                </TypeDef>
               </GenericTypeArguments>
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Collections.Generic.IEnumerable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53614,7 +53614,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>System.Collections.Generic.KeyValuePair</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53628,7 +53628,7 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments>
-                <ArgumentType>
+                <TypeDef>
                   <Name>System.Object</Name>
                   <IsNullable>false</IsNullable>
                   <IsEnum>false</IsEnum>
@@ -53642,8 +53642,8 @@
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
                   <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
-                </ArgumentType>
-                <ArgumentType>
+                </TypeDef>
+                <TypeDef>
                   <Name>System.Object</Name>
                   <IsNullable>false</IsNullable>
                   <IsEnum>false</IsEnum>
@@ -53657,12 +53657,12 @@
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
                   <IsInterface>false</IsInterface>
                   <GenericTypeArguments />
-                </ArgumentType>
+                </TypeDef>
               </GenericTypeArguments>
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Collections.IEnumerable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53676,8 +53676,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -53691,7 +53691,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -53705,9 +53705,9 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>
@@ -53727,7 +53727,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Object</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -53741,7 +53741,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
@@ -53763,7 +53763,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Object</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -53777,7 +53777,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
@@ -53859,7 +53859,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -53873,7 +53873,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
@@ -53915,7 +53915,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Object</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -53929,8 +53929,8 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
-              <ArgumentType>
+              </TypeDef>
+              <TypeDef>
                 <Name>System.Object</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -53944,7 +53944,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </Type>
           <CanRead>true</CanRead>
@@ -54396,7 +54396,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
-                  <ArgumentType>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54410,8 +54410,8 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
-                  <ArgumentType>
+                  </TypeDef>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54425,7 +54425,7 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
+                  </TypeDef>
                 </GenericTypeArguments>
               </Type>
             </ParameterDef>
@@ -54490,7 +54490,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
-                  <ArgumentType>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54504,8 +54504,8 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
-                  <ArgumentType>
+                  </TypeDef>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54519,7 +54519,7 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
+                  </TypeDef>
                 </GenericTypeArguments>
               </Type>
             </ParameterDef>
@@ -54575,7 +54575,7 @@
                   <IsGenericMethodParameter>false</IsGenericMethodParameter>
                   <IsInterface>false</IsInterface>
                   <GenericTypeArguments>
-                    <ArgumentType>
+                    <TypeDef>
                       <Name>System.Object</Name>
                       <IsNullable>false</IsNullable>
                       <IsEnum>false</IsEnum>
@@ -54589,8 +54589,8 @@
                       <IsGenericMethodParameter>false</IsGenericMethodParameter>
                       <IsInterface>false</IsInterface>
                       <GenericTypeArguments />
-                    </ArgumentType>
-                    <ArgumentType>
+                    </TypeDef>
+                    <TypeDef>
                       <Name>System.Object</Name>
                       <IsNullable>false</IsNullable>
                       <IsEnum>false</IsEnum>
@@ -54604,7 +54604,7 @@
                       <IsGenericMethodParameter>false</IsGenericMethodParameter>
                       <IsInterface>false</IsInterface>
                       <GenericTypeArguments />
-                    </ArgumentType>
+                    </TypeDef>
                   </GenericTypeArguments>
                 </ElementType>
                 <GenericTypeArguments />
@@ -54649,7 +54649,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Collections.Generic.KeyValuePair</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -54663,7 +54663,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
-                  <ArgumentType>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54677,8 +54677,8 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
-                  <ArgumentType>
+                  </TypeDef>
+                  <TypeDef>
                     <Name>System.Object</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -54692,9 +54692,9 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
+                  </TypeDef>
                 </GenericTypeArguments>
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </ReturnType>
           <Parameters />
@@ -54724,7 +54724,7 @@
         <GenericTypeArguments />
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>System.ISpanFormattable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -54738,8 +54738,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IFormattable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -54753,8 +54753,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.Serialization.ISerializable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -54768,7 +54768,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>
@@ -56684,7 +56684,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments>
-                  <ArgumentType>
+                  <TypeDef>
                     <Name>System.Char</Name>
                     <IsNullable>false</IsNullable>
                     <IsEnum>false</IsEnum>
@@ -56698,7 +56698,7 @@
                     <IsGenericMethodParameter>false</IsGenericMethodParameter>
                     <IsInterface>false</IsInterface>
                     <GenericTypeArguments />
-                  </ArgumentType>
+                  </TypeDef>
                 </GenericTypeArguments>
               </Type>
             </ParameterDef>
@@ -57069,7 +57069,7 @@
         <GenericTypeArguments />
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>Windows.UI.Core.ICoreAcceleratorKeys</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57083,8 +57083,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57098,8 +57098,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>WinRT.IWinRTObject</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57113,8 +57113,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57128,8 +57128,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57143,8 +57143,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57158,7 +57158,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Windows.UI.Core.CoreDispatcher</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -57172,9 +57172,9 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>
@@ -57610,7 +57610,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Boolean</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -57624,7 +57624,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </ReturnType>
           <Parameters>
@@ -57685,7 +57685,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
-              <ArgumentType>
+              <TypeDef>
                 <Name>System.Boolean</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
@@ -57699,7 +57699,7 @@
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
                 <GenericTypeArguments />
-              </ArgumentType>
+              </TypeDef>
             </GenericTypeArguments>
           </ReturnType>
           <Parameters>
@@ -57748,7 +57748,7 @@
         <GenericTypeArguments />
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57762,8 +57762,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>WinRT.IWinRTObject</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57777,8 +57777,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.IDynamicInterfaceCastable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57792,8 +57792,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57807,8 +57807,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.IEquatable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -57822,7 +57822,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments>
-            <ArgumentType>
+            <TypeDef>
               <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
               <IsNullable>false</IsNullable>
               <IsEnum>false</IsEnum>
@@ -57836,9 +57836,9 @@
               <IsGenericMethodParameter>false</IsGenericMethodParameter>
               <IsInterface>false</IsInterface>
               <GenericTypeArguments />
-            </ArgumentType>
+            </TypeDef>
           </GenericTypeArguments>
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>
@@ -58323,7 +58323,7 @@
         <IsGenericMethodParameter>false</IsGenericMethodParameter>
         <IsInterface>false</IsInterface>
         <GenericTypeArguments>
-          <ArgumentType>
+          <TypeDef>
             <Name>TKey</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
@@ -58337,8 +58337,8 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>false</IsInterface>
             <GenericTypeArguments />
-          </ArgumentType>
-          <ArgumentType>
+          </TypeDef>
+          <TypeDef>
             <Name>TValue</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
@@ -58352,7 +58352,7 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>false</IsInterface>
             <GenericTypeArguments />
-          </ArgumentType>
+          </TypeDef>
         </GenericTypeArguments>
       </Type>
       <BaseType>
@@ -58684,7 +58684,7 @@
         <IsGenericMethodParameter>false</IsGenericMethodParameter>
         <IsInterface>true</IsInterface>
         <GenericTypeArguments>
-          <ArgumentType>
+          <TypeDef>
             <Name>T</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
@@ -58698,11 +58698,11 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>false</IsInterface>
             <GenericTypeArguments />
-          </ArgumentType>
+          </TypeDef>
         </GenericTypeArguments>
       </Type>
       <Interfaces>
-        <ArgumentType>
+        <TypeDef>
           <Name>System.IDisposable</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -58716,8 +58716,8 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
+        </TypeDef>
+        <TypeDef>
           <Name>System.Collections.IEnumerator</Name>
           <IsNullable>false</IsNullable>
           <IsEnum>false</IsEnum>
@@ -58731,7 +58731,7 @@
           <IsGenericMethodParameter>false</IsGenericMethodParameter>
           <IsInterface>true</IsInterface>
           <GenericTypeArguments />
-        </ArgumentType>
+        </TypeDef>
       </Interfaces>
       <StaticProperties />
       <InstanceProperties>

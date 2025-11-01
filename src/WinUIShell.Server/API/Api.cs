@@ -7,15 +7,11 @@ public class Api
     public List<EnumDef> Enums { get; } = [];
     public List<ObjectDef> Objects { get; } = [];
 
-    public class TypeDef
+    public class EnumDef
     {
         public string Name { get; set; } = "";
         public string FullName { get; set; } = "";
         public string Namespace { get; set; } = "";
-    }
-
-    public class EnumDef : TypeDef
-    {
         public string UnderlyingType { get; set; } = "";
         public List<EnumEntryDef> Entries { get; } = [];
     }
@@ -26,11 +22,14 @@ public class Api
         public object? Value { get; set; }
     }
 
-    public class ObjectDef : TypeDef
+    public class ObjectDef
     {
-        public ArgumentType Type { get; set; } = new();
-        public ArgumentType? BaseType { get; set; }
-        public List<ArgumentType> Interfaces { get; } = [];
+        public string Name { get; set; } = "";
+        public string FullName { get; set; } = "";
+        public string Namespace { get; set; } = "";
+        public TypeDef Type { get; set; } = new();
+        public TypeDef? BaseType { get; set; }
+        public List<TypeDef> Interfaces { get; } = [];
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
         public List<MethodDef> Constructors { get; } = [];
@@ -41,12 +40,12 @@ public class Api
     public class PropertyDef
     {
         public string Name { get; set; } = "";
-        public ArgumentType Type { get; set; } = new();
+        public TypeDef Type { get; set; } = new();
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
     }
 
-    public class ArgumentType
+    public class TypeDef
     {
         public string Name { get; set; } = "";
         public bool IsNullable { get; set; }
@@ -60,14 +59,14 @@ public class Api
         public bool IsGenericTypeParameter { get; set; }
         public bool IsGenericMethodParameter { get; set; }
         public bool IsInterface { get; set; }
-        public ArgumentType? ElementType { get; set; }
-        public List<ArgumentType> GenericTypeArguments { get; } = [];
+        public TypeDef? ElementType { get; set; }
+        public List<TypeDef> GenericTypeArguments { get; } = [];
     }
 
     public class MethodDef
     {
         public string? Name { get; set; }
-        public ArgumentType? ReturnType { get; set; }
+        public TypeDef? ReturnType { get; set; }
         public List<ParameterDef> Parameters { get; } = [];
         public bool IsGenericMethod { get; set; }
         public bool IsVirtual { get; set; }
@@ -77,7 +76,7 @@ public class Api
     public class ParameterDef
     {
         public string? Name { get; set; } = "";
-        public ArgumentType Type { get; set; } = new();
+        public TypeDef Type { get; set; } = new();
     }
 
 #pragma warning restore CA1002

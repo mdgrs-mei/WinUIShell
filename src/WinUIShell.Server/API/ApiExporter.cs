@@ -88,17 +88,17 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = GetObjectTypeName(type),
             FullName = $"{type.FullName}, {assembly.GetName().Name}",
             Namespace = type.Namespace!,
-            Type = GetArgumentType(type),
+            Type = GetTypeDef(type),
         };
 
         if (type.BaseType != typeof(object) && type.BaseType is not null)
         {
-            def.BaseType = GetArgumentType(type.BaseType);
+            def.BaseType = GetTypeDef(type.BaseType);
         }
 
         foreach (var interfaceType in type.GetInterfaces())
         {
-            def.Interfaces.Add(GetArgumentType(interfaceType));
+            def.Interfaces.Add(GetTypeDef(interfaceType));
         }
 
         foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static))
@@ -134,13 +134,13 @@ public class ApiExporter : Singleton<ApiExporter>
     private Api.PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
     {
         var propertyType = propertyInfo.PropertyType;
-        var argumentType = GetArgumentType(propertyType);
-        argumentType.IsNullable = Reflection.IsNullable(propertyInfo);
+        var typeDef = GetTypeDef(propertyType);
+        typeDef.IsNullable = Reflection.IsNullable(propertyInfo);
 
         return new Api.PropertyDef
         {
             Name = propertyInfo.Name,
-            Type = argumentType,
+            Type = typeDef,
             CanRead = propertyInfo.CanRead,
             CanWrite = propertyInfo.CanWrite
         };
@@ -160,7 +160,7 @@ public class ApiExporter : Singleton<ApiExporter>
     private Api.MethodDef GetMethodDef(MethodInfo methodInfo)
     {
         var returnParameter = methodInfo.ReturnParameter;
-        var returnType = GetArgumentType(methodInfo.ReturnType);
+        var returnType = GetTypeDef(methodInfo.ReturnType);
         returnType.IsNullable = Reflection.IsNullable(returnParameter);
         returnType.IsIn = returnParameter.IsIn;
         returnType.IsOut = returnParameter.IsOut;
@@ -185,22 +185,22 @@ public class ApiExporter : Singleton<ApiExporter>
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)
     {
         var type = parameterInfo.ParameterType;
-        var argumentType = GetArgumentType(type);
-        argumentType.IsNullable = Reflection.IsNullable(parameterInfo);
-        argumentType.IsIn = parameterInfo.IsIn;
-        argumentType.IsOut = parameterInfo.IsOut;
+        var typeDef = GetTypeDef(type);
+        typeDef.IsNullable = Reflection.IsNullable(parameterInfo);
+        typeDef.IsIn = parameterInfo.IsIn;
+        typeDef.IsOut = parameterInfo.IsOut;
 
         return new Api.ParameterDef
         {
             Name = parameterInfo.Name,
-            Type = argumentType,
+            Type = typeDef,
         };
     }
 
-    private Api.ArgumentType GetArgumentType(Type type)
+    private Api.TypeDef GetTypeDef(Type type)
     {
-        var name = GetArgumentTypeName(type);
-        var argumentType = new Api.ArgumentType
+        var name = GetTypeDefName(type);
+        var typeDef = new Api.TypeDef
         {
             Name = name,
             IsNullable = Reflection.IsNullable(type),
@@ -217,27 +217,27 @@ public class ApiExporter : Singleton<ApiExporter>
         if (type.IsByRef)
         {
             var elementType = type.GetElementType();
-            argumentType.ElementType = GetArgumentType(elementType!);
+            typeDef.ElementType = GetTypeDef(elementType!);
         }
         else
         if (type.IsArray)
         {
             var elementType = type.GetElementType();
-            argumentType.ElementType = GetArgumentType(elementType!);
+            typeDef.ElementType = GetTypeDef(elementType!);
         }
 
         if (type.IsGenericType)
         {
             foreach (var genericTypeArgument in type.GetGenericArguments())
             {
-                argumentType.GenericTypeArguments.Add(GetArgumentType(genericTypeArgument));
+                typeDef.GenericTypeArguments.Add(GetTypeDef(genericTypeArgument));
             }
         }
 
-        return argumentType;
+        return typeDef;
     }
 
-    private string GetArgumentTypeName(Type type)
+    private string GetTypeDefName(Type type)
     {
         if (type.IsByRef)
         {
