@@ -52314,7 +52314,21 @@
       <Name>Application</Name>
       <FullName>Microsoft.UI.Xaml.Application, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>Microsoft.UI.Xaml.Application</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>Microsoft.UI.Xaml.IApplicationOverrides</Name>
@@ -52423,7 +52437,6 @@
           </GenericTypeArguments>
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties>
         <PropertyDef>
           <Name>Current</Name>
@@ -52951,7 +52964,21 @@
       <Name>DebugSettings</Name>
       <FullName>Microsoft.UI.Xaml.DebugSettings, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>Microsoft.UI.Xaml.DebugSettings</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
@@ -53045,7 +53072,6 @@
           </GenericTypeArguments>
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -53344,7 +53370,21 @@
       <Name>ResourceDictionary</Name>
       <FullName>Microsoft.UI.Xaml.ResourceDictionary, Microsoft.WinUI</FullName>
       <Namespace>Microsoft.UI.Xaml</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>Microsoft.UI.Xaml.ResourceDictionary</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <BaseType>
         <Name>Microsoft.UI.Xaml.DependencyObject</Name>
         <IsNullable>false</IsNullable>
@@ -53669,7 +53709,6 @@
           </GenericTypeArguments>
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -54669,7 +54708,21 @@
       <Name>Uri</Name>
       <FullName>System.Uri, System.Private.Uri</FullName>
       <Namespace>System</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>System.Uri</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>System.ISpanFormattable</Name>
@@ -54717,7 +54770,6 @@
           <GenericTypeArguments />
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -56939,7 +56991,21 @@
       <Name>UriCreationOptions</Name>
       <FullName>System.UriCreationOptions, System.Private.Uri</FullName>
       <Namespace>System</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>System.UriCreationOptions</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <BaseType>
         <Name>System.ValueType</Name>
         <IsNullable>false</IsNullable>
@@ -56956,7 +57022,6 @@
         <GenericTypeArguments />
       </BaseType>
       <Interfaces />
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -56988,7 +57053,21 @@
       <Name>CoreDispatcher</Name>
       <FullName>Windows.UI.Core.CoreDispatcher, Microsoft.Windows.SDK.NET</FullName>
       <Namespace>Windows.UI.Core</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>Windows.UI.Core.CoreDispatcher</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>Windows.UI.Core.ICoreAcceleratorKeys</Name>
@@ -57097,7 +57176,6 @@
           </GenericTypeArguments>
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -57654,7 +57732,21 @@
       <Name>DispatcherQueue</Name>
       <FullName>Microsoft.UI.Dispatching.DispatcherQueue, Microsoft.InteractiveExperiences.Projection</FullName>
       <Namespace>Microsoft.UI.Dispatching</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>Microsoft.UI.Dispatching.DispatcherQueue</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>System.Runtime.InteropServices.ICustomQueryInterface</Name>
@@ -57748,7 +57840,6 @@
           </GenericTypeArguments>
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -58218,7 +58309,52 @@
       <Name>KeyValuePair</Name>
       <FullName>System.Collections.Generic.KeyValuePair`2, System.Private.CoreLib</FullName>
       <Namespace>System.Collections.Generic</Namespace>
-      <IsInterface>false</IsInterface>
+      <Type>
+        <Name>System.Collections.Generic.KeyValuePair</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>true</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>false</IsInterface>
+        <GenericTypeArguments>
+          <ArgumentType>
+            <Name>TKey</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>true</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
+            <GenericTypeArguments />
+          </ArgumentType>
+          <ArgumentType>
+            <Name>TValue</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>true</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
+            <GenericTypeArguments />
+          </ArgumentType>
+        </GenericTypeArguments>
+      </Type>
       <BaseType>
         <Name>System.ValueType</Name>
         <IsNullable>false</IsNullable>
@@ -58235,38 +58371,6 @@
         <GenericTypeArguments />
       </BaseType>
       <Interfaces />
-      <GenericParameterTypes>
-        <ArgumentType>
-          <Name>TKey</Name>
-          <IsNullable>false</IsNullable>
-          <IsEnum>false</IsEnum>
-          <IsArray>false</IsArray>
-          <IsDelegate>false</IsDelegate>
-          <IsByRef>false</IsByRef>
-          <IsIn>false</IsIn>
-          <IsOut>false</IsOut>
-          <IsGenericType>false</IsGenericType>
-          <IsGenericTypeParameter>true</IsGenericTypeParameter>
-          <IsGenericMethodParameter>false</IsGenericMethodParameter>
-          <IsInterface>false</IsInterface>
-          <GenericTypeArguments />
-        </ArgumentType>
-        <ArgumentType>
-          <Name>TValue</Name>
-          <IsNullable>false</IsNullable>
-          <IsEnum>false</IsEnum>
-          <IsArray>false</IsArray>
-          <IsDelegate>false</IsDelegate>
-          <IsByRef>false</IsByRef>
-          <IsIn>false</IsIn>
-          <IsOut>false</IsOut>
-          <IsGenericType>false</IsGenericType>
-          <IsGenericTypeParameter>true</IsGenericTypeParameter>
-          <IsGenericMethodParameter>false</IsGenericMethodParameter>
-          <IsInterface>false</IsInterface>
-          <GenericTypeArguments />
-        </ArgumentType>
-      </GenericParameterTypes>
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -58474,9 +58578,22 @@
       <Name>IEnumerator</Name>
       <FullName>System.Collections.IEnumerator, System.Private.CoreLib</FullName>
       <Namespace>System.Collections</Namespace>
-      <IsInterface>true</IsInterface>
+      <Type>
+        <Name>System.Collections.IEnumerator</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>true</IsInterface>
+        <GenericTypeArguments />
+      </Type>
       <Interfaces />
-      <GenericParameterTypes />
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>
@@ -58553,7 +58670,37 @@
       <Name>IEnumerator</Name>
       <FullName>System.Collections.Generic.IEnumerator`1, System.Private.CoreLib</FullName>
       <Namespace>System.Collections.Generic</Namespace>
-      <IsInterface>true</IsInterface>
+      <Type>
+        <Name>System.Collections.Generic.IEnumerator</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>true</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>true</IsInterface>
+        <GenericTypeArguments>
+          <ArgumentType>
+            <Name>T</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>true</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
+            <GenericTypeArguments />
+          </ArgumentType>
+        </GenericTypeArguments>
+      </Type>
       <Interfaces>
         <ArgumentType>
           <Name>System.IDisposable</Name>
@@ -58586,23 +58733,6 @@
           <GenericTypeArguments />
         </ArgumentType>
       </Interfaces>
-      <GenericParameterTypes>
-        <ArgumentType>
-          <Name>T</Name>
-          <IsNullable>false</IsNullable>
-          <IsEnum>false</IsEnum>
-          <IsArray>false</IsArray>
-          <IsDelegate>false</IsDelegate>
-          <IsByRef>false</IsByRef>
-          <IsIn>false</IsIn>
-          <IsOut>false</IsOut>
-          <IsGenericType>false</IsGenericType>
-          <IsGenericTypeParameter>true</IsGenericTypeParameter>
-          <IsGenericMethodParameter>false</IsGenericMethodParameter>
-          <IsInterface>false</IsInterface>
-          <GenericTypeArguments />
-        </ArgumentType>
-      </GenericParameterTypes>
       <StaticProperties />
       <InstanceProperties>
         <PropertyDef>

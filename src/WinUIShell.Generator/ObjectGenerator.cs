@@ -26,7 +26,7 @@ internal static class ObjectGenerator
 
                 """);
 
-            if (objectDef.IsInterface)
+            if (objectDef.Type.IsInterface)
             {
                 GenerateInterface(sourceCode, objectDef);
             }
@@ -42,13 +42,13 @@ internal static class ObjectGenerator
     public static void GenerateInterface(StringBuilder sourceCode, Api.ObjectDef objectDef)
     {
         string genericParameterExpression = "";
-        if (objectDef.GenericParameterTypes.Count > 0)
+        if (objectDef.Type.GenericTypeArguments.Count > 0)
         {
-            var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
+            var genericParameterNames = objectDef.Type.GenericTypeArguments.Select(t => t.Name);
             genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
         }
 
-        bool isSystemInterface = objectDef.IsInterface && objectDef.Namespace.StartsWith("System.");
+        bool isSystemInterface = objectDef.Type.IsInterface && objectDef.Namespace.StartsWith("System.");
         StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{objectDef.Namespace}.{objectDef.Name}{genericParameterExpression}" : "");
         foreach (var interfaceType in objectDef.Interfaces)
         {
@@ -74,7 +74,6 @@ internal static class ObjectGenerator
 
         if (!isSystemInterface)
         {
-
             foreach (var constructorDef in objectDef.Constructors)
             {
                 var method = new Method(constructorDef, objectDef);
@@ -184,9 +183,9 @@ internal static class ObjectGenerator
     public static void GenerateClass(StringBuilder sourceCode, Api.ObjectDef objectDef)
     {
         string genericParameterExpression = "";
-        if (objectDef.GenericParameterTypes.Count > 0)
+        if (objectDef.Type.GenericTypeArguments.Count > 0)
         {
-            var genericParameterNames = objectDef.GenericParameterTypes.Select(t => t.Name);
+            var genericParameterNames = objectDef.Type.GenericTypeArguments.Select(t => t.Name);
             genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
         }
 

@@ -88,7 +88,7 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = GetObjectTypeName(type),
             FullName = $"{type.FullName}, {assembly.GetName().Name}",
             Namespace = type.Namespace!,
-            IsInterface = type.IsInterface,
+            Type = GetArgumentType(type),
         };
 
         if (type.BaseType != typeof(object) && type.BaseType is not null)
@@ -99,14 +99,6 @@ public class ApiExporter : Singleton<ApiExporter>
         foreach (var interfaceType in type.GetInterfaces())
         {
             def.Interfaces.Add(GetArgumentType(interfaceType));
-        }
-
-        if (type.IsGenericTypeDefinition)
-        {
-            foreach (var genericParameter in type.GetGenericArguments())
-            {
-                def.GenericParameterTypes.Add(GetArgumentType(genericParameter));
-            }
         }
 
         foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static))

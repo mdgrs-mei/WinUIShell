@@ -28,10 +28,9 @@ public class Api
 
     public class ObjectDef : TypeDef
     {
-        public bool IsInterface { get; set; }
+        public ArgumentType Type { get; set; } = new();
         public ArgumentType? BaseType { get; set; }
         public List<ArgumentType> Interfaces { get; } = [];
-        public List<ArgumentType> GenericParameterTypes { get; } = [];
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
         public List<MethodDef> Constructors { get; } = [];
