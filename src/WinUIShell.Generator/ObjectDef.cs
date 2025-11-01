@@ -54,7 +54,7 @@ internal class ObjectDef
 
     public bool IsSupported()
     {
-        return true;
+        return Type.IsSupported();
     }
 
     public string GetSourceCodeFileName()
