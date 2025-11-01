@@ -94,12 +94,10 @@ internal class ObjectDef
     private void GenerateInterface(StringBuilder sourceCode)
     {
         string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
-        bool isSystemInterface = _apiObjectDef.Type.IsInterface && _apiObjectDef.Namespace.StartsWith("System.");
-        StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
-        foreach (var interfaceType in _apiObjectDef.Interfaces)
+        StringBuilder baseTypeExpression = new(_type.IsSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
+        foreach (var interfaceType in _interfaces)
         {
-            var type = new TypeDef(interfaceType);
-            if (type.IsSupported())
+            if (interfaceType.IsSupported())
             {
                 if (baseTypeExpression.Length == 0)
                 {
@@ -109,7 +107,7 @@ internal class ObjectDef
                 {
                     _ = baseTypeExpression.Append(", ");
                 }
-                _ = baseTypeExpression.Append(type.GetName());
+                _ = baseTypeExpression.Append(interfaceType.GetName());
             }
         }
 
@@ -118,11 +116,10 @@ internal class ObjectDef
             {
             """);
 
-        if (!isSystemInterface)
+        if (!_type.IsSystemInterface)
         {
-            foreach (var constructorDef in _apiObjectDef.Constructors)
+            foreach (var method in _constructors)
             {
-                var method = new Method(constructorDef, _apiObjectDef);
                 if (!method.IsSupported())
                     continue;
 
@@ -197,9 +194,8 @@ internal class ObjectDef
                 _ = sourceCode.Append("    }\r\n");
             }
 
-            foreach (var methodDef in _apiObjectDef.StaticMethods)
+            foreach (var method in _staticMethods)
             {
-                var method = new Method(methodDef, _apiObjectDef);
                 if (!method.IsSupported())
                     continue;
 
@@ -210,9 +206,8 @@ internal class ObjectDef
                     """);
             }
 
-            foreach (var methodDef in _apiObjectDef.InstanceMethods)
+            foreach (var method in _instanceMethods)
             {
-                var method = new Method(methodDef, _apiObjectDef);
                 if (!method.IsSupported())
                     continue;
 
@@ -231,20 +226,15 @@ internal class ObjectDef
         string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
 
         StringBuilder baseTypeExpression = new(" : WinUIShellObject");
-        if (_apiObjectDef.BaseType is not null)
+        if (_baseType is not null && _baseType.IsSupported())
         {
-            var type = new TypeDef(_apiObjectDef.BaseType);
-            if (type.IsSupported())
-            {
-                _ = baseTypeExpression.Append($", {type.GetName()}");
-            }
+            _ = baseTypeExpression.Append($", {_baseType.GetName()}");
         }
-        foreach (var interfaceType in _apiObjectDef.Interfaces)
+        foreach (var interfaceType in _interfaces)
         {
-            var type = new TypeDef(interfaceType);
-            if (type.IsSupported())
+            if (interfaceType.IsSupported())
             {
-                _ = baseTypeExpression.Append($", {type.GetName()}");
+                _ = baseTypeExpression.Append($", {interfaceType.GetName()}");
             }
         }
 
@@ -259,9 +249,8 @@ internal class ObjectDef
             """);
 
 
-        foreach (var constructorDef in _apiObjectDef.Constructors)
+        foreach (var method in _constructors)
         {
-            var method = new Method(constructorDef, _apiObjectDef);
             if (!method.IsSupported())
                 continue;
 
@@ -346,9 +335,8 @@ internal class ObjectDef
             _ = sourceCode.Append("    }\r\n");
         }
 
-        foreach (var methodDef in _apiObjectDef.StaticMethods)
+        foreach (var method in _staticMethods)
         {
-            var method = new Method(methodDef, _apiObjectDef);
             if (!method.IsSupported())
                 continue;
 
@@ -381,9 +369,8 @@ internal class ObjectDef
             }
         }
 
-        foreach (var methodDef in _apiObjectDef.InstanceMethods)
+        foreach (var method in _instanceMethods)
         {
-            var method = new Method(methodDef, _apiObjectDef);
             if (!method.IsSupported())
                 continue;
 
