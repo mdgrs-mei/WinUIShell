@@ -10,6 +10,10 @@ internal class TypeDef
     private readonly List<TypeDef>? _genericTypeArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
+    public bool IsInterface
+    {
+        get => _apiTypeDef.IsInterface;
+    }
     public bool IsSystemInterface { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
