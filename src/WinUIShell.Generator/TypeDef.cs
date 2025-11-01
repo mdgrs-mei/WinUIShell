@@ -7,7 +7,7 @@ internal class TypeDef
     private readonly string _name = "";
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
-    private readonly List<TypeDef>? _genericTypeArguments;
+    private readonly List<TypeDef>? _genericArguments;
     public bool IsNullable { get; internal set; }
     public bool IsRpcSupportedType { get; internal set; }
     public bool IsInterface
@@ -102,10 +102,10 @@ internal class TypeDef
         }
         if (apiTypeDef.GenericTypeArguments.Count > 0)
         {
-            _genericTypeArguments = [];
-            foreach (var genericTypeArgument in apiTypeDef.GenericTypeArguments)
+            _genericArguments = [];
+            foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
-                _genericTypeArguments.Add(new TypeDef(genericTypeArgument));
+                _genericArguments.Add(new TypeDef(genericArgument));
             }
         }
     }
@@ -176,13 +176,22 @@ internal class TypeDef
             return _elementType.GetName();
         }
 
-        if (_genericTypeArguments is not null)
+        if (_genericArguments is not null)
         {
-            var genericTypeArgumentsNames = _genericTypeArguments.Select(t => t.GetName());
-            return $"{_name}<{string.Join(", ", genericTypeArgumentsNames)}>";
+            return $"{_name}{GetGenericArgumentsExpression()}";
         }
 
         return _name;
+    }
+
+    public string GetGenericArgumentsExpression()
+    {
+        if (_genericArguments is not null)
+        {
+            var genericArgumentsNames = _genericArguments.Select(t => t.GetName());
+            return $"<{string.Join(", ", genericArgumentsNames)}>";
+        }
+        return "";
     }
 
     public string GetTypeExpression()

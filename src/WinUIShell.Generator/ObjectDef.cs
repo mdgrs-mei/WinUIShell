@@ -93,15 +93,9 @@ internal class ObjectDef
 
     private void GenerateInterface(StringBuilder sourceCode)
     {
-        string genericParameterExpression = "";
-        if (_apiObjectDef.Type.GenericTypeArguments.Count > 0)
-        {
-            var genericParameterNames = _apiObjectDef.Type.GenericTypeArguments.Select(t => t.Name);
-            genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
-        }
-
+        string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
         bool isSystemInterface = _apiObjectDef.Type.IsInterface && _apiObjectDef.Namespace.StartsWith("System.");
-        StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericParameterExpression}" : "");
+        StringBuilder baseTypeExpression = new(isSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
         foreach (var interfaceType in _apiObjectDef.Interfaces)
         {
             var type = new TypeDef(interfaceType);
@@ -120,7 +114,7 @@ internal class ObjectDef
         }
 
         _ = sourceCode.Append($$"""
-            public interface {{_apiObjectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
+            public interface {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
 
@@ -234,12 +228,7 @@ internal class ObjectDef
 
     private void GenerateClass(StringBuilder sourceCode)
     {
-        string genericParameterExpression = "";
-        if (_apiObjectDef.Type.GenericTypeArguments.Count > 0)
-        {
-            var genericParameterNames = _apiObjectDef.Type.GenericTypeArguments.Select(t => t.Name);
-            genericParameterExpression = $"<{string.Join(", ", genericParameterNames)}>";
-        }
+        string genericArgumentsExpression = _type.GetGenericArgumentsExpression();
 
         StringBuilder baseTypeExpression = new(" : WinUIShellObject");
         if (_apiObjectDef.BaseType is not null)
@@ -260,7 +249,7 @@ internal class ObjectDef
         }
 
         _ = sourceCode.Append($$"""
-            public class {{_apiObjectDef.Name}}{{genericParameterExpression}}{{baseTypeExpression}}
+            public class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
                 internal {{_apiObjectDef.Name}}(ObjectId id)
                     : base(id)
