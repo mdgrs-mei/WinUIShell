@@ -130,15 +130,14 @@ internal class ObjectDef
                     """);
             }
 
-            foreach (var property in _apiObjectDef.StaticProperties)
+            foreach (var property in _staticProperties)
             {
-                var propertyType = new TypeDef(property.Type);
-                if (!propertyType.IsSupported())
+                if (!property.IsSupported())
                     continue;
 
                 _ = sourceCode.Append($$"""
 
-                        public static {{propertyType.GetTypeExpression()}} {{property.Name}}
+                        public static {{property.GetSignatureExpression()}}
                         {
 
                     """);
@@ -162,15 +161,14 @@ internal class ObjectDef
                 _ = sourceCode.Append("    }\r\n");
             }
 
-            foreach (var property in _apiObjectDef.InstanceProperties)
+            foreach (var property in _instanceProperties)
             {
-                var propertyType = new TypeDef(property.Type);
-                if (!propertyType.IsSupported())
+                if (!property.IsSupported())
                     continue;
 
                 _ = sourceCode.Append($$"""
 
-                        public {{propertyType.GetTypeExpression()}} {{property.Name}}
+                        public {{property.GetSignatureExpression()}}
                         {
 
                     """);
@@ -266,15 +264,14 @@ internal class ObjectDef
                 """);
         }
 
-        foreach (var property in _apiObjectDef.StaticProperties)
+        foreach (var property in _staticProperties)
         {
-            var propertyType = new TypeDef(property.Type);
-            if (!propertyType.IsSupported())
+            if (!property.IsSupported())
                 continue;
 
             _ = sourceCode.Append($$"""
 
-                    public static {{propertyType.GetTypeExpression()}} {{property.Name}}
+                    public static {{property.GetSignatureExpression()}}
                     {
 
                 """);
@@ -282,9 +279,9 @@ internal class ObjectDef
             if (property.CanRead)
             {
                 _ = sourceCode.Append($$"""
-                            get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}>(
+                            get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
-                                nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+                                nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
             }
@@ -303,15 +300,14 @@ internal class ObjectDef
             _ = sourceCode.Append("    }\r\n");
         }
 
-        foreach (var property in _apiObjectDef.InstanceProperties)
+        foreach (var property in _instanceProperties)
         {
-            var propertyType = new TypeDef(property.Type);
-            if (!propertyType.IsSupported())
+            if (!property.IsSupported())
                 continue;
 
             _ = sourceCode.Append($$"""
 
-                    public {{propertyType.GetTypeExpression()}} {{property.Name}}
+                    public {{property.GetSignatureExpression()}}
                     {
 
                 """);
@@ -319,7 +315,7 @@ internal class ObjectDef
             if (property.CanRead)
             {
                 _ = sourceCode.Append($$"""
-                            get => PropertyAccessor.Get<{{propertyType.GetName()}}>(Id, nameof({{property.Name}})){{(propertyType.IsNullable ? "" : "!")}};
+                            get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
             }
@@ -327,7 +323,7 @@ internal class ObjectDef
             if (property.CanWrite)
             {
                 _ = sourceCode.Append($$"""
-                            set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{propertyType.GetValueExpression()}});
+                            set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{property.Type.GetValueExpression()}});
 
                     """);
             }
