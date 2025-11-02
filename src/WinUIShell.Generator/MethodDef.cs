@@ -56,7 +56,7 @@ internal class MethodDef
 
     public string GetSignatureExpression()
     {
-        string overrideExpression = (_apiMethodDef.IsVirtual && !_objectDef.Type.IsInterface) ? "override " : "";
+        string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
         return $"{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 

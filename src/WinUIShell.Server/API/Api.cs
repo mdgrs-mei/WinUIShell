@@ -69,8 +69,7 @@ public class Api
         public TypeDef? ReturnType { get; set; }
         public List<ParameterDef> Parameters { get; } = [];
         public bool IsGenericMethod { get; set; }
-        public bool IsVirtual { get; set; }
-        public bool IsAbstruct { get; set; }
+        public bool IsOverride { get; set; }
     }
 
     public class ParameterDef

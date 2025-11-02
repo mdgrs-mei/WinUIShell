@@ -52585,8 +52585,7 @@
         <MethodDef>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -52609,8 +52608,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Start</Name>
@@ -52650,8 +52648,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52709,8 +52706,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>LoadComponent</Name>
@@ -52786,8 +52782,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -52827,8 +52822,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -52870,8 +52864,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -52911,8 +52904,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -52933,8 +52925,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Exit</Name>
@@ -52955,8 +52946,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -53255,8 +53245,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -53298,8 +53287,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -53339,8 +53327,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -53361,8 +53348,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -53995,8 +53981,7 @@
         <MethodDef>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -54038,8 +54023,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -54081,8 +54065,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -54122,8 +54105,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -54144,8 +54126,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -54203,8 +54184,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>ContainsKey</Name>
@@ -54244,8 +54224,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Remove</Name>
@@ -54285,8 +54264,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryGetValue</Name>
@@ -54359,8 +54337,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -54431,8 +54408,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Clear</Name>
@@ -54453,8 +54429,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Contains</Name>
@@ -54525,8 +54500,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>CopyTo</Name>
@@ -54630,8 +54604,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetEnumerator</Name>
@@ -54699,8 +54672,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -55251,8 +55223,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55294,8 +55265,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55355,8 +55325,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55398,8 +55367,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55456,8 +55424,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55499,8 +55466,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Parameters>
@@ -55542,8 +55508,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </Constructors>
       <StaticMethods>
@@ -55585,8 +55550,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>HexEscape</Name>
@@ -55626,8 +55590,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>HexUnescape</Name>
@@ -55700,8 +55663,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>IsHexEncoding</Name>
@@ -55759,8 +55721,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>CheckSchemeName</Name>
@@ -55800,8 +55761,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>IsHexDigit</Name>
@@ -55841,8 +55801,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>FromHex</Name>
@@ -55882,8 +55841,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -55974,8 +55932,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -56081,8 +56038,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -56173,8 +56129,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryCreate</Name>
@@ -56265,8 +56220,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Compare</Name>
@@ -56378,8 +56332,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedUriString</Name>
@@ -56437,8 +56390,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>UnescapeDataString</Name>
@@ -56478,8 +56430,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>EscapeUriString</Name>
@@ -56519,8 +56470,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>EscapeDataString</Name>
@@ -56560,8 +56510,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -56603,8 +56552,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -56625,8 +56573,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>ToString</Name>
@@ -56647,8 +56594,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryFormat</Name>
@@ -56737,8 +56683,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -56778,8 +56723,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelativeUri</Name>
@@ -56819,8 +56763,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>MakeRelative</Name>
@@ -56860,8 +56803,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetComponents</Name>
@@ -56919,8 +56861,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>IsWellFormedOriginalString</Name>
@@ -56941,8 +56882,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>IsBaseOf</Name>
@@ -56982,8 +56922,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -57244,8 +57183,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -57287,8 +57225,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -57328,8 +57265,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -57350,8 +57286,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>ProcessEvents</Name>
@@ -57391,8 +57326,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>RunAsync</Name>
@@ -57450,8 +57384,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>RunIdleAsync</Name>
@@ -57491,8 +57424,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -57513,8 +57445,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>ShouldYield</Name>
@@ -57554,8 +57485,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>StopProcessEvents</Name>
@@ -57576,8 +57506,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryRunAsync</Name>
@@ -57651,8 +57580,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryRunIdleAsync</Name>
@@ -57708,8 +57636,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -57869,8 +57796,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>true</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetForCurrentThread</Name>
@@ -57891,8 +57817,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>FromAbi</Name>
@@ -57932,8 +57857,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </StaticMethods>
       <InstanceMethods>
@@ -57975,8 +57899,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -58016,8 +57939,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>GetHashCode</Name>
@@ -58038,8 +57960,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>CreateTimer</Name>
@@ -58060,8 +57981,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -58101,8 +58021,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryEnqueue</Name>
@@ -58160,8 +58079,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>EnqueueEventLoopExit</Name>
@@ -58182,8 +58100,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>EnsureSystemDispatcherQueue</Name>
@@ -58204,8 +58121,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -58226,8 +58142,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>RunEventLoop</Name>
@@ -58285,8 +58200,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -58425,8 +58339,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </Constructors>
       <StaticMethods />
@@ -58450,8 +58363,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>true</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Deconstruct</Name>
@@ -58539,8 +58451,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>false</IsVirtual>
-          <IsAbstruct>false</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -58609,8 +58520,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Reset</Name>
@@ -58631,8 +58541,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -59057,8 +58966,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Add</Name>
@@ -59116,8 +59024,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Remove</Name>
@@ -59157,8 +59064,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>TryGetValue</Name>
@@ -59231,8 +59137,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -59403,8 +59308,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Clear</Name>
@@ -59425,8 +59329,7 @@
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Contains</Name>
@@ -59466,8 +59369,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>CopyTo</Name>
@@ -59540,8 +59442,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Remove</Name>
@@ -59581,8 +59482,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>
@@ -59764,8 +59664,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>Insert</Name>
@@ -59823,8 +59722,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
         <MethodDef>
           <Name>RemoveAt</Name>
@@ -59864,8 +59762,7 @@
             </ParameterDef>
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
-          <IsVirtual>true</IsVirtual>
-          <IsAbstruct>true</IsAbstruct>
+          <IsOverride>false</IsOverride>
         </MethodDef>
       </InstanceMethods>
     </ObjectDef>

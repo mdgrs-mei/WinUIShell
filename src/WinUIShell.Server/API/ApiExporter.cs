@@ -175,8 +175,7 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = methodInfo.Name,
             ReturnType = returnType,
             IsGenericMethod = methodInfo.IsGenericMethod,
-            IsVirtual = methodInfo.IsVirtual,
-            IsAbstruct = methodInfo.IsAbstract,
+            IsOverride = IsOverride(methodInfo),
         };
 
         var parameters = methodInfo.GetParameters();
@@ -185,6 +184,23 @@ public class ApiExporter : Singleton<ApiExporter>
             methodDef.Parameters.Add(GetParameterDef(parameter));
         }
         return methodDef;
+    }
+
+    private bool IsOverride(MethodInfo methodInfo)
+    {
+        Type objectType = methodInfo.ReflectedType!;
+        bool isImplemented = methodInfo.DeclaringType == objectType;
+        if (!isImplemented)
+            return false;
+
+        if (!methodInfo.IsVirtual)
+            return false;
+
+        if (objectType.IsInterface)
+            return false;
+
+        bool isNewSlot = (methodInfo.Attributes & MethodAttributes.NewSlot) > 0;
+        return !isNewSlot;
     }
 
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)
@@ -276,9 +292,9 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)
     {
-        bool isNotOverridden = methodInfo.DeclaringType != methodInfo.ReflectedType;
+        bool isImplemented = methodInfo.DeclaringType == methodInfo.ReflectedType;
         bool isHiddenMethodsLikeGetterSetter = methodInfo.IsSpecialName;
-        return isNotOverridden || isHiddenMethodsLikeGetterSetter;
+        return !isImplemented || isHiddenMethodsLikeGetterSetter;
     }
 
     private void ExportToFile(string filePath)
