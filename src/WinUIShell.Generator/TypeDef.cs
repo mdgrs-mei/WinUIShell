@@ -8,7 +8,10 @@ internal class TypeDef
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
     private readonly List<TypeDef>? _genericArguments;
-    public bool IsNullable { get; internal set; }
+    public bool IsNullable
+    {
+        get => _apiTypeDef.IsNullable;
+    }
     public bool IsRpcSupportedType { get; internal set; }
     public bool IsInterface
     {
@@ -93,8 +96,6 @@ internal class TypeDef
         {
             _name = $"WinUIShell.{serverTypeName}";
         }
-
-        IsNullable = apiTypeDef.IsNullable || !IsRpcSupportedType;
 
         if (apiTypeDef.ElementType is not null)
         {
