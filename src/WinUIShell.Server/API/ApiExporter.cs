@@ -78,6 +78,9 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(KeyValuePair<,>));
         AddObject(typeof(System.Collections.IEnumerator));
         AddObject(typeof(IEnumerator<>));
+        AddObject(typeof(IDictionary<,>));
+        AddObject(typeof(ICollection<>));
+        AddObject(typeof(IList<>));
     }
 
     private void AddObject(Type type)
@@ -91,7 +94,9 @@ public class ApiExporter : Singleton<ApiExporter>
             Type = GetTypeDef(type),
         };
 
-        if (type.BaseType != typeof(object) && type.BaseType is not null)
+        if (type.BaseType != typeof(object) &&
+            type.BaseType != typeof(ValueType) &&
+            type.BaseType is not null)
         {
             def.BaseType = GetTypeDef(type.BaseType);
         }
