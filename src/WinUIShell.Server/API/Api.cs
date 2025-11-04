@@ -71,6 +71,7 @@ public class Api
         public List<ParameterDef> Parameters { get; } = [];
         public bool IsGenericMethod { get; set; }
         public bool IsOverride { get; set; }
+        public bool HidesBase { get; set; }
     }
 
     public class ParameterDef

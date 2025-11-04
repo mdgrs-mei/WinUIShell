@@ -56,8 +56,9 @@ internal class MethodDef
 
     public string GetSignatureExpression()
     {
+        string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
-        return $"{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        return $"{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()

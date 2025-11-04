@@ -179,6 +179,7 @@ public class ApiExporter : Singleton<ApiExporter>
             ReturnType = returnType,
             IsGenericMethod = methodInfo.IsGenericMethod,
             IsOverride = IsOverride(methodInfo),
+            HidesBase = HidesBaseMethod(methodInfo),
         };
 
         var parameters = methodInfo.GetParameters();
