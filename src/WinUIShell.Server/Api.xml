@@ -53746,7 +53746,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Values</Name>
@@ -53783,7 +53783,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Count</Name>
@@ -53804,7 +53804,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsReadOnly</Name>
@@ -53825,7 +53825,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Item</Name>
@@ -53846,7 +53846,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>MergedDictionaries</Name>
@@ -58548,7 +58548,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -58591,6 +58591,150 @@
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>false</IsInterface>
             <GenericTypeArguments />
+          </ReturnType>
+          <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
+          <IsOverride>false</IsOverride>
+        </MethodDef>
+      </InstanceMethods>
+    </ObjectDef>
+    <ObjectDef>
+      <Name>IEnumerable</Name>
+      <FullName>System.Collections.IEnumerable, System.Private.CoreLib</FullName>
+      <Namespace>System.Collections</Namespace>
+      <Type>
+        <Name>System.Collections.IEnumerable</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>false</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>true</IsInterface>
+        <GenericTypeArguments />
+      </Type>
+      <Interfaces />
+      <StaticProperties />
+      <InstanceProperties />
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods>
+        <MethodDef>
+          <Name>GetEnumerator</Name>
+          <ReturnType>
+            <Name>System.Collections.IEnumerator</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>false</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
+            <GenericTypeArguments />
+          </ReturnType>
+          <Parameters />
+          <IsGenericMethod>false</IsGenericMethod>
+          <IsOverride>false</IsOverride>
+        </MethodDef>
+      </InstanceMethods>
+    </ObjectDef>
+    <ObjectDef>
+      <Name>IEnumerable</Name>
+      <FullName>System.Collections.Generic.IEnumerable`1, System.Private.CoreLib</FullName>
+      <Namespace>System.Collections.Generic</Namespace>
+      <Type>
+        <Name>System.Collections.Generic.IEnumerable</Name>
+        <IsNullable>false</IsNullable>
+        <IsEnum>false</IsEnum>
+        <IsArray>false</IsArray>
+        <IsDelegate>false</IsDelegate>
+        <IsByRef>false</IsByRef>
+        <IsIn>false</IsIn>
+        <IsOut>false</IsOut>
+        <IsGenericType>true</IsGenericType>
+        <IsGenericTypeParameter>false</IsGenericTypeParameter>
+        <IsGenericMethodParameter>false</IsGenericMethodParameter>
+        <IsInterface>true</IsInterface>
+        <GenericTypeArguments>
+          <TypeDef>
+            <Name>T</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>false</IsGenericType>
+            <IsGenericTypeParameter>true</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>false</IsInterface>
+            <GenericTypeArguments />
+          </TypeDef>
+        </GenericTypeArguments>
+      </Type>
+      <Interfaces>
+        <TypeDef>
+          <Name>System.Collections.IEnumerable</Name>
+          <IsNullable>false</IsNullable>
+          <IsEnum>false</IsEnum>
+          <IsArray>false</IsArray>
+          <IsDelegate>false</IsDelegate>
+          <IsByRef>false</IsByRef>
+          <IsIn>false</IsIn>
+          <IsOut>false</IsOut>
+          <IsGenericType>false</IsGenericType>
+          <IsGenericTypeParameter>false</IsGenericTypeParameter>
+          <IsGenericMethodParameter>false</IsGenericMethodParameter>
+          <IsInterface>true</IsInterface>
+          <GenericTypeArguments />
+        </TypeDef>
+      </Interfaces>
+      <StaticProperties />
+      <InstanceProperties />
+      <Constructors />
+      <StaticMethods />
+      <InstanceMethods>
+        <MethodDef>
+          <Name>GetEnumerator</Name>
+          <ReturnType>
+            <Name>System.Collections.Generic.IEnumerator</Name>
+            <IsNullable>false</IsNullable>
+            <IsEnum>false</IsEnum>
+            <IsArray>false</IsArray>
+            <IsDelegate>false</IsDelegate>
+            <IsByRef>false</IsByRef>
+            <IsIn>false</IsIn>
+            <IsOut>false</IsOut>
+            <IsGenericType>true</IsGenericType>
+            <IsGenericTypeParameter>false</IsGenericTypeParameter>
+            <IsGenericMethodParameter>false</IsGenericMethodParameter>
+            <IsInterface>true</IsInterface>
+            <GenericTypeArguments>
+              <TypeDef>
+                <Name>T</Name>
+                <IsNullable>false</IsNullable>
+                <IsEnum>false</IsEnum>
+                <IsArray>false</IsArray>
+                <IsDelegate>false</IsDelegate>
+                <IsByRef>false</IsByRef>
+                <IsIn>false</IsIn>
+                <IsOut>false</IsOut>
+                <IsGenericType>false</IsGenericType>
+                <IsGenericTypeParameter>true</IsGenericTypeParameter>
+                <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                <IsInterface>false</IsInterface>
+                <GenericTypeArguments />
+              </TypeDef>
+            </GenericTypeArguments>
           </ReturnType>
           <Parameters />
           <IsGenericMethod>false</IsGenericMethod>
@@ -58905,7 +59049,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Keys</Name>
@@ -58942,7 +59086,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Values</Name>
@@ -58979,7 +59123,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -59302,7 +59446,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsReadOnly</Name>
@@ -59323,7 +59467,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -59680,7 +59824,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />

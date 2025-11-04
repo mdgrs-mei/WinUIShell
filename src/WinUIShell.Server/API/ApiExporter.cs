@@ -77,6 +77,8 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
         AddObject(typeof(KeyValuePair<,>));
         AddObject(typeof(System.Collections.IEnumerator));
+        AddObject(typeof(System.Collections.IEnumerable));
+        AddObject(typeof(IEnumerable<>));
         AddObject(typeof(IEnumerator<>));
         AddObject(typeof(IDictionary<,>));
         AddObject(typeof(ICollection<>));
@@ -217,7 +219,18 @@ public class ApiExporter : Singleton<ApiExporter>
         if (methodInfo.IsVirtual)
         {
             bool isNewSlot = (methodInfo.Attributes & MethodAttributes.NewSlot) > 0;
-            return isNewSlot;
+            if (!isNewSlot)
+                // Override.
+                return false;
+
+            if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
+                return true;
+
+            foreach (var interfaceType in objectType.GetInterfaces())
+            {
+                if (HasMethod(interfaceType, methodInfo))
+                    return objectType.IsInterface;
+            }
         }
         else
         {
