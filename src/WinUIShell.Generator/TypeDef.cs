@@ -44,13 +44,20 @@ internal class TypeDef
         "System.IntPtr",
         "Microsoft.UI.Xaml.DependencyObject",
         "WinRT.IWinRTObject",
+        "System.Runtime.InteropServices.ICustomQueryInterface",
+        "System.Runtime.InteropServices.IDynamicInterfaceCastable",
+        "System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider",
+        "System.IEquatable",
+        "System.ISpanFormattable",
+        "System.IFormattable",
+        "System.IDisposable",
+        "System.Runtime.Serialization.ISerializable",
     ];
 
     private static readonly List<string> _supportedSystemInterfaces =
     [
         "System.Collections.Generic.ICollection",
         "System.Collections.Generic.IList",
-        "System.Collections.Generic.IDictionary",
     ];
 
     public TypeDef(Api.TypeDef apiTypeDef)
@@ -59,7 +66,7 @@ internal class TypeDef
 
         var serverTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
-        if (_apiTypeDef.IsInterface && serverTypeName.StartsWith("System."))
+        if (_apiTypeDef.IsInterface && _supportedSystemInterfaces.Contains(serverTypeName))
         {
             IsSystemInterface = true;
         }
@@ -140,20 +147,12 @@ internal class TypeDef
         if (IsUnsupportedType())
             return false;
 
-        if (IsUnsupportedSystemInterface())
-            return false;
-
         return true;
     }
 
     private bool IsUnsupportedType()
     {
         return _unsupportedTypes.Contains(_apiTypeDef.Name) || _apiTypeDef.IsDelegate;
-    }
-
-    private bool IsUnsupportedSystemInterface()
-    {
-        return IsSystemInterface && !_supportedSystemInterfaces.Contains(_apiTypeDef.Name);
     }
 
     private bool IsRefOrOut()
