@@ -43,6 +43,7 @@ public class Api
         public TypeDef Type { get; set; } = new();
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
+        public bool HidesBase { get; set; }
     }
 
     public class TypeDef

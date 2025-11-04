@@ -52457,6 +52457,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </StaticProperties>
       <InstanceProperties>
@@ -52479,6 +52480,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>DispatcherShutdownMode</Name>
@@ -52499,6 +52501,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>FocusVisualKind</Name>
@@ -52519,6 +52522,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>HighContrastAdjustment</Name>
@@ -52539,6 +52543,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>RequestedTheme</Name>
@@ -52559,6 +52564,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Resources</Name>
@@ -52579,6 +52585,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors>
@@ -53083,6 +53090,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>FailFastOnErrors</Name>
@@ -53103,6 +53111,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsBindingTracingEnabled</Name>
@@ -53123,6 +53132,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsTextPerformanceVisualizationEnabled</Name>
@@ -53143,6 +53153,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsXamlResourceReferenceTracingEnabled</Name>
@@ -53163,6 +53174,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>LayoutCycleDebugBreakLevel</Name>
@@ -53183,6 +53195,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>LayoutCycleTracingLevel</Name>
@@ -53203,6 +53216,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -53732,6 +53746,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Values</Name>
@@ -53768,6 +53783,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Count</Name>
@@ -53788,6 +53804,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsReadOnly</Name>
@@ -53808,6 +53825,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Item</Name>
@@ -53828,6 +53846,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>MergedDictionaries</Name>
@@ -53864,6 +53883,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Source</Name>
@@ -53884,6 +53904,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>ThemeDictionaries</Name>
@@ -53935,6 +53956,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Dispatcher</Name>
@@ -53955,6 +53977,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>DispatcherQueue</Name>
@@ -53975,6 +53998,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors>
@@ -54763,6 +54787,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>AbsoluteUri</Name>
@@ -54783,6 +54808,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>LocalPath</Name>
@@ -54803,6 +54829,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Authority</Name>
@@ -54823,6 +54850,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>HostNameType</Name>
@@ -54843,6 +54871,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsDefaultPort</Name>
@@ -54863,6 +54892,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsFile</Name>
@@ -54883,6 +54913,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsLoopback</Name>
@@ -54903,6 +54934,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>PathAndQuery</Name>
@@ -54923,6 +54955,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Segments</Name>
@@ -54958,6 +54991,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsUnc</Name>
@@ -54978,6 +55012,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Host</Name>
@@ -54998,6 +55033,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Port</Name>
@@ -55018,6 +55054,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Query</Name>
@@ -55038,6 +55075,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Fragment</Name>
@@ -55058,6 +55096,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Scheme</Name>
@@ -55078,6 +55117,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>OriginalString</Name>
@@ -55098,6 +55138,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>DnsSafeHost</Name>
@@ -55118,6 +55159,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IdnHost</Name>
@@ -55138,6 +55180,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsAbsoluteUri</Name>
@@ -55158,6 +55201,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>UserEscaped</Name>
@@ -55178,6 +55222,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>UserInfo</Name>
@@ -55198,6 +55243,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors>
@@ -56967,6 +57013,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -57121,6 +57168,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>HasThreadAccess</Name>
@@ -57141,6 +57189,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -57773,6 +57822,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -58276,6 +58326,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Value</Name>
@@ -58296,6 +58347,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>false</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors>
@@ -58496,6 +58548,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -58633,6 +58686,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -58851,6 +58905,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Keys</Name>
@@ -58887,6 +58942,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>Values</Name>
@@ -58923,6 +58979,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -59245,6 +59302,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
         <PropertyDef>
           <Name>IsReadOnly</Name>
@@ -59265,6 +59323,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>false</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />
@@ -59621,6 +59680,7 @@
           </Type>
           <CanRead>true</CanRead>
           <CanWrite>true</CanWrite>
+          <HidesBase>true</HidesBase>
         </PropertyDef>
       </InstanceProperties>
       <Constructors />

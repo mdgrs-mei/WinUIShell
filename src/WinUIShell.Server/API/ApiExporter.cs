@@ -147,7 +147,8 @@ public class ApiExporter : Singleton<ApiExporter>
             Name = propertyInfo.Name,
             Type = typeDef,
             CanRead = propertyInfo.CanRead,
-            CanWrite = propertyInfo.CanWrite
+            CanWrite = propertyInfo.CanWrite,
+            HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
         };
     }
 
@@ -201,6 +202,45 @@ public class ApiExporter : Singleton<ApiExporter>
 
         bool isNewSlot = (methodInfo.Attributes & MethodAttributes.NewSlot) > 0;
         return !isNewSlot;
+    }
+
+    private bool HidesBaseMethod(MethodInfo? methodInfo)
+    {
+        if (methodInfo is null)
+            return false;
+
+        Type objectType = methodInfo.ReflectedType!;
+        bool isImplemented = methodInfo.DeclaringType == objectType;
+        if (!isImplemented)
+            return false;
+
+        if (methodInfo.IsVirtual)
+        {
+            bool isNewSlot = (methodInfo.Attributes & MethodAttributes.NewSlot) > 0;
+            return isNewSlot;
+        }
+        else
+        {
+            if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
+                return true;
+
+            foreach (var interfaceType in objectType.GetInterfaces())
+            {
+                if (HasMethod(interfaceType, methodInfo))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private bool HasMethod(Type type, MethodInfo methodInfo)
+    {
+        var parameterTypes = methodInfo.GetParameters().Select(p => p.ParameterType).ToArray();
+        var method = type.GetMethod(
+            methodInfo.Name,
+            BindingFlags.Public | BindingFlags.Instance,
+            parameterTypes);
+        return method is not null;
     }
 
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)

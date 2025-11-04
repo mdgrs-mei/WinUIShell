@@ -32,6 +32,7 @@ internal class PropertyDef
 
     public string GetSignatureExpression()
     {
-        return $"{Type.GetTypeExpression()} {Name}";
+        string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
+        return $"{newExpression}{Type.GetTypeExpression()} {Name}";
     }
 }
