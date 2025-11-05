@@ -6,6 +6,9 @@ internal static class Reflection
 {
     public static bool IsNullable(PropertyInfo propertyInfo)
     {
+        if (propertyInfo.PropertyType.IsGenericParameter)
+            return false;
+
         var nullabilityInfoContext = new NullabilityInfoContext();
         var nullability = nullabilityInfoContext.Create(propertyInfo);
         if (nullability.WriteState == NullabilityState.Nullable || nullability.ReadState == NullabilityState.Nullable)
@@ -18,6 +21,9 @@ internal static class Reflection
 
     public static bool IsNullable(ParameterInfo parameterInfo)
     {
+        if (parameterInfo.ParameterType.IsGenericParameter)
+            return false;
+
         var nullabilityInfoContext = new NullabilityInfoContext();
         var nullability = nullabilityInfoContext.Create(parameterInfo);
         if (nullability.WriteState == NullabilityState.Nullable || nullability.ReadState == NullabilityState.Nullable)
@@ -30,6 +36,9 @@ internal static class Reflection
 
     public static bool IsNullable(Type type)
     {
+        if (type.IsGenericParameter)
+            return false;
+
         return Nullable.GetUnderlyingType(type) is not null;
     }
 }
