@@ -5,6 +5,8 @@ namespace WinUIShell.Generator;
 internal class PropertyDef
 {
     private readonly Api.PropertyDef _apiPropertyDef;
+    private readonly ObjectDef _objectDef;
+    private readonly MemberDefType _memberDefType;
     public readonly TypeDef Type;
     public string Name
     {
@@ -19,9 +21,14 @@ internal class PropertyDef
         get => _apiPropertyDef.CanWrite;
     }
 
-    public PropertyDef(Api.PropertyDef apiPropertyDef)
+    public PropertyDef(
+        Api.PropertyDef apiPropertyDef,
+        ObjectDef objectDef,
+        MemberDefType memberDefType)
     {
         _apiPropertyDef = apiPropertyDef;
+        _objectDef = objectDef;
+        _memberDefType = memberDefType;
         Type = new TypeDef(_apiPropertyDef.Type);
     }
 
@@ -32,7 +39,9 @@ internal class PropertyDef
 
     public string GetSignatureExpression()
     {
+        string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
-        return $"{newExpression}{Type.GetTypeExpression()} {Name}";
+        return $"{accessorExpression}{staticExpression}{newExpression}{Type.GetTypeExpression()} {Name}";
     }
 }

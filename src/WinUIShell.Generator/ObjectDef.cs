@@ -32,23 +32,23 @@ internal class ObjectDef
         }
         foreach (var property in _apiObjectDef.StaticProperties)
         {
-            _staticProperties.Add(new PropertyDef(property));
+            _staticProperties.Add(new PropertyDef(property, this, MemberDefType.Static));
         }
         foreach (var property in _apiObjectDef.InstanceProperties)
         {
-            _instanceProperties.Add(new PropertyDef(property));
+            _instanceProperties.Add(new PropertyDef(property, this, MemberDefType.Instance));
         }
         foreach (var constructor in _apiObjectDef.Constructors)
         {
-            _constructors.Add(new MethodDef(constructor, this));
+            _constructors.Add(new MethodDef(constructor, this, MemberDefType.Constructor));
         }
         foreach (var method in _apiObjectDef.StaticMethods)
         {
-            _staticMethods.Add(new MethodDef(method, this));
+            _staticMethods.Add(new MethodDef(method, this, MemberDefType.Static));
         }
         foreach (var method in _apiObjectDef.InstanceMethods)
         {
-            _instanceMethods.Add(new MethodDef(method, this));
+            _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
         }
     }
 
@@ -126,7 +126,7 @@ internal class ObjectDef
 
                 _ = sourceCode.Append($$"""
 
-                        public {{_apiObjectDef.Name}}({{method.GetParametersExpression()}});
+                        {{_apiObjectDef.Name}}({{method.GetParametersExpression()}});
 
                     """);
             }
@@ -138,7 +138,7 @@ internal class ObjectDef
 
                 _ = sourceCode.Append($$"""
 
-                        public static {{property.GetSignatureExpression()}}
+                        {{property.GetSignatureExpression()}}
                         {
 
                     """);
@@ -169,7 +169,7 @@ internal class ObjectDef
 
                 _ = sourceCode.Append($$"""
 
-                        public {{property.GetSignatureExpression()}}
+                        {{property.GetSignatureExpression()}}
                         {
 
                     """);
@@ -200,7 +200,7 @@ internal class ObjectDef
 
                 _ = sourceCode.Append($$"""
 
-                        public static {{method.GetSignatureExpression()}};
+                        {{method.GetSignatureExpression()}};
 
                     """);
             }
@@ -212,7 +212,7 @@ internal class ObjectDef
 
                 _ = sourceCode.Append($$"""
 
-                        public {{method.GetSignatureExpression()}};
+                        {{method.GetSignatureExpression()}};
 
                     """);
             }
@@ -272,7 +272,7 @@ internal class ObjectDef
 
             _ = sourceCode.Append($$"""
 
-                    public static {{property.GetSignatureExpression()}}
+                    {{property.GetSignatureExpression()}}
                     {
 
                 """);
@@ -308,7 +308,7 @@ internal class ObjectDef
 
             _ = sourceCode.Append($$"""
 
-                    public {{property.GetSignatureExpression()}}
+                    {{property.GetSignatureExpression()}}
                     {
 
                 """);
@@ -342,7 +342,7 @@ internal class ObjectDef
             {
                 _ = sourceCode.Append($$"""
 
-                        public static {{method.GetSignatureExpression()}}
+                        {{method.GetSignatureExpression()}}
                         {
                             CommandClient.Get().InvokeStaticMethod(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
@@ -355,7 +355,7 @@ internal class ObjectDef
             {
                 _ = sourceCode.Append($$"""
 
-                        public static {{method.GetSignatureExpression()}}
+                        {{method.GetSignatureExpression()}}
                         {
                             return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
@@ -376,7 +376,7 @@ internal class ObjectDef
             {
                 _ = sourceCode.Append($$"""
 
-                        public {{method.GetSignatureExpression()}}
+                        {{method.GetSignatureExpression()}}
                         {
                             CommandClient.Get().InvokeMethod(
                                 Id,
@@ -389,7 +389,7 @@ internal class ObjectDef
             {
                 _ = sourceCode.Append($$"""
 
-                        public {{method.GetSignatureExpression()}}
+                        {{method.GetSignatureExpression()}}
                         {
                             return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                                 Id,

@@ -7,6 +7,7 @@ internal class MethodDef
 {
     private readonly Api.MethodDef _apiMethodDef;
     private readonly ObjectDef _objectDef;
+    private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
     public TypeDef? ReturnType { get; }
 
@@ -17,10 +18,14 @@ internal class MethodDef
         "GetType",
     ];
 
-    public MethodDef(Api.MethodDef apiMethodDef, ObjectDef objectDef)
+    public MethodDef(
+        Api.MethodDef apiMethodDef,
+        ObjectDef objectDef,
+        MemberDefType memberDefType)
     {
         _apiMethodDef = apiMethodDef;
         _objectDef = objectDef;
+        _memberDefType = memberDefType;
         _explicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
         ReturnType = apiMethodDef.ReturnType is null ? null : new TypeDef(apiMethodDef.ReturnType);
     }
@@ -66,9 +71,11 @@ internal class MethodDef
 
     public string GetSignatureExpression()
     {
+        string accessorExpression = (_objectDef.Type.IsInterface || _explicitInterfaceType is not null) ? "" : "public ";
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
-        return $"{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()
