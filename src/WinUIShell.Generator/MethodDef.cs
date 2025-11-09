@@ -7,6 +7,7 @@ internal class MethodDef
 {
     private readonly Api.MethodDef _apiMethodDef;
     private readonly ObjectDef _objectDef;
+    private readonly TypeDef? _explicitInterfaceType;
     public TypeDef? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =
@@ -20,6 +21,7 @@ internal class MethodDef
     {
         _apiMethodDef = apiMethodDef;
         _objectDef = objectDef;
+        _explicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
         ReturnType = apiMethodDef.ReturnType is null ? null : new TypeDef(apiMethodDef.ReturnType);
     }
 
@@ -46,12 +48,20 @@ internal class MethodDef
             if (!parameterType.IsSupported())
                 return false;
         }
+
+        if (_explicitInterfaceType is not null)
+        {
+            if (!_explicitInterfaceType.IsSupported())
+                return false;
+        }
+
         return true;
     }
 
     public string GetName()
     {
-        return _apiMethodDef.Name!;
+        string interfaceTypeName = _explicitInterfaceType is null ? "" : $"{_explicitInterfaceType.GetName()}.";
+        return $"{interfaceTypeName}{_apiMethodDef.Name}";
     }
 
     public string GetSignatureExpression()
