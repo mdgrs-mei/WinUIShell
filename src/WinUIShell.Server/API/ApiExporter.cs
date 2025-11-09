@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using System.Xml.Serialization;
 using WinUIShell.Common;
 
@@ -122,17 +123,29 @@ public class ApiExporter : Singleton<ApiExporter>
             def.Constructors.Add(GetConstructorDef(constructor));
         }
 
-        foreach (var staticMethod in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
+        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
         {
-            if (IsIgnoredMethod(staticMethod))
+            if (IsIgnoredMethod(method))
                 continue;
-            def.StaticMethods.Add(GetMethodDef(staticMethod));
+            def.StaticMethods.Add(GetMethodDef(method));
         }
-        foreach (var instanceMethod in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+
+        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
         {
-            if (IsIgnoredMethod(instanceMethod))
+            if (IsIgnoredMethod(method))
                 continue;
-            def.InstanceMethods.Add(GetMethodDef(instanceMethod));
+            def.InstanceMethods.Add(GetMethodDef(method));
+        }
+        // Explicit interface implementations.
+        foreach (var method in type.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        {
+            if (!method.IsFinal || !method.IsPrivate)
+                continue;
+
+            if (IsIgnoredMethod(method))
+                continue;
+
+            def.InstanceMethods.Add(GetMethodDef(method));
         }
 
         _api.Objects.Add(def);
@@ -175,8 +188,9 @@ public class ApiExporter : Singleton<ApiExporter>
 
         var methodDef = new Api.MethodDef
         {
-            Name = methodInfo.Name,
+            Name = GetMethodName(methodInfo),
             ReturnType = returnType,
+            ExplicitInterfaceType = GetExplicitInterfaceType(methodInfo),
             IsGenericMethod = methodInfo.IsGenericMethod,
             IsOverride = IsOverride(methodInfo),
             HidesBase = HidesBaseMethod(methodInfo),
@@ -188,6 +202,13 @@ public class ApiExporter : Singleton<ApiExporter>
             methodDef.Parameters.Add(GetParameterDef(parameter));
         }
         return methodDef;
+    }
+
+    private string GetMethodName(MethodInfo methodInfo)
+    {
+        var name = methodInfo.Name;
+        int dot = name.LastIndexOf('.');
+        return name[(dot + 1)..];
     }
 
     private bool IsOverride(MethodInfo methodInfo)
@@ -249,12 +270,28 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private bool HasMethod(Type type, MethodInfo methodInfo)
     {
+        var name = GetMethodName(methodInfo);
         var parameterTypes = methodInfo.GetParameters().Select(p => p.ParameterType).ToArray();
         var method = type.GetMethod(
-            methodInfo.Name,
+            name,
             BindingFlags.Public | BindingFlags.Instance,
             parameterTypes);
         return method is not null;
+    }
+
+    private Api.TypeDef? GetExplicitInterfaceType(MethodInfo methodInfo)
+    {
+        if (!methodInfo.IsFinal || !methodInfo.IsPrivate)
+            return null;
+
+        foreach (var interfaceType in methodInfo.DeclaringType!.GetInterfaces())
+        {
+            if (HasMethod(interfaceType, methodInfo))
+                return GetTypeDef(interfaceType);
+        }
+
+        Debug.Assert(false, "Could not find interface type of explicit implementation.");
+        return null;
     }
 
     private Api.ParameterDef GetParameterDef(ParameterInfo parameterInfo)

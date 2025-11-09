@@ -69,6 +69,7 @@ public class Api
         public string? Name { get; set; }
         public TypeDef? ReturnType { get; set; }
         public List<ParameterDef> Parameters { get; } = [];
+        public TypeDef? ExplicitInterfaceType { get; set; }
         public bool IsGenericMethod { get; set; }
         public bool IsOverride { get; set; }
         public bool HidesBase { get; set; }
