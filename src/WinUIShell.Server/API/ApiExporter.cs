@@ -274,7 +274,7 @@ public class ApiExporter : Singleton<ApiExporter>
         var parameterTypes = methodInfo.GetParameters().Select(p => p.ParameterType).ToArray();
         var method = type.GetMethod(
             name,
-            BindingFlags.Public | BindingFlags.Instance,
+            BindingFlags.Public | BindingFlags.Instance | BindingFlags.ExactBinding,
             parameterTypes);
         return method is not null;
     }

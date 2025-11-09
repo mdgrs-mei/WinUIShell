@@ -52878,7 +52878,7 @@
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -53473,7 +53473,7 @@
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -54370,7 +54370,7 @@
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -55059,7 +55059,7 @@
             </ParameterDef>
           </Parameters>
           <ExplicitInterfaceType>
-            <Name>System.Collections.Generic.IDictionary</Name>
+            <Name>System.Collections.Generic.ICollection</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -55073,7 +55073,7 @@
             <IsInterface>true</IsInterface>
             <GenericTypeArguments>
               <TypeDef>
-                <Name>System.Object</Name>
+                <Name>System.Collections.Generic.KeyValuePair</Name>
                 <IsNullable>false</IsNullable>
                 <IsEnum>false</IsEnum>
                 <IsArray>false</IsArray>
@@ -55081,26 +55081,42 @@
                 <IsByRef>false</IsByRef>
                 <IsIn>false</IsIn>
                 <IsOut>false</IsOut>
-                <IsGenericType>false</IsGenericType>
+                <IsGenericType>true</IsGenericType>
                 <IsGenericTypeParameter>false</IsGenericTypeParameter>
                 <IsGenericMethodParameter>false</IsGenericMethodParameter>
                 <IsInterface>false</IsInterface>
-                <GenericTypeArguments />
-              </TypeDef>
-              <TypeDef>
-                <Name>System.Object</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-                <IsGenericType>false</IsGenericType>
-                <IsGenericTypeParameter>false</IsGenericTypeParameter>
-                <IsGenericMethodParameter>false</IsGenericMethodParameter>
-                <IsInterface>false</IsInterface>
-                <GenericTypeArguments />
+                <GenericTypeArguments>
+                  <TypeDef>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                    <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
+                    <GenericTypeArguments />
+                  </TypeDef>
+                  <TypeDef>
+                    <Name>System.Object</Name>
+                    <IsNullable>false</IsNullable>
+                    <IsEnum>false</IsEnum>
+                    <IsArray>false</IsArray>
+                    <IsDelegate>false</IsDelegate>
+                    <IsByRef>false</IsByRef>
+                    <IsIn>false</IsIn>
+                    <IsOut>false</IsOut>
+                    <IsGenericType>false</IsGenericType>
+                    <IsGenericTypeParameter>false</IsGenericTypeParameter>
+                    <IsGenericMethodParameter>false</IsGenericMethodParameter>
+                    <IsInterface>false</IsInterface>
+                    <GenericTypeArguments />
+                  </TypeDef>
+                </GenericTypeArguments>
               </TypeDef>
             </GenericTypeArguments>
           </ExplicitInterfaceType>
@@ -58212,7 +58228,7 @@
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
@@ -59005,7 +59021,7 @@
           </Parameters>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
-          <HidesBase>true</HidesBase>
+          <HidesBase>false</HidesBase>
         </MethodDef>
         <MethodDef>
           <Name>Equals</Name>
