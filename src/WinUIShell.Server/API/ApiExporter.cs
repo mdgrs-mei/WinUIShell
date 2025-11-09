@@ -284,9 +284,11 @@ public class ApiExporter : Singleton<ApiExporter>
         if (!methodInfo.IsFinal || !methodInfo.IsPrivate)
             return null;
 
-        foreach (var interfaceType in methodInfo.DeclaringType!.GetInterfaces())
+        Type objectType = methodInfo.DeclaringType!;
+        foreach (var interfaceType in objectType.GetInterfaces())
         {
-            if (HasMethod(interfaceType, methodInfo))
+            var interfaceMap = objectType.GetInterfaceMap(interfaceType);
+            if (interfaceMap.TargetMethods.Contains(methodInfo))
                 return GetTypeDef(interfaceType);
         }
 

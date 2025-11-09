@@ -55143,7 +55143,7 @@
           </ReturnType>
           <Parameters />
           <ExplicitInterfaceType>
-            <Name>System.Collections.Generic.IEnumerable</Name>
+            <Name>System.Collections.IEnumerable</Name>
             <IsNullable>false</IsNullable>
             <IsEnum>false</IsEnum>
             <IsArray>false</IsArray>
@@ -55151,58 +55151,11 @@
             <IsByRef>false</IsByRef>
             <IsIn>false</IsIn>
             <IsOut>false</IsOut>
-            <IsGenericType>true</IsGenericType>
+            <IsGenericType>false</IsGenericType>
             <IsGenericTypeParameter>false</IsGenericTypeParameter>
             <IsGenericMethodParameter>false</IsGenericMethodParameter>
             <IsInterface>true</IsInterface>
-            <GenericTypeArguments>
-              <TypeDef>
-                <Name>System.Collections.Generic.KeyValuePair</Name>
-                <IsNullable>false</IsNullable>
-                <IsEnum>false</IsEnum>
-                <IsArray>false</IsArray>
-                <IsDelegate>false</IsDelegate>
-                <IsByRef>false</IsByRef>
-                <IsIn>false</IsIn>
-                <IsOut>false</IsOut>
-                <IsGenericType>true</IsGenericType>
-                <IsGenericTypeParameter>false</IsGenericTypeParameter>
-                <IsGenericMethodParameter>false</IsGenericMethodParameter>
-                <IsInterface>false</IsInterface>
-                <GenericTypeArguments>
-                  <TypeDef>
-                    <Name>System.Object</Name>
-                    <IsNullable>false</IsNullable>
-                    <IsEnum>false</IsEnum>
-                    <IsArray>false</IsArray>
-                    <IsDelegate>false</IsDelegate>
-                    <IsByRef>false</IsByRef>
-                    <IsIn>false</IsIn>
-                    <IsOut>false</IsOut>
-                    <IsGenericType>false</IsGenericType>
-                    <IsGenericTypeParameter>false</IsGenericTypeParameter>
-                    <IsGenericMethodParameter>false</IsGenericMethodParameter>
-                    <IsInterface>false</IsInterface>
-                    <GenericTypeArguments />
-                  </TypeDef>
-                  <TypeDef>
-                    <Name>System.Object</Name>
-                    <IsNullable>false</IsNullable>
-                    <IsEnum>false</IsEnum>
-                    <IsArray>false</IsArray>
-                    <IsDelegate>false</IsDelegate>
-                    <IsByRef>false</IsByRef>
-                    <IsIn>false</IsIn>
-                    <IsOut>false</IsOut>
-                    <IsGenericType>false</IsGenericType>
-                    <IsGenericTypeParameter>false</IsGenericTypeParameter>
-                    <IsGenericMethodParameter>false</IsGenericMethodParameter>
-                    <IsInterface>false</IsInterface>
-                    <GenericTypeArguments />
-                  </TypeDef>
-                </GenericTypeArguments>
-              </TypeDef>
-            </GenericTypeArguments>
+            <GenericTypeArguments />
           </ExplicitInterfaceType>
           <IsGenericMethod>false</IsGenericMethod>
           <IsOverride>false</IsOverride>
