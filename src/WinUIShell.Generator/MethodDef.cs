@@ -9,6 +9,7 @@ internal class MethodDef
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
+    private bool _isUnsafe;
     public TypeDef? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =
@@ -27,7 +28,24 @@ internal class MethodDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
         _explicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
-        ReturnType = apiMethodDef.ReturnType is null ? null : new TypeDef(apiMethodDef.ReturnType);
+
+        if (apiMethodDef.ReturnType is not null)
+        {
+            ReturnType = new TypeDef(apiMethodDef.ReturnType);
+            if (ReturnType.IsPointer)
+            {
+                _isUnsafe = true;
+            }
+        }
+
+        foreach (var parameter in _apiMethodDef.Parameters)
+        {
+            var parameterType = new TypeDef(parameter.Type);
+            if (parameterType.IsPointer)
+            {
+                _isUnsafe = true;
+            }
+        }
     }
 
     public bool IsSupported()
@@ -71,11 +89,19 @@ internal class MethodDef
 
     public string GetSignatureExpression()
     {
+        string unsafeExpression = _isUnsafe ? "unsafe " : "";
         string accessorExpression = (_objectDef.Type.IsInterface || _explicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
-        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+    }
+
+    public string GetConstructorSignatureExpression(string className)
+    {
+        string unsafeExpression = _isUnsafe ? "unsafe " : "";
+        string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
+        return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression()})";
     }
 
     public string GetParametersExpression()

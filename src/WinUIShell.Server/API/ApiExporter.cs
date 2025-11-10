@@ -26,6 +26,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddEnum(typeof(UriKind));
         AddEnum(typeof(UriComponents));
         AddEnum(typeof(UriFormat));
+        AddEnum(typeof(UriPartial));
         AddEnum(typeof(StringComparison));
     }
 
@@ -84,6 +85,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(IDictionary<,>));
         AddObject(typeof(ICollection<>));
         AddObject(typeof(IList<>));
+        AddObject(typeof(Span<>));
     }
 
     private void AddObject(Type type)
@@ -321,6 +323,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsEnum = type.IsEnum,
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
+            IsPointer = type.IsPointer,
             IsByRef = type.IsByRef,
             IsGenericType = type.IsGenericType,
             IsGenericTypeParameter = type.IsGenericTypeParameter,
@@ -364,6 +367,7 @@ public class ApiExporter : Singleton<ApiExporter>
 
         string name = type.ToString();
         name = RemoveGenericExpression(name);
+        name = RemovePointerExpression(name);
 
         return name;
     }
@@ -381,6 +385,11 @@ public class ApiExporter : Singleton<ApiExporter>
             return name[..genericSeparator];
         }
         return name;
+    }
+
+    private string RemovePointerExpression(string name)
+    {
+        return name.Replace("*", "");
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)

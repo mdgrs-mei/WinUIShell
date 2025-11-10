@@ -53,6 +53,7 @@ public class Api
         public bool IsEnum { get; set; }
         public bool IsArray { get; set; }
         public bool IsDelegate { get; set; }
+        public bool IsPointer { get; set; }
         public bool IsByRef { get; set; }
         public bool IsIn { get; set; }
         public bool IsOut { get; set; }

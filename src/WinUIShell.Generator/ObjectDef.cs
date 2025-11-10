@@ -124,7 +124,7 @@ internal class ObjectDef
 
             _ = sourceCode.Append($$"""
 
-                    {{_apiObjectDef.Name}}({{method.GetParametersExpression()}});
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
 
                 """);
         }
@@ -252,7 +252,7 @@ internal class ObjectDef
 
             _ = sourceCode.Append($$"""
 
-                    public {{_apiObjectDef.Name}}({{method.GetParametersExpression()}})
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     {
                         Id = CommandClient.Get().CreateObject(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),

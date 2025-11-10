@@ -20,6 +20,10 @@ internal class TypeDef
     public bool IsSystemInterface { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
+    public bool IsPointer
+    {
+        get => _apiTypeDef.IsPointer;
+    }
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -181,12 +185,15 @@ internal class TypeDef
             return _elementType.GetName();
         }
 
+        var name = _apiTypeDef.IsPointer ? $"{_name}*" : _name;
         if (_genericArguments is not null)
         {
-            return $"{_name}{GetGenericArgumentsExpression()}";
+            return $"{name}{GetGenericArgumentsExpression()}";
         }
-
-        return _name;
+        else
+        {
+            return name;
+        }
     }
 
     public string GetGenericArgumentsExpression()
