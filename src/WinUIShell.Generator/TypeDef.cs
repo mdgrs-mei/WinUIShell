@@ -58,6 +58,10 @@ internal class TypeDef
     [
         "System.Collections.Generic.ICollection",
         "System.Collections.Generic.IList",
+        "System.Collections.IEnumerable",
+        "System.Collections.Generic.IEnumerable",
+        "System.Collections.IEnumerator",
+        "System.Collections.Generic.IEnumerator",
     ];
 
     public TypeDef(Api.TypeDef apiTypeDef)
@@ -69,8 +73,9 @@ internal class TypeDef
         if (_apiTypeDef.IsInterface && _supportedSystemInterfaces.Contains(serverTypeName))
         {
             IsSystemInterface = true;
+            _name = $"global::{serverTypeName}";
         }
-
+        else
         if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.ElementType is not null)
         {
             _name = serverTypeName;
@@ -196,6 +201,12 @@ internal class TypeDef
 
     public string GetTypeExpression()
     {
+        string refExpression = GetRefExpression();
+        return $"{refExpression}{GetName()}{(IsNullable ? "?" : "")}";
+    }
+
+    private string GetRefExpression()
+    {
         string refExpression = "";
         if (_apiTypeDef.IsByRef)
         {
@@ -213,8 +224,7 @@ internal class TypeDef
                 refExpression = "ref ";
             }
         }
-
-        return $"{refExpression}{GetName()}{(IsNullable ? "?" : "")}";
+        return refExpression;
     }
 
     public string GetValueExpression()

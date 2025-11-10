@@ -54,7 +54,7 @@ internal class ObjectDef
 
     public bool IsSupported()
     {
-        return Type.IsSupported();
+        return Type.IsSupported() && !Type.IsSystemInterface;
     }
 
     public string GetSourceCodeFileName()
@@ -95,7 +95,7 @@ internal class ObjectDef
     private void GenerateInterface(StringBuilder sourceCode)
     {
         string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
-        StringBuilder baseTypeExpression = new(Type.IsSystemInterface ? $" : global::{_apiObjectDef.Namespace}.{_apiObjectDef.Name}{genericArgumentsExpression}" : "");
+        StringBuilder baseTypeExpression = new();
         foreach (var interfaceType in _interfaces)
         {
             if (interfaceType.IsSupported())
@@ -117,105 +117,102 @@ internal class ObjectDef
             {
             """);
 
-        if (!Type.IsSystemInterface)
+        foreach (var method in _constructors)
         {
-            foreach (var method in _constructors)
+            if (!method.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    {{_apiObjectDef.Name}}({{method.GetParametersExpression()}});
+
+                """);
+        }
+
+        foreach (var property in _staticProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    {{property.GetSignatureExpression()}}
+                    {
+
+                """);
+
+            if (property.CanRead)
             {
-                if (!method.IsSupported())
-                    continue;
-
                 _ = sourceCode.Append($$"""
-
-                        {{_apiObjectDef.Name}}({{method.GetParametersExpression()}});
+                            get;
 
                     """);
             }
 
-            foreach (var property in _staticProperties)
+            if (property.CanWrite)
             {
-                if (!property.IsSupported())
-                    continue;
-
                 _ = sourceCode.Append($$"""
-
-                        {{property.GetSignatureExpression()}}
-                        {
-
-                    """);
-
-                if (property.CanRead)
-                {
-                    _ = sourceCode.Append($$"""
-                                get;
-
-                        """);
-                }
-
-                if (property.CanWrite)
-                {
-                    _ = sourceCode.Append($$"""
-                                set;
-
-                        """);
-                }
-
-                _ = sourceCode.Append("    }\r\n");
-            }
-
-            foreach (var property in _instanceProperties)
-            {
-                if (!property.IsSupported())
-                    continue;
-
-                _ = sourceCode.Append($$"""
-
-                        {{property.GetSignatureExpression()}}
-                        {
-
-                    """);
-
-                if (property.CanRead)
-                {
-                    _ = sourceCode.Append($$"""
-                                get;
-
-                        """);
-                }
-
-                if (property.CanWrite)
-                {
-                    _ = sourceCode.Append($$"""
-                                set;
-
-                        """);
-                }
-
-                _ = sourceCode.Append("    }\r\n");
-            }
-
-            foreach (var method in _staticMethods)
-            {
-                if (!method.IsSupported())
-                    continue;
-
-                _ = sourceCode.Append($$"""
-
-                        {{method.GetSignatureExpression()}};
+                            set;
 
                     """);
             }
 
-            foreach (var method in _instanceMethods)
+            _ = sourceCode.Append("    }\r\n");
+        }
+
+        foreach (var property in _instanceProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    {{property.GetSignatureExpression()}}
+                    {
+
+                """);
+
+            if (property.CanRead)
             {
-                if (!method.IsSupported())
-                    continue;
-
                 _ = sourceCode.Append($$"""
-
-                        {{method.GetSignatureExpression()}};
+                            get;
 
                     """);
             }
+
+            if (property.CanWrite)
+            {
+                _ = sourceCode.Append($$"""
+                            set;
+
+                    """);
+            }
+
+            _ = sourceCode.Append("    }\r\n");
+        }
+
+        foreach (var method in _staticMethods)
+        {
+            if (!method.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    {{method.GetSignatureExpression()}};
+
+                """);
+        }
+
+        foreach (var method in _instanceMethods)
+        {
+            if (!method.IsSupported())
+                continue;
+
+            _ = sourceCode.Append($$"""
+
+                    {{method.GetSignatureExpression()}};
+
+                """);
         }
         _ = sourceCode.Append("}\r\n");
     }
