@@ -86,6 +86,13 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(ICollection<>));
         AddObject(typeof(IList<>));
         AddObject(typeof(Span<>));
+        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueueTimer));
+        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherExitDeferral));
+        AddObject(typeof(Microsoft.UI.Xaml.LaunchActivatedEventArgs));
+        AddObject(typeof(Windows.UI.Core.ICoreAcceleratorKeys));
+        AddObject(typeof(System.TimeSpan));
+        AddObject(typeof(System.ReadOnlySpan<>));
+        AddObject(typeof(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs));
     }
 
     private void AddObject(Type type)
@@ -287,11 +294,22 @@ public class ApiExporter : Singleton<ApiExporter>
             return null;
 
         Type objectType = methodInfo.DeclaringType!;
-        foreach (var interfaceType in objectType.GetInterfaces())
+        if (objectType.IsInterface)
         {
-            var interfaceMap = objectType.GetInterfaceMap(interfaceType);
-            if (interfaceMap.TargetMethods.Contains(methodInfo))
-                return GetTypeDef(interfaceType);
+            foreach (var interfaceType in objectType.GetInterfaces())
+            {
+                if (HasMethod(interfaceType, methodInfo))
+                    return GetTypeDef(interfaceType);
+            }
+        }
+        else
+        {
+            foreach (var interfaceType in objectType.GetInterfaces())
+            {
+                var interfaceMap = objectType.GetInterfaceMap(interfaceType);
+                if (interfaceMap.TargetMethods.Contains(methodInfo))
+                    return GetTypeDef(interfaceType);
+            }
         }
 
         Debug.Assert(false, "Could not find interface type of explicit implementation.");
@@ -389,7 +407,7 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private string RemovePointerExpression(string name)
     {
-        return name.Replace("*", "");
+        return name.Replace("*", "", StringComparison.Ordinal);
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)

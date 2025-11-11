@@ -56,6 +56,11 @@ internal class TypeDef
         "System.IFormattable",
         "System.IDisposable",
         "System.Runtime.Serialization.ISerializable",
+        "System.IComparable",
+        "System.ISpanParsable",
+        "System.IParsable",
+        "System.IUtf8SpanFormattable",
+        "System.IFormatProvider",
     ];
 
     private static readonly List<string> _supportedSystemInterfaces =
