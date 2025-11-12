@@ -63,23 +63,13 @@ internal class TypeDef
         "System.IFormatProvider",
     ];
 
-    private static readonly List<string> _supportedSystemInterfaces =
-    [
-        "System.Collections.Generic.ICollection",
-        "System.Collections.Generic.IList",
-        "System.Collections.IEnumerable",
-        "System.Collections.Generic.IEnumerable",
-        "System.Collections.IEnumerator",
-        "System.Collections.Generic.IEnumerator",
-    ];
-
     public TypeDef(Api.TypeDef apiTypeDef)
     {
         _apiTypeDef = apiTypeDef;
 
         var serverTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
-        if (_apiTypeDef.IsInterface && _supportedSystemInterfaces.Contains(serverTypeName))
+        if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
         {
             IsSystemInterface = true;
             _name = $"global::{serverTypeName}";
@@ -166,7 +156,8 @@ internal class TypeDef
 
     private bool IsUnsupportedType()
     {
-        return _unsupportedTypes.Contains(_apiTypeDef.Name) || _apiTypeDef.IsDelegate;
+        bool isUnsupportedSystemInterface = IsSystemInterface && !Api.IsSupportedSystemInterface(_apiTypeDef.Name);
+        return _unsupportedTypes.Contains(_apiTypeDef.Name) || _apiTypeDef.IsDelegate || isUnsupportedSystemInterface;
     }
 
     private bool IsRefOrOut()
@@ -186,6 +177,11 @@ internal class TypeDef
             if (_apiTypeDef.IsArray)
             {
                 return $"{_elementType.GetName()}[]";
+            }
+            else
+            if (_apiTypeDef.IsPointer)
+            {
+                return $"{_elementType.GetName()}*";
             }
             return _elementType.GetName();
         }

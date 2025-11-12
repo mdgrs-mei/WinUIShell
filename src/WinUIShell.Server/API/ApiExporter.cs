@@ -8,6 +8,7 @@ namespace WinUIShell.Server;
 public class ApiExporter : Singleton<ApiExporter>
 {
     private readonly Api _api = new();
+    private readonly HashSet<string> _addedObjects = [];
 
     public void Export(string apiFilePath)
     {
@@ -97,11 +98,20 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObject(Type type)
     {
+        if (type.IsEnum)
+            return;
+
         var assembly = type.Assembly;
+        string fullName = $"{type.FullName}, {assembly.GetName().Name}";
+        if (_addedObjects.Contains(fullName))
+            return;
+
+        _ = _addedObjects.Add(fullName);
+
         var def = new Api.ObjectDef
         {
             Name = GetObjectTypeName(type),
-            FullName = $"{type.FullName}, {assembly.GetName().Name}",
+            FullName = fullName,
             Namespace = type.Namespace!,
             Type = GetTypeDef(type),
         };
@@ -347,18 +357,30 @@ public class ApiExporter : Singleton<ApiExporter>
             IsGenericTypeParameter = type.IsGenericTypeParameter,
             IsGenericMethodParameter = type.IsGenericMethodParameter,
             IsInterface = type.IsInterface,
+            IsSystemObject = name.StartsWith("System.", StringComparison.Ordinal),
         };
 
-        if (type.IsByRef)
+        if (type.IsByRef || type.IsArray || type.IsPointer)
         {
             var elementType = type.GetElementType();
             typeDef.ElementType = GetTypeDef(elementType!);
         }
         else
-        if (type.IsArray)
         {
-            var elementType = type.GetElementType();
-            typeDef.ElementType = GetTypeDef(elementType!);
+#if false
+            bool isUnsupportedSystemInterface = typeDef.IsInterface && typeDef.IsSystemObject && !Api.IsSupportedSystemInterface(name);
+            if (!type.IsGenericParameter && !isUnsupportedSystemInterface)
+            {
+                if (type.IsGenericType && !type.IsGenericTypeDefinition)
+                {
+                    AddObject(type.GetGenericTypeDefinition());
+                }
+                else
+                {
+                    AddObject(type);
+                }
+            }
+#endif
         }
 
         if (type.IsGenericType)
@@ -381,6 +403,10 @@ public class ApiExporter : Singleton<ApiExporter>
         if (type.IsArray)
         {
             return "Array";
+        }
+        if (type.IsPointer)
+        {
+            return "Pointer";
         }
 
         string name = type.ToString();

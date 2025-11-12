@@ -61,6 +61,7 @@ public class Api
         public bool IsGenericTypeParameter { get; set; }
         public bool IsGenericMethodParameter { get; set; }
         public bool IsInterface { get; set; }
+        public bool IsSystemObject { get; set; }
         public TypeDef? ElementType { get; set; }
         public List<TypeDef> GenericTypeArguments { get; } = [];
     }
@@ -80,6 +81,20 @@ public class Api
     {
         public string? Name { get; set; } = "";
         public TypeDef Type { get; set; } = new();
+    }
+
+    private static readonly List<string> _supportedSystemInterfaces =
+    [
+        "System.Collections.Generic.ICollection",
+        "System.Collections.Generic.IList",
+        "System.Collections.IEnumerable",
+        "System.Collections.Generic.IEnumerable",
+        "System.Collections.IEnumerator",
+        "System.Collections.Generic.IEnumerator",
+    ];
+    public static bool IsSupportedSystemInterface(string typeDefName)
+    {
+        return _supportedSystemInterfaces.Contains(typeDefName);
     }
 
 #pragma warning restore CA1002
