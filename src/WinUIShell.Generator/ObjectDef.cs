@@ -59,7 +59,8 @@ internal class ObjectDef
 
     public string GetSourceCodeFileName()
     {
-        return $"WinUIShell.{_apiObjectDef.Namespace}.{_apiObjectDef.Name}.g.cs";
+        var fullName = _apiObjectDef.FullName.Split(',')[0];
+        return $"WinUIShell.{fullName}.g.cs";
     }
 
     public string Generate()

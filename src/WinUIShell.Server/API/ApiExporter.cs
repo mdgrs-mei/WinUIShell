@@ -101,17 +101,28 @@ public class ApiExporter : Singleton<ApiExporter>
         if (type.IsEnum)
             return;
 
-        var assembly = type.Assembly;
-        string fullName = $"{type.FullName}, {assembly.GetName().Name}";
+        if (type.IsNested)
+        {
+            AddObject(type.DeclaringType!);
+            return;
+        }
+
+        string fullName = GetObjectFullName(type);
         if (_addedObjects.Contains(fullName))
             return;
-
         _ = _addedObjects.Add(fullName);
 
+        var def = GetObjectDef(type);
+
+        _api.Objects.Add(def);
+    }
+
+    private Api.ObjectDef GetObjectDef(Type type)
+    {
         var def = new Api.ObjectDef
         {
             Name = GetObjectTypeName(type),
-            FullName = fullName,
+            FullName = GetObjectFullName(type),
             Namespace = type.Namespace!,
             Type = GetTypeDef(type),
         };
@@ -167,7 +178,12 @@ public class ApiExporter : Singleton<ApiExporter>
             def.InstanceMethods.Add(GetMethodDef(method));
         }
 
-        _api.Objects.Add(def);
+        foreach (var nestedType in type.GetNestedTypes())
+        {
+            def.NestedTypes.Add(GetObjectDef(nestedType));
+        }
+
+        return def;
     }
 
     private Api.PropertyDef GetPropertyDef(PropertyInfo propertyInfo)
@@ -367,7 +383,6 @@ public class ApiExporter : Singleton<ApiExporter>
         }
         else
         {
-#if false
             bool isUnsupportedSystemInterface = typeDef.IsInterface && typeDef.IsSystemObject && !Api.IsSupportedSystemInterface(name);
             if (!type.IsGenericParameter && !isUnsupportedSystemInterface)
             {
@@ -380,7 +395,6 @@ public class ApiExporter : Singleton<ApiExporter>
                     AddObject(type);
                 }
             }
-#endif
         }
 
         if (type.IsGenericType)
@@ -419,6 +433,12 @@ public class ApiExporter : Singleton<ApiExporter>
     private string GetObjectTypeName(Type type)
     {
         return RemoveGenericExpression(type.Name);
+    }
+
+    private string GetObjectFullName(Type type)
+    {
+        var assembly = type.Assembly;
+        return $"{type.FullName}, {assembly.GetName().Name}";
     }
 
     private string RemoveGenericExpression(string name)

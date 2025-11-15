@@ -35,6 +35,7 @@ public class Api
         public List<MethodDef> Constructors { get; } = [];
         public List<MethodDef> StaticMethods { get; } = [];
         public List<MethodDef> InstanceMethods { get; } = [];
+        public List<ObjectDef> NestedTypes { get; } = [];
     }
 
     public class PropertyDef
