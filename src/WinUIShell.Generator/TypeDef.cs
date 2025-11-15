@@ -151,6 +151,9 @@ internal class TypeDef
         if (IsUnsupportedType())
             return false;
 
+        if (_elementType is not null && !_elementType.IsSupported())
+            return false;
+
         return true;
     }
 

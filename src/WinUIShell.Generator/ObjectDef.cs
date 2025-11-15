@@ -54,7 +54,7 @@ internal class ObjectDef
 
     public bool IsSupported()
     {
-        return Type.IsSupported() && !Type.IsSystemInterface;
+        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsSystemInterface;
     }
 
     public string GetSourceCodeFileName()
@@ -222,11 +222,16 @@ internal class ObjectDef
     {
         string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
 
-        StringBuilder baseTypeExpression = new(" : WinUIShellObject");
+        StringBuilder baseTypeExpression = new();
         if (_baseType is not null && _baseType.IsSupported())
         {
-            _ = baseTypeExpression.Append($", {_baseType.GetName()}");
+            _ = baseTypeExpression.Append($" : {_baseType.GetName()}");
         }
+        else
+        {
+            _ = baseTypeExpression.Append($" : WinUIShellObject");
+        }
+
         foreach (var interfaceType in _interfaces)
         {
             if (interfaceType.IsSupported())
