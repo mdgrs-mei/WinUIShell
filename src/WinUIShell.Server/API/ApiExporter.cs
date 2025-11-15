@@ -8,6 +8,7 @@ namespace WinUIShell.Server;
 public class ApiExporter : Singleton<ApiExporter>
 {
     private readonly Api _api = new();
+    private readonly HashSet<string> _addedEnums = [];
     private readonly HashSet<string> _addedObjects = [];
 
     public void Export(string apiFilePath)
@@ -42,22 +43,31 @@ public class ApiExporter : Singleton<ApiExporter>
         }
     }
 
-    private void AddEnum(Type enumType)
+    private void AddEnum(Type type)
     {
-        var assembly = enumType.Assembly;
-        var underlyingType = Enum.GetUnderlyingType(enumType);
+        if (!type.IsEnum)
+            return;
+
+        var assembly = type.Assembly;
+        string fullName = $"{type.FullName}, {assembly.GetName().Name}";
+
+        if (_addedEnums.Contains(fullName))
+            return;
+        _ = _addedEnums.Add(fullName);
+
+        var underlyingType = Enum.GetUnderlyingType(type);
 
         var def = new Api.EnumDef
         {
-            Name = enumType.Name,
-            FullName = $"{enumType.FullName}, {assembly.GetName().Name}",
-            Namespace = enumType.Namespace!,
+            Name = type.Name,
+            FullName = fullName,
+            Namespace = type.Namespace!,
             UnderlyingType = underlyingType.Name
         };
 
-        foreach (var entryName in Enum.GetNames(enumType))
+        foreach (var entryName in Enum.GetNames(type))
         {
-            var value = Enum.Parse(enumType, entryName);
+            var value = Enum.Parse(type, entryName);
             var underlyingTypeValue = Convert.ChangeType(value, underlyingType);
             def.Entries.Add(new Api.EnumEntryDef
             {
@@ -368,6 +378,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
             IsPointer = type.IsPointer,
+            IsFunctionPointer = type.IsFunctionPointer,
             IsByRef = type.IsByRef,
             IsGenericType = type.IsGenericType,
             IsGenericTypeParameter = type.IsGenericTypeParameter,
@@ -380,6 +391,11 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             var elementType = type.GetElementType();
             typeDef.ElementType = GetTypeDef(elementType!);
+        }
+        else
+        if (type.IsEnum)
+        {
+            AddEnum(type);
         }
         else
         {

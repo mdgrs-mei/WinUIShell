@@ -48,6 +48,7 @@ internal class TypeDef
         "System.IntPtr",
         "Microsoft.UI.Xaml.DependencyObject",
         "WinRT.IWinRTObject",
+        "WinRT.IObjectReference",
         "System.Runtime.InteropServices.ICustomQueryInterface",
         "System.Runtime.InteropServices.IDynamicInterfaceCastable",
         "System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider",
@@ -145,6 +146,9 @@ internal class TypeDef
         if (IsRefOrOut())
             return false;
 #endif
+        if (_apiTypeDef.IsFunctionPointer)
+            return false;
+
         if (IsGenericParameter())
             return true;
 
