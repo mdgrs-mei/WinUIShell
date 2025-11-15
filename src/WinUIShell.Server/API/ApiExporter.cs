@@ -149,28 +149,28 @@ public class ApiExporter : Singleton<ApiExporter>
             def.Interfaces.Add(GetTypeDef(interfaceType));
         }
 
-        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static))
+        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
         {
             def.StaticProperties.Add(GetPropertyDef(propertyInfo));
         }
-        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
 
-        foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
             def.Constructors.Add(GetConstructorDef(constructor));
         }
 
-        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
+        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
         {
             if (IsIgnoredMethod(method))
                 continue;
             def.StaticMethods.Add(GetMethodDef(method));
         }
 
-        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+        foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
             if (IsIgnoredMethod(method))
                 continue;
