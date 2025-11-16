@@ -47,7 +47,9 @@ internal class PropertyDef
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
         string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
-        string abstructExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
-        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstructExpression}{Type.GetTypeExpression()} {Name}";
+        string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
+        string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract) ? "virtual " : "";
+
+        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {Name}";
     }
 }

@@ -11,6 +11,10 @@ internal class MethodDef
     private readonly TypeDef? _explicitInterfaceType;
     private readonly bool _isUnsafe;
     public TypeDef? ReturnType { get; }
+    public bool IsAbstract
+    {
+        get => _apiMethodDef.IsAbstract;
+    }
 
     private static readonly List<string> _unsupportedMethodNames =
     [
@@ -94,7 +98,10 @@ internal class MethodDef
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        string abstractExpression = IsAbstract ? "abstract " : "";
+        string virtualExpression = (_apiMethodDef.IsVirtual && !_apiMethodDef.IsOverride && !_apiMethodDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
+
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
     public string GetConstructorSignatureExpression(string className)

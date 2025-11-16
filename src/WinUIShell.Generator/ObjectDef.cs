@@ -383,6 +383,15 @@ internal class ObjectDef
                 continue;
 
             var returnType = method.ReturnType!;
+            if (method.IsAbstract)
+            {
+                _ = sourceCode.Append($$"""
+
+                        {{method.GetSignatureExpression()}};
+
+                    """);
+            }
+            else
             if (returnType.IsVoid)
             {
                 _ = sourceCode.Append($$"""
@@ -417,6 +426,15 @@ internal class ObjectDef
                 continue;
 
             var returnType = method.ReturnType!;
+            if (method.IsAbstract)
+            {
+                _ = sourceCode.Append($$"""
+
+                        {{method.GetSignatureExpression()}};
+
+                    """);
+            }
+            else
             if (returnType.IsVoid)
             {
                 _ = sourceCode.Append($$"""
