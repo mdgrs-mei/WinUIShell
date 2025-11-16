@@ -208,6 +208,7 @@ public class ApiExporter : Singleton<ApiExporter>
             Type = typeDef,
             CanRead = propertyInfo.CanRead,
             CanWrite = propertyInfo.CanWrite,
+            IsVirtual = propertyInfo.GetMethod?.IsVirtual ?? false,
             IsAbstract = propertyInfo.GetMethod?.IsAbstract ?? false,
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
@@ -239,6 +240,8 @@ public class ApiExporter : Singleton<ApiExporter>
             ReturnType = returnType,
             ExplicitInterfaceType = GetExplicitInterfaceType(methodInfo),
             IsGenericMethod = methodInfo.IsGenericMethod,
+            IsVirtual = methodInfo.IsVirtual,
+            IsAbstract = methodInfo.IsAbstract,
             IsOverride = IsOverride(methodInfo),
             HidesBase = HidesBaseMethod(methodInfo),
         };
