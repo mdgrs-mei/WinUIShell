@@ -8,10 +8,7 @@ internal class PropertyDef
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     public readonly TypeDef Type;
-    public string Name
-    {
-        get => _apiPropertyDef.Name;
-    }
+    private readonly TypeDef? _explicitInterfaceType;
     public bool CanRead
     {
         get => _apiPropertyDef.CanRead;
@@ -34,22 +31,38 @@ internal class PropertyDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
         Type = new TypeDef(_apiPropertyDef.Type);
+        _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType);
     }
 
     public bool IsSupported()
     {
-        return Type.IsSupported();
+        if (!Type.IsSupported())
+            return false;
+
+        if (_explicitInterfaceType is not null)
+        {
+            if (!_explicitInterfaceType.IsSupported())
+                return false;
+        }
+
+        return true;
+    }
+
+    public string GetName()
+    {
+        string interfaceTypeName = _explicitInterfaceType is null ? "" : $"{_explicitInterfaceType.GetName()}.";
+        return $"{interfaceTypeName}{_apiPropertyDef.Name}";
     }
 
     public string GetSignatureExpression()
     {
-        string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
+        string accessorExpression = (_objectDef.Type.IsInterface || _explicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
         string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
         string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
-        string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract) ? "virtual " : "";
+        string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
 
-        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {Name}";
+        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}";
     }
 }

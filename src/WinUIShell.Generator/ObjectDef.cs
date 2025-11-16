@@ -296,7 +296,7 @@ internal class ObjectDef
                     _ = sourceCode.Append($$"""
                             get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
-                                nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
+                                nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
                 }
@@ -316,7 +316,7 @@ internal class ObjectDef
                     _ = sourceCode.Append($$"""
                             set => PropertyAccessor.SetStatic(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
-                                nameof({{property.Name}}),
+                                nameof({{property.GetName()}}),
                                 value);
 
                     """);
@@ -350,7 +350,7 @@ internal class ObjectDef
                 else
                 {
                     _ = sourceCode.Append($$"""
-                            get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
+                            get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
                 }
@@ -368,7 +368,7 @@ internal class ObjectDef
                 else
                 {
                     _ = sourceCode.Append($$"""
-                            set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{property.Type.GetValueExpression()}});
+                            set => PropertyAccessor.Set(Id, nameof({{property.GetName()}}), {{property.Type.GetValueExpression()}});
 
                     """);
                 }

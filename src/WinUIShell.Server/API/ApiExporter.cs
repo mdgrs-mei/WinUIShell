@@ -157,6 +157,15 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
+        // Explicit interface implementations.
+        foreach (var propertyInfo in type.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        {
+            var method = propertyInfo.GetMethod;
+            if (method is null || !method.IsFinal || !method.IsPrivate)
+                continue;
+
+            def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
+        }
 
         foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
@@ -204,8 +213,9 @@ public class ApiExporter : Singleton<ApiExporter>
 
         return new Api.PropertyDef
         {
-            Name = propertyInfo.Name,
+            Name = GetPropertyName(propertyInfo),
             Type = typeDef,
+            ExplicitInterfaceType = GetExplicitInterfaceType(propertyInfo.GetMethod),
             CanRead = propertyInfo.CanRead,
             CanWrite = propertyInfo.CanWrite,
             IsVirtual = propertyInfo.GetMethod?.IsVirtual ?? false,
@@ -213,6 +223,13 @@ public class ApiExporter : Singleton<ApiExporter>
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
         };
+    }
+
+    private string GetPropertyName(PropertyInfo propertyInfo)
+    {
+        var name = propertyInfo.Name;
+        int dot = name.LastIndexOf('.');
+        return name[(dot + 1)..];
     }
 
     private Api.MethodDef GetConstructorDef(ConstructorInfo constructorInfo)
@@ -332,8 +349,11 @@ public class ApiExporter : Singleton<ApiExporter>
         return method is not null;
     }
 
-    private Api.TypeDef? GetExplicitInterfaceType(MethodInfo methodInfo)
+    private Api.TypeDef? GetExplicitInterfaceType(MethodInfo? methodInfo)
     {
+        if (methodInfo is null)
+            return null;
+
         if (!methodInfo.IsFinal || !methodInfo.IsPrivate)
             return null;
 
