@@ -44,6 +44,8 @@ public class Api
         public TypeDef Type { get; set; } = new();
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
+        public bool IsAbstract { get; set; }
+        public bool IsOverride { get; set; }
         public bool HidesBase { get; set; }
     }
 
@@ -51,6 +53,7 @@ public class Api
     {
         public string Name { get; set; } = "";
         public bool IsNullable { get; set; }
+        public bool IsAbstract { get; set; }
         public bool IsEnum { get; set; }
         public bool IsArray { get; set; }
         public bool IsDelegate { get; set; }

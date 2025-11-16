@@ -20,6 +20,10 @@ internal class PropertyDef
     {
         get => _apiPropertyDef.CanWrite;
     }
+    public bool IsAbstract
+    {
+        get => _apiPropertyDef.IsAbstract;
+    }
 
     public PropertyDef(
         Api.PropertyDef apiPropertyDef,
@@ -42,6 +46,8 @@ internal class PropertyDef
         string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
-        return $"{accessorExpression}{staticExpression}{newExpression}{Type.GetTypeExpression()} {Name}";
+        string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
+        string abstructExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
+        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstructExpression}{Type.GetTypeExpression()} {Name}";
     }
 }

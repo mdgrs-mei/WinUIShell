@@ -9,7 +9,7 @@ internal class MethodDef
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
-    private bool _isUnsafe;
+    private readonly bool _isUnsafe;
     public TypeDef? ReturnType { get; }
 
     private static readonly List<string> _unsupportedMethodNames =

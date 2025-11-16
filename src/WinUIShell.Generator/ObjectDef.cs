@@ -240,8 +240,10 @@ internal class ObjectDef
             }
         }
 
+        string abstractExpression = _apiObjectDef.Type.IsAbstract ? "abstract " : "";
+
         _ = sourceCode.Append($$"""
-            public class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public {{abstractExpression}}class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
                 internal {{_apiObjectDef.Name}}(ObjectId id)
                     : base(id)
@@ -282,23 +284,43 @@ internal class ObjectDef
 
             if (property.CanRead)
             {
-                _ = sourceCode.Append($$"""
+                if (property.IsAbstract)
+                {
+                    _ = sourceCode.Append($$"""
+                            get;
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
                             get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
                                 nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
+                }
             }
 
             if (property.CanWrite)
             {
-                _ = sourceCode.Append($$"""
+                if (property.IsAbstract)
+                {
+                    _ = sourceCode.Append($$"""
+                            set;
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
                             set => PropertyAccessor.SetStatic(
                                 ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
                                 nameof({{property.Name}}),
                                 value);
 
                     """);
+                }
             }
 
             _ = sourceCode.Append("    }\r\n");
@@ -318,18 +340,38 @@ internal class ObjectDef
 
             if (property.CanRead)
             {
-                _ = sourceCode.Append($$"""
+                if (property.IsAbstract)
+                {
+                    _ = sourceCode.Append($$"""
+                            get;
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
                             get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.Name}})){{(property.Type.IsNullable ? "" : "!")}};
 
                     """);
+                }
             }
 
             if (property.CanWrite)
             {
-                _ = sourceCode.Append($$"""
+                if (property.IsAbstract)
+                {
+                    _ = sourceCode.Append($$"""
+                            set;
+
+                    """);
+                }
+                else
+                {
+                    _ = sourceCode.Append($$"""
                             set => PropertyAccessor.Set(Id, nameof({{property.Name}}), {{property.Type.GetValueExpression()}});
 
                     """);
+                }
             }
 
             _ = sourceCode.Append("    }\r\n");

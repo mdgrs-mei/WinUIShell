@@ -208,6 +208,8 @@ public class ApiExporter : Singleton<ApiExporter>
             Type = typeDef,
             CanRead = propertyInfo.CanRead,
             CanWrite = propertyInfo.CanWrite,
+            IsAbstract = propertyInfo.GetMethod?.IsAbstract ?? false,
+            IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
         };
     }
@@ -256,8 +258,11 @@ public class ApiExporter : Singleton<ApiExporter>
         return name[(dot + 1)..];
     }
 
-    private bool IsOverride(MethodInfo methodInfo)
+    private bool IsOverride(MethodInfo? methodInfo)
     {
+        if (methodInfo is null)
+            return false;
+
         Type objectType = methodInfo.ReflectedType!;
         bool isImplemented = methodInfo.DeclaringType == objectType;
         if (!isImplemented)
@@ -374,6 +379,7 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             Name = name,
             IsNullable = Reflection.IsNullable(type),
+            IsAbstract = type.IsAbstract,
             IsEnum = type.IsEnum,
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
