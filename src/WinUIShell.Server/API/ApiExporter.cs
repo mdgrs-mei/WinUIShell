@@ -314,37 +314,22 @@ public class ApiExporter : Singleton<ApiExporter>
             if (!isNewSlot)
                 // Override.
                 return false;
-
-            if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
-                return true;
-
-            foreach (var interfaceType in objectType.GetInterfaces())
-            {
-                if (HasMethod(interfaceType, methodInfo))
-                    return objectType.IsInterface;
-            }
         }
-        else
-        {
-            if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
-                return true;
 
-            foreach (var interfaceType in objectType.GetInterfaces())
-            {
-                if (HasMethod(interfaceType, methodInfo))
-                    return true;
-            }
-        }
+        if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
+            return true;
+
         return false;
     }
 
     private bool HasMethod(Type type, MethodInfo methodInfo)
     {
+        var staticOrInstance = methodInfo.IsStatic ? BindingFlags.Static : BindingFlags.Instance;
         var name = GetMethodName(methodInfo);
         var parameterTypes = methodInfo.GetParameters().Select(p => p.ParameterType).ToArray();
         var method = type.GetMethod(
             name,
-            BindingFlags.Public | BindingFlags.Instance | BindingFlags.ExactBinding,
+            BindingFlags.Public | BindingFlags.ExactBinding | staticOrInstance,
             parameterTypes);
         return method is not null;
     }
