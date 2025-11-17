@@ -36,7 +36,7 @@ internal class MethodDef
         if (apiMethodDef.ReturnType is not null)
         {
             ReturnType = new TypeDef(apiMethodDef.ReturnType);
-            if (ReturnType.IsPointer)
+            if (ReturnType.IsUnsafe())
             {
                 _isUnsafe = true;
             }
@@ -45,7 +45,7 @@ internal class MethodDef
         foreach (var parameter in _apiMethodDef.Parameters)
         {
             var parameterType = new TypeDef(parameter.Type);
-            if (parameterType.IsPointer)
+            if (parameterType.IsUnsafe())
             {
                 _isUnsafe = true;
             }

@@ -7,8 +7,9 @@ internal class PropertyDef
     private readonly Api.PropertyDef _apiPropertyDef;
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
-    public readonly TypeDef Type;
     private readonly TypeDef? _explicitInterfaceType;
+
+    public readonly TypeDef Type;
     public bool CanRead
     {
         get => _apiPropertyDef.CanRead;
@@ -30,8 +31,8 @@ internal class PropertyDef
         _apiPropertyDef = apiPropertyDef;
         _objectDef = objectDef;
         _memberDefType = memberDefType;
-        Type = new TypeDef(_apiPropertyDef.Type);
         _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType);
+        Type = new TypeDef(_apiPropertyDef.Type);
     }
 
     public bool IsSupported()
@@ -56,6 +57,7 @@ internal class PropertyDef
 
     public string GetSignatureExpression()
     {
+        string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
         string accessorExpression = (_objectDef.Type.IsInterface || _explicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
@@ -63,6 +65,6 @@ internal class PropertyDef
         string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
         string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
 
-        return $"{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}";
     }
 }

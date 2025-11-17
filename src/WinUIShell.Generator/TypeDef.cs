@@ -20,10 +20,6 @@ internal class TypeDef
     public bool IsSystemInterface { get; internal set; }
     public bool IsObject { get; internal set; }
     public bool IsVoid { get; internal set; }
-    public bool IsPointer
-    {
-        get => _apiTypeDef.IsPointer;
-    }
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -175,6 +171,17 @@ internal class TypeDef
     private bool IsGenericParameter()
     {
         return _apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter;
+    }
+
+    public bool IsUnsafe()
+    {
+        if (_apiTypeDef.IsPointer)
+            return true;
+
+        if (_elementType is not null && _elementType.IsUnsafe())
+            return true;
+
+        return false;
     }
 
     public string GetName()
