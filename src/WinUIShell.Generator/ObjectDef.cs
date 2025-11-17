@@ -54,7 +54,7 @@ internal class ObjectDef
 
     public bool IsSupported()
     {
-        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsSystemInterface;
+        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsObject && !Type.IsSystemInterface;
     }
 
     public string GetSourceCodeFileName()
