@@ -7,6 +7,7 @@ internal class ObjectDef
 {
     private readonly Api.ObjectDef _apiObjectDef;
     private readonly TypeDef? _baseType;
+    private readonly ObjectDef? _parentObjectDef;
 
     private readonly List<TypeDef> _interfaces = [];
     private readonly List<PropertyDef> _staticProperties = [];
@@ -14,12 +15,15 @@ internal class ObjectDef
     private readonly List<MethodDef> _constructors = [];
     private readonly List<MethodDef> _staticMethods = [];
     private readonly List<MethodDef> _instanceMethods = [];
+    private readonly List<ObjectDef> _nestedObjects = [];
 
     public TypeDef Type { get; }
 
-    public ObjectDef(Api.ObjectDef apiObjectDef)
+    public ObjectDef(Api.ObjectDef apiObjectDef, ObjectDef? parentObjectDef = null)
     {
         _apiObjectDef = apiObjectDef;
+        _parentObjectDef = parentObjectDef;
+
         Type = new TypeDef(_apiObjectDef.Type);
         if (_apiObjectDef.BaseType is not null)
         {
@@ -49,6 +53,10 @@ internal class ObjectDef
         foreach (var method in _apiObjectDef.InstanceMethods)
         {
             _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
+        }
+        foreach (var nestedType in _apiObjectDef.NestedTypes)
+        {
+            _nestedObjects.Add(new ObjectDef(nestedType, this));
         }
     }
 
@@ -96,7 +104,7 @@ internal class ObjectDef
 
     private void GenerateInterface(CodeWriter codeWriter)
     {
-        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
         StringBuilder baseTypeExpression = new();
         foreach (var interfaceType in _interfaces)
         {
@@ -208,13 +216,18 @@ internal class ObjectDef
                 """);
         }
 
+        foreach (var nestedObject in _nestedObjects)
+        {
+            nestedObject.Generate(codeWriter);
+        }
+
         codeWriter.DecrementIndent();
         codeWriter.Append("}");
     }
 
     private void GenerateClass(CodeWriter codeWriter)
     {
-        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
 
         StringBuilder baseTypeExpression = new();
         if (_baseType is not null && _baseType.IsSupported())
@@ -435,6 +448,11 @@ internal class ObjectDef
                     }
                     """);
             }
+        }
+
+        foreach (var nestedObject in _nestedObjects)
+        {
+            nestedObject.Generate(codeWriter);
         }
 
         codeWriter.DecrementIndent();

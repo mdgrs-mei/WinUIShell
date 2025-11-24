@@ -7,7 +7,8 @@ internal class TypeDef
     private readonly string _name = "";
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
-    private readonly List<TypeDef>? _genericArguments;
+
+    public readonly List<TypeDef>? GenericArguments;
     public bool IsNullable
     {
         get => _apiTypeDef.IsNullable;
@@ -111,10 +112,10 @@ internal class TypeDef
         }
         if (apiTypeDef.GenericTypeArguments.Count > 0)
         {
-            _genericArguments = [];
+            GenericArguments = [];
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
-                _genericArguments.Add(new TypeDef(genericArgument));
+                GenericArguments.Add(new TypeDef(genericArgument));
             }
         }
     }
@@ -201,7 +202,7 @@ internal class TypeDef
         }
 
         var name = _apiTypeDef.IsPointer ? $"{_name}*" : _name;
-        if (_genericArguments is not null)
+        if (GenericArguments is not null)
         {
             return $"{name}{GetGenericArgumentsExpression()}";
         }
@@ -211,12 +212,21 @@ internal class TypeDef
         }
     }
 
-    public string GetGenericArgumentsExpression()
+    public string GetGenericArgumentsExpression(List<TypeDef>? parentGenericArguments = null)
     {
-        if (_genericArguments is not null)
+        if (GenericArguments is not null)
         {
-            var genericArgumentsNames = _genericArguments.Select(t => t.GetName());
-            return $"<{string.Join(", ", genericArgumentsNames)}>";
+            var genericArgumentsNames = GenericArguments.Select(t => t.GetName());
+            if (parentGenericArguments is not null)
+            {
+                var parentGenericArgumentsNames = parentGenericArguments.Select(t => t.GetName());
+                genericArgumentsNames = genericArgumentsNames.Where(t => !parentGenericArgumentsNames.Contains(t));
+            }
+
+            if (genericArgumentsNames.Count() != 0)
+            {
+                return $"<{string.Join(", ", genericArgumentsNames)}>";
+            }
         }
         return "";
     }

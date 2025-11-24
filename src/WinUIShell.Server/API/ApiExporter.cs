@@ -456,6 +456,7 @@ public class ApiExporter : Singleton<ApiExporter>
         string name = type.ToString();
         name = RemoveGenericExpression(name);
         name = RemovePointerExpression(name);
+        name = ReplaceNestedTypeExpression(name);
 
         return name;
     }
@@ -484,6 +485,11 @@ public class ApiExporter : Singleton<ApiExporter>
     private string RemovePointerExpression(string name)
     {
         return name.Replace("*", "", StringComparison.Ordinal);
+    }
+
+    private string ReplaceNestedTypeExpression(string name)
+    {
+        return name.Replace("+", ".", StringComparison.Ordinal);
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)
