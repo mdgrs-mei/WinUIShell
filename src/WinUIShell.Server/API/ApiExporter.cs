@@ -211,7 +211,7 @@ public class ApiExporter : Singleton<ApiExporter>
         var typeDef = GetTypeDef(propertyType);
         typeDef.IsNullable = Reflection.IsNullable(propertyInfo);
 
-        return new Api.PropertyDef
+        var propertyDef = new Api.PropertyDef
         {
             Name = GetPropertyName(propertyInfo),
             Type = typeDef,
@@ -223,6 +223,13 @@ public class ApiExporter : Singleton<ApiExporter>
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
         };
+
+        var indexParameters = propertyInfo.GetIndexParameters();
+        foreach (var parameter in indexParameters)
+        {
+            propertyDef.IndexParameters.Add(GetParameterDef(parameter));
+        }
+        return propertyDef;
     }
 
     private string GetPropertyName(PropertyInfo propertyInfo)

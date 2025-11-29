@@ -349,6 +349,13 @@ internal class ObjectDef
                         """);
                 }
                 else
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(Id{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        """);
+                }
+                else
                 {
                     codeWriter.Append($$"""
                         get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
@@ -362,6 +369,13 @@ internal class ObjectDef
                 {
                     codeWriter.Append($$"""
                         set;
+                        """);
+                }
+                else
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.SetIndexer(Id{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
                         """);
                 }
                 else

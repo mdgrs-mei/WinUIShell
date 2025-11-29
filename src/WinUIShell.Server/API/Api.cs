@@ -43,6 +43,7 @@ public class Api
         public string Name { get; set; } = "";
         public TypeDef Type { get; set; } = new();
         public TypeDef? ExplicitInterfaceType { get; set; }
+        public List<ParameterDef> IndexParameters { get; } = [];
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
         public bool IsVirtual { get; set; }

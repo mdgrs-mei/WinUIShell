@@ -1,5 +1,4 @@
-﻿using System.Text;
-using WinUIShell.Server;
+﻿using WinUIShell.Server;
 
 namespace WinUIShell.Generator;
 
@@ -10,6 +9,8 @@ internal class MethodDef
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
     private readonly bool _isUnsafe;
+    private readonly List<ParameterDef> _parameters = [];
+
     public TypeDef? ReturnType { get; }
     public bool IsAbstract
     {
@@ -33,19 +34,20 @@ internal class MethodDef
         _memberDefType = memberDefType;
         _explicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
 
-        if (apiMethodDef.ReturnType is not null)
+        foreach (var apiParameterDef in _apiMethodDef.Parameters)
         {
-            ReturnType = new TypeDef(apiMethodDef.ReturnType);
-            if (ReturnType.IsUnsafe())
+            var parameter = new ParameterDef(apiParameterDef);
+            _parameters.Add(parameter);
+            if (parameter.IsUnsafe())
             {
                 _isUnsafe = true;
             }
         }
 
-        foreach (var parameter in _apiMethodDef.Parameters)
+        if (apiMethodDef.ReturnType is not null)
         {
-            var parameterType = new TypeDef(parameter.Type);
-            if (parameterType.IsUnsafe())
+            ReturnType = new TypeDef(apiMethodDef.ReturnType);
+            if (ReturnType.IsUnsafe())
             {
                 _isUnsafe = true;
             }
@@ -69,10 +71,9 @@ internal class MethodDef
                 return false;
         }
 
-        foreach (var parameter in _apiMethodDef.Parameters)
+        foreach (var parameter in _parameters)
         {
-            var parameterType = new TypeDef(parameter.Type);
-            if (!parameterType.IsSupported())
+            if (!parameter.IsSupported())
                 return false;
         }
 
@@ -111,33 +112,13 @@ internal class MethodDef
         return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression()})";
     }
 
-    public string GetParametersExpression()
+    private string GetParametersExpression()
     {
-        if (_apiMethodDef.Parameters.Count == 0)
-            return "";
-
-        StringBuilder builder = new();
-        string commaSpace = "";
-        foreach (var parameter in _apiMethodDef.Parameters)
-        {
-            var parameterType = new TypeDef(parameter.Type);
-            _ = builder.Append($"{commaSpace}{parameterType.GetTypeExpression()} {parameter.Name}");
-            commaSpace = ", ";
-        }
-        return builder.ToString();
+        return ParameterDef.GetParametersSignatureExpression(_parameters);
     }
 
     public string GetArgumentsExpression()
     {
-        if (_apiMethodDef.Parameters.Count == 0)
-            return "";
-
-        StringBuilder builder = new();
-        foreach (var parameter in _apiMethodDef.Parameters)
-        {
-            var typeDef = new TypeDef(parameter.Type);
-            _ = builder.Append($", {typeDef.GetArgumentExpression(parameter.Name!)}");
-        }
-        return builder.ToString();
+        return ParameterDef.GetParametersArgumentExpression(_parameters);
     }
 }

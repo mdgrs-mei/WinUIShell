@@ -8,6 +8,7 @@ internal class PropertyDef
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
+    private readonly List<ParameterDef>? _indexParameters;
 
     public readonly TypeDef Type;
     public bool CanRead
@@ -22,6 +23,10 @@ internal class PropertyDef
     {
         get => _apiPropertyDef.IsAbstract;
     }
+    public bool IsIndexer
+    {
+        get => _indexParameters is not null;
+    }
 
     public PropertyDef(
         Api.PropertyDef apiPropertyDef,
@@ -32,6 +37,15 @@ internal class PropertyDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
         _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType);
+        if (_apiPropertyDef.IndexParameters.Count > 0)
+        {
+            _indexParameters = [];
+            foreach (var apiParameterDef in _apiPropertyDef.IndexParameters)
+            {
+                _indexParameters.Add(new ParameterDef(apiParameterDef));
+            }
+        }
+
         Type = new TypeDef(_apiPropertyDef.Type);
     }
 
@@ -46,13 +60,23 @@ internal class PropertyDef
                 return false;
         }
 
+        if (_indexParameters is not null)
+        {
+            foreach (var parameter in _indexParameters)
+            {
+                if (!parameter.IsSupported())
+                    return false;
+            }
+        }
+
         return true;
     }
 
     public string GetName()
     {
         string interfaceTypeName = _explicitInterfaceType is null ? "" : $"{_explicitInterfaceType.GetName()}.";
-        return $"{interfaceTypeName}{_apiPropertyDef.Name}";
+        string name = IsIndexer ? "this" : _apiPropertyDef.Name;
+        return $"{interfaceTypeName}{name}";
     }
 
     public string GetSignatureExpression()
@@ -64,7 +88,16 @@ internal class PropertyDef
         string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
         string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
         string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
+        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!)}]" : "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
+    }
+
+    public string GetIndexerArgumentsExpression()
+    {
+        if (!IsIndexer)
+            return "";
+
+        return ParameterDef.GetParametersArgumentExpression(_indexParameters!);
     }
 }
