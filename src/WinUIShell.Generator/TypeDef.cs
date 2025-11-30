@@ -124,13 +124,12 @@ internal class TypeDef
 
     public bool IsSupported()
     {
-#if false
         if (_apiTypeDef.IsArray)
             return false;
 
         if (IsRefOrOut())
             return false;
-#endif
+
         if (_apiTypeDef.IsFunctionPointer)
             return false;
 
