@@ -13,14 +13,14 @@ internal class TypeDef
     {
         get => _apiTypeDef.IsNullable;
     }
-    public bool IsRpcSupportedType { get; internal set; }
+    public bool IsRpcSupportedType { get; private set; }
     public bool IsInterface
     {
         get => _apiTypeDef.IsInterface;
     }
-    public bool IsSystemInterface { get; internal set; }
-    public bool IsObject { get; internal set; }
-    public bool IsVoid { get; internal set; }
+    public bool IsSystemInterface { get; private set; }
+    public bool IsObject { get; private set; }
+    public bool IsVoid { get; private set; }
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -46,19 +46,7 @@ internal class TypeDef
         "Microsoft.UI.Xaml.DependencyObject",
         "WinRT.IWinRTObject",
         "WinRT.IObjectReference",
-        "System.Runtime.InteropServices.ICustomQueryInterface",
-        "System.Runtime.InteropServices.IDynamicInterfaceCastable",
-        "System.Runtime.InteropServices.Marshalling.IUnmanagedVirtualMethodTableProvider",
-        "System.IEquatable",
-        "System.ISpanFormattable",
-        "System.IFormattable",
-        "System.IDisposable",
-        "System.Runtime.Serialization.ISerializable",
-        "System.IComparable",
-        "System.ISpanParsable",
-        "System.IParsable",
-        "System.IUtf8SpanFormattable",
-        "System.IFormatProvider",
+        "WinRT.ObjectReference",
     ];
 
     public TypeDef(Api.TypeDef apiTypeDef)

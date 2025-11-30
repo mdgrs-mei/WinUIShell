@@ -95,6 +95,7 @@ public class Api
 
     private static readonly List<string> _supportedSystemInterfaces =
     [
+        "System.IDisposable",
         "System.Collections.Generic.ICollection",
         "System.Collections.Generic.IList",
         "System.Collections.IEnumerable",
