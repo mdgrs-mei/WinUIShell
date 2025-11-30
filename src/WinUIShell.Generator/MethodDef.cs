@@ -9,9 +9,9 @@ internal class MethodDef
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
     private readonly bool _isUnsafe;
-    private readonly List<ParameterDef> _parameters = [];
 
     public TypeDef? ReturnType { get; }
+    public List<ParameterDef> Parameters { get; } = [];
     public bool IsAbstract
     {
         get => _apiMethodDef.IsAbstract;
@@ -34,20 +34,20 @@ internal class MethodDef
         _memberDefType = memberDefType;
         _explicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
 
-        foreach (var apiParameterDef in _apiMethodDef.Parameters)
+        if (apiMethodDef.ReturnType is not null)
         {
-            var parameter = new ParameterDef(apiParameterDef);
-            _parameters.Add(parameter);
-            if (parameter.IsUnsafe())
+            ReturnType = new TypeDef(apiMethodDef.ReturnType);
+            if (ReturnType.IsUnsafe())
             {
                 _isUnsafe = true;
             }
         }
 
-        if (apiMethodDef.ReturnType is not null)
+        foreach (var apiParameterDef in _apiMethodDef.Parameters)
         {
-            ReturnType = new TypeDef(apiMethodDef.ReturnType);
-            if (ReturnType.IsUnsafe())
+            var parameter = new ParameterDef(apiParameterDef);
+            Parameters.Add(parameter);
+            if (parameter.IsUnsafe())
             {
                 _isUnsafe = true;
             }
@@ -71,7 +71,7 @@ internal class MethodDef
                 return false;
         }
 
-        foreach (var parameter in _parameters)
+        foreach (var parameter in Parameters)
         {
             if (!parameter.IsSupported())
                 return false;
@@ -114,11 +114,11 @@ internal class MethodDef
 
     private string GetParametersExpression()
     {
-        return ParameterDef.GetParametersSignatureExpression(_parameters);
+        return ParameterDef.GetParametersSignatureExpression(Parameters);
     }
 
     public string GetArgumentsExpression()
     {
-        return ParameterDef.GetParametersArgumentExpression(_parameters);
+        return ParameterDef.GetParametersArgumentExpression(Parameters);
     }
 }

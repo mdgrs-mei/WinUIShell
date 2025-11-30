@@ -255,27 +255,53 @@ internal class ObjectDef
             """);
         codeWriter.IncrementIndent();
 
+        bool hasDefaultConstructor = false;
+        foreach (var method in _constructors)
+        {
+            if (!method.IsSupported())
+                continue;
+
+            if (method.Parameters.Count == 0)
+            {
+                hasDefaultConstructor = true;
+            }
+
+            if (_apiObjectDef.Type.IsAbstract)
+            {
+                codeWriter.Append($$"""
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
+                    {
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.Append($$"""
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
+                    {
+                        Id = CommandClient.Get().CreateObject(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            this{{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+        }
+
+        if (_apiObjectDef.Type.IsAbstract && !hasDefaultConstructor)
+        {
+            codeWriter.Append($$"""
+            internal {{_apiObjectDef.Name}}()
+            {
+            }
+            """);
+        }
+
         codeWriter.Append($$"""
             internal {{_apiObjectDef.Name}}(ObjectId id)
                 : base(id)
             {
             }
             """);
-
-        foreach (var method in _constructors)
-        {
-            if (!method.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
-                {
-                    Id = CommandClient.Get().CreateObject(
-                        ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
-                        this{{method.GetArgumentsExpression()}});
-                }
-                """);
-        }
 
         foreach (var property in _staticProperties)
         {
