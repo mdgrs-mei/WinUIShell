@@ -455,6 +455,9 @@ internal class ObjectDef
 
         foreach (var method in _instanceMethods)
         {
+            if (SpecializedMethodGenerator.Generate(codeWriter, method))
+                continue;
+
             if (!method.IsSupported())
                 continue;
 

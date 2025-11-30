@@ -6,8 +6,8 @@ namespace WinUIShell.Generator;
 internal class ParameterDef
 {
     private readonly Api.ParameterDef _apiParameterDef;
-    private readonly TypeDef _type;
 
+    public TypeDef Type;
     public string Name
     {
         get => _apiParameterDef.Name!;
@@ -16,27 +16,27 @@ internal class ParameterDef
     public ParameterDef(Api.ParameterDef apiParameterDef)
     {
         _apiParameterDef = apiParameterDef;
-        _type = new TypeDef(apiParameterDef.Type);
+        Type = new TypeDef(apiParameterDef.Type);
     }
 
     public bool IsSupported()
     {
-        return _type.IsSupported();
+        return Type.IsSupported();
     }
 
     public bool IsUnsafe()
     {
-        return _type.IsUnsafe();
+        return Type.IsUnsafe();
     }
 
     public string GetSignatureExpression()
     {
-        return $"{_type.GetTypeExpression()} {Name}";
+        return $"{Type.GetTypeExpression()} {Name}";
     }
 
     public string GetArgumentExpression()
     {
-        return _type.GetArgumentExpression(Name);
+        return Type.GetArgumentExpression(Name);
     }
 
     public static string GetParametersSignatureExpression(List<ParameterDef> parameters)

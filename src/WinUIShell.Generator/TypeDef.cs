@@ -21,6 +21,10 @@ internal class TypeDef
     public bool IsSystemInterface { get; private set; }
     public bool IsObject { get; private set; }
     public bool IsVoid { get; private set; }
+    public bool IsArray
+    {
+        get => _apiTypeDef.IsArray;
+    }
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -124,7 +128,7 @@ internal class TypeDef
 
     public bool IsSupported()
     {
-        if (_apiTypeDef.IsArray)
+        if (IsArray)
             return false;
 
         if (IsRefOrOut())
@@ -176,7 +180,7 @@ internal class TypeDef
     {
         if (_elementType is not null)
         {
-            if (_apiTypeDef.IsArray)
+            if (IsArray)
             {
                 return $"{_elementType.GetName()}[]";
             }
