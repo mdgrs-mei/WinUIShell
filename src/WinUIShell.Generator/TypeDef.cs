@@ -134,6 +134,9 @@ internal class TypeDef
         if (IsRefOrOut())
             return false;
 
+        if (_apiTypeDef.IsPointer)
+            return false;
+
         if (_apiTypeDef.IsFunctionPointer)
             return false;
 
