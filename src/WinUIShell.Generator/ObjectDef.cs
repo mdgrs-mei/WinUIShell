@@ -280,7 +280,7 @@ internal class ObjectDef
                     {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     {
                         Id = CommandClient.Get().CreateObject(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             this{{method.GetArgumentsExpression()}});
                     }
                     """);
@@ -326,7 +326,7 @@ internal class ObjectDef
                 {
                     codeWriter.Append($$"""
                         get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
@@ -344,7 +344,7 @@ internal class ObjectDef
                 {
                     codeWriter.Append($$"""
                         set => PropertyAccessor.SetStatic(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{property.GetName()}}),
                             value);
                         """);
@@ -435,7 +435,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         CommandClient.Get().InvokeStaticMethod(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
                     }
                     """);
@@ -446,7 +446,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{_apiObjectDef.Name}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
