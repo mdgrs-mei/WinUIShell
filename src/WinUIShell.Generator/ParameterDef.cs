@@ -34,9 +34,9 @@ internal class ParameterDef
         return $"{Type.GetTypeExpression()} {Name}";
     }
 
-    public string GetArgumentExpression()
+    public string GetArgumentExpression(int parameterIndex)
     {
-        return Type.GetArgumentExpression(Name);
+        return Type.GetArgumentExpression(Name, parameterIndex);
     }
 
     public static string GetParametersSignatureExpression(List<ParameterDef> parameters)
@@ -60,9 +60,11 @@ internal class ParameterDef
             return "";
 
         StringBuilder builder = new();
+        int parameterIndex = 0;
         foreach (var parameter in parameters)
         {
-            _ = builder.Append($", {parameter.GetArgumentExpression()}");
+            _ = builder.Append($", {parameter.GetArgumentExpression(parameterIndex)}");
+            ++parameterIndex;
         }
         return builder.ToString();
     }

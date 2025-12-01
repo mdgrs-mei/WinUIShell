@@ -270,11 +270,11 @@ internal class TypeDef
         }
     }
 
-    public string GetArgumentExpression(string variableName)
+    public string GetArgumentExpression(string variableName, int variableIndex)
     {
         if (_apiTypeDef.IsByRef)
         {
-            return _elementType!.GetArgumentExpression(variableName);
+            return _elementType!.GetArgumentExpression(variableName, variableIndex);
         }
         else
         if (IsRpcSupportedType)
@@ -284,7 +284,7 @@ internal class TypeDef
         else
         if (IsObject || IsGenericParameter())
         {
-            return $"({variableName} is WinUIShellObject v ? v.Id : {variableName})";
+            return $"({variableName} is WinUIShellObject v{variableIndex} ? v{variableIndex}.Id : {variableName})";
         }
         else
         {
