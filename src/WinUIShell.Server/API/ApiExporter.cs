@@ -222,6 +222,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsAbstract = propertyInfo.GetMethod?.IsAbstract ?? false,
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
+            ImplementsSystemInterface = ImplementsSystemInterface(propertyInfo.GetMethod),
         };
 
         var indexParameters = propertyInfo.GetIndexParameters();
@@ -268,6 +269,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsAbstract = methodInfo.IsAbstract,
             IsOverride = IsOverride(methodInfo),
             HidesBase = HidesBaseMethod(methodInfo),
+            ImplementsSystemInterface = ImplementsSystemInterface(methodInfo),
         };
 
         var parameters = methodInfo.GetParameters();
@@ -326,6 +328,41 @@ public class ApiExporter : Singleton<ApiExporter>
         if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
             return true;
 
+        return false;
+    }
+
+    private bool ImplementsSystemInterface(MethodInfo? methodInfo)
+    {
+        if (methodInfo is null)
+            return false;
+
+        if (!methodInfo.IsVirtual)
+            return false;
+
+        Type objectType = methodInfo.ReflectedType!;
+        bool isImplemented = methodInfo.DeclaringType == objectType;
+        if (!isImplemented)
+            return false;
+
+        foreach (var interfaceType in objectType.GetInterfaces())
+        {
+            var interfaceName = GetTypeDefName(interfaceType);
+            bool isSystemInterface = interfaceName.StartsWith("System.", StringComparison.Ordinal);
+            if (!isSystemInterface)
+                continue;
+
+            if (objectType.IsInterface)
+            {
+                if (HasMethod(interfaceType, methodInfo))
+                    return true;
+            }
+            else
+            {
+                var interfaceMap = objectType.GetInterfaceMap(interfaceType);
+                if (interfaceMap.TargetMethods.Contains(methodInfo))
+                    return true;
+            }
+        }
         return false;
     }
 

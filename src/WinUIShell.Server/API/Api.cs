@@ -50,6 +50,7 @@ public class Api
         public bool IsAbstract { get; set; }
         public bool IsOverride { get; set; }
         public bool HidesBase { get; set; }
+        public bool ImplementsSystemInterface { get; set; }
     }
 
     public class TypeDef
@@ -85,6 +86,7 @@ public class Api
         public bool IsAbstract { get; set; }
         public bool IsOverride { get; set; }
         public bool HidesBase { get; set; }
+        public bool ImplementsSystemInterface { get; set; }
     }
 
     public class ParameterDef
