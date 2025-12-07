@@ -36,17 +36,20 @@ internal class PropertyDef
         _apiPropertyDef = apiPropertyDef;
         _objectDef = objectDef;
         _memberDefType = memberDefType;
-        _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType);
+
+        bool useSystemInterfaceName = _apiPropertyDef.ImplementsSystemInterface;
+        _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType, useSystemInterfaceName);
+
         if (_apiPropertyDef.IndexParameters.Count > 0)
         {
             _indexParameters = [];
             foreach (var apiParameterDef in _apiPropertyDef.IndexParameters)
             {
-                _indexParameters.Add(new ParameterDef(apiParameterDef));
+                _indexParameters.Add(new ParameterDef(apiParameterDef, useSystemInterfaceName));
             }
         }
 
-        Type = new TypeDef(_apiPropertyDef.Type);
+        Type = new TypeDef(_apiPropertyDef.Type, useSystemInterfaceName);
     }
 
     public bool IsSupported()

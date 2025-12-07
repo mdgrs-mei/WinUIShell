@@ -13,10 +13,10 @@ internal class ParameterDef
         get => _apiParameterDef.Name!;
     }
 
-    public ParameterDef(Api.ParameterDef apiParameterDef)
+    public ParameterDef(Api.ParameterDef apiParameterDef, bool useSystemInterfaceName)
     {
         _apiParameterDef = apiParameterDef;
-        Type = new TypeDef(apiParameterDef.Type);
+        Type = new TypeDef(apiParameterDef.Type, useSystemInterfaceName);
     }
 
     public bool IsSupported()

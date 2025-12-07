@@ -33,9 +33,11 @@ internal class MethodDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
 
+        bool useSystemInterfaceName = _apiMethodDef.ImplementsSystemInterface;
+
         if (apiMethodDef.ReturnType is not null)
         {
-            ReturnType = new TypeDef(apiMethodDef.ReturnType);
+            ReturnType = new TypeDef(apiMethodDef.ReturnType, useSystemInterfaceName);
             if (ReturnType.IsUnsafe())
             {
                 _isUnsafe = true;
@@ -44,7 +46,7 @@ internal class MethodDef
 
         foreach (var apiParameterDef in _apiMethodDef.Parameters)
         {
-            var parameter = new ParameterDef(apiParameterDef);
+            var parameter = new ParameterDef(apiParameterDef, useSystemInterfaceName);
             Parameters.Add(parameter);
             if (parameter.IsUnsafe())
             {
@@ -52,7 +54,7 @@ internal class MethodDef
             }
         }
 
-        ExplicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType);
+        ExplicitInterfaceType = apiMethodDef.ExplicitInterfaceType is null ? null : new TypeDef(apiMethodDef.ExplicitInterfaceType, useSystemInterfaceName);
     }
 
     public bool IsSupported()

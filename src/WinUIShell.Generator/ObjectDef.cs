@@ -62,7 +62,7 @@ internal class ObjectDef
 
     public bool IsSupported()
     {
-        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsObject && !Type.IsSystemInterface;
+        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsObject;
     }
 
     public string GetSourceCodeFileName()
@@ -122,106 +122,120 @@ internal class ObjectDef
             }
         }
 
+        if (baseTypeExpression.Length == 0)
+        {
+            _ = baseTypeExpression.Append($" : IWinUIShellObject");
+        }
+
+        if (Type.IsSystemInterface)
+        {
+            _ = baseTypeExpression.Append($", {Type.GetSystemInterfaceName()}");
+        }
+
         codeWriter.Append($$"""
             public interface {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
-        codeWriter.IncrementIndent();
 
-        foreach (var method in _constructors)
+        if (!Type.IsSystemInterface)
         {
-            if (!method.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
-                """);
-        }
-
-        foreach (var property in _staticProperties)
-        {
-            if (!property.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{property.GetSignatureExpression()}}
-                {
-                """);
             codeWriter.IncrementIndent();
 
-            if (property.CanRead)
+            foreach (var method in _constructors)
             {
+                if (!method.IsSupported())
+                    continue;
+
                 codeWriter.Append($$"""
-                    get;
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     """);
             }
 
-            if (property.CanWrite)
+            foreach (var property in _staticProperties)
             {
+                if (!property.IsSupported())
+                    continue;
+
                 codeWriter.Append($$"""
-                    set;
+                    {{property.GetSignatureExpression()}}
+                    {
                     """);
+                codeWriter.IncrementIndent();
+
+                if (property.CanRead)
+                {
+                    codeWriter.Append($$"""
+                        get;
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    codeWriter.Append($$"""
+                        set;
+                        """);
+                }
+
+                codeWriter.DecrementIndent();
+                codeWriter.Append("}");
+            }
+
+            foreach (var property in _instanceProperties)
+            {
+                if (!property.IsSupported())
+                    continue;
+
+                codeWriter.Append($$"""
+                    {{property.GetSignatureExpression()}}
+                    {
+                    """);
+                codeWriter.IncrementIndent();
+
+                if (property.CanRead)
+                {
+                    codeWriter.Append($$"""
+                        get;
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    codeWriter.Append($$"""
+                        set;
+                        """);
+                }
+
+                codeWriter.DecrementIndent();
+                codeWriter.Append("}");
+            }
+
+            foreach (var method in _staticMethods)
+            {
+                if (!method.IsSupported())
+                    continue;
+
+                codeWriter.Append($$"""
+                    {{method.GetSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var method in _instanceMethods)
+            {
+                if (!method.IsSupported())
+                    continue;
+
+                codeWriter.Append($$"""
+                    {{method.GetSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var nestedObject in _nestedObjects)
+            {
+                nestedObject.Generate(codeWriter);
             }
 
             codeWriter.DecrementIndent();
-            codeWriter.Append("}");
         }
-
-        foreach (var property in _instanceProperties)
-        {
-            if (!property.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{property.GetSignatureExpression()}}
-                {
-                """);
-            codeWriter.IncrementIndent();
-
-            if (property.CanRead)
-            {
-                codeWriter.Append($$"""
-                    get;
-                    """);
-            }
-
-            if (property.CanWrite)
-            {
-                codeWriter.Append($$"""
-                    set;
-                    """);
-            }
-
-            codeWriter.DecrementIndent();
-            codeWriter.Append("}");
-        }
-
-        foreach (var method in _staticMethods)
-        {
-            if (!method.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{method.GetSignatureExpression()}};
-                """);
-        }
-
-        foreach (var method in _instanceMethods)
-        {
-            if (!method.IsSupported())
-                continue;
-
-            codeWriter.Append($$"""
-                {{method.GetSignatureExpression()}};
-                """);
-        }
-
-        foreach (var nestedObject in _nestedObjects)
-        {
-            nestedObject.Generate(codeWriter);
-        }
-
-        codeWriter.DecrementIndent();
         codeWriter.Append("}");
     }
 
@@ -234,17 +248,27 @@ internal class ObjectDef
         {
             _ = baseTypeExpression.Append($" : {_baseType.GetName()}");
         }
-        else
-        {
-            _ = baseTypeExpression.Append($" : WinUIShellObject");
-        }
+        bool hasBaseType = baseTypeExpression.Length > 0;
 
         foreach (var interfaceType in _interfaces)
         {
             if (interfaceType.IsSupported())
             {
-                _ = baseTypeExpression.Append($", {interfaceType.GetName()}");
+                if (baseTypeExpression.Length == 0)
+                {
+                    _ = baseTypeExpression.Append(" : ");
+                }
+                else
+                {
+                    _ = baseTypeExpression.Append(", ");
+                }
+                _ = baseTypeExpression.Append(interfaceType.GetName());
             }
+        }
+
+        if (baseTypeExpression.Length == 0)
+        {
+            _ = baseTypeExpression.Append($" : IWinUIShellObject");
         }
 
         string abstractExpression = _apiObjectDef.Type.IsAbstract ? "abstract " : "";
@@ -254,6 +278,13 @@ internal class ObjectDef
             {
             """);
         codeWriter.IncrementIndent();
+
+        if (!hasBaseType)
+        {
+            codeWriter.Append($$"""
+                public ObjectId WinUIShellObjectId { get; protected set; } = new();
+                """);
+        }
 
         bool hasDefaultConstructor = false;
         foreach (var method in _constructors)
@@ -279,7 +310,7 @@ internal class ObjectDef
                 codeWriter.Append($$"""
                     {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     {
-                        Id = CommandClient.Get().CreateObject(
+                        WinUIShellObjectId = CommandClient.Get().CreateObject(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             this{{method.GetArgumentsExpression()}});
                     }
@@ -290,18 +321,30 @@ internal class ObjectDef
         if (_apiObjectDef.Type.IsAbstract && !hasDefaultConstructor)
         {
             codeWriter.Append($$"""
-            internal {{_apiObjectDef.Name}}()
-            {
-            }
-            """);
+                internal {{_apiObjectDef.Name}}()
+                {
+                }
+                """);
         }
 
-        codeWriter.Append($$"""
-            internal {{_apiObjectDef.Name}}(ObjectId id)
-                : base(id)
-            {
-            }
-            """);
+        if (hasBaseType)
+        {
+            codeWriter.Append($$"""
+                internal {{_apiObjectDef.Name}}(ObjectId id)
+                    : base(id)
+                {
+                }
+                """);
+        }
+        else
+        {
+            codeWriter.Append($$"""
+                internal {{_apiObjectDef.Name}}(ObjectId id)
+                {
+                    WinUIShellObjectId = id;
+                }
+                """);
+        }
 
         foreach (var property in _staticProperties)
         {
@@ -378,13 +421,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(Id{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.Get<{{property.Type.GetName()}}>(Id, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.Get<{{property.Type.GetName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
             }
@@ -401,13 +444,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(Id{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.Set(Id, nameof({{property.GetName()}}), {{property.Type.GetValueExpression()}});
+                        set => PropertyAccessor.Set(WinUIShellObjectId, nameof({{property.GetName()}}), {{property.Type.GetValueExpression()}});
                         """);
                 }
             }
@@ -475,7 +518,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         CommandClient.Get().InvokeMethod(
-                            Id,
+                            WinUIShellObjectId,
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
                     }
                     """);
@@ -486,7 +529,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
-                            Id,
+                            WinUIShellObjectId,
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);

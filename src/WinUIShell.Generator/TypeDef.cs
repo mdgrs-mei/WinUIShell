@@ -7,6 +7,7 @@ internal class TypeDef
     private readonly string _name = "";
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
+    private readonly bool _alwaysReturnSystemInterfaceName;
 
     public readonly List<TypeDef>? GenericArguments;
     public bool IsNullable
@@ -53,16 +54,17 @@ internal class TypeDef
         "WinRT.ObjectReference",
     ];
 
-    public TypeDef(Api.TypeDef apiTypeDef)
+    public TypeDef(Api.TypeDef apiTypeDef, bool alwaysReturnSystemInterfaceName = false)
     {
         _apiTypeDef = apiTypeDef;
+        _alwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
 
         var serverTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
         if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
         {
             IsSystemInterface = true;
-            _name = $"global::{serverTypeName}";
+            _name = $"WinUIShell.{serverTypeName}";
         }
         else
         if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.ElementType is not null)
@@ -100,14 +102,14 @@ internal class TypeDef
 
         if (apiTypeDef.ElementType is not null)
         {
-            _elementType = new TypeDef(apiTypeDef.ElementType);
+            _elementType = new TypeDef(apiTypeDef.ElementType, _alwaysReturnSystemInterfaceName);
         }
         if (apiTypeDef.GenericTypeArguments.Count > 0)
         {
             GenericArguments = [];
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
-                GenericArguments.Add(new TypeDef(genericArgument));
+                GenericArguments.Add(new TypeDef(genericArgument, _alwaysReturnSystemInterfaceName));
             }
         }
     }
@@ -181,6 +183,30 @@ internal class TypeDef
 
     public string GetName()
     {
+        if (_alwaysReturnSystemInterfaceName)
+        {
+            return GetSystemInterfaceName();
+        }
+        else
+        {
+            return GetName(_name);
+        }
+    }
+
+    public string GetSystemInterfaceName()
+    {
+        if (IsSystemInterface)
+        {
+            return GetName($"global::{_apiTypeDef.Name}");
+        }
+        else
+        {
+            return GetName(_name);
+        }
+    }
+
+    private string GetName(string thisName)
+    {
         if (_elementType is not null)
         {
             if (IsArray)
@@ -195,7 +221,7 @@ internal class TypeDef
             return _elementType.GetName();
         }
 
-        var name = _apiTypeDef.IsPointer ? $"{_name}*" : _name;
+        var name = _apiTypeDef.IsPointer ? $"{thisName}*" : thisName;
         if (GenericArguments is not null)
         {
             return $"{name}{GetGenericArgumentsExpression()}";
@@ -262,11 +288,11 @@ internal class TypeDef
         else
         if (IsObject || IsGenericParameter())
         {
-            return "(value is WinUIShellObject v ? v.Id : value)";
+            return "(value is IWinUIShellObject v ? v.WinUIShellObjectId : value)";
         }
         else
         {
-            return "value?.Id";
+            return "value?.WinUIShellObjectId";
         }
     }
 
@@ -284,11 +310,11 @@ internal class TypeDef
         else
         if (IsObject || IsGenericParameter())
         {
-            return $"({variableName} is WinUIShellObject v{variableIndex} ? v{variableIndex}.Id : {variableName})";
+            return $"({variableName} is IWinUIShellObject v{variableIndex} ? v{variableIndex}.WinUIShellObjectId : {variableName})";
         }
         else
         {
-            return $"{variableName}?.Id";
+            return $"{variableName}?.WinUIShellObjectId";
         }
     }
 }
