@@ -104,6 +104,7 @@ public class Api
         "System.Collections.Generic.IEnumerable",
         "System.Collections.IEnumerator",
         "System.Collections.Generic.IEnumerator",
+        "System.Collections.Generic.IReadOnlyList",
     ];
     public static bool IsSupportedSystemInterface(string typeDefName)
     {
