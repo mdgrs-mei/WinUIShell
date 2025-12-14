@@ -1,4 +1,6 @@
-﻿namespace WinUIShell.Server;
+﻿using System.ComponentModel;
+
+namespace WinUIShell.Server;
 
 public class Api
 {
@@ -28,7 +30,10 @@ public class Api
         public string FullName { get; set; } = "";
         public string Namespace { get; set; } = "";
         public TypeDef Type { get; set; } = new();
+
+        [DefaultValue(null)]
         public TypeDef? BaseType { get; set; }
+
         public List<TypeDef> Interfaces { get; } = [];
         public List<PropertyDef> StaticProperties { get; } = [];
         public List<PropertyDef> InstanceProperties { get; } = [];
@@ -42,50 +47,117 @@ public class Api
     {
         public string Name { get; set; } = "";
         public TypeDef Type { get; set; } = new();
+
+        [DefaultValue(null)]
         public TypeDef? ExplicitInterfaceType { get; set; }
+
         public List<ParameterDef> IndexParameters { get; } = [];
+
+        [DefaultValue(false)]
         public bool CanRead { get; set; }
+
+        [DefaultValue(false)]
         public bool CanWrite { get; set; }
+
+        [DefaultValue(false)]
         public bool IsVirtual { get; set; }
+
+        [DefaultValue(false)]
         public bool IsAbstract { get; set; }
+
+        [DefaultValue(false)]
         public bool IsOverride { get; set; }
+
+        [DefaultValue(false)]
         public bool HidesBase { get; set; }
+
+        [DefaultValue(false)]
         public bool ImplementsSystemInterface { get; set; }
     }
 
     public class TypeDef
     {
         public string Name { get; set; } = "";
+
+        [DefaultValue(false)]
         public bool IsNullable { get; set; }
+
+        [DefaultValue(false)]
         public bool IsAbstract { get; set; }
+
+        [DefaultValue(false)]
         public bool IsEnum { get; set; }
+
+        [DefaultValue(false)]
         public bool IsArray { get; set; }
+
+        [DefaultValue(false)]
         public bool IsDelegate { get; set; }
+
+        [DefaultValue(false)]
         public bool IsPointer { get; set; }
+
+        [DefaultValue(false)]
         public bool IsFunctionPointer { get; set; }
+
+        [DefaultValue(false)]
         public bool IsByRef { get; set; }
+
+        [DefaultValue(false)]
         public bool IsIn { get; set; }
+
+        [DefaultValue(false)]
         public bool IsOut { get; set; }
+
+        [DefaultValue(false)]
         public bool IsGenericType { get; set; }
+
+        [DefaultValue(false)]
         public bool IsGenericTypeParameter { get; set; }
+
+        [DefaultValue(false)]
         public bool IsGenericMethodParameter { get; set; }
+
+        [DefaultValue(false)]
         public bool IsInterface { get; set; }
+
+        [DefaultValue(false)]
         public bool IsSystemObject { get; set; }
+
+        [DefaultValue(null)]
         public TypeDef? ElementType { get; set; }
+
         public List<TypeDef> GenericTypeArguments { get; } = [];
     }
 
     public class MethodDef
     {
         public string? Name { get; set; }
+
+        [DefaultValue(null)]
         public TypeDef? ReturnType { get; set; }
+
         public List<ParameterDef> Parameters { get; } = [];
+
+        [DefaultValue(null)]
         public TypeDef? ExplicitInterfaceType { get; set; }
+
+        [DefaultValue(false)]
         public bool IsGenericMethod { get; set; }
+
+        [DefaultValue(false)]
         public bool IsVirtual { get; set; }
+
+        [DefaultValue(false)]
         public bool IsAbstract { get; set; }
+
+        [DefaultValue(false)]
         public bool IsOverride { get; set; }
+
+        [DefaultValue(false)]
         public bool HidesBase { get; set; }
+
+        [DefaultValue(false)]
         public bool ImplementsSystemInterface { get; set; }
     }
 
