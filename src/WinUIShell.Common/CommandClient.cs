@@ -306,7 +306,7 @@ public class CommandClient : Singleton<CommandClient>
         return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
-    public void SetIndexerProperty(ObjectId id, object index, object? value)
+    public void SetIndexerProperty(ObjectId id, object? index, object? value)
     {
         Debug.Assert(_rpc is not null);
 
@@ -316,7 +316,7 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public T? GetIndexerProperty<T>(ObjectId id, object index)
+    public T? GetIndexerProperty<T>(ObjectId id, object? index)
     {
         Debug.Assert(_rpc is not null);
 
