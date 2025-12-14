@@ -27,10 +27,11 @@ internal class SpecializedMethodGenerator
                         throw new ArgumentException("Insufficient space to copy.");
                     }
                 
-                    int num = Count;
-                    for (int i = 0; i < num; i++)
+                    int i = 0;
+                    foreach (var item in this)
                     {
-                        {{arrayName}}[i + {{indexName}}] = this[i];
+                        {{arrayName}}[i + {{indexName}}] = item;
+                        i++;
                     }
                 }
                 """);
