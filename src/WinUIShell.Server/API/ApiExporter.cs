@@ -266,6 +266,10 @@ public class ApiExporter : Singleton<ApiExporter>
         var indexParameters = propertyInfo.GetIndexParameters();
         foreach (var parameter in indexParameters)
         {
+            if (propertyDef.IndexParameters is null)
+            {
+                propertyDef.IndexParameters = [];
+            }
             propertyDef.IndexParameters.Add(GetParameterDef(parameter));
         }
         return propertyDef;
@@ -284,6 +288,10 @@ public class ApiExporter : Singleton<ApiExporter>
         var parameters = constructorInfo.GetParameters();
         foreach (var parameter in parameters)
         {
+            if (methodDef.Parameters is null)
+            {
+                methodDef.Parameters = [];
+            }
             methodDef.Parameters.Add(GetParameterDef(parameter));
         }
         return methodDef;
@@ -313,6 +321,10 @@ public class ApiExporter : Singleton<ApiExporter>
         var parameters = methodInfo.GetParameters();
         foreach (var parameter in parameters)
         {
+            if (methodDef.Parameters is null)
+            {
+                methodDef.Parameters = [];
+            }
             methodDef.Parameters.Add(GetParameterDef(parameter));
         }
         return methodDef;
@@ -513,6 +525,10 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             foreach (var genericTypeArgument in type.GetGenericArguments())
             {
+                if (typeDef.GenericTypeArguments is null)
+                {
+                    typeDef.GenericTypeArguments = [];
+                }
                 typeDef.GenericTypeArguments.Add(GetTypeDef(genericTypeArgument));
             }
         }

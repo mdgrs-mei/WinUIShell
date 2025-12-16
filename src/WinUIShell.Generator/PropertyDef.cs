@@ -40,11 +40,14 @@ internal class PropertyDef
         bool useSystemInterfaceName = _apiPropertyDef.ImplementsSystemInterface;
         _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType, useSystemInterfaceName);
 
-        if (_apiPropertyDef.IndexParameters.Count > 0)
+        if (_apiPropertyDef.IndexParameters is not null)
         {
-            _indexParameters = [];
             foreach (var apiParameterDef in _apiPropertyDef.IndexParameters)
             {
+                if (_indexParameters is null)
+                {
+                    _indexParameters = [];
+                }
                 _indexParameters.Add(new ParameterDef(apiParameterDef, useSystemInterfaceName));
             }
         }

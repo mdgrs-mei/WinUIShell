@@ -44,13 +44,16 @@ internal class MethodDef
             }
         }
 
-        foreach (var apiParameterDef in _apiMethodDef.Parameters)
+        if (_apiMethodDef.Parameters is not null)
         {
-            var parameter = new ParameterDef(apiParameterDef, useSystemInterfaceName);
-            Parameters.Add(parameter);
-            if (parameter.IsUnsafe())
+            foreach (var apiParameterDef in _apiMethodDef.Parameters)
             {
-                _isUnsafe = true;
+                var parameter = new ParameterDef(apiParameterDef, useSystemInterfaceName);
+                Parameters.Add(parameter);
+                if (parameter.IsUnsafe())
+                {
+                    _isUnsafe = true;
+                }
             }
         }
 

@@ -104,11 +104,14 @@ internal class TypeDef
         {
             _elementType = new TypeDef(apiTypeDef.ElementType, _alwaysReturnSystemInterfaceName);
         }
-        if (apiTypeDef.GenericTypeArguments.Count > 0)
+        if (apiTypeDef.GenericTypeArguments is not null)
         {
-            GenericArguments = [];
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
+                if (GenericArguments is null)
+                {
+                    GenericArguments = [];
+                }
                 GenericArguments.Add(new TypeDef(genericArgument, _alwaysReturnSystemInterfaceName));
             }
         }

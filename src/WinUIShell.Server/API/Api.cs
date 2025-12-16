@@ -65,7 +65,8 @@ public class Api
         [DefaultValue(null)]
         public TypeDef? ExplicitInterfaceType { get; set; }
 
-        public List<ParameterDef> IndexParameters { get; } = [];
+        [DefaultValue(null)]
+        public List<ParameterDef>? IndexParameters { get; set; }
 
         [DefaultValue(false)]
         public bool CanRead { get; set; }
@@ -141,7 +142,8 @@ public class Api
         [DefaultValue(null)]
         public TypeDef? ElementType { get; set; }
 
-        public List<TypeDef> GenericTypeArguments { get; } = [];
+        [DefaultValue(null)]
+        public List<TypeDef>? GenericTypeArguments { get; set; }
     }
 
     public class MethodDef
@@ -151,7 +153,8 @@ public class Api
         [DefaultValue(null)]
         public TypeDef? ReturnType { get; set; }
 
-        public List<ParameterDef> Parameters { get; } = [];
+        [DefaultValue(null)]
+        public List<ParameterDef>? Parameters { get; set; }
 
         [DefaultValue(null)]
         public TypeDef? ExplicitInterfaceType { get; set; }
