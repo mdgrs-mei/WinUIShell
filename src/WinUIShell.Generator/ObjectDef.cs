@@ -30,33 +30,54 @@ internal class ObjectDef
             _baseType = new TypeDef(_apiObjectDef.BaseType);
         }
 
-        foreach (var interfaceType in _apiObjectDef.Interfaces)
+        if (_apiObjectDef.Interfaces is not null)
         {
-            _interfaces.Add(new TypeDef(interfaceType));
+            foreach (var interfaceType in _apiObjectDef.Interfaces)
+            {
+                _interfaces.Add(new TypeDef(interfaceType));
+            }
         }
-        foreach (var property in _apiObjectDef.StaticProperties)
+        if (_apiObjectDef.StaticProperties is not null)
         {
-            _staticProperties.Add(new PropertyDef(property, this, MemberDefType.Static));
+            foreach (var property in _apiObjectDef.StaticProperties)
+            {
+                _staticProperties.Add(new PropertyDef(property, this, MemberDefType.Static));
+            }
         }
-        foreach (var property in _apiObjectDef.InstanceProperties)
+        if (_apiObjectDef.InstanceProperties is not null)
         {
-            _instanceProperties.Add(new PropertyDef(property, this, MemberDefType.Instance));
+            foreach (var property in _apiObjectDef.InstanceProperties)
+            {
+                _instanceProperties.Add(new PropertyDef(property, this, MemberDefType.Instance));
+            }
         }
-        foreach (var constructor in _apiObjectDef.Constructors)
+        if (_apiObjectDef.Constructors is not null)
         {
-            _constructors.Add(new MethodDef(constructor, this, MemberDefType.Constructor));
+            foreach (var constructor in _apiObjectDef.Constructors)
+            {
+                _constructors.Add(new MethodDef(constructor, this, MemberDefType.Constructor));
+            }
         }
-        foreach (var method in _apiObjectDef.StaticMethods)
+        if (_apiObjectDef.StaticMethods is not null)
         {
-            _staticMethods.Add(new MethodDef(method, this, MemberDefType.Static));
+            foreach (var method in _apiObjectDef.StaticMethods)
+            {
+                _staticMethods.Add(new MethodDef(method, this, MemberDefType.Static));
+            }
         }
-        foreach (var method in _apiObjectDef.InstanceMethods)
+        if (_apiObjectDef.InstanceMethods is not null)
         {
-            _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
+            foreach (var method in _apiObjectDef.InstanceMethods)
+            {
+                _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
+            }
         }
-        foreach (var nestedType in _apiObjectDef.NestedTypes)
+        if (_apiObjectDef.NestedTypes is not null)
         {
-            _nestedObjects.Add(new ObjectDef(nestedType, this));
+            foreach (var nestedType in _apiObjectDef.NestedTypes)
+            {
+                _nestedObjects.Add(new ObjectDef(nestedType, this));
+            }
         }
     }
 

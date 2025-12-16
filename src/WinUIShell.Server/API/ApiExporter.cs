@@ -146,15 +146,27 @@ public class ApiExporter : Singleton<ApiExporter>
 
         foreach (var interfaceType in type.GetInterfaces())
         {
+            if (def.Interfaces is null)
+            {
+                def.Interfaces = [];
+            }
             def.Interfaces.Add(GetTypeDef(interfaceType));
         }
 
         foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
         {
+            if (def.StaticProperties is null)
+            {
+                def.StaticProperties = [];
+            }
             def.StaticProperties.Add(GetPropertyDef(propertyInfo));
         }
         foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
+            if (def.InstanceProperties is null)
+            {
+                def.InstanceProperties = [];
+            }
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
         // Explicit interface implementations.
@@ -164,11 +176,19 @@ public class ApiExporter : Singleton<ApiExporter>
             if (method is null || !method.IsFinal || !method.IsPrivate)
                 continue;
 
+            if (def.InstanceProperties is null)
+            {
+                def.InstanceProperties = [];
+            }
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
 
         foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
+            if (def.Constructors is null)
+            {
+                def.Constructors = [];
+            }
             def.Constructors.Add(GetConstructorDef(constructor));
         }
 
@@ -176,6 +196,11 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             if (IsIgnoredMethod(method))
                 continue;
+
+            if (def.StaticMethods is null)
+            {
+                def.StaticMethods = [];
+            }
             def.StaticMethods.Add(GetMethodDef(method));
         }
 
@@ -183,6 +208,11 @@ public class ApiExporter : Singleton<ApiExporter>
         {
             if (IsIgnoredMethod(method))
                 continue;
+
+            if (def.InstanceMethods is null)
+            {
+                def.InstanceMethods = [];
+            }
             def.InstanceMethods.Add(GetMethodDef(method));
         }
         // Explicit interface implementations.
@@ -194,11 +224,19 @@ public class ApiExporter : Singleton<ApiExporter>
             if (IsIgnoredMethod(method))
                 continue;
 
+            if (def.InstanceMethods is null)
+            {
+                def.InstanceMethods = [];
+            }
             def.InstanceMethods.Add(GetMethodDef(method));
         }
 
         foreach (var nestedType in type.GetNestedTypes())
         {
+            if (def.NestedTypes is null)
+            {
+                def.NestedTypes = [];
+            }
             def.NestedTypes.Add(GetObjectDef(nestedType));
         }
 

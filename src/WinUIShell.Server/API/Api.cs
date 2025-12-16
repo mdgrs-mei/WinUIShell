@@ -6,6 +6,7 @@ public class Api
 {
 #pragma warning disable CA1034 // Nested types should not be visible
 #pragma warning disable CA1002 // Do not expose generic lists
+#pragma warning disable CA2227 // Collection properties should be read only
     public List<EnumDef> Enums { get; } = [];
     public List<ObjectDef> Objects { get; } = [];
 
@@ -34,13 +35,26 @@ public class Api
         [DefaultValue(null)]
         public TypeDef? BaseType { get; set; }
 
-        public List<TypeDef> Interfaces { get; } = [];
-        public List<PropertyDef> StaticProperties { get; } = [];
-        public List<PropertyDef> InstanceProperties { get; } = [];
-        public List<MethodDef> Constructors { get; } = [];
-        public List<MethodDef> StaticMethods { get; } = [];
-        public List<MethodDef> InstanceMethods { get; } = [];
-        public List<ObjectDef> NestedTypes { get; } = [];
+        [DefaultValue(null)]
+        public List<TypeDef>? Interfaces { get; set; }
+
+        [DefaultValue(null)]
+        public List<PropertyDef>? StaticProperties { get; set; }
+
+        [DefaultValue(null)]
+        public List<PropertyDef>? InstanceProperties { get; set; }
+
+        [DefaultValue(null)]
+        public List<MethodDef>? Constructors { get; set; }
+
+        [DefaultValue(null)]
+        public List<MethodDef>? StaticMethods { get; set; }
+
+        [DefaultValue(null)]
+        public List<MethodDef>? InstanceMethods { get; set; }
+
+        [DefaultValue(null)]
+        public List<ObjectDef>? NestedTypes { get; set; }
     }
 
     public class PropertyDef
@@ -183,6 +197,7 @@ public class Api
         return _supportedSystemInterfaces.Contains(typeDefName);
     }
 
+#pragma warning restore CA2227
 #pragma warning restore CA1002
 #pragma warning restore CA1034
 }
