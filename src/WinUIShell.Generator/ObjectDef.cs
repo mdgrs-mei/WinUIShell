@@ -105,6 +105,7 @@ internal class ObjectDef
             using WinUIShell.Common;
 
             namespace {{ns}};
+
             """);
 
         Generate(codeWriter);
@@ -167,7 +168,7 @@ internal class ObjectDef
                 if (!method.IsSupported())
                     continue;
 
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     """);
             }
@@ -198,7 +199,7 @@ internal class ObjectDef
                 }
 
                 codeWriter.DecrementIndent();
-                codeWriter.Append("}");
+                codeWriter.AppendAndReserveNewLine("}");
             }
 
             foreach (var property in _instanceProperties)
@@ -227,7 +228,7 @@ internal class ObjectDef
                 }
 
                 codeWriter.DecrementIndent();
-                codeWriter.Append("}");
+                codeWriter.AppendAndReserveNewLine("}");
             }
 
             foreach (var method in _staticMethods)
@@ -235,7 +236,7 @@ internal class ObjectDef
                 if (!method.IsSupported())
                     continue;
 
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}};
                     """);
             }
@@ -245,7 +246,7 @@ internal class ObjectDef
                 if (!method.IsSupported())
                     continue;
 
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}};
                     """);
             }
@@ -257,7 +258,7 @@ internal class ObjectDef
 
             codeWriter.DecrementIndent();
         }
-        codeWriter.Append("}");
+        codeWriter.AppendAndReserveNewLine("}");
     }
 
     private void GenerateClass(CodeWriter codeWriter)
@@ -302,7 +303,7 @@ internal class ObjectDef
 
         if (!hasBaseType)
         {
-            codeWriter.Append($$"""
+            codeWriter.AppendAndReserveNewLine($$"""
                 public ObjectId WinUIShellObjectId { get; protected set; } = new();
                 """);
         }
@@ -320,7 +321,7 @@ internal class ObjectDef
 
             if (_apiObjectDef.Type.IsAbstract)
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     {
                     }
@@ -328,7 +329,7 @@ internal class ObjectDef
             }
             else
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
                     {
                         WinUIShellObjectId = CommandClient.Get().CreateObject(
@@ -341,7 +342,7 @@ internal class ObjectDef
 
         if (_apiObjectDef.Type.IsAbstract && !hasDefaultConstructor)
         {
-            codeWriter.Append($$"""
+            codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}()
                 {
                 }
@@ -350,7 +351,7 @@ internal class ObjectDef
 
         if (hasBaseType)
         {
-            codeWriter.Append($$"""
+            codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}(ObjectId id)
                     : base(id)
                 {
@@ -359,7 +360,7 @@ internal class ObjectDef
         }
         else
         {
-            codeWriter.Append($$"""
+            codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}(ObjectId id)
                 {
                     WinUIShellObjectId = id;
@@ -416,7 +417,7 @@ internal class ObjectDef
             }
 
             codeWriter.DecrementIndent();
-            codeWriter.Append("}");
+            codeWriter.AppendAndReserveNewLine("}");
         }
 
         foreach (var property in _instanceProperties)
@@ -477,7 +478,7 @@ internal class ObjectDef
             }
 
             codeWriter.DecrementIndent();
-            codeWriter.Append("}");
+            codeWriter.AppendAndReserveNewLine("}");
         }
 
         foreach (var method in _staticMethods)
@@ -488,14 +489,14 @@ internal class ObjectDef
             var returnType = method.ReturnType!;
             if (method.IsAbstract)
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}};
                     """);
             }
             else
             if (returnType.IsVoid)
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
                         CommandClient.Get().InvokeStaticMethod(
@@ -506,7 +507,7 @@ internal class ObjectDef
             }
             else
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
@@ -528,14 +529,14 @@ internal class ObjectDef
             var returnType = method.ReturnType!;
             if (method.IsAbstract)
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}};
                     """);
             }
             else
             if (returnType.IsVoid)
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
                         CommandClient.Get().InvokeMethod(
@@ -546,7 +547,7 @@ internal class ObjectDef
             }
             else
             {
-                codeWriter.Append($$"""
+                codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
@@ -563,6 +564,6 @@ internal class ObjectDef
         }
 
         codeWriter.DecrementIndent();
-        codeWriter.Append("}");
+        codeWriter.AppendAndReserveNewLine("}");
     }
 }
