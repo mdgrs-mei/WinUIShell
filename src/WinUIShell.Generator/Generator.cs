@@ -11,7 +11,6 @@ public class Generator : IIncrementalGenerator
     {
         context.RegisterPostInitializationOutput((postInitContext) =>
         {
-
         });
 
         var provider = context.AdditionalTextsProvider.Where((text) =>
@@ -33,6 +32,7 @@ public class Generator : IIncrementalGenerator
             if (configOptionsProvider.GlobalOptions.TryGetValue("build_property.WinUIShellGenerator_GenerateTypeMapping", out var generateTypeMapping))
             {
                 EnumGenerator.GenerateTypeMapping(sourceProductionContext, api);
+                ObjectGenerator.GenerateTypeMapping(sourceProductionContext, api);
             }
             else
             {
