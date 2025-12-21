@@ -112,11 +112,12 @@ internal class ObjectDef
         return codeWriter.ToString();
     }
 
-    public void Generate(CodeWriter codeWriter)
+    private void Generate(CodeWriter codeWriter)
     {
         if (Type.IsInterface)
         {
             GenerateInterface(codeWriter);
+            GenerateInterfaceImpl(codeWriter);
         }
         else
         {
@@ -561,6 +562,178 @@ internal class ObjectDef
         foreach (var nestedObject in _nestedObjects)
         {
             nestedObject.Generate(codeWriter);
+        }
+
+        codeWriter.DecrementIndent();
+        codeWriter.AppendAndReserveNewLine("}");
+    }
+
+    // When properties or methods return an object with its interface type, and if we don't have the corresponding object type on the client side,
+    // we have to create an accessor object that implements the interface. This function generates such implementation classes.
+    private void GenerateInterfaceImpl(CodeWriter codeWriter)
+    {
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
+        string baseTypeExpression = $" : {_apiObjectDef.Name}{genericArgumentsExpression}";
+
+        codeWriter.Append($$"""
+            public class {{_apiObjectDef.Name}}Impl{{genericArgumentsExpression}}{{baseTypeExpression}}
+            {
+            """);
+        codeWriter.IncrementIndent();
+
+        codeWriter.AppendAndReserveNewLine($$"""
+            public ObjectId WinUIShellObjectId { get; protected set; } = new();
+            """);
+
+        codeWriter.AppendAndReserveNewLine($$"""
+            internal {{_apiObjectDef.Name}}Impl(ObjectId id)
+            {
+                WinUIShellObjectId = id;
+            }
+            """);
+
+        foreach (var property in _staticProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            codeWriter.Append($$"""
+                {{property.GetInterfaceImplSignatureExpression()}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                codeWriter.Append($$"""
+                    get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                    """);
+            }
+
+            if (property.CanWrite)
+            {
+                codeWriter.Append($$"""
+                    set => PropertyAccessor.SetStatic(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        nameof({{property.GetName()}}),
+                        value);
+                    """);
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var property in _instanceProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            codeWriter.Append($$"""
+                {{property.GetInterfaceImplSignatureExpression()}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.Get<{{property.Type.GetName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                        """);
+                }
+            }
+
+            if (property.CanWrite)
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.Set(WinUIShellObjectId, nameof({{property.GetName()}}), {{property.Type.GetValueExpression()}});
+                        """);
+                }
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var method in _staticMethods)
+        {
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {
+                        CommandClient.Get().InvokeStaticMethod(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {
+                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
+        }
+
+        foreach (var method in _instanceMethods)
+        {
+            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method))
+                continue;
+
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {
+                        CommandClient.Get().InvokeMethod(
+                            WinUIShellObjectId,
+                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {
+                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
+                            WinUIShellObjectId,
+                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
         }
 
         codeWriter.DecrementIndent();

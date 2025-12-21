@@ -111,6 +111,19 @@ internal class MethodDef
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
+    public string GetInterfaceImplSignatureExpression()
+    {
+        string unsafeExpression = _isUnsafe ? "unsafe " : "";
+        string accessorExpression = "public ";
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
+        string newExpression = "";
+        string overrideExpression = "";
+        string abstractExpression = "";
+        string virtualExpression = "";
+
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+    }
+
     public string GetConstructorSignatureExpression(string className)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";

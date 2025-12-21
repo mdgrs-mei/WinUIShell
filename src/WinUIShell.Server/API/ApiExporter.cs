@@ -394,10 +394,15 @@ public class ApiExporter : Singleton<ApiExporter>
         if (!isImplemented)
             return false;
 
+        if (objectType.IsInterface && IsSystemType(GetTypeDefName(objectType)))
+        {
+            return true;
+        }
+
         foreach (var interfaceType in objectType.GetInterfaces())
         {
             var interfaceName = GetTypeDefName(interfaceType);
-            bool isSystemInterface = interfaceName.StartsWith("System.", StringComparison.Ordinal);
+            bool isSystemInterface = IsSystemType(interfaceName);
             if (!isSystemInterface)
                 continue;
 
@@ -492,7 +497,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsGenericTypeParameter = type.IsGenericTypeParameter,
             IsGenericMethodParameter = type.IsGenericMethodParameter,
             IsInterface = type.IsInterface,
-            IsSystemObject = name.StartsWith("System.", StringComparison.Ordinal),
+            IsSystemObject = IsSystemType(name),
         };
 
         if (type.IsByRef || type.IsArray || type.IsPointer)
@@ -595,6 +600,11 @@ public class ApiExporter : Singleton<ApiExporter>
         bool isImplemented = methodInfo.DeclaringType == methodInfo.ReflectedType;
         bool isHiddenMethodsLikeGetterSetter = methodInfo.IsSpecialName;
         return !isImplemented || isHiddenMethodsLikeGetterSetter;
+    }
+
+    private bool IsSystemType(string typeDefName)
+    {
+        return typeDefName.StartsWith("System.", StringComparison.Ordinal);
     }
 
     private void ExportToFile(string filePath)

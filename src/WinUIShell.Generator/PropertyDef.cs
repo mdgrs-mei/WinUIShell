@@ -99,6 +99,20 @@ internal class PropertyDef
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
     }
 
+    public string GetInterfaceImplSignatureExpression()
+    {
+        string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
+        string accessorExpression = "public ";
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
+        string newExpression = "";
+        string overrideExpression = "";
+        string abstractExpression = "";
+        string virtualExpression = "";
+        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!)}]" : "";
+
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
+    }
+
     public string GetIndexerArgumentsExpression()
     {
         if (!IsIndexer)
