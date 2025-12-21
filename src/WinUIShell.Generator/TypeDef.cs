@@ -235,6 +235,33 @@ internal class TypeDef
         }
     }
 
+    public string GetUniqueName()
+    {
+        if (_elementType is not null)
+        {
+            if (IsArray)
+            {
+                return $"{_elementType.GetUniqueName()}[]";
+            }
+            else
+            if (_apiTypeDef.IsPointer)
+            {
+                return $"{_elementType.GetUniqueName()}*";
+            }
+            return _elementType.GetUniqueName();
+        }
+
+        var name = _apiTypeDef.Name;
+        if (GenericArguments is not null)
+        {
+            return $"{name}`{GenericArguments.Count}";
+        }
+        else
+        {
+            return name;
+        }
+    }
+
     public string GetGenericArgumentsExpression(List<TypeDef>? parentGenericArguments = null)
     {
         if (GenericArguments is not null)

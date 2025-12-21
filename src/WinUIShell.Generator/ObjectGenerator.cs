@@ -5,7 +5,24 @@ namespace WinUIShell.Generator;
 
 internal static class ObjectGenerator
 {
+    private static readonly Dictionary<string, ObjectDef> _objectDefs = [];
+
     public static void Generate(SourceProductionContext sourceProductionContext, Api api)
+    {
+        CreateObjectDefMap(api);
+
+        foreach (var keyValuePair in _objectDefs)
+        {
+            ObjectDef objectDef = keyValuePair.Value;
+            string filename = objectDef.GetSourceCodeFileName();
+            string sourceCode = objectDef.Generate();
+            sourceProductionContext.AddSource(filename, sourceCode);
+        }
+
+        DestroyObjectDefMap();
+    }
+
+    private static void CreateObjectDefMap(Api api)
     {
         foreach (var apiObjectDef in api.Objects)
         {
@@ -13,10 +30,28 @@ internal static class ObjectGenerator
             if (!objectDef.IsSupported())
                 continue;
 
-            string filename = objectDef.GetSourceCodeFileName();
-            string sourceCode = objectDef.Generate();
-            sourceProductionContext.AddSource(filename, sourceCode);
+            var uniqueName = objectDef.Type.GetUniqueName();
+            if (_objectDefs.ContainsKey(uniqueName))
+            {
+                throw new InvalidOperationException($"Duplicate object found: {uniqueName}");
+            }
+            _objectDefs[uniqueName] = objectDef;
         }
+    }
+
+    private static void DestroyObjectDefMap()
+    {
+        _objectDefs.Clear();
+    }
+
+    public static ObjectDef? GetObjectDef(TypeDef typeDef)
+    {
+        var uniqueName = typeDef.GetUniqueName();
+        if (_objectDefs.TryGetValue(uniqueName, out var objectDef))
+        {
+            return objectDef;
+        }
+        return null;
     }
 
     public static void GenerateTypeMapping(SourceProductionContext sourceProductionContext, Api api)
