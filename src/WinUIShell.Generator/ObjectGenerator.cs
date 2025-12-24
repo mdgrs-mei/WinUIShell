@@ -30,12 +30,12 @@ internal static class ObjectGenerator
             if (!objectDef.IsSupported())
                 continue;
 
-            var uniqueName = objectDef.Type.GetUniqueName();
-            if (_objectDefs.ContainsKey(uniqueName))
+            var typeId = objectDef.Type.GetId();
+            if (_objectDefs.ContainsKey(typeId))
             {
-                throw new InvalidOperationException($"Duplicate object found: {uniqueName}");
+                throw new InvalidOperationException($"Duplicate object found: {typeId}");
             }
-            _objectDefs[uniqueName] = objectDef;
+            _objectDefs[typeId] = objectDef;
         }
     }
 
@@ -46,8 +46,8 @@ internal static class ObjectGenerator
 
     public static ObjectDef? GetObjectDef(TypeDef typeDef)
     {
-        var uniqueName = typeDef.GetUniqueName();
-        if (_objectDefs.TryGetValue(uniqueName, out var objectDef))
+        var typeId = typeDef.GetId();
+        if (_objectDefs.TryGetValue(typeId, out var objectDef))
         {
             return objectDef;
         }
@@ -117,7 +117,7 @@ internal static class ObjectGenerator
                 continue;
 
             var ns = Generator.GetTargetNamespace(apiObjectDef.Namespace);
-            var genericArgumentCount = apiObjectDef.Type.GenericTypeArguments.Count;
+            var genericArgumentCount = apiObjectDef.Type.GenericTypeArguments is not null ? apiObjectDef.Type.GenericTypeArguments.Count : 0;
             string genericSuffix = (genericArgumentCount > 0) ? $"`{genericArgumentCount}" : "";
 
             codeWriter.Append($"""

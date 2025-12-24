@@ -235,20 +235,20 @@ internal class TypeDef
         }
     }
 
-    public string GetUniqueName()
+    public string GetId()
     {
         if (_elementType is not null)
         {
             if (IsArray)
             {
-                return $"{_elementType.GetUniqueName()}[]";
+                return $"{_elementType.GetId()}[]";
             }
             else
             if (_apiTypeDef.IsPointer)
             {
-                return $"{_elementType.GetUniqueName()}*";
+                return $"{_elementType.GetId()}*";
             }
-            return _elementType.GetUniqueName();
+            return _elementType.GetId();
         }
 
         var name = _apiTypeDef.Name;
@@ -267,6 +267,8 @@ internal class TypeDef
         if (GenericArguments is not null)
         {
             var genericArgumentsNames = GenericArguments.Select(t => t.GetName());
+
+            // In a nested class, generic arguments defined in the parent class can be omitted.
             if (parentGenericArguments is not null)
             {
                 var parentGenericArgumentsNames = parentGenericArguments.Select(t => t.GetName());
