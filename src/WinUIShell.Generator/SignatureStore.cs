@@ -9,6 +9,11 @@ internal class SignatureStore
         _objectDefs.Add(objectDef);
     }
 
+    public bool ContainsObject(ObjectDef objectDef)
+    {
+        return _objectDefs.Contains(objectDef);
+    }
+
     public bool ContainsSignature(PropertyDef propertyDef)
     {
         foreach (var objectDef in _objectDefs)

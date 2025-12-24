@@ -651,6 +651,9 @@ internal class ObjectDef
 
     private void GenerateInterfaceImplBody(CodeWriter codeWriter, string rootClassName, SignatureStore signatureStore)
     {
+        if (signatureStore.ContainsObject(this))
+            return;
+
         foreach (var property in _staticProperties)
         {
             if (!property.IsSupported())
