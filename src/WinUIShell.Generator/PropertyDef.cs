@@ -78,11 +78,33 @@ internal class PropertyDef
         return true;
     }
 
-    public string GetName()
+    public string GetName(bool isExplicitImplementation = false)
     {
-        string interfaceTypeName = _explicitInterfaceType is null ? "" : $"{_explicitInterfaceType.GetName()}.";
+        string interfaceTypeName = "";
+        if (_explicitInterfaceType is not null)
+        {
+            interfaceTypeName = $"{_explicitInterfaceType.GetName()}.";
+        }
+        else
+        if (isExplicitImplementation)
+        {
+            interfaceTypeName = $"{_objectDef.Type.GetName()}.";
+        }
+
         string name = IsIndexer ? "this" : _apiPropertyDef.Name;
         return $"{interfaceTypeName}{name}";
+    }
+
+    public string GetSignatureId()
+    {
+        if (IsIndexer)
+        {
+            return $"{GetName()}[{ParameterDef.GetParametersSignatureId(_indexParameters!)}]";
+        }
+        else
+        {
+            return GetName();
+        }
     }
 
     public string GetSignatureExpression()
@@ -99,10 +121,10 @@ internal class PropertyDef
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
     }
 
-    public string GetInterfaceImplSignatureExpression()
+    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation = false)
     {
         string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
-        string accessorExpression = "public ";
+        string accessorExpression = isExplicitImplementation ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = "";
         string overrideExpression = "";
@@ -110,7 +132,7 @@ internal class PropertyDef
         string virtualExpression = "";
         string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!)}]" : "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName(isExplicitImplementation)}{indexerParametersExpression}";
     }
 
     public string GetIndexerArgumentsExpression()

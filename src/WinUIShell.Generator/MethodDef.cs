@@ -92,10 +92,25 @@ internal class MethodDef
         return true;
     }
 
-    public string GetName()
+    public string GetName(bool isExplicitImplementation = false)
     {
-        string interfaceTypeName = ExplicitInterfaceType is null ? "" : $"{ExplicitInterfaceType.GetName()}.";
+        string interfaceTypeName = "";
+        if (ExplicitInterfaceType is not null)
+        {
+            interfaceTypeName = $"{ExplicitInterfaceType.GetName()}.";
+        }
+        else
+        if (isExplicitImplementation)
+        {
+            interfaceTypeName = $"{_objectDef.Type.GetSystemInterfaceName()}.";
+        }
+
         return $"{interfaceTypeName}{_apiMethodDef.Name}";
+    }
+
+    public string GetSignatureId()
+    {
+        return $"{GetName()}({GetParametersSignatureId()})";
     }
 
     public string GetSignatureExpression()
@@ -111,17 +126,17 @@ internal class MethodDef
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
     }
 
-    public string GetInterfaceImplSignatureExpression()
+    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
-        string accessorExpression = "public ";
+        string accessorExpression = isExplicitImplementation ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = "";
         string overrideExpression = "";
         string abstractExpression = "";
         string virtualExpression = "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName(isExplicitImplementation)}({GetParametersExpression()})";
     }
 
     public string GetConstructorSignatureExpression(string className)
@@ -129,6 +144,11 @@ internal class MethodDef
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
         string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
         return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression()})";
+    }
+
+    private string GetParametersSignatureId()
+    {
+        return ParameterDef.GetParametersSignatureId(Parameters);
     }
 
     private string GetParametersExpression()

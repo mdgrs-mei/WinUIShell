@@ -29,6 +29,11 @@ internal class ParameterDef
         return Type.IsUnsafe();
     }
 
+    public string GetSignatureId()
+    {
+        return $"{Type.GetId()}";
+    }
+
     public string GetSignatureExpression()
     {
         return $"{Type.GetTypeExpression()} {Name}";
@@ -37,6 +42,21 @@ internal class ParameterDef
     public string GetArgumentExpression(int parameterIndex)
     {
         return Type.GetArgumentExpression(Name, parameterIndex);
+    }
+
+    public static string GetParametersSignatureId(List<ParameterDef> parameters)
+    {
+        if (parameters.Count == 0)
+            return "";
+
+        StringBuilder builder = new();
+        string commaSpace = "";
+        foreach (var parameter in parameters)
+        {
+            _ = builder.Append($"{commaSpace}{parameter.GetSignatureId()}");
+            commaSpace = ", ";
+        }
+        return builder.ToString();
     }
 
     public static string GetParametersSignatureExpression(List<ParameterDef> parameters)

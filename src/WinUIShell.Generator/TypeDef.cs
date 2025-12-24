@@ -7,8 +7,8 @@ internal class TypeDef
     private readonly string _name = "";
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
-    private readonly bool _alwaysReturnSystemInterfaceName;
 
+    public bool AlwaysReturnSystemInterfaceName { get; set; }
     public readonly List<TypeDef>? GenericArguments;
     public bool IsNullable
     {
@@ -57,7 +57,7 @@ internal class TypeDef
     public TypeDef(Api.TypeDef apiTypeDef, bool alwaysReturnSystemInterfaceName = false)
     {
         _apiTypeDef = apiTypeDef;
-        _alwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
+        AlwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
 
         var serverTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
@@ -102,7 +102,7 @@ internal class TypeDef
 
         if (apiTypeDef.ElementType is not null)
         {
-            _elementType = new TypeDef(apiTypeDef.ElementType, _alwaysReturnSystemInterfaceName);
+            _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
         }
         if (apiTypeDef.GenericTypeArguments is not null)
         {
@@ -112,7 +112,7 @@ internal class TypeDef
                 {
                     GenericArguments = [];
                 }
-                GenericArguments.Add(new TypeDef(genericArgument, _alwaysReturnSystemInterfaceName));
+                GenericArguments.Add(new TypeDef(genericArgument, AlwaysReturnSystemInterfaceName));
             }
         }
     }
@@ -186,7 +186,7 @@ internal class TypeDef
 
     public string GetName()
     {
-        if (_alwaysReturnSystemInterfaceName)
+        if (AlwaysReturnSystemInterfaceName)
         {
             return GetSystemInterfaceName();
         }

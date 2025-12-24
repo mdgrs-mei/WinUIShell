@@ -25,6 +25,8 @@ internal class ObjectDef
         _parentObjectDef = parentObjectDef;
 
         Type = new TypeDef(_apiObjectDef.Type);
+        Type.AlwaysReturnSystemInterfaceName = Type.IsSystemInterface;
+
         if (_apiObjectDef.BaseType is not null)
         {
             _baseType = new TypeDef(_apiObjectDef.BaseType);
@@ -84,6 +86,53 @@ internal class ObjectDef
     public bool IsSupported()
     {
         return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsObject;
+    }
+
+    public bool ContainsSignature(PropertyDef propertyDef)
+    {
+        string signature = propertyDef.GetSignatureId();
+        foreach (var property in _staticProperties)
+        {
+            if (property.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var property in _instanceProperties)
+        {
+            if (property.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool ContainsSignature(MethodDef methodDef)
+    {
+        string signature = methodDef.GetSignatureId();
+        foreach (var method in _constructors)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var method in _staticMethods)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var method in _instanceMethods)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public string GetSourceCodeFileName()
@@ -574,9 +623,10 @@ internal class ObjectDef
     {
         string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
         string baseTypeExpression = $" : {_apiObjectDef.Name}{genericArgumentsExpression}";
+        string className = $"{_apiObjectDef.Name}Impl";
 
         codeWriter.Append($$"""
-            public class {{_apiObjectDef.Name}}Impl{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public class {{className}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
         codeWriter.IncrementIndent();
@@ -586,19 +636,30 @@ internal class ObjectDef
             """);
 
         codeWriter.AppendAndReserveNewLine($$"""
-            internal {{_apiObjectDef.Name}}Impl(ObjectId id)
+            internal {{className}}(ObjectId id)
             {
                 WinUIShellObjectId = id;
             }
             """);
 
+        SignatureStore signatureStore = new();
+        GenerateInterfaceImplBody(codeWriter, className, signatureStore);
+
+        codeWriter.DecrementIndent();
+        codeWriter.AppendAndReserveNewLine("}");
+    }
+
+    private void GenerateInterfaceImplBody(CodeWriter codeWriter, string rootClassName, SignatureStore signatureStore)
+    {
         foreach (var property in _staticProperties)
         {
             if (!property.IsSupported())
                 continue;
 
+            bool isExplicit = signatureStore.ContainsSignature(property);
+
             codeWriter.Append($$"""
-                {{property.GetInterfaceImplSignatureExpression()}}
+                {{property.GetInterfaceImplSignatureExpression(isExplicit)}}
                 {
                 """);
             codeWriter.IncrementIndent();
@@ -607,7 +668,7 @@ internal class ObjectDef
             {
                 codeWriter.Append($$"""
                     get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
-                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                         nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                     """);
             }
@@ -616,7 +677,7 @@ internal class ObjectDef
             {
                 codeWriter.Append($$"""
                     set => PropertyAccessor.SetStatic(
-                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                         nameof({{property.GetName()}}),
                         value);
                     """);
@@ -631,8 +692,10 @@ internal class ObjectDef
             if (!property.IsSupported())
                 continue;
 
+            bool isExplicit = signatureStore.ContainsSignature(property);
+
             codeWriter.Append($$"""
-                {{property.GetInterfaceImplSignatureExpression()}}
+                {{property.GetInterfaceImplSignatureExpression(isExplicit)}}
                 {
                 """);
             codeWriter.IncrementIndent();
@@ -678,14 +741,16 @@ internal class ObjectDef
             if (!method.IsSupported())
                 continue;
 
+            bool isExplicit = signatureStore.ContainsSignature(method);
+
             var returnType = method.ReturnType!;
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
                     {
                         CommandClient.Get().InvokeStaticMethod(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
                     }
                     """);
@@ -693,10 +758,10 @@ internal class ObjectDef
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
@@ -705,17 +770,19 @@ internal class ObjectDef
 
         foreach (var method in _instanceMethods)
         {
-            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method))
+            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method, signatureStore))
                 continue;
 
             if (!method.IsSupported())
                 continue;
 
+            bool isExplicit = signatureStore.ContainsSignature(method);
+
             var returnType = method.ReturnType!;
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
@@ -726,7 +793,7 @@ internal class ObjectDef
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression()}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                             WinUIShellObjectId,
@@ -736,7 +803,14 @@ internal class ObjectDef
             }
         }
 
-        codeWriter.DecrementIndent();
-        codeWriter.AppendAndReserveNewLine("}");
+        signatureStore.AddObjectDef(this);
+
+        foreach (var interfaceType in _interfaces)
+        {
+            if (interfaceType.IsSupported())
+            {
+                ObjectGenerator.GetObjectDef(interfaceType)?.GenerateInterfaceImplBody(codeWriter, rootClassName, signatureStore);
+            }
+        }
     }
 }
