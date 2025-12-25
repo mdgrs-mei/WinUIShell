@@ -111,6 +111,12 @@ public class ApiExporter : Singleton<ApiExporter>
         if (type.IsEnum)
             return;
 
+        string typeDefName = GetTypeDefName(type);
+        bool isSystemType = IsSystemType(typeDefName);
+        bool isUnsupportedSystemInterface = type.IsInterface && isSystemType && !Api.IsSupportedSystemInterface(typeDefName);
+        if (isUnsupportedSystemInterface)
+            return;
+
         if (type.IsNested)
         {
             AddObject(type.DeclaringType!);
@@ -511,18 +517,15 @@ public class ApiExporter : Singleton<ApiExporter>
             AddEnum(type);
         }
         else
+        if (!type.IsGenericParameter)
         {
-            bool isUnsupportedSystemInterface = typeDef.IsInterface && typeDef.IsSystemObject && !Api.IsSupportedSystemInterface(name);
-            if (!type.IsGenericParameter && !isUnsupportedSystemInterface)
+            if (type.IsGenericType && !type.IsGenericTypeDefinition)
             {
-                if (type.IsGenericType && !type.IsGenericTypeDefinition)
-                {
-                    AddObject(type.GetGenericTypeDefinition());
-                }
-                else
-                {
-                    AddObject(type);
-                }
+                AddObject(type.GetGenericTypeDefinition());
+            }
+            else
+            {
+                AddObject(type);
             }
         }
 
