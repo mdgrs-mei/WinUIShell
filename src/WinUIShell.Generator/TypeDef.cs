@@ -67,7 +67,7 @@ internal class TypeDef
             _name = $"WinUIShell.{serverTypeName}";
         }
         else
-        if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.ElementType is not null)
+        if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter || _apiTypeDef.ElementType is not null)
         {
             _name = serverTypeName;
         }

@@ -133,6 +133,9 @@ public class Api
         [DefaultValue(false)]
         public bool IsGenericMethodParameter { get; set; }
 
+        [DefaultValue(0)]
+        public int GenericParameterPosition { get; set; }
+
         [DefaultValue(false)]
         public bool IsInterface { get; set; }
 

@@ -502,6 +502,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsGenericType = type.IsGenericType,
             IsGenericTypeParameter = type.IsGenericTypeParameter,
             IsGenericMethodParameter = type.IsGenericMethodParameter,
+            GenericParameterPosition = type.IsGenericParameter ? type.GenericParameterPosition : 0,
             IsInterface = type.IsInterface,
             IsSystemObject = IsSystemType(name),
         };
