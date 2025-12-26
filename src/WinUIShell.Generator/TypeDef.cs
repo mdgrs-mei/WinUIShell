@@ -65,7 +65,8 @@ internal class TypeDef
     public TypeDef(
         Api.TypeDef apiTypeDef,
         bool alwaysReturnSystemInterfaceName = false,
-        List<TypeDef>? genericArgumentsOverride = null)
+        List<TypeDef>? genericArgumentsOverride = null,
+        TypeDef? elementTypeOverride = null)
     {
         _apiTypeDef = apiTypeDef;
         AlwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
@@ -111,6 +112,11 @@ internal class TypeDef
             _name = $"WinUIShell.{serverTypeName}";
         }
 
+        if (elementTypeOverride is not null)
+        {
+            _elementType = elementTypeOverride;
+        }
+        else
         if (apiTypeDef.ElementType is not null)
         {
             _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
@@ -283,6 +289,12 @@ internal class TypeDef
     {
         if (genericTypeParametersOverride is null)
             return this;
+
+        if (_elementType is not null)
+        {
+            var overriddenElementType = _elementType.OverrideGenericTypeParameter(genericTypeParametersOverride);
+            return new TypeDef(_apiTypeDef, AlwaysReturnSystemInterfaceName, null, overriddenElementType);
+        }
 
         if (IsGenericTypeParameter)
         {

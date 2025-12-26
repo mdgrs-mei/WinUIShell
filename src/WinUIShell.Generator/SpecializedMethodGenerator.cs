@@ -48,7 +48,7 @@ internal class SpecializedMethodGenerator
             var arrayName = methodDef.Parameters[0].Name;
             var indexName = methodDef.Parameters[1].Name;
 
-            codeWriter.Append($$"""
+            codeWriter.AppendAndReserveNewLine($$"""
                 {{signature}}
                 {
                     ArgumentNullException.ThrowIfNull({{arrayName}});
