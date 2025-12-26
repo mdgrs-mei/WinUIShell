@@ -215,7 +215,7 @@ internal class TypeDef
         }
         else
         {
-            return GetName(_name);
+            return GetNameInternal(NameType.Normal);
         }
     }
 
@@ -223,37 +223,76 @@ internal class TypeDef
     {
         if (IsSystemInterface)
         {
-            return GetName($"global::{_apiTypeDef.Name}");
+            return GetNameInternal(NameType.SystemInterface);
         }
         else
         {
-            return GetName(_name);
+            return GetNameInternal(NameType.Normal);
         }
     }
 
-    private string GetName(string thisName)
+    public string GetReturnInstanceTypeName()
+    {
+        if (IsInterface)
+        {
+            return GetNameInternal(NameType.InterfaceImplementation);
+        }
+        else
+        {
+            return GetName();
+        }
+    }
+
+    private enum NameType
+    {
+        Normal,
+        SystemInterface,
+        InterfaceImplementation,
+    }
+
+    private string GetNameInternal(NameType nameType)
     {
         if (_elementType is not null)
         {
+            string elementName = _elementType.GetNameInternal(nameType);
             if (IsArray)
             {
-                return $"{_elementType.GetName()}[]";
+                return $"{elementName}[]";
             }
             else
             if (_apiTypeDef.IsPointer)
             {
-                return $"{_elementType.GetName()}*";
+                return $"{elementName}*";
             }
-            return _elementType.GetName();
+            return elementName;
+        }
+
+        string name = "";
+        switch (nameType)
+        {
+            case NameType.Normal:
+                name = _name;
+                break;
+
+            case NameType.SystemInterface:
+                name = $"global::{_apiTypeDef.Name}";
+                break;
+
+            case NameType.InterfaceImplementation:
+                name = $"{_name}Impl";
+                break;
+
+            default:
+                break;
         }
 
         if (GenericArguments is not null)
         {
-            return $"{thisName}{GetGenericArgumentsExpression()}";
+            return $"{name}{GetGenericArgumentsExpression()}";
         }
         else
         {
-            return thisName;
+            return name;
         }
     }
 
