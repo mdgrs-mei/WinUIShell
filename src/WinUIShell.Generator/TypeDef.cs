@@ -247,14 +247,13 @@ internal class TypeDef
             return _elementType.GetName();
         }
 
-        var name = _apiTypeDef.IsPointer ? $"{thisName}*" : thisName;
         if (GenericArguments is not null)
         {
-            return $"{name}{GetGenericArgumentsExpression()}";
+            return $"{thisName}{GetGenericArgumentsExpression()}";
         }
         else
         {
-            return name;
+            return thisName;
         }
     }
 
