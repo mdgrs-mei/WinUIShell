@@ -34,9 +34,10 @@ internal class ParameterDef
         return $"{Type.GetId()}";
     }
 
-    public string GetSignatureExpression()
+    private string GetSignatureExpression(List<TypeDef>? genericTypeParametersOverride)
     {
-        return $"{Type.GetTypeExpression()} {Name}";
+        TypeDef type = Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+        return $"{type.GetTypeExpression()} {Name}";
     }
 
     public string GetArgumentExpression(int parameterIndex)
@@ -59,7 +60,7 @@ internal class ParameterDef
         return builder.ToString();
     }
 
-    public static string GetParametersSignatureExpression(List<ParameterDef> parameters)
+    public static string GetParametersSignatureExpression(List<ParameterDef> parameters, List<TypeDef>? genericTypeParametersOverride)
     {
         if (parameters.Count == 0)
             return "";
@@ -68,7 +69,7 @@ internal class ParameterDef
         string commaSpace = "";
         foreach (var parameter in parameters)
         {
-            _ = builder.Append($"{commaSpace}{parameter.GetSignatureExpression()}");
+            _ = builder.Append($"{commaSpace}{parameter.GetSignatureExpression(genericTypeParametersOverride)}");
             commaSpace = ", ";
         }
         return builder.ToString();

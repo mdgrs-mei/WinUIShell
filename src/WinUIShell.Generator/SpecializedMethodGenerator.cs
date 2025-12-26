@@ -4,15 +4,29 @@ internal class SpecializedMethodGenerator
 {
     public static bool Generate(CodeWriter codeWriter, MethodDef methodDef)
     {
-        return Generate(codeWriter, methodDef, isInterfaceImpl: false, signatureStore: null);
+        return Generate(codeWriter, methodDef, isInterfaceImpl: false, genericTypeParametersOverride: null, signatureStore: null);
     }
 
-    public static bool GenerateForInterfaceImpl(CodeWriter codeWriter, MethodDef methodDef, SignatureStore signatureStore)
+    public static bool GenerateForInterfaceImpl(
+        CodeWriter codeWriter,
+        MethodDef methodDef,
+        List<TypeDef>? genericTypeParametersOverride,
+        SignatureStore signatureStore)
     {
-        return Generate(codeWriter, methodDef, isInterfaceImpl: true, signatureStore: signatureStore);
+        return Generate(
+            codeWriter,
+            methodDef,
+            isInterfaceImpl: true,
+            genericTypeParametersOverride: genericTypeParametersOverride,
+            signatureStore: signatureStore);
     }
 
-    private static bool Generate(CodeWriter codeWriter, MethodDef methodDef, bool isInterfaceImpl, SignatureStore? signatureStore)
+    private static bool Generate(
+        CodeWriter codeWriter,
+        MethodDef methodDef,
+        bool isInterfaceImpl,
+        List<TypeDef>? genericTypeParametersOverride,
+        SignatureStore? signatureStore)
     {
         var methodName = methodDef.GetName();
         if (methodName.EndsWith("CopyTo") &&
@@ -24,7 +38,7 @@ internal class SpecializedMethodGenerator
             if (isInterfaceImpl && signatureStore != null)
             {
                 bool isExplicit = signatureStore.ContainsSignature(methodDef);
-                signature = methodDef.GetInterfaceImplSignatureExpression(isExplicit);
+                signature = methodDef.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride);
             }
             else
             {

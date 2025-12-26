@@ -123,10 +123,10 @@ internal class MethodDef
         string abstractExpression = IsAbstract ? "abstract " : "";
         string virtualExpression = (_apiMethodDef.IsVirtual && !_apiMethodDef.IsOverride && !_apiMethodDef.IsAbstract && ExplicitInterfaceType is null) ? "virtual " : "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression()})";
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression(genericTypeParametersOverride: null)})";
     }
 
-    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation)
+    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
         string accessorExpression = isExplicitImplementation ? "" : "public ";
@@ -136,14 +136,16 @@ internal class MethodDef
         string abstractExpression = "";
         string virtualExpression = "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName(isExplicitImplementation)}({GetParametersExpression()})";
+        TypeDef returnType = ReturnType!.OverrideGenericTypeParameter(genericTypeParametersOverride);
+
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{returnType.GetTypeExpression()} {GetName(isExplicitImplementation)}({GetParametersExpression(genericTypeParametersOverride)})";
     }
 
     public string GetConstructorSignatureExpression(string className)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
         string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
-        return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression()})";
+        return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression(genericTypeParametersOverride: null)})";
     }
 
     private string GetParametersSignatureId()
@@ -151,9 +153,9 @@ internal class MethodDef
         return ParameterDef.GetParametersSignatureId(Parameters);
     }
 
-    private string GetParametersExpression()
+    private string GetParametersExpression(List<TypeDef>? genericTypeParametersOverride)
     {
-        return ParameterDef.GetParametersSignatureExpression(Parameters);
+        return ParameterDef.GetParametersSignatureExpression(Parameters, genericTypeParametersOverride);
     }
 
     public string GetArgumentsExpression()

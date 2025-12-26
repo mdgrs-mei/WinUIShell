@@ -26,6 +26,14 @@ internal class TypeDef
     {
         get => _apiTypeDef.IsArray;
     }
+    public bool IsGenericTypeParameter
+    {
+        get => _apiTypeDef.IsGenericTypeParameter;
+    }
+    public int GenericParameterPosition
+    {
+        get => _apiTypeDef.GenericParameterPosition;
+    }
 
     private static readonly List<(string FullName, string ShortName)> _systemTypes =
     [
@@ -54,7 +62,10 @@ internal class TypeDef
         "WinRT.ObjectReference",
     ];
 
-    public TypeDef(Api.TypeDef apiTypeDef, bool alwaysReturnSystemInterfaceName = false)
+    public TypeDef(
+        Api.TypeDef apiTypeDef,
+        bool alwaysReturnSystemInterfaceName = false,
+        List<TypeDef>? genericArgumentsOverride = null)
     {
         _apiTypeDef = apiTypeDef;
         AlwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
@@ -104,6 +115,12 @@ internal class TypeDef
         {
             _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
         }
+
+        if (genericArgumentsOverride is not null)
+        {
+            GenericArguments = genericArgumentsOverride;
+        }
+        else
         if (apiTypeDef.GenericTypeArguments is not null)
         {
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
@@ -259,6 +276,31 @@ internal class TypeDef
         else
         {
             return name;
+        }
+    }
+
+    public TypeDef OverrideGenericTypeParameter(List<TypeDef>? genericTypeParametersOverride)
+    {
+        if (genericTypeParametersOverride is null)
+            return this;
+
+        if (IsGenericTypeParameter)
+        {
+            return genericTypeParametersOverride[GenericParameterPosition];
+        }
+        else
+        if (GenericArguments is not null)
+        {
+            List<TypeDef> overriddenGenericArguments = [];
+            foreach (var genericArgument in GenericArguments)
+            {
+                overriddenGenericArguments.Add(genericArgument.OverrideGenericTypeParameter(genericTypeParametersOverride));
+            }
+            return new TypeDef(_apiTypeDef, AlwaysReturnSystemInterfaceName, overriddenGenericArguments);
+        }
+        else
+        {
+            return this;
         }
     }
 

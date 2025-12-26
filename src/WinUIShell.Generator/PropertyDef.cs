@@ -116,12 +116,12 @@ internal class PropertyDef
         string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
         string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
         string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
-        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!)}]" : "";
+        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!, genericTypeParametersOverride: null)}]" : "";
 
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
     }
 
-    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation = false)
+    public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
     {
         string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
         string accessorExpression = isExplicitImplementation ? "" : "public ";
@@ -130,9 +130,10 @@ internal class PropertyDef
         string overrideExpression = "";
         string abstractExpression = "";
         string virtualExpression = "";
-        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!)}]" : "";
+        string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!, genericTypeParametersOverride)}]" : "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName(isExplicitImplementation)}{indexerParametersExpression}";
+        TypeDef type = Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{type.GetTypeExpression()} {GetName(isExplicitImplementation)}{indexerParametersExpression}";
     }
 
     public string GetIndexerArgumentsExpression()

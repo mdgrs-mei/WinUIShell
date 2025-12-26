@@ -643,13 +643,13 @@ internal class ObjectDef
             """);
 
         SignatureStore signatureStore = new();
-        GenerateInterfaceImplBody(codeWriter, className, signatureStore);
+        GenerateInterfaceImplBody(codeWriter, className, Type.GenericArguments, signatureStore);
 
         codeWriter.DecrementIndent();
         codeWriter.AppendAndReserveNewLine("}");
     }
 
-    private void GenerateInterfaceImplBody(CodeWriter codeWriter, string rootClassName, SignatureStore signatureStore)
+    private void GenerateInterfaceImplBody(CodeWriter codeWriter, string rootClassName, List<TypeDef>? genericTypeParametersOverride, SignatureStore signatureStore)
     {
         if (signatureStore.ContainsObject(this))
             return;
@@ -662,7 +662,7 @@ internal class ObjectDef
             bool isExplicit = signatureStore.ContainsSignature(property);
 
             codeWriter.Append($$"""
-                {{property.GetInterfaceImplSignatureExpression(isExplicit)}}
+                {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                 {
                 """);
             codeWriter.IncrementIndent();
@@ -698,7 +698,7 @@ internal class ObjectDef
             bool isExplicit = signatureStore.ContainsSignature(property);
 
             codeWriter.Append($$"""
-                {{property.GetInterfaceImplSignatureExpression(isExplicit)}}
+                {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                 {
                 """);
             codeWriter.IncrementIndent();
@@ -746,11 +746,11 @@ internal class ObjectDef
 
             bool isExplicit = signatureStore.ContainsSignature(method);
 
-            var returnType = method.ReturnType!;
+            var returnType = method.ReturnType!.OverrideGenericTypeParameter(genericTypeParametersOverride);
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
                         CommandClient.Get().InvokeStaticMethod(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
@@ -761,7 +761,7 @@ internal class ObjectDef
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
@@ -773,7 +773,7 @@ internal class ObjectDef
 
         foreach (var method in _instanceMethods)
         {
-            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method, signatureStore))
+            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method, genericTypeParametersOverride, signatureStore))
                 continue;
 
             if (!method.IsSupported())
@@ -781,11 +781,11 @@ internal class ObjectDef
 
             bool isExplicit = signatureStore.ContainsSignature(method);
 
-            var returnType = method.ReturnType!;
+            var returnType = method.ReturnType!.OverrideGenericTypeParameter(genericTypeParametersOverride);
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
@@ -796,7 +796,7 @@ internal class ObjectDef
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetInterfaceImplSignatureExpression(isExplicit)}}
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                             WinUIShellObjectId,
@@ -810,10 +810,20 @@ internal class ObjectDef
 
         foreach (var interfaceType in _interfaces)
         {
-            if (interfaceType.IsSupported())
-            {
-                ObjectGenerator.GetObjectDef(interfaceType)?.GenerateInterfaceImplBody(codeWriter, rootClassName, signatureStore);
-            }
+            if (!interfaceType.IsSupported())
+                continue;
+
+            ObjectDef? interfaceObject = ObjectGenerator.GetObjectDef(interfaceType);
+            if (interfaceObject is null)
+                continue;
+
+            TypeDef overridenInterfaceType = interfaceType.OverrideGenericTypeParameter(genericTypeParametersOverride);
+
+            interfaceObject.GenerateInterfaceImplBody(
+                codeWriter,
+                rootClassName,
+                overridenInterfaceType.GenericArguments,
+                signatureStore);
         }
     }
 }
