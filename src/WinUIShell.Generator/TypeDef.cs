@@ -177,6 +177,15 @@ internal class TypeDef
         if (_elementType is not null && !_elementType.IsSupported())
             return false;
 
+        if (GenericArguments is not null)
+        {
+            foreach (var genericArgument in GenericArguments)
+            {
+                if (!genericArgument.IsSupported())
+                    return false;
+            }
+        }
+
         return true;
     }
 
