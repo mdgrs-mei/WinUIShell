@@ -17,6 +17,8 @@ internal class ObjectDef
     private readonly List<MethodDef> _instanceMethods = [];
     private readonly List<ObjectDef> _nestedObjects = [];
 
+    private Dictionary<string, GetterSetter>? _explicitInterfaceImplementationIndexerMethods;
+
     public TypeDef Type { get; }
 
     public ObjectDef(Api.ObjectDef apiObjectDef, ObjectDef? parentObjectDef = null)
@@ -67,10 +69,17 @@ internal class ObjectDef
                 _staticMethods.Add(new MethodDef(method, this, MemberDefType.Static));
             }
         }
+
+        // Depending on the compiler, some classes have "InterfaceName.get_Item" and "InterfaceName.set_Item" methods
+        // instead of indexer explicit interface implementation. Look for those methods and turn them into an indexer property.
+        InitExplicitInterfaceImplementationIndexerMethods();
+
         if (_apiObjectDef.InstanceMethods is not null)
         {
             foreach (var method in _apiObjectDef.InstanceMethods)
             {
+                if (IsExplicitInterfaceImplementationIndexerMethod(method))
+                    continue;
                 _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
             }
         }
@@ -81,6 +90,69 @@ internal class ObjectDef
                 _nestedObjects.Add(new ObjectDef(nestedType, this));
             }
         }
+    }
+
+    private class GetterSetter
+    {
+        public Api.MethodDef? Getter;
+        public Api.MethodDef? Setter;
+    }
+
+    private void InitExplicitInterfaceImplementationIndexerMethods()
+    {
+        if (_apiObjectDef.InstanceMethods is null)
+            return;
+
+        Dictionary<string, GetterSetter>? indexerMethods = null;
+        foreach (var method in _apiObjectDef.InstanceMethods)
+        {
+            if (method.ExplicitInterfaceType is null)
+                continue;
+
+            bool isGetter = method.Name == "get_Item";
+            bool isSetter = method.Name == "set_Item";
+            if (!isGetter && !isSetter)
+                continue;
+
+            if (indexerMethods is null)
+            {
+                indexerMethods = [];
+            }
+
+            string interfaceName = method.ExplicitInterfaceType.Name;
+            if (!indexerMethods.TryGetValue(interfaceName, out var getterSetter))
+            {
+                getterSetter = new GetterSetter();
+                indexerMethods.Add(interfaceName, getterSetter);
+            }
+
+            if (isGetter)
+            {
+                getterSetter.Getter = method;
+            }
+            else
+            if (isSetter)
+            {
+                getterSetter.Setter = method;
+            }
+        }
+
+        _explicitInterfaceImplementationIndexerMethods = indexerMethods;
+    }
+
+    private bool IsExplicitInterfaceImplementationIndexerMethod(Api.MethodDef apiMethodDef)
+    {
+        if (_explicitInterfaceImplementationIndexerMethods is null)
+            return false;
+
+        foreach (var getterSetter in _explicitInterfaceImplementationIndexerMethods.Values)
+        {
+            if (apiMethodDef == getterSetter.Getter || apiMethodDef == getterSetter.Setter)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool IsSupported()
