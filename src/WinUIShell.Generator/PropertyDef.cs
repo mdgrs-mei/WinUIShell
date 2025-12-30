@@ -4,25 +4,19 @@ namespace WinUIShell.Generator;
 
 internal class PropertyDef
 {
-    private readonly Api.PropertyDef _apiPropertyDef;
     private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     private readonly TypeDef? _explicitInterfaceType;
     private readonly List<ParameterDef>? _indexParameters;
+    private readonly bool _hidesBase;
+    private readonly bool _isOverride;
+    private readonly bool _isVirtual;
+    private readonly string _propertyName;
 
     public readonly TypeDef Type;
-    public bool CanRead
-    {
-        get => _apiPropertyDef.CanRead;
-    }
-    public bool CanWrite
-    {
-        get => _apiPropertyDef.CanWrite;
-    }
-    public bool IsAbstract
-    {
-        get => _apiPropertyDef.IsAbstract;
-    }
+    public bool CanRead { get; private set; }
+    public bool CanWrite { get; private set; }
+    public bool IsAbstract { get; private set; }
     public bool IsIndexer
     {
         get => _indexParameters is not null;
@@ -33,16 +27,24 @@ internal class PropertyDef
         ObjectDef objectDef,
         MemberDefType memberDefType)
     {
-        _apiPropertyDef = apiPropertyDef;
+        _hidesBase = apiPropertyDef.HidesBase;
+        _isOverride = apiPropertyDef.IsOverride;
+        _isVirtual = apiPropertyDef.IsVirtual;
+        _propertyName = apiPropertyDef.Name;
+
+        CanRead = apiPropertyDef.CanRead;
+        CanWrite = apiPropertyDef.CanWrite;
+        IsAbstract = apiPropertyDef.IsAbstract;
+
         _objectDef = objectDef;
         _memberDefType = memberDefType;
 
-        bool useSystemInterfaceName = _apiPropertyDef.ImplementsSystemInterface;
+        bool useSystemInterfaceName = apiPropertyDef.ImplementsSystemInterface;
         _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType, useSystemInterfaceName);
 
-        if (_apiPropertyDef.IndexParameters is not null)
+        if (apiPropertyDef.IndexParameters is not null)
         {
-            foreach (var apiParameterDef in _apiPropertyDef.IndexParameters)
+            foreach (var apiParameterDef in apiPropertyDef.IndexParameters)
             {
                 if (_indexParameters is null)
                 {
@@ -52,7 +54,42 @@ internal class PropertyDef
             }
         }
 
-        Type = new TypeDef(_apiPropertyDef.Type, useSystemInterfaceName);
+        Type = new TypeDef(apiPropertyDef.Type, useSystemInterfaceName);
+    }
+
+    public PropertyDef(
+        Api.MethodDef indexerGetter,
+        Api.MethodDef? indexerSetter,
+        ObjectDef objectDef,
+        MemberDefType memberDefType)
+    {
+        _hidesBase = indexerGetter.HidesBase;
+        _isOverride = indexerGetter.IsOverride;
+        _isVirtual = indexerGetter.IsVirtual;
+        _propertyName = "";
+
+        CanRead = true;
+        CanWrite = indexerSetter is not null;
+        IsAbstract = indexerGetter.IsAbstract;
+
+        _objectDef = objectDef;
+        _memberDefType = memberDefType;
+
+        bool useSystemInterfaceName = indexerGetter!.ImplementsSystemInterface;
+        _explicitInterfaceType = indexerGetter.ExplicitInterfaceType is null ? null : new TypeDef(indexerGetter.ExplicitInterfaceType, useSystemInterfaceName);
+
+        List<Api.ParameterDef> indexParameters = indexerGetter.Parameters!;
+
+        foreach (var apiParameterDef in indexParameters)
+        {
+            if (_indexParameters is null)
+            {
+                _indexParameters = [];
+            }
+            _indexParameters.Add(new ParameterDef(apiParameterDef, useSystemInterfaceName));
+        }
+
+        Type = new TypeDef(indexerGetter.ReturnType!, useSystemInterfaceName);
     }
 
     public bool IsSupported()
@@ -91,7 +128,7 @@ internal class PropertyDef
             interfaceTypeName = $"{_objectDef.Type.GetName()}.";
         }
 
-        string name = IsIndexer ? "this" : _apiPropertyDef.Name;
+        string name = IsIndexer ? "this" : _propertyName;
         return $"{interfaceTypeName}{name}";
     }
 
@@ -112,10 +149,10 @@ internal class PropertyDef
         string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
         string accessorExpression = (_objectDef.Type.IsInterface || _explicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
-        string newExpression = _apiPropertyDef.HidesBase ? "new " : "";
-        string overrideExpression = _apiPropertyDef.IsOverride ? "override " : "";
-        string abstractExpression = _apiPropertyDef.IsAbstract ? "abstract " : "";
-        string virtualExpression = (_apiPropertyDef.IsVirtual && !_apiPropertyDef.IsOverride && !_apiPropertyDef.IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
+        string newExpression = _hidesBase ? "new " : "";
+        string overrideExpression = _isOverride ? "override " : "";
+        string abstractExpression = IsAbstract ? "abstract " : "";
+        string virtualExpression = (_isVirtual && !_isOverride && !IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
         string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!, genericTypeParametersOverride: null)}]" : "";
 
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";

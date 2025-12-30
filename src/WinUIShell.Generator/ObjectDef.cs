@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using WinUIShell.Server;
 
 namespace WinUIShell.Generator;
@@ -70,8 +71,6 @@ internal class ObjectDef
             }
         }
 
-        // Depending on the compiler, some classes have "InterfaceName.get_Item" and "InterfaceName.set_Item" methods
-        // instead of indexer explicit interface implementation. Look for those methods and turn them into an indexer property.
         InitExplicitInterfaceImplementationIndexerMethods();
 
         if (_apiObjectDef.InstanceMethods is not null)
@@ -98,6 +97,8 @@ internal class ObjectDef
         public Api.MethodDef? Setter;
     }
 
+    // Depending on the compiler, some classes have "InterfaceName.get_Item" and "InterfaceName.set_Item" methods
+    // instead of indexer explicit interface implementation. Look for those methods and turn them into an indexer property.
     private void InitExplicitInterfaceImplementationIndexerMethods()
     {
         if (_apiObjectDef.InstanceMethods is null)
@@ -138,6 +139,19 @@ internal class ObjectDef
         }
 
         _explicitInterfaceImplementationIndexerMethods = indexerMethods;
+
+        if (_explicitInterfaceImplementationIndexerMethods is not null)
+        {
+            foreach (var getterSetter in _explicitInterfaceImplementationIndexerMethods.Values)
+            {
+                Debug.Assert(getterSetter.Getter is not null);
+                _instanceProperties.Add(new PropertyDef(
+                    getterSetter.Getter!,
+                    getterSetter.Setter,
+                    this,
+                    MemberDefType.Instance));
+            }
+        }
     }
 
     private bool IsExplicitInterfaceImplementationIndexerMethod(Api.MethodDef apiMethodDef)
