@@ -94,6 +94,8 @@ public class Invoker : Singleton<Invoker>
                 int parameterCount = method.GetParameters().Length;
                 if (parameterCount == arguments.Length)
                 {
+                    // Return the first match.
+                    // This is not precise if there are multiple overloads with the same parameter count.
                     return method;
                 }
             }
@@ -180,43 +182,71 @@ public class Invoker : Singleton<Invoker>
         throw new InvalidOperationException($"Property or Filed [{name}] not found.");
     }
 
-    public void SetIndexerProperty(object obj, object index, object? value)
+    public void SetIndexerProperty(object obj, object? value, object?[] indexArguments)
     {
         ArgumentNullException.ThrowIfNull(obj);
-        ArgumentNullException.ThrowIfNull(index);
         if (!IsValid(obj))
             return;
 
         var type = obj.GetType();
-        var indexType = index.GetType();
-        var property = type.GetProperty(
-            type.GetCustomAttribute<DefaultMemberAttribute>()!.MemberName,
-            [indexType]);
+        var property = GetIndexerPropertyInfo(type, indexArguments);
 
         if (property == null)
         {
             throw new InvalidOperationException($"Indexer property for [{obj}] not found.");
         }
-        property.SetValue(obj, value, [index]);
+        property.SetValue(obj, value, indexArguments);
     }
 
-    public object? GetIndexerProperty(object obj, object index)
+    public object? GetIndexerProperty(object obj, object?[] indexArguments)
     {
         ArgumentNullException.ThrowIfNull(obj);
-        ArgumentNullException.ThrowIfNull(index);
         if (!IsValid(obj))
             return null;
 
         var type = obj.GetType();
-        var indexType = index.GetType();
-        var property = type.GetProperty(
-            type.GetCustomAttribute<DefaultMemberAttribute>()!.MemberName,
-            [indexType]);
+        var property = GetIndexerPropertyInfo(type, indexArguments);
 
         if (property == null)
         {
             throw new InvalidOperationException($"Indexer property for [{obj}] not found.");
         }
-        return property.GetValue(obj, [index]);
+        return property.GetValue(obj, indexArguments);
+    }
+
+    private PropertyInfo? GetIndexerPropertyInfo(
+        Type objType,
+        object?[]? indexArguments)
+    {
+        var indexerName = objType.GetCustomAttribute<DefaultMemberAttribute>()!.MemberName;
+
+        if (indexArguments is null)
+        {
+            return objType.GetProperty(indexerName, Type.EmptyTypes);
+        }
+        else
+        if (indexArguments.Contains(null))
+        {
+            var properties = objType.GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.Name != indexerName)
+                    continue;
+
+                int parameterCount = property.GetIndexParameters().Length;
+                if (parameterCount == indexArguments.Length)
+                {
+                    // Return the first match.
+                    // This is not precise if there are multiple overloads with the same parameter count.
+                    return property;
+                }
+            }
+            return null;
+        }
+        else
+        {
+            Type[] types = [.. indexArguments.Select(argument => argument is not null ? argument.GetType() : typeof(object))];
+            return objType.GetProperty(indexerName, types);
+        }
     }
 }

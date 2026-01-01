@@ -602,7 +602,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
                         """);
                 }
                 else
@@ -810,7 +810,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}, {{property.Type.GetValueExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
                         """);
                 }
                 else

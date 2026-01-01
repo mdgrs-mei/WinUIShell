@@ -29,16 +29,16 @@ internal static class PropertyAccessor
         CommandClient.Get().SetPropertyWait(id, propertyName, value);
     }
 
-    public static void SetIndexer(ObjectId id, object? index, object? value)
+    public static void SetIndexer(ObjectId id, object? value, params object?[] indexArguments)
     {
-        CommandClient.Get().SetIndexerProperty(id, index, value);
+        CommandClient.Get().SetIndexerProperty(id, value, indexArguments);
     }
 
-    public static T? GetIndexer<T>(ObjectId id, object? index)
+    public static T? GetIndexer<T>(ObjectId id, params object?[] indexArguments)
     {
         try
         {
-            return CommandClient.Get().GetIndexerProperty<T>(id, index);
+            return CommandClient.Get().GetIndexerProperty<T>(id, indexArguments);
         }
         catch (Exception e)
         {

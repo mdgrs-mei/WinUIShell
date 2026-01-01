@@ -22,11 +22,11 @@ public class WinUIShellObjectList<T> : WinUIShellObject, IList<T> where T : clas
         {
             if (value is WinUIShellObject obj)
             {
-                PropertyAccessor.SetIndexer(Id, index, obj.Id);
+                PropertyAccessor.SetIndexer(Id, obj.Id, index);
             }
             else
             {
-                PropertyAccessor.SetIndexer(Id, index, value);
+                PropertyAccessor.SetIndexer(Id, value, index);
             }
         }
     }
