@@ -476,7 +476,7 @@ internal class ObjectDef
             }
         }
 
-        if (_apiObjectDef.Type.IsAbstract && !hasDefaultConstructor)
+        if (!hasDefaultConstructor)
         {
             codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}()
