@@ -444,16 +444,11 @@ internal class ObjectDef
                 """);
         }
 
-        bool hasDefaultConstructor = false;
+        string baseInitializer = hasBaseType ? " : base(ObjectId.Null)" : "";
         foreach (var method in _constructors)
         {
             if (!method.IsSupported())
                 continue;
-
-            if (method.Parameters.Count == 0)
-            {
-                hasDefaultConstructor = true;
-            }
 
             if (_apiObjectDef.Type.IsAbstract)
             {
@@ -466,7 +461,7 @@ internal class ObjectDef
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}{{baseInitializer}}
                     {
                         WinUIShellObjectId = CommandClient.Get().CreateObject(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
@@ -476,20 +471,10 @@ internal class ObjectDef
             }
         }
 
-        if (!hasDefaultConstructor)
-        {
-            codeWriter.AppendAndReserveNewLine($$"""
-                internal {{_apiObjectDef.Name}}()
-                {
-                }
-                """);
-        }
-
         if (hasBaseType)
         {
             codeWriter.AppendAndReserveNewLine($$"""
-                internal {{_apiObjectDef.Name}}(ObjectId id)
-                    : base(id)
+                internal {{_apiObjectDef.Name}}(ObjectId id) : base(id)
                 {
                 }
                 """);
