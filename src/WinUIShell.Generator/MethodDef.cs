@@ -16,6 +16,10 @@ internal class MethodDef
     {
         get => _apiMethodDef.IsAbstract;
     }
+    public bool ImplementsSystemInterface
+    {
+        get => _apiMethodDef.ImplementsSystemInterface;
+    }
 
     private static readonly List<string> _unsupportedMethodNames =
     [
