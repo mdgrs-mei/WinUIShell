@@ -19,6 +19,21 @@ internal static class Reflection
         return false;
     }
 
+    public static bool IsNullable(FieldInfo fieldInfo)
+    {
+        if (fieldInfo.FieldType.IsGenericParameter)
+            return false;
+
+        var nullabilityInfoContext = new NullabilityInfoContext();
+        var nullability = nullabilityInfoContext.Create(fieldInfo);
+        if (nullability.WriteState == NullabilityState.Nullable || nullability.ReadState == NullabilityState.Nullable)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public static bool IsNullable(ParameterInfo parameterInfo)
     {
         if (parameterInfo.ParameterType.IsGenericParameter)

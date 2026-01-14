@@ -85,6 +85,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.Button));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.TextBlock));
         AddObject(typeof(Uri));
         AddObject(typeof(UriCreationOptions));
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
@@ -168,6 +169,14 @@ public class ApiExporter : Singleton<ApiExporter>
             }
             def.StaticProperties.Add(GetPropertyDef(propertyInfo));
         }
+        foreach (var fieldInfo in type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
+        {
+            if (def.StaticProperties is null)
+            {
+                def.StaticProperties = [];
+            }
+            def.StaticProperties.Add(GetPropertyDef(fieldInfo));
+        }
         foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
             if (def.InstanceProperties is null)
@@ -176,6 +185,15 @@ public class ApiExporter : Singleton<ApiExporter>
             }
             def.InstanceProperties.Add(GetPropertyDef(propertyInfo));
         }
+        foreach (var fieldInfo in type.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        {
+            if (def.InstanceProperties is null)
+            {
+                def.InstanceProperties = [];
+            }
+            def.InstanceProperties.Add(GetPropertyDef(fieldInfo));
+        }
+
         // Explicit interface implementations.
         foreach (var propertyInfo in type.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
@@ -287,6 +305,36 @@ public class ApiExporter : Singleton<ApiExporter>
         var name = propertyInfo.Name;
         int dot = name.LastIndexOf('.');
         return name[(dot + 1)..];
+    }
+
+    private string GetPropertyName(FieldInfo fieldInfo)
+    {
+        var name = fieldInfo.Name;
+        int dot = name.LastIndexOf('.');
+        return name[(dot + 1)..];
+    }
+
+    private Api.PropertyDef GetPropertyDef(FieldInfo fieldInfo)
+    {
+        var propertyType = fieldInfo.FieldType;
+        var typeDef = GetTypeDef(propertyType);
+        typeDef.IsNullable = Reflection.IsNullable(fieldInfo);
+
+        var propertyDef = new Api.PropertyDef
+        {
+            Name = GetPropertyName(fieldInfo),
+            Type = typeDef,
+            ExplicitInterfaceType = null,
+            CanRead = true,
+            CanWrite = true,
+            IsVirtual = false,
+            IsAbstract = false,
+            IsOverride = false,
+            HidesBase = false,
+            ImplementsSystemInterface = false,
+        };
+
+        return propertyDef;
     }
 
     private Api.MethodDef GetConstructorDef(ConstructorInfo constructorInfo)
