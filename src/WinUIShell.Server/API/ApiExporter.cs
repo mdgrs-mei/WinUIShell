@@ -81,6 +81,7 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObjects()
     {
+        AddObject(typeof(Microsoft.UI.Xaml.Thickness));
         AddObject(typeof(Microsoft.UI.Xaml.Application));
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
@@ -543,6 +544,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsNullable = Reflection.IsNullable(type),
             IsAbstract = type.IsAbstract,
             IsEnum = type.IsEnum,
+            IsClass = type.IsClass,
             IsArray = type.IsArray,
             IsDelegate = typeof(Delegate).IsAssignableFrom(type),
             IsPointer = type.IsPointer,

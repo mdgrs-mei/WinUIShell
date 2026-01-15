@@ -22,6 +22,10 @@ internal class TypeDef
     public bool IsSystemInterface { get; private set; }
     public bool IsObject { get; private set; }
     public bool IsVoid { get; private set; }
+    public bool IsClass
+    {
+        get => _apiTypeDef.IsClass;
+    }
     public bool IsArray
     {
         get => _apiTypeDef.IsArray;

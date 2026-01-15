@@ -103,6 +103,9 @@ public class Api
         [DefaultValue(false)]
         public bool IsEnum { get; set; }
 
+        [DefaultValue(true)]
+        public bool IsClass { get; set; } = true;
+
         [DefaultValue(false)]
         public bool IsArray { get; set; }
 
