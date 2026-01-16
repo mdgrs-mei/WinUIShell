@@ -13,22 +13,24 @@ public class Generator : IIncrementalGenerator
         {
         });
 
-        var provider = context.AdditionalTextsProvider.Where((text) =>
+        var additionalTextsProvider = context.AdditionalTextsProvider.Where((text) =>
         {
             return text.Path.EndsWith("Api.xml");
-        }).Combine(context.AnalyzerConfigOptionsProvider);
+        }).Collect();
 
-        context.RegisterSourceOutput(provider, (sourceProductionContext, source) =>
+        var provider = additionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider);
+
+        context.RegisterSourceOutput(provider, (sourceProductionContext, providers) =>
         {
-            var text = source.Left.GetText();
-            if (text is null)
+            var apiText = providers.Left.FirstOrDefault()?.GetText();
+            if (apiText is null)
                 return;
 
-            var api = LoadApi(text.ToString());
+            var api = LoadApi(apiText.ToString());
             if (api is null)
                 return;
 
-            var configOptionsProvider = source.Right;
+            var configOptionsProvider = providers.Right;
             if (configOptionsProvider.GlobalOptions.TryGetValue("build_property.WinUIShellGenerator_GenerateTypeMapping", out var generateTypeMapping))
             {
                 EnumGenerator.GenerateTypeMapping(sourceProductionContext, api);
