@@ -81,6 +81,8 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObjects()
     {
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.Primitives.ButtonBase));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
         AddObject(typeof(Microsoft.UI.Xaml.Window));
         AddObject(typeof(Microsoft.UI.Xaml.Thickness));
         AddObject(typeof(Microsoft.UI.Xaml.Application));
@@ -256,6 +258,24 @@ public class ApiExporter : Singleton<ApiExporter>
                 def.InstanceMethods = [];
             }
             def.InstanceMethods.Add(GetMethodDef(method));
+        }
+
+        foreach (var eventInfo in type.GetEvents(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly))
+        {
+            if (def.StaticEvents is null)
+            {
+                def.StaticEvents = [];
+            }
+            def.StaticEvents.Add(GetEventDef(eventInfo));
+        }
+
+        foreach (var eventInfo in type.GetEvents(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+        {
+            if (def.InstanceEvents is null)
+            {
+                def.InstanceEvents = [];
+            }
+            def.InstanceEvents.Add(GetEventDef(eventInfo));
         }
 
         foreach (var nestedType in type.GetNestedTypes())
@@ -653,6 +673,26 @@ public class ApiExporter : Singleton<ApiExporter>
     private string ReplaceNestedTypeExpression(string name)
     {
         return name.Replace("+", ".", StringComparison.Ordinal);
+    }
+
+    private Api.EventDef GetEventDef(EventInfo eventInfo)
+    {
+        var eventDef = new Api.EventDef
+        {
+            Name = eventInfo.Name,
+        };
+
+        var invokeMethod = eventInfo.EventHandlerType!.GetMethod("Invoke");
+        var parameters = invokeMethod!.GetParameters();
+        foreach (var parameter in parameters)
+        {
+            if (eventDef.Parameters is null)
+            {
+                eventDef.Parameters = [];
+            }
+            eventDef.Parameters.Add(GetParameterDef(parameter));
+        }
+        return eventDef;
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)

@@ -54,6 +54,12 @@ public class Api
         public List<MethodDef>? InstanceMethods { get; set; }
 
         [DefaultValue(null)]
+        public List<EventDef>? StaticEvents { get; set; }
+
+        [DefaultValue(null)]
+        public List<EventDef>? InstanceEvents { get; set; }
+
+        [DefaultValue(null)]
         public List<ObjectDef>? NestedTypes { get; set; }
     }
 
@@ -182,6 +188,14 @@ public class Api
 
         [DefaultValue(false)]
         public bool ImplementsSystemInterface { get; set; }
+    }
+
+    public class EventDef
+    {
+        public string Name { get; set; } = "";
+
+        [DefaultValue(null)]
+        public List<ParameterDef>? Parameters { get; set; }
     }
 
     public class ParameterDef
