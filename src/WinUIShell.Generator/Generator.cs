@@ -9,20 +9,23 @@ public class Generator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput((postInitContext) =>
-        {
-        });
+        context.RegisterPostInitializationOutput(AttributeGenerator.Generate);
 
         var additionalTextsProvider = context.AdditionalTextsProvider.Where((text) =>
         {
             return text.Path.EndsWith("Api.xml");
         }).Collect();
 
-        var provider = additionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider);
+        var attributesProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
+            AttributeGenerator.SurpressByNameAttributeFullName,
+            (syntaxNode, cancellationToken) => true,
+            (generatorAttributeSyntaxContext, cancellationToken) => generatorAttributeSyntaxContext).Collect();
+
+        var provider = additionalTextsProvider.Combine(context.AnalyzerConfigOptionsProvider).Combine(attributesProvider);
 
         context.RegisterSourceOutput(provider, (sourceProductionContext, providers) =>
         {
-            var apiText = providers.Left.FirstOrDefault()?.GetText();
+            var apiText = providers.Left.Left.FirstOrDefault()?.GetText();
             if (apiText is null)
                 return;
 
@@ -30,7 +33,7 @@ public class Generator : IIncrementalGenerator
             if (api is null)
                 return;
 
-            var configOptionsProvider = providers.Right;
+            var configOptionsProvider = providers.Left.Right;
             if (configOptionsProvider.GlobalOptions.TryGetValue("build_property.WinUIShellGenerator_GenerateTypeMapping", out var generateTypeMapping))
             {
                 EnumGenerator.GenerateTypeMapping(sourceProductionContext, api);
@@ -38,8 +41,13 @@ public class Generator : IIncrementalGenerator
             }
             else
             {
+                var surpressByNameAttributes = providers.Right;
+                AttributeGenerator.InitSurpressDictionary(surpressByNameAttributes);
+
                 EnumGenerator.Generate(sourceProductionContext, api);
                 ObjectGenerator.Generate(sourceProductionContext, api);
+
+                AttributeGenerator.TermSurpressDictionary();
             }
         });
     }

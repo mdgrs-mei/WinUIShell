@@ -301,7 +301,7 @@ internal class ObjectDef
 
             foreach (var method in _constructors)
             {
-                if (!method.IsSupported())
+                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                     continue;
 
                 codeWriter.AppendAndReserveNewLine($$"""
@@ -369,7 +369,7 @@ internal class ObjectDef
 
             foreach (var method in _staticMethods)
             {
-                if (!method.IsSupported())
+                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                     continue;
 
                 codeWriter.AppendAndReserveNewLine($$"""
@@ -379,7 +379,7 @@ internal class ObjectDef
 
             foreach (var method in _instanceMethods)
             {
-                if (!method.IsSupported())
+                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                     continue;
 
                 codeWriter.AppendAndReserveNewLine($$"""
@@ -447,7 +447,7 @@ internal class ObjectDef
         string baseInitializer = hasBaseType ? " : base(ObjectId.Null)" : "";
         foreach (var method in _constructors)
         {
-            if (!method.IsSupported())
+            if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                 continue;
 
             if (_apiObjectDef.Type.IsAbstract)
@@ -471,22 +471,25 @@ internal class ObjectDef
             }
         }
 
-        if (hasBaseType)
+        if (!AttributeGenerator.IsConstructorSurpressed(Type.GetName()))
         {
-            codeWriter.AppendAndReserveNewLine($$"""
+            if (hasBaseType)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}(ObjectId id) : base(id)
                 {
                 }
                 """);
-        }
-        else
-        {
-            codeWriter.AppendAndReserveNewLine($$"""
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
                 internal {{_apiObjectDef.Name}}(ObjectId id)
                 {
                     WinUIShellObjectId = id;
                 }
                 """);
+            }
         }
 
         foreach (var property in _staticProperties)
@@ -605,7 +608,7 @@ internal class ObjectDef
 
         foreach (var method in _staticMethods)
         {
-            if (!method.IsSupported())
+            if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                 continue;
 
             var returnType = method.ReturnType!;
@@ -642,6 +645,9 @@ internal class ObjectDef
 
         foreach (var method in _instanceMethods)
         {
+            if (AttributeGenerator.IsSurpressed(method))
+                continue;
+
             if (SpecializedMethodGenerator.Generate(codeWriter, method))
                 continue;
 
@@ -707,12 +713,15 @@ internal class ObjectDef
             public ObjectId WinUIShellObjectId { get; protected set; } = new();
             """);
 
-        codeWriter.AppendAndReserveNewLine($$"""
-            internal {{className}}(ObjectId id)
-            {
-                WinUIShellObjectId = id;
-            }
-            """);
+        if (!AttributeGenerator.IsConstructorSurpressed(Type.GetName()))
+        {
+            codeWriter.AppendAndReserveNewLine($$"""
+                internal {{className}}(ObjectId id)
+                {
+                    WinUIShellObjectId = id;
+                }
+                """);
+        }
 
         SignatureStore signatureStore = new();
         GenerateInterfaceImplBody(codeWriter, className, Type.GenericArguments, signatureStore);
@@ -813,7 +822,7 @@ internal class ObjectDef
 
         foreach (var method in _staticMethods)
         {
-            if (!method.IsSupported())
+            if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                 continue;
 
             bool isExplicit = signatureStore.ContainsSignature(method);
@@ -845,6 +854,9 @@ internal class ObjectDef
 
         foreach (var method in _instanceMethods)
         {
+            if (AttributeGenerator.IsSurpressed(method))
+                continue;
+
             if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method, genericTypeParametersOverride, signatureStore))
                 continue;
 

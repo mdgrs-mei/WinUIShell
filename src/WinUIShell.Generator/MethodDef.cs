@@ -5,10 +5,10 @@ namespace WinUIShell.Generator;
 internal class MethodDef
 {
     private readonly Api.MethodDef _apiMethodDef;
-    private readonly ObjectDef _objectDef;
     private readonly MemberDefType _memberDefType;
     private readonly bool _isUnsafe;
 
+    public ObjectDef ObjectDef { get; }
     public TypeDef? ReturnType { get; }
     public List<ParameterDef> Parameters { get; } = [];
     public TypeDef? ExplicitInterfaceType;
@@ -34,7 +34,7 @@ internal class MethodDef
         MemberDefType memberDefType)
     {
         _apiMethodDef = apiMethodDef;
-        _objectDef = objectDef;
+        ObjectDef = objectDef;
         _memberDefType = memberDefType;
 
         bool useSystemInterfaceName = _apiMethodDef.ImplementsSystemInterface;
@@ -106,7 +106,7 @@ internal class MethodDef
         else
         if (isInterfaceImplExplicitImplementation)
         {
-            interfaceTypeName = $"{_objectDef.Type.GetSystemInterfaceName()}.";
+            interfaceTypeName = $"{ObjectDef.Type.GetSystemInterfaceName()}.";
         }
 
         return $"{interfaceTypeName}{_apiMethodDef.Name}";
@@ -120,7 +120,7 @@ internal class MethodDef
     public string GetSignatureExpression()
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
-        string accessorExpression = (_objectDef.Type.IsInterface || ExplicitInterfaceType is not null) ? "" : "public ";
+        string accessorExpression = (ObjectDef.Type.IsInterface || ExplicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
@@ -148,7 +148,7 @@ internal class MethodDef
     public string GetConstructorSignatureExpression(string className)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
-        string accessorExpression = _objectDef.Type.IsInterface ? "" : "public ";
+        string accessorExpression = ObjectDef.Type.IsInterface ? "" : "public ";
         return $"{unsafeExpression}{accessorExpression}{className}({GetParametersExpression(genericTypeParametersOverride: null)})";
     }
 

@@ -81,6 +81,7 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObjects()
     {
+        AddObject(typeof(Microsoft.UI.Xaml.Window));
         AddObject(typeof(Microsoft.UI.Xaml.Thickness));
         AddObject(typeof(Microsoft.UI.Xaml.Application));
         AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
@@ -340,7 +341,11 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private Api.MethodDef GetConstructorDef(ConstructorInfo constructorInfo)
     {
-        var methodDef = new Api.MethodDef();
+        var methodDef = new Api.MethodDef
+        {
+            Name = constructorInfo.Name,
+        };
+
         var parameters = constructorInfo.GetParameters();
         foreach (var parameter in parameters)
         {
