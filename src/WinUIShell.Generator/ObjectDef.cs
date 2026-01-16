@@ -229,6 +229,19 @@ internal class ObjectDef
         return false;
     }
 
+    public bool ContainsSignature(EventDef eventDef)
+    {
+        string signature = eventDef.GetSignatureId();
+        foreach (var e in _instanceEvents)
+        {
+            if (e.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public string GetSourceCodeFileName()
     {
         var fullName = _apiObjectDef.FullName.Split(',')[0];
@@ -393,6 +406,20 @@ internal class ObjectDef
 
                 codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var eventDef in _instanceEvents)
+            {
+                if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetScriptBlockMethodSignatureExpression()}};
+                    """);
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetEventCallbackMethodSignatureExpression()}};
                     """);
             }
 
@@ -914,6 +941,27 @@ internal class ObjectDef
                     }
                     """);
             }
+        }
+
+        if (_instanceEvents.Count > 0)
+        {
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression());
+        }
+
+        foreach (var eventDef in _instanceEvents)
+        {
+            if (!eventDef.IsSupported())
+                continue;
+
+            bool isExplicit = signatureStore.ContainsSignature(eventDef);
+
+            if (AttributeGenerator.IsSurpressed(eventDef, isExplicit))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine(
+                eventDef.GetInterfaceImplScriptBlockMethodExpression(isExplicit));
+            codeWriter.AppendAndReserveNewLine(
+                eventDef.GetInterfaceImplEventCallbackMethodExpression(isExplicit, genericTypeParametersOverride));
         }
 
         signatureStore.AddObjectDef(this);

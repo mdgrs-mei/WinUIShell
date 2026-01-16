@@ -33,4 +33,14 @@ internal class SignatureStore
         }
         return false;
     }
+
+    public bool ContainsSignature(EventDef eventDef)
+    {
+        foreach (var objectDef in _objectDefs)
+        {
+            if (objectDef.ContainsSignature(eventDef))
+                return true;
+        }
+        return false;
+    }
 }

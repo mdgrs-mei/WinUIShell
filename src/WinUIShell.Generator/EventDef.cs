@@ -77,6 +77,23 @@ internal class EventDef
         return $"{GetMethodName()}({GetParametersSignatureId()})";
     }
 
+    public string GetScriptBlockMethodSignatureExpression()
+    {
+        string accessorExpression = ObjectDef.Type.IsInterface ? "" : "public ";
+        return GetScriptBlockMethodSignatureExpression(
+            accessorExpression,
+            isInterfaceImplExplicitImplementation: false,
+            writeDefaultValue: false);
+    }
+
+    private string GetScriptBlockMethodSignatureExpression(string accessorExpression, bool isInterfaceImplExplicitImplementation, bool writeDefaultValue)
+    {
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
+        string defaultValueExpression = writeDefaultValue ? " = null" : "";
+
+        return $"{accessorExpression}{staticExpression}void {GetMethodFullName(isInterfaceImplExplicitImplementation)}(ScriptBlock scriptBlock, object? argumentList{defaultValueExpression})";
+    }
+
     public string GetScriptBlockMethodExpression()
     {
         string accessorExpression = ObjectDef.Type.IsInterface ? "" : "public ";
@@ -91,10 +108,8 @@ internal class EventDef
 
     private string GetScriptBlockMethodExpression(string accessorExpression, bool isInterfaceImplExplicitImplementation)
     {
-        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
-
         return $$"""
-            {{accessorExpression}}{{staticExpression}}void {{GetMethodFullName(isInterfaceImplExplicitImplementation)}}(ScriptBlock scriptBlock, object? argumentList = null)
+            {{GetScriptBlockMethodSignatureExpression(accessorExpression, isInterfaceImplExplicitImplementation, writeDefaultValue: true)}}
             {
                 {{GetMethodName()}}(new EventCallback
                 {
@@ -105,37 +120,59 @@ internal class EventDef
             """;
     }
 
+    public string GetEventCallbackMethodSignatureExpression()
+    {
+        string accessorExpression = ObjectDef.Type.IsInterface ? "" : "public ";
+        return GetEventCallbackMethodSignatureExpression(
+            accessorExpression,
+            isInterfaceImplExplicitImplementation: false);
+    }
+
+    private string GetEventCallbackMethodSignatureExpression(string accessorExpression, bool isInterfaceImplExplicitImplementation)
+    {
+        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
+        return $"{accessorExpression}{staticExpression}void {GetMethodFullName(isInterfaceImplExplicitImplementation)}(EventCallback eventCallback)";
+    }
+
     public string GetEventCallbackMethodExpression()
     {
         string accessorExpression = ObjectDef.Type.IsInterface ? "" : "public ";
-        return GetEventCallbackMethodExpression(accessorExpression, isInterfaceImplExplicitImplementation: false);
+        return GetEventCallbackMethodExpression(
+            accessorExpression,
+            isInterfaceImplExplicitImplementation: false,
+            genericTypeParametersOverride: null);
     }
 
-    public string GetInterfaceImplEventCallbackMethodExpression(bool isExplicitImplementation)
+    public string GetInterfaceImplEventCallbackMethodExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
     {
         string accessorExpression = isExplicitImplementation ? "" : "public ";
-        return GetEventCallbackMethodExpression(accessorExpression, isExplicitImplementation);
+        return GetEventCallbackMethodExpression(
+            accessorExpression,
+            isExplicitImplementation,
+            genericTypeParametersOverride);
     }
 
-    private string GetEventCallbackMethodExpression(string accessorExpression, bool isInterfaceImplExplicitImplementation)
+    private string GetEventCallbackMethodExpression(
+        string accessorExpression,
+        bool isInterfaceImplExplicitImplementation,
+        List<TypeDef>? genericTypeParametersOverride)
     {
-        string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
-
         return $$"""
-            {{accessorExpression}}{{staticExpression}}void {{GetMethodFullName(isInterfaceImplExplicitImplementation)}}(EventCallback eventCallback)
+            {{GetEventCallbackMethodSignatureExpression(accessorExpression, isInterfaceImplExplicitImplementation)}}
             {
                 {{GetEventCallbackListFieldName()}}.Add(
                     WinUIShellObjectId,
                     "{{GetEventName()}}",
-                    ObjectTypeMapping.Get().GetTargetTypeName<{{GetEventArgsTypeName()}}>(),
+                    ObjectTypeMapping.Get().GetTargetTypeName<{{GetEventArgsTypeName(genericTypeParametersOverride)}}>(),
                     eventCallback);
             }
             """;
     }
 
-    private string GetEventArgsTypeName()
+    private string GetEventArgsTypeName(List<TypeDef>? genericTypeParametersOverride)
     {
-        return Parameters[1].Type.GetName();
+        var type = Parameters[1].Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+        return type.GetName();
     }
 
     private string GetParametersSignatureId()
