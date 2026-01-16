@@ -432,7 +432,7 @@ internal class ObjectDef
         string abstractExpression = _apiObjectDef.Type.IsAbstract ? "abstract " : "";
 
         codeWriter.Append($$"""
-            public {{abstractExpression}}class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public {{abstractExpression}}partial class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
         codeWriter.IncrementIndent();
