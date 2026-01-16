@@ -96,7 +96,7 @@ internal class MethodDef
         return true;
     }
 
-    public string GetName(bool isExplicitImplementation = false)
+    public string GetName(bool isInterfaceImplExplicitImplementation = false)
     {
         string interfaceTypeName = "";
         if (ExplicitInterfaceType is not null)
@@ -104,7 +104,7 @@ internal class MethodDef
             interfaceTypeName = $"{ExplicitInterfaceType.GetName()}.";
         }
         else
-        if (isExplicitImplementation)
+        if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{_objectDef.Type.GetSystemInterfaceName()}.";
         }

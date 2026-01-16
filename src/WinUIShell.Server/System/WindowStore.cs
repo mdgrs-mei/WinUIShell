@@ -43,7 +43,7 @@ internal sealed class WindowStore : Singleton<WindowStore>
         }
         else
         {
-            throw new InvalidOperationException($"Window not found {window}.");
+            throw new InvalidOperationException($"WindowStore: Window not found [{window}].");
         }
     }
 
@@ -55,7 +55,7 @@ internal sealed class WindowStore : Singleton<WindowStore>
         }
         else
         {
-            throw new InvalidOperationException($"Window not found {window}.");
+            throw new InvalidOperationException($"WindowStore: Window not found [{window}].");
         }
     }
 
