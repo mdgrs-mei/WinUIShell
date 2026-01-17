@@ -1,4 +1,5 @@
 ﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -32,6 +33,19 @@ public class EventCallback
             e._scriptBlockString = ScriptBlock.ToString();
         }
         return e;
+    }
+
+    internal ObjectId[]? GetDisabledControlIds()
+    {
+        if (DisabledControlsWhileProcessing is null)
+            return null;
+
+        ObjectId[] ids = new ObjectId[DisabledControlsWhileProcessing.Length];
+        for (int i = 0; i < DisabledControlsWhileProcessing.Length; ++i)
+        {
+            ids[i] = DisabledControlsWhileProcessing[i].Id;
+        }
+        return ids;
     }
 
     internal void Invoke(object? sender, object? eventArgs)

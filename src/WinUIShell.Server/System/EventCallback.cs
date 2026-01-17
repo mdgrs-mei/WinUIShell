@@ -17,6 +17,55 @@ internal static class EventCallback
     {
         var targetType = target.GetType();
 
+        Add(target,
+            targetType,
+            eventName,
+            eventArgsTypeName,
+            runspaceMode,
+            mainRunspaceId,
+            eventListId,
+            eventId,
+            disabledControlsWhileProcessing);
+    }
+
+    public static void AddStatic(
+        string className,
+        string eventName,
+        string eventArgsTypeName,
+        EventCallbackRunspaceMode runspaceMode,
+        int mainRunspaceId,
+        string eventListId,
+        int eventId,
+        object?[]? disabledControlsWhileProcessing)
+    {
+        var targetType = Type.GetType(className);
+        if (targetType is null)
+        {
+            throw new InvalidOperationException($"Type [{className}] not found.");
+        }
+
+        Add(null,
+            targetType,
+            eventName,
+            eventArgsTypeName,
+            runspaceMode,
+            mainRunspaceId,
+            eventListId,
+            eventId,
+            disabledControlsWhileProcessing);
+    }
+
+    private static void Add(
+        object? target,
+        Type targetType,
+        string eventName,
+        string eventArgsTypeName,
+        EventCallbackRunspaceMode runspaceMode,
+        int mainRunspaceId,
+        string eventListId,
+        int eventId,
+        object?[]? disabledControlsWhileProcessing)
+    {
         var eventInfo = targetType.GetEvent(eventName);
         if (eventInfo is null)
         {

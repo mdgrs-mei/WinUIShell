@@ -16,6 +16,7 @@ internal class ObjectDef
     private readonly List<MethodDef> _constructors = [];
     private readonly List<MethodDef> _staticMethods = [];
     private readonly List<MethodDef> _instanceMethods = [];
+    private readonly List<EventDef> _staticEvents = [];
     private readonly List<EventDef> _instanceEvents = [];
     private readonly List<ObjectDef> _nestedObjects = [];
 
@@ -81,6 +82,13 @@ internal class ObjectDef
                 if (IsExplicitInterfaceImplementationIndexerMethod(method))
                     continue;
                 _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
+            }
+        }
+        if (_apiObjectDef.StaticEvents is not null)
+        {
+            foreach (var eventDef in _apiObjectDef.StaticEvents)
+            {
+                _staticEvents.Add(new EventDef(eventDef, this, MemberDefType.Static));
             }
         }
         if (_apiObjectDef.InstanceEvents is not null)
@@ -232,6 +240,13 @@ internal class ObjectDef
     public bool ContainsSignature(EventDef eventDef)
     {
         string signature = eventDef.GetSignatureId();
+        foreach (var e in _staticEvents)
+        {
+            if (e.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
         foreach (var e in _instanceEvents)
         {
             if (e.GetSignatureId() == signature)
@@ -409,6 +424,20 @@ internal class ObjectDef
                     """);
             }
 
+            foreach (var eventDef in _staticEvents)
+            {
+                if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetScriptBlockMethodSignatureExpression()}};
+                    """);
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetEventCallbackMethodSignatureExpression()}};
+                    """);
+            }
+
             foreach (var eventDef in _instanceEvents)
             {
                 if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
@@ -473,9 +502,13 @@ internal class ObjectDef
             """);
         codeWriter.IncrementIndent();
 
+        if (_staticEvents.Count > 0)
+        {
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Static));
+        }
         if (_instanceEvents.Count > 0)
         {
-            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression());
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Instance));
         }
 
         if (!hasBaseType)
@@ -727,6 +760,15 @@ internal class ObjectDef
             }
         }
 
+        foreach (var eventDef in _staticEvents)
+        {
+            if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine(eventDef.GetScriptBlockMethodExpression());
+            codeWriter.AppendAndReserveNewLine(eventDef.GetEventCallbackMethodExpression());
+        }
+
         foreach (var eventDef in _instanceEvents)
         {
             if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
@@ -943,9 +985,13 @@ internal class ObjectDef
             }
         }
 
+        if (_staticEvents.Count > 0)
+        {
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Static));
+        }
         if (_instanceEvents.Count > 0)
         {
-            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression());
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Instance));
         }
 
         foreach (var eventDef in _instanceEvents)
@@ -960,8 +1006,12 @@ internal class ObjectDef
 
             codeWriter.AppendAndReserveNewLine(
                 eventDef.GetInterfaceImplScriptBlockMethodExpression(isExplicit));
+
             codeWriter.AppendAndReserveNewLine(
-                eventDef.GetInterfaceImplEventCallbackMethodExpression(isExplicit, genericTypeParametersOverride));
+                eventDef.GetInterfaceImplEventCallbackMethodExpression(
+                    rootClassName,
+                    isExplicit,
+                    genericTypeParametersOverride));
         }
 
         signatureStore.AddObjectDef(this);
