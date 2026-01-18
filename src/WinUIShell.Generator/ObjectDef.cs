@@ -328,7 +328,7 @@ internal class ObjectDef
         }
 
         codeWriter.Append($$"""
-            public interface {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public partial interface {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
 

@@ -81,8 +81,14 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObjects()
     {
+        AddObject(typeof(Microsoft.UI.Colors));
+        AddObject(typeof(Microsoft.UI.Windowing.AppWindowTitleBar));
+        AddObject(typeof(Microsoft.UI.Windowing.OverlappedPresenter));
+        AddObject(typeof(Microsoft.UI.Windowing.CompactOverlayPresenter));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.NavigationView));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.Primitives.ButtonBase));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
+        AddObject(typeof(Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo));
         AddObject(typeof(Microsoft.UI.Xaml.Window));
         AddObject(typeof(Microsoft.UI.Xaml.Thickness));
         AddObject(typeof(Microsoft.UI.Xaml.Application));
@@ -90,9 +96,13 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.Button));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.TextBlock));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.Frame));
         AddObject(typeof(Uri));
         AddObject(typeof(UriCreationOptions));
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
+        AddObject(typeof(Microsoft.UI.Text.FontWeights));
+        AddObject(typeof(Microsoft.UI.Xaml.Markup.XamlReader));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.Page));
         AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
         AddObject(typeof(KeyValuePair<,>));
         AddObject(typeof(System.Collections.IEnumerator));

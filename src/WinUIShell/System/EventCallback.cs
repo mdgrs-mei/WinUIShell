@@ -19,7 +19,7 @@ public class EventCallback
 
     public object? ArgumentList { get; set; }
 
-    public Control[]? DisabledControlsWhileProcessing { get; set; }
+    public Microsoft.UI.Xaml.Controls.Control[]? DisabledControlsWhileProcessing { get; set; }
 
     public EventCallback()
     {
@@ -43,7 +43,7 @@ public class EventCallback
         ObjectId[] ids = new ObjectId[DisabledControlsWhileProcessing.Length];
         for (int i = 0; i < DisabledControlsWhileProcessing.Length; ++i)
         {
-            ids[i] = DisabledControlsWhileProcessing[i].Id;
+            ids[i] = DisabledControlsWhileProcessing[i].WinUIShellObjectId;
         }
         return ids;
     }
