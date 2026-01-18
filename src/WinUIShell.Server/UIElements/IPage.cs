@@ -44,12 +44,12 @@ public interface IPage
 
             page.Id = CommandClient.Get().CreateObjectWithId(
                 temporaryQueueId,
-                "WinUIShell.Page, WinUIShell",
+                "WinUIShell.Microsoft.UI.Xaml.Controls.Page, WinUIShell",
                 page);
 
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 temporaryQueueId,
-                "WinUIShell.RoutedEventArgs, WinUIShell",
+                "WinUIShell.Microsoft.UI.Xaml.RoutedEventArgs, WinUIShell",
                 eventArgs);
 
             var invokeTask = CommandClient.Get().InvokeStaticMethodWaitAsync(
