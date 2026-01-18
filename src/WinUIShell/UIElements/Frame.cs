@@ -5,11 +5,12 @@ using WinUIShell.Generator;
 
 namespace WinUIShell.Microsoft.UI.Xaml.Controls;
 
+[SurpressGeneratorMethodByName("NavigateToType")]
 public partial class Frame : ContentControl
 {
     private const string _accessorClassName = "WinUIShell.Server.FrameAccessor, WinUIShell.Server";
 
-    [SurpressGeneratorByName]
+    [SurpressGeneratorMethodByName]
     public bool Navigate(
         string pageName,
         Media.Animation.NavigationTransitionInfo? transitionOverride,

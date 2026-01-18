@@ -17,7 +17,7 @@ public class Generator : IIncrementalGenerator
         }).Collect();
 
         var attributesProvider = context.SyntaxProvider.ForAttributeWithMetadataName(
-            AttributeGenerator.SurpressByNameAttributeFullName,
+            AttributeGenerator.SurpressMethodByNameAttributeFullName,
             (syntaxNode, cancellationToken) => true,
             (generatorAttributeSyntaxContext, cancellationToken) => generatorAttributeSyntaxContext).Collect();
 
@@ -41,8 +41,8 @@ public class Generator : IIncrementalGenerator
             }
             else
             {
-                var surpressByNameAttributes = providers.Right;
-                AttributeGenerator.InitSurpressDictionary(surpressByNameAttributes);
+                var surpressMethodByNameAttributes = providers.Right;
+                AttributeGenerator.InitSurpressDictionary(surpressMethodByNameAttributes);
 
                 EnumGenerator.Generate(sourceProductionContext, api);
                 ObjectGenerator.Generate(sourceProductionContext, api);

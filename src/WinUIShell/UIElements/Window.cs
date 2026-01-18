@@ -19,7 +19,7 @@ public partial class Window : IWinUIShellObject
         private set => Interlocked.Exchange(ref _isClosed, value ? 1 : 0);
     }
 
-    [SurpressGeneratorByName]
+    [SurpressGeneratorMethodByName]
     public Window()
     {
         WinUIShellObjectId = CommandClient.Get().CreateObject(
@@ -35,7 +35,7 @@ public partial class Window : IWinUIShellObject
         CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", WinUIShellObjectId);
     }
 
-    [SurpressGeneratorByName]
+    [SurpressGeneratorMethodByName]
     public void Activate()
     {
         if (IsTerminated)
@@ -46,7 +46,7 @@ public partial class Window : IWinUIShellObject
         CommandClient.Get().InvokeMethod(WinUIShellObjectId, nameof(Activate));
     }
 
-    [SurpressGeneratorByName]
+    [SurpressGeneratorMethodByName]
     public void AddClosed(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddClosed(new EventCallback
@@ -64,7 +64,7 @@ public partial class Window : IWinUIShellObject
             eventCallback);
     }
 
-    [SurpressGeneratorByName]
+    [SurpressGeneratorMethodByName]
     public void Close()
     {
         if (IsTerminated || IsClosed)
