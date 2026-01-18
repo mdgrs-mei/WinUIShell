@@ -9,6 +9,7 @@ public class RpcValue
     public ushort? UShortValue { get; set; }
     public int? IntValue { get; set; }
     public uint? UIntValue { get; set; }
+    public long? LongValue { get; set; }
     public float? FloatValue { get; set; }
     public double? DoubleValue { get; set; }
     public string? StringValue { get; set; }
@@ -35,6 +36,7 @@ public class RpcValue
             ushort or
             int or
             uint or
+            long or
             float or
             double or
             string or
@@ -83,6 +85,9 @@ public class RpcValue
                 break;
             case uint value:
                 UIntValue = value;
+                break;
+            case long value:
+                LongValue = value;
                 break;
             case float value:
                 FloatValue = value;
@@ -155,6 +160,10 @@ public class RpcValue
         if (UIntValue is not null)
         {
             return UIntValue;
+        }
+        if (LongValue is not null)
+        {
+            return LongValue;
         }
         if (FloatValue is not null)
         {
