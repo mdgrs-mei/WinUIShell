@@ -117,7 +117,7 @@ internal static class EventCallback
             var processingQueueId = GetProcessingQueueId(runspaceMode, mainRunspaceId);
 
             Type eventArgsType = typeof(TEventArgs);
-            var eventArgsTypeName = (eventArgsType == typeof(object)) ? "WinUIShellObject" : eventArgsType.Name;
+            var eventArgsTypeName = (eventArgsType == typeof(object)) ? "WinUIShellObject" : eventArgsType.ToString();
             var eventArgsId = CommandClient.Get().CreateObjectWithId(
                 temporaryQueueId,
                 $"WinUIShell.{eventArgsTypeName}, WinUIShell",

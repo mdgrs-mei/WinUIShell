@@ -3,14 +3,15 @@ using WinUIShell.Common;
 
 namespace WinUIShell;
 
-internal sealed class EventCallbackList : WinUIShellObject
+internal sealed class EventCallbackList : IWinUIShellObject
 {
     private readonly List<EventCallback> _callbacks = [];
+    public ObjectId WinUIShellObjectId { get; } = new();
 
     public EventCallbackList()
     {
         _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
-        Id = id;
+        WinUIShellObjectId = id;
     }
 
     public void Add(
@@ -41,7 +42,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             eventArgsTypeName,
             copiedEventCallback.RunspaceMode,
             Runspace.DefaultRunspace.Id,
-            Id.Id,
+            WinUIShellObjectId.Id,
             eventId,
             disabledControlIds);
     }
@@ -74,7 +75,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             eventArgsTypeName,
             copiedEventCallback.RunspaceMode,
             Runspace.DefaultRunspace.Id,
-            Id.Id,
+            WinUIShellObjectId.Id,
             eventId,
             disabledControlIds);
     }
