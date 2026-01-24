@@ -39,7 +39,7 @@ internal class TypeDef
         get => _apiTypeDef.GenericParameterPosition;
     }
 
-    private static readonly List<(string FullName, string ShortName)> _systemTypes =
+    public static readonly List<(string FullName, string ShortName)> SystemTypes =
     [
         ("System.Boolean", "bool"),
         ("System.Byte", "byte"),
@@ -55,6 +55,8 @@ internal class TypeDef
         ("System.Int16", "short"),
         ("System.UInt16", "ushort"),
         ("System.String", "string"),
+        ("System.Object", "object"),
+        ("System.Void", "void"),
     ];
 
     private static readonly List<string> _unsupportedTypes =
@@ -146,15 +148,15 @@ internal class TypeDef
 
     private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)
     {
-        foreach (var (FullName, ShortName) in _systemTypes)
+        foreach (var (fullName, shortName) in SystemTypes)
         {
-            if (typeName == FullName)
+            if (typeName == fullName)
             {
-                systemTypeName = typeName.Replace(FullName, ShortName);
+                systemTypeName = typeName.Replace(fullName, shortName);
                 return true;
             }
         }
-        systemTypeName=null;
+        systemTypeName = null;
         return false;
     }
 

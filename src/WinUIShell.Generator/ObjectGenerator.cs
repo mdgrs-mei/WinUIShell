@@ -110,6 +110,14 @@ internal static class ObjectGenerator
             """);
 
         codeWriter.IncrementIndent();
+
+        foreach (var (systemTypeFullName, _) in TypeDef.SystemTypes)
+        {
+            codeWriter.Append($"""
+                ("{systemTypeFullName}, System.Private.CoreLib", "{systemTypeFullName}, System.Private.CoreLib"),
+                """);
+        }
+
         foreach (var apiObjectDef in api.Objects)
         {
             ObjectDef objectDef = new(apiObjectDef);
