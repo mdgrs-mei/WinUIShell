@@ -33,10 +33,8 @@ public class ObjectStore : Singleton<ObjectStore>
         bool registered = RegisterObject(obj, out id);
         if (obj is not null)
         {
-            var type = obj.GetType();
-            var typeName = type.FullName;
-            var assemblyName = type.Assembly.GetName().Name;
-            id.Type = $"{typeName}, {assemblyName}";
+            _ = ObjectTypeMapping.Get().TryGetTargetTypeName(obj.GetType(), out string? targetTypeName);
+            id.Type = targetTypeName ?? "";
         }
         return registered;
     }

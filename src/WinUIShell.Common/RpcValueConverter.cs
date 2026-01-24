@@ -64,12 +64,7 @@ public static class RpcValueConverter
                 if (string.IsNullOrEmpty(objectId.Type))
                     return objectId;
 
-                var sourceTypeName = objectId.Type;
-                _ = ObjectTypeMapping.Get().TryGetValue(sourceTypeName, out string? targetTypeName);
-                if (targetTypeName is null)
-                    return objectId;
-
-                Type? targetType = Type.GetType(targetTypeName);
+                Type? targetType = Type.GetType(objectId.Type);
                 if (targetType is null)
                     return objectId;
 
@@ -82,7 +77,7 @@ public static class RpcValueConverter
 
                 if (obj == null)
                 {
-                    throw new InvalidOperationException($"Failed to create instance of type [{targetTypeName}].");
+                    throw new InvalidOperationException($"Failed to create instance of type [{objectId.Type}].");
                 }
                 ObjectStore.Get().RegisterObject(objectId, obj);
             }

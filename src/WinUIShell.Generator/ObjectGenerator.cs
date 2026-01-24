@@ -77,33 +77,30 @@ internal static class ObjectGenerator
                 foreach (var map in _list)
                 {
                     _map.Add(map.Item1, map.Item2);
-                    _map.Add(map.Item2, map.Item1);
+                    if (!_map.ContainsKey(map.Item2))
+                    {
+                        _map.Add(map.Item2, map.Item1);
+                    }
                 }
-            }
-
-            internal bool TryGetValue(string sourceTypeName, out string? targetTypeName)
-            {
-                return _map.TryGetValue(sourceTypeName, out targetTypeName);
             }
 
             public string GetTargetTypeName<T>()
             {
                 Type type = typeof(T);
-                var typeName = type.FullName;
-                var assemblyName = type.Assembly.GetName().Name;
-                var sourceTypeName = $"{typeName}, {assemblyName}";
-
-                if (type == typeof(object))
-                {
-                    return sourceTypeName;
-                }
-
-                _ = TryGetValue(sourceTypeName, out string? targetTypeName);
+                _ = TryGetTargetTypeName(type, out string? targetTypeName);
                 if (targetTypeName is null)
                 {
-                    throw new InvalidOperationException($"Object type mapping not found for [{sourceTypeName}].");
+                    throw new InvalidOperationException($"Object type mapping not found for [{type.FullName}].");
                 }
                 return targetTypeName;
+            }
+
+            public bool TryGetTargetTypeName(Type sourceType, out string? targetTypeName)
+            {
+                var typeName = sourceType.FullName;
+                var assemblyName = sourceType.Assembly.GetName().Name;
+                var sourceTypeName = $"{typeName}, {assemblyName}";
+                return _map.TryGetValue(sourceTypeName, out targetTypeName);
             }
 
             private readonly List<(string, string)> _list = [
