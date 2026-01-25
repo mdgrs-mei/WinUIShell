@@ -97,10 +97,35 @@ internal static class ObjectGenerator
 
             public bool TryGetTargetTypeName(Type sourceType, out string? targetTypeName)
             {
-                var typeName = sourceType.FullName;
                 var assemblyName = sourceType.Assembly.GetName().Name;
-                var sourceTypeName = $"{typeName}, {assemblyName}";
-                return _map.TryGetValue(sourceTypeName, out targetTypeName);
+                if (sourceType.IsGenericType)
+                {
+                    if (!_map.TryGetValue($"{sourceType.FullName!.Split('[')[0]}, {assemblyName}", out string? thisName))
+                    {
+                        targetTypeName = null;
+                        return false;
+                    }
+
+                    string[] thisNameAndAssembly = thisName.Split(", ");
+
+                    List<string> argNames = [];
+                    foreach (var argType in sourceType.GetGenericArguments())
+                    {
+                        if (!TryGetTargetTypeName(argType, out string? argTargetTypeName))
+                        {
+                            targetTypeName = null;
+                            return false;
+                        }
+                        argNames.Add($"[{argTargetTypeName}]");
+                    }
+
+                    targetTypeName = $"{thisNameAndAssembly[0]}[{string.Join(", ", argNames)}], {thisNameAndAssembly[1]}";
+                    return true;
+                }
+                else
+                {
+                    return _map.TryGetValue($"{sourceType.FullName}, {assemblyName}", out targetTypeName);
+                }
             }
 
             private readonly List<(string, string)> _list = [
