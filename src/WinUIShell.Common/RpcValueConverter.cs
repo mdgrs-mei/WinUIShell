@@ -4,7 +4,7 @@ namespace WinUIShell.Common;
 
 public static class RpcValueConverter
 {
-    public static T? ConvertRpcValueTo<T>(RpcValue rpcValue)
+    public static TReturn? ConvertRpcValueTo<TReturn, TCreate>(RpcValue rpcValue)
     {
         var obj = ConvertRpcValueToObject(rpcValue);
         if (obj is null)
@@ -14,14 +14,14 @@ public static class RpcValueConverter
         {
             // Newly created object on the server side, and no type mapping was found.
             // Create the object on the client side with the return type. It needs to have a constructor from ObjectId.
-            if (typeof(T) == typeof(object))
+            if (typeof(TCreate) == typeof(object))
             {
                 throw new InvalidOperationException($"Object not found or unsupported object type. Id:[{objectId.Id}], Type:[{objectId.Type}].");
             }
             else
             {
                 obj = Activator.CreateInstance(
-                    typeof(T),
+                    typeof(TCreate),
                     System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
                     null,
                     [objectId],
@@ -29,13 +29,13 @@ public static class RpcValueConverter
 
                 if (obj == null)
                 {
-                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(T).Name}].");
+                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(TCreate).Name}].");
                 }
                 ObjectStore.Get().RegisterObject(objectId, obj);
             }
         }
 
-        return (T?)obj;
+        return (TReturn?)obj;
     }
 
     private static object? ConvertRpcValueToObject(RpcValue rpcValue)
@@ -129,7 +129,7 @@ public static class RpcValueConverter
         var objectArray = new object?[rpcArray.Length];
         for (int i = 0; i < objectArray.Length; ++i)
         {
-            objectArray[i] = ConvertRpcValueTo<object>(rpcArray[i]);
+            objectArray[i] = ConvertRpcValueTo<object, object>(rpcArray[i]);
         }
         return objectArray;
     }

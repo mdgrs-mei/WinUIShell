@@ -176,7 +176,7 @@ public class CommandClient : Singleton<CommandClient>
         return _rpc.InvokeAsync("InvokeMethodWait", queueId, id, methodName, rpcArguments);
     }
 
-    public T? InvokeMethodAndGetResult<T>(ObjectId id, string methodName, params object?[] arguments)
+    public TReturn? InvokeMethodAndGetResult<TReturn, TCreate>(ObjectId id, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -188,7 +188,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("InvokeMethodAndGetResult", id, methodName, rpcArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
     public void InvokeStaticMethod(string className, string methodName, params object?[] arguments)
@@ -214,7 +214,7 @@ public class CommandClient : Singleton<CommandClient>
         return _rpc.InvokeAsync("InvokeStaticMethodWait", queueId, className, methodName, rpcArguments);
     }
 
-    public T? InvokeStaticMethodAndGetResult<T>(string className, string methodName, params object?[] arguments)
+    public TReturn? InvokeStaticMethodAndGetResult<TReturn, TCreate>(string className, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -226,7 +226,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("InvokeStaticMethodAndGetResult", className, methodName, rpcArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
     public void SetProperty(ObjectId id, string propertyName, object? value)
@@ -282,7 +282,7 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public T? GetProperty<T>(ObjectId id, string propertyName)
+    public TReturn? GetProperty<TReturn, TCreate>(ObjectId id, string propertyName)
     {
         Debug.Assert(_rpc is not null);
 
@@ -291,10 +291,10 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetProperty", id, propertyName);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
-    public T? GetStaticProperty<T>(string className, string propertyName)
+    public TReturn? GetStaticProperty<TReturn, TCreate>(string className, string propertyName)
     {
         Debug.Assert(_rpc is not null);
 
@@ -303,7 +303,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetStaticProperty", className, propertyName);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
     public void SetIndexerProperty(ObjectId id, object? value, params object?[] indexArguments)
@@ -319,7 +319,7 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public T? GetIndexerProperty<T>(ObjectId id, params object?[] indexArguments)
+    public TReturn? GetIndexerProperty<TReturn, TCreate>(ObjectId id, params object?[] indexArguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(indexArguments);
@@ -331,7 +331,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, rpcIndexArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
     public void WriteError(string message)

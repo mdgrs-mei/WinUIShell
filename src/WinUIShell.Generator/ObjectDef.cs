@@ -588,7 +588,7 @@ internal class ObjectDef
                 else
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetStatic<{{property.Type.GetReturnInstanceTypeName()}}>(
+                        get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                         """);
@@ -641,13 +641,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.Get<{{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.Get<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
             }
@@ -709,7 +709,7 @@ internal class ObjectDef
                 codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
-                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetReturnInstanceTypeName()}}>(
+                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
@@ -752,7 +752,7 @@ internal class ObjectDef
                 codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetSignatureExpression()}}
                     {
-                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetReturnInstanceTypeName()}}>(
+                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             WinUIShellObjectId,
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
@@ -843,7 +843,7 @@ internal class ObjectDef
             if (property.CanRead)
             {
                 codeWriter.Append($$"""
-                    get => PropertyAccessor.GetStatic<{{property.Type.GetReturnInstanceTypeName()}}>(
+                    get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
                         ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                         nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                     """);
@@ -881,13 +881,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.Get<{{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.Get<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
             }
@@ -939,7 +939,7 @@ internal class ObjectDef
                 codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
-                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetReturnInstanceTypeName()}}>(
+                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
@@ -977,7 +977,7 @@ internal class ObjectDef
                 codeWriter.AppendAndReserveNewLine($$"""
                     {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
                     {
-                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetReturnInstanceTypeName()}}>(
+                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             WinUIShellObjectId,
                             nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }

@@ -33,7 +33,7 @@ public partial class Frame : ContentControl
     {
         ArgumentNullException.ThrowIfNull(onLoaded);
         PageStore.Get().RegisterLoaded(pageName, onLoaded);
-        return CommandClient.Get().InvokeStaticMethodAndGetResult<bool>(
+        return CommandClient.Get().InvokeStaticMethodAndGetResult<bool, bool>(
             _accessorClassName,
             nameof(Navigate),
             WinUIShellObjectId,

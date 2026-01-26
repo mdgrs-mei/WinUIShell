@@ -253,6 +253,11 @@ internal class TypeDef
             return GetNameInternal(NameType.InterfaceImplementation);
         }
         else
+        if (IsObject)
+        {
+            return "WinUIShell.WinUIShellObject";
+        }
+        else
         {
             return GetName();
         }

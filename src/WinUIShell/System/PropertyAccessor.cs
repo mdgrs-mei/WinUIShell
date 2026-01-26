@@ -4,11 +4,11 @@ namespace WinUIShell;
 
 internal static class PropertyAccessor
 {
-    public static T? Get<T>(ObjectId id, string propertyName)
+    public static TReturn? Get<TReturn, TCreate>(ObjectId id, string propertyName)
     {
         try
         {
-            return CommandClient.Get().GetProperty<T>(id, propertyName);
+            return CommandClient.Get().GetProperty<TReturn, TCreate>(id, propertyName);
         }
         catch (Exception e)
         {
@@ -34,11 +34,11 @@ internal static class PropertyAccessor
         CommandClient.Get().SetIndexerProperty(id, value, indexArguments);
     }
 
-    public static T? GetIndexer<T>(ObjectId id, params object?[] indexArguments)
+    public static TReturn? GetIndexer<TReturn, TCreate>(ObjectId id, params object?[] indexArguments)
     {
         try
         {
-            return CommandClient.Get().GetIndexerProperty<T>(id, indexArguments);
+            return CommandClient.Get().GetIndexerProperty<TReturn, TCreate>(id, indexArguments);
         }
         catch (Exception e)
         {
@@ -52,11 +52,11 @@ internal static class PropertyAccessor
         CommandClient.Get().SetStaticProperty(className, propertyName, value);
     }
 
-    public static T? GetStatic<T>(string className, string propertyName)
+    public static TReturn? GetStatic<TReturn, TCreate>(string className, string propertyName)
     {
         try
         {
-            return CommandClient.Get().GetStaticProperty<T>(className, propertyName);
+            return CommandClient.Get().GetStaticProperty<TReturn, TCreate>(className, propertyName);
         }
         catch (Exception e)
         {
