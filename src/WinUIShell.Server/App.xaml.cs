@@ -42,7 +42,6 @@ public partial class App : Application
 
 #if DEBUG
         //System.Diagnostics.Debugger.Launch();
-        TypeMappingPrinter.Print();
         if (!string.IsNullOrEmpty(_apiFilePath))
         {
             ApiExporter.Get().Export(_apiFilePath);
