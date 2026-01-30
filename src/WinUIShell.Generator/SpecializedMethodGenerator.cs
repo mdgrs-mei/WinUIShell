@@ -4,7 +4,12 @@ internal class SpecializedMethodGenerator
 {
     public static bool Generate(CodeWriter codeWriter, MethodDef methodDef)
     {
-        return Generate(codeWriter, methodDef, isInterfaceImpl: false, genericTypeParametersOverride: null, signatureStore: null);
+        return Generate(
+            codeWriter,
+            methodDef,
+            isInterfaceImpl: false,
+            genericTypeParametersOverride: null,
+            signatureStore: null);
     }
 
     public static bool GenerateForInterfaceImpl(
@@ -30,6 +35,7 @@ internal class SpecializedMethodGenerator
     {
         var methodName = methodDef.GetName();
         if (methodDef.ImplementsSystemInterface &&
+            (isInterfaceImpl || !methodDef.ObjectDef.Type.IsInterface) &&
             methodName.EndsWith("CopyTo") &&
             methodDef.Parameters.Count == 2 &&
             methodDef.Parameters[0].Type.IsArray &&
@@ -73,6 +79,44 @@ internal class SpecializedMethodGenerator
                 }
                 """);
             return true;
+        }
+        else
+        if (methodName.EndsWith("GetAwaiter") &&
+            methodDef.Parameters.Count == 0)
+        {
+            // If the object is awaitable, add WaitForCompleted() method.
+
+            if (methodDef.ReturnType!.GenericArguments is null)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    void WaitForCompleted()
+                    {
+                        var awaiter = GetAwaiter();
+                        while (!awaiter.IsCompleted)
+                        {
+                            Engine.Get().UpdateRunspace();
+                            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                        }
+                    }
+                    """);
+            }
+            else
+            {
+                TypeDef resultType = methodDef.ReturnType!.GenericArguments[0];
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{resultType.GetName()}} WaitForCompleted()
+                    {
+                        var awaiter = GetAwaiter();
+                        while (!awaiter.IsCompleted)
+                        {
+                            Engine.Get().UpdateRunspace();
+                            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                        }
+                        return awaiter.GetResult();
+                    }
+                    """);
+            }
+            return false;
         }
 
         return false;

@@ -7,6 +7,7 @@ internal class TypeDef
     private readonly string _name = "";
     private readonly Api.TypeDef _apiTypeDef;
     private readonly TypeDef? _elementType;
+    private readonly TypeDef? _parentType;
 
     public bool AlwaysReturnSystemInterfaceName { get; set; }
     public readonly List<TypeDef>? GenericArguments;
@@ -79,15 +80,16 @@ internal class TypeDef
 
         var serverTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
+        if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter ||
+            _apiTypeDef.ElementType is not null || _apiTypeDef.ParentType is not null)
+        {
+            _name = serverTypeName;
+        }
+        else
         if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
         {
             IsSystemInterface = true;
             _name = $"WinUIShell.{serverTypeName}";
-        }
-        else
-        if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter || _apiTypeDef.ElementType is not null)
-        {
-            _name = serverTypeName;
         }
         else
         if (serverTypeName.StartsWith("WinUIShell.Server"))
@@ -126,6 +128,11 @@ internal class TypeDef
         if (apiTypeDef.ElementType is not null)
         {
             _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
+        }
+
+        if (_apiTypeDef.ParentType is not null)
+        {
+            _parentType = new TypeDef(_apiTypeDef.ParentType, AlwaysReturnSystemInterfaceName);
         }
 
         if (genericArgumentsOverride is not null)
@@ -287,19 +294,27 @@ internal class TypeDef
             return elementName;
         }
 
+        string parentNameSpace = (_parentType is not null) ? $"{_parentType.GetName()}." : "";
         string name = "";
         switch (nameType)
         {
             case NameType.Normal:
-                name = _name;
+                name = $"{parentNameSpace}{_name}";
                 break;
 
             case NameType.SystemInterface:
-                name = $"global::{_apiTypeDef.Name}";
+                if (_parentType is not null)
+                {
+                    name = $"{parentNameSpace}{_apiTypeDef.Name}";
+                }
+                else
+                {
+                    name = $"global::{_apiTypeDef.Name}";
+                }
                 break;
 
             case NameType.InterfaceImplementation:
-                name = $"{_name}Impl";
+                name = $"{parentNameSpace}{_name}Impl";
                 break;
 
             default:
@@ -374,16 +389,16 @@ internal class TypeDef
         }
     }
 
-    public string GetGenericArgumentsExpression(List<TypeDef>? parentGenericArguments = null)
+    public string GetGenericArgumentsExpression()
     {
         if (GenericArguments is not null)
         {
             var genericArgumentsNames = GenericArguments.Select(t => t.GetName());
 
             // In a nested class, generic arguments defined in the parent class can be omitted.
-            if (parentGenericArguments is not null)
+            if (_parentType is not null && _parentType.GenericArguments is not null)
             {
-                var parentGenericArgumentsNames = parentGenericArguments.Select(t => t.GetName());
+                var parentGenericArgumentsNames = _parentType.GenericArguments.Select(t => t.GetName());
                 genericArgumentsNames = genericArgumentsNames.Where(t => !parentGenericArgumentsNames.Contains(t));
             }
 

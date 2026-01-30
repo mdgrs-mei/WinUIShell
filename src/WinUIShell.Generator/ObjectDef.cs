@@ -8,7 +8,6 @@ internal class ObjectDef
 {
     private readonly Api.ObjectDef _apiObjectDef;
     private readonly TypeDef? _baseType;
-    private readonly ObjectDef? _parentObjectDef;
 
     private readonly List<TypeDef> _interfaces = [];
     private readonly List<PropertyDef> _staticProperties = [];
@@ -24,10 +23,9 @@ internal class ObjectDef
 
     public TypeDef Type { get; }
 
-    public ObjectDef(Api.ObjectDef apiObjectDef, ObjectDef? parentObjectDef = null)
+    public ObjectDef(Api.ObjectDef apiObjectDef)
     {
         _apiObjectDef = apiObjectDef;
-        _parentObjectDef = parentObjectDef;
 
         Type = new TypeDef(_apiObjectDef.Type);
         Type.AlwaysReturnSystemInterfaceName = Type.IsSystemInterface;
@@ -102,7 +100,7 @@ internal class ObjectDef
         {
             foreach (var nestedType in _apiObjectDef.NestedTypes)
             {
-                _nestedObjects.Add(new ObjectDef(nestedType, this));
+                _nestedObjects.Add(new ObjectDef(nestedType));
             }
         }
     }
@@ -299,7 +297,7 @@ internal class ObjectDef
 
     private void GenerateInterface(CodeWriter codeWriter)
     {
-        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
         StringBuilder baseTypeExpression = new();
         foreach (var interfaceType in _interfaces)
         {
@@ -332,7 +330,19 @@ internal class ObjectDef
             {
             """);
 
-        if (!Type.IsSystemInterface)
+        if (Type.IsSystemInterface)
+        {
+            codeWriter.IncrementIndent();
+            foreach (var method in _instanceMethods)
+            {
+                if (AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                _ = SpecializedMethodGenerator.Generate(codeWriter, method);
+            }
+            codeWriter.DecrementIndent();
+        }
+        else
         {
             codeWriter.IncrementIndent();
 
@@ -416,7 +426,13 @@ internal class ObjectDef
 
             foreach (var method in _instanceMethods)
             {
-                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
+                if (AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                if (SpecializedMethodGenerator.Generate(codeWriter, method))
+                    continue;
+
+                if (!method.IsSupported())
                     continue;
 
                 codeWriter.AppendAndReserveNewLine($$"""
@@ -464,7 +480,7 @@ internal class ObjectDef
 
     private void GenerateClass(CodeWriter codeWriter)
     {
-        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
 
         StringBuilder baseTypeExpression = new();
         if (_baseType is not null && _baseType.IsSupported())
@@ -791,12 +807,12 @@ internal class ObjectDef
     // we have to create an accessor object that implements the interface. This function generates such implementation classes.
     private void GenerateInterfaceImpl(CodeWriter codeWriter)
     {
-        string genericArgumentsExpression = Type.GetGenericArgumentsExpression(_parentObjectDef?.Type.GenericArguments);
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
         string baseTypeExpression = $" : {_apiObjectDef.Name}{genericArgumentsExpression}";
         string className = $"{_apiObjectDef.Name}Impl";
 
         codeWriter.Append($$"""
-            public class {{className}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public partial class {{className}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
         codeWriter.IncrementIndent();
