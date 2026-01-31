@@ -81,6 +81,8 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private void AddObjects()
     {
+        AddObject(typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<>));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.ContentDialog));
         AddObject(typeof(Microsoft.UI.Colors));
         AddObject(typeof(Microsoft.UI.Windowing.AppWindowTitleBar));
         AddObject(typeof(Microsoft.UI.Windowing.OverlappedPresenter));
@@ -97,6 +99,8 @@ public class ApiExporter : Singleton<ApiExporter>
         AddObject(typeof(Microsoft.UI.Xaml.Controls.Button));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.TextBlock));
         AddObject(typeof(Microsoft.UI.Xaml.Controls.Frame));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.FontIcon));
+        AddObject(typeof(Microsoft.UI.Xaml.Controls.TabView));
         AddObject(typeof(Uri));
         AddObject(typeof(UriCreationOptions));
         AddObject(typeof(Windows.UI.Core.CoreDispatcher));
@@ -628,6 +632,11 @@ public class ApiExporter : Singleton<ApiExporter>
             }
         }
 
+        if (type.IsNested && !type.IsGenericParameter)
+        {
+            typeDef.ParentType = GetTypeDef(type.DeclaringType!);
+        }
+
         return typeDef;
     }
 
@@ -644,6 +653,10 @@ public class ApiExporter : Singleton<ApiExporter>
         if (type.IsPointer)
         {
             return "Pointer";
+        }
+        if (type.IsNested)
+        {
+            return type.Name;
         }
 
         string name = type.ToString();

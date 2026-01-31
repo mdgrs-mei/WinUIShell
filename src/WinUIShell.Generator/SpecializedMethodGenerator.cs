@@ -86,35 +86,60 @@ internal class SpecializedMethodGenerator
         {
             // If the object is awaitable, add WaitForCompleted() method.
 
+            string newExpression = "";
+            if (methodDef.ObjectDef.BaseType is not null)
+            {
+                ObjectDef? baseObjectDef = ObjectGenerator.GetObjectDef(methodDef.ObjectDef.BaseType);
+                newExpression = (baseObjectDef is not null) && baseObjectDef.ContainsSignature(methodDef) ? "new " : "";
+            }
+
             if (methodDef.ReturnType!.GenericArguments is null)
             {
-                codeWriter.AppendAndReserveNewLine($$"""
-                    void WaitForCompleted()
-                    {
-                        var awaiter = GetAwaiter();
-                        while (!awaiter.IsCompleted)
+                if (isInterfaceImpl || !methodDef.ObjectDef.Type.IsInterface)
+                {
+                    codeWriter.AppendAndReserveNewLine($$"""
+                        public {{newExpression}}void WaitForCompleted()
                         {
-                            Engine.Get().UpdateRunspace();
-                            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                            var awaiter = GetAwaiter();
+                            while (!awaiter.IsCompleted)
+                            {
+                                Engine.Get().UpdateRunspace();
+                                Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                            }
                         }
-                    }
-                    """);
+                        """);
+                }
+                else
+                {
+                    codeWriter.AppendAndReserveNewLine($$"""
+                        {{newExpression}}void WaitForCompleted();
+                        """);
+                }
             }
             else
             {
                 TypeDef resultType = methodDef.ReturnType!.GenericArguments[0];
-                codeWriter.AppendAndReserveNewLine($$"""
-                    {{resultType.GetName()}} WaitForCompleted()
-                    {
-                        var awaiter = GetAwaiter();
-                        while (!awaiter.IsCompleted)
+                if (isInterfaceImpl || !methodDef.ObjectDef.Type.IsInterface)
+                {
+                    codeWriter.AppendAndReserveNewLine($$"""
+                        public {{newExpression}}{{resultType.GetName()}} WaitForCompleted()
                         {
-                            Engine.Get().UpdateRunspace();
-                            Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                            var awaiter = GetAwaiter();
+                            while (!awaiter.IsCompleted)
+                            {
+                                Engine.Get().UpdateRunspace();
+                                Thread.Sleep(Constants.ClientCommandPolingIntervalMillisecond);
+                            }
+                            return awaiter.GetResult();
                         }
-                        return awaiter.GetResult();
-                    }
-                    """);
+                        """);
+                }
+                else
+                {
+                    codeWriter.AppendAndReserveNewLine($$"""
+                        {{newExpression}}{{resultType.GetName()}} WaitForCompleted();
+                        """);
+                }
             }
             return false;
         }

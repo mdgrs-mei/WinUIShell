@@ -7,7 +7,6 @@ namespace WinUIShell.Generator;
 internal class ObjectDef
 {
     private readonly Api.ObjectDef _apiObjectDef;
-    private readonly TypeDef? _baseType;
 
     private readonly List<TypeDef> _interfaces = [];
     private readonly List<PropertyDef> _staticProperties = [];
@@ -22,6 +21,7 @@ internal class ObjectDef
     private Dictionary<string, GetterSetter>? _explicitInterfaceImplementationIndexerMethods;
 
     public TypeDef Type { get; }
+    public TypeDef? BaseType { get; }
 
     public ObjectDef(Api.ObjectDef apiObjectDef)
     {
@@ -32,7 +32,7 @@ internal class ObjectDef
 
         if (_apiObjectDef.BaseType is not null)
         {
-            _baseType = new TypeDef(_apiObjectDef.BaseType);
+            BaseType = new TypeDef(_apiObjectDef.BaseType);
         }
 
         if (_apiObjectDef.Interfaces is not null)
@@ -483,9 +483,9 @@ internal class ObjectDef
         string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
 
         StringBuilder baseTypeExpression = new();
-        if (_baseType is not null && _baseType.IsSupported())
+        if (BaseType is not null && BaseType.IsSupported())
         {
-            _ = baseTypeExpression.Append($" : {_baseType.GetName()}");
+            _ = baseTypeExpression.Append($" : {BaseType.GetName()}");
         }
         bool hasBaseType = baseTypeExpression.Length > 0;
 

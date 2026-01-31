@@ -154,6 +154,10 @@ public class Api
         [DefaultValue(null)]
         public TypeDef? ElementType { get; set; }
 
+        // Parent type if this is a nested type.
+        [DefaultValue(null)]
+        public TypeDef? ParentType { get; set; }
+
         [DefaultValue(null)]
         public List<TypeDef>? GenericTypeArguments { get; set; }
     }
