@@ -41,6 +41,9 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private bool IsPublicType(Type type)
     {
+        if (type.IsGenericParameter)
+            return true;
+
         if (type.IsNested)
         {
             return type.IsNestedPublic && IsPublicType(type.DeclaringType!);
@@ -538,12 +541,13 @@ public class ApiExporter : Singleton<ApiExporter>
         };
     }
 
-    private Api.TypeDef GetTypeDef(Type type)
+    private Api.TypeDef GetTypeDef(Type type, Type[]? genericArgumentsOverride = null)
     {
         var name = GetTypeDefName(type);
         var typeDef = new Api.TypeDef
         {
             Name = name,
+            IsPublic = IsPublicType(type),
             IsNullable = Reflection.IsNullable(type),
             IsAbstract = type.IsAbstract,
             IsEnum = type.IsEnum,
@@ -586,19 +590,22 @@ public class ApiExporter : Singleton<ApiExporter>
 
         if (type.IsGenericType)
         {
-            foreach (var genericTypeArgument in type.GetGenericArguments())
+            var genericArgumentsCount = type.GetGenericArguments().Length;
+            var genericArguments = genericArgumentsOverride ?? type.GetGenericArguments();
+            for (int i = 0; i < genericArgumentsCount; ++i)
             {
+                Type genericArgument = genericArguments[i];
                 if (typeDef.GenericTypeArguments is null)
                 {
                     typeDef.GenericTypeArguments = [];
                 }
-                typeDef.GenericTypeArguments.Add(GetTypeDef(genericTypeArgument));
+                typeDef.GenericTypeArguments.Add(GetTypeDef(genericArgument));
             }
         }
 
         if (type.IsNested && !type.IsGenericParameter)
         {
-            typeDef.ParentType = GetTypeDef(type.DeclaringType!);
+            typeDef.ParentType = GetTypeDef(type.DeclaringType!, type.GetGenericArguments());
         }
 
         return typeDef;

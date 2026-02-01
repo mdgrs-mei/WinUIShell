@@ -11,6 +11,10 @@ internal class TypeDef
 
     public bool AlwaysReturnSystemInterfaceName { get; set; }
     public readonly List<TypeDef>? GenericArguments;
+    public bool IsPublic
+    {
+        get => _apiTypeDef.IsPublic;
+    }
     public bool IsNullable
     {
         get => _apiTypeDef.IsNullable;
@@ -144,6 +148,9 @@ internal class TypeDef
         {
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
+                if (!genericArgument.IsPublic)
+                    continue;
+
                 if (GenericArguments is null)
                 {
                     GenericArguments = [];
@@ -169,6 +176,9 @@ internal class TypeDef
 
     public bool IsSupported()
     {
+        if (!IsPublic)
+            return false;
+
         if (IsArray)
             return false;
 

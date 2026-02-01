@@ -100,6 +100,9 @@ public class Api
     {
         public string Name { get; set; } = "";
 
+        [DefaultValue(true)]
+        public bool IsPublic { get; set; } = true;
+
         [DefaultValue(false)]
         public bool IsNullable { get; set; }
 
