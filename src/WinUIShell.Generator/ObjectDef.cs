@@ -669,7 +669,7 @@ internal class ObjectDef
             }
 
             // Make the property readonly if it's struct. We cannot update value type objects in the ObjectStore.
-            if (property.CanWrite && Type.IsClass)
+            if (property.CanWrite && (Type.IsClass || property.ImplementsInterface))
             {
                 if (property.IsAbstract)
                 {

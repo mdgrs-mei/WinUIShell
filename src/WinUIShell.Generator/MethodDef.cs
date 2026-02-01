@@ -16,6 +16,10 @@ internal class MethodDef
     {
         get => _apiMethodDef.IsAbstract;
     }
+    public bool ImplementsInterface
+    {
+        get => _apiMethodDef.ImplementsInterface;
+    }
     public bool ImplementsSystemInterface
     {
         get => _apiMethodDef.ImplementsSystemInterface;

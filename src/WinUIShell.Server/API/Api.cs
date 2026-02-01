@@ -93,6 +93,9 @@ public class Api
         public bool HidesBase { get; set; }
 
         [DefaultValue(false)]
+        public bool ImplementsInterface { get; set; }
+
+        [DefaultValue(false)]
         public bool ImplementsSystemInterface { get; set; }
     }
 
@@ -192,6 +195,9 @@ public class Api
 
         [DefaultValue(false)]
         public bool HidesBase { get; set; }
+
+        [DefaultValue(false)]
+        public bool ImplementsInterface { get; set; }
 
         [DefaultValue(false)]
         public bool ImplementsSystemInterface { get; set; }

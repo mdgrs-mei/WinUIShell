@@ -17,6 +17,7 @@ internal class PropertyDef
     public bool CanRead { get; private set; }
     public bool CanWrite { get; private set; }
     public bool IsAbstract { get; private set; }
+    public bool ImplementsInterface { get; private set; }
     public bool IsIndexer
     {
         get => _indexParameters is not null;
@@ -35,6 +36,7 @@ internal class PropertyDef
         CanRead = apiPropertyDef.CanRead;
         CanWrite = apiPropertyDef.CanWrite;
         IsAbstract = apiPropertyDef.IsAbstract;
+        ImplementsInterface = apiPropertyDef.ImplementsInterface;
 
         _objectDef = objectDef;
         _memberDefType = memberDefType;
@@ -71,6 +73,7 @@ internal class PropertyDef
         CanRead = true;
         CanWrite = indexerSetter is not null;
         IsAbstract = indexerGetter.IsAbstract;
+        ImplementsInterface = indexerGetter.ImplementsInterface;
 
         _objectDef = objectDef;
         _memberDefType = memberDefType;

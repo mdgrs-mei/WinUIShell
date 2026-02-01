@@ -288,6 +288,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsAbstract = propertyInfo.GetMethod?.IsAbstract ?? false,
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
+            ImplementsInterface = ImplementsInterface(propertyInfo.GetMethod),
             ImplementsSystemInterface = ImplementsSystemInterface(propertyInfo.GetMethod),
         };
 
@@ -334,6 +335,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsAbstract = false,
             IsOverride = false,
             HidesBase = false,
+            ImplementsInterface = false,
             ImplementsSystemInterface = false,
         };
 
@@ -377,6 +379,7 @@ public class ApiExporter : Singleton<ApiExporter>
             IsAbstract = methodInfo.IsAbstract,
             IsOverride = IsOverride(methodInfo),
             HidesBase = HidesBaseMethod(methodInfo),
+            ImplementsInterface = ImplementsInterface(methodInfo),
             ImplementsSystemInterface = ImplementsSystemInterface(methodInfo),
         };
 
@@ -440,6 +443,41 @@ public class ApiExporter : Singleton<ApiExporter>
         if (objectType.BaseType is not null && HasMethod(objectType.BaseType, methodInfo))
             return true;
 
+        return false;
+    }
+
+    private bool ImplementsInterface(MethodInfo? methodInfo)
+    {
+        if (methodInfo is null)
+            return false;
+
+        if (!methodInfo.IsVirtual)
+            return false;
+
+        Type objectType = methodInfo.ReflectedType!;
+        bool isImplemented = methodInfo.DeclaringType == objectType;
+        if (!isImplemented)
+            return false;
+
+        if (objectType.IsInterface)
+        {
+            return true;
+        }
+
+        foreach (var interfaceType in objectType.GetInterfaces())
+        {
+            if (objectType.IsInterface)
+            {
+                if (HasMethod(interfaceType, methodInfo))
+                    return true;
+            }
+            else
+            {
+                var interfaceMap = objectType.GetInterfaceMap(interfaceType);
+                if (interfaceMap.TargetMethods.Contains(methodInfo))
+                    return true;
+            }
+        }
         return false;
     }
 
