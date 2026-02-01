@@ -13,39 +13,47 @@ public class ApiExporter : Singleton<ApiExporter>
 
     public void Export(string apiFilePath)
     {
-        AddEnums();
-        AddObjects();
+        AddTypesInAssembly(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing)); // Microsoft.WinUI
+        AddTypesInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
+        AddTypesInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
+        AddEnum(typeof(EventCallbackRunspaceMode));
+
         ExportToFile(apiFilePath);
     }
 
-    private void AddEnums()
-    {
-        AddEnumsInAssembly(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing)); // Microsoft.WinUI
-        AddEnumsInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
-        AddEnumsInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
-        AddEnum(typeof(EventCallbackRunspaceMode));
-        AddEnum(typeof(UriHostNameType));
-        AddEnum(typeof(UriKind));
-        AddEnum(typeof(UriComponents));
-        AddEnum(typeof(UriFormat));
-        AddEnum(typeof(UriPartial));
-        AddEnum(typeof(StringComparison));
-    }
-
-    private void AddEnumsInAssembly(Type representativeTypeInAssembly)
+    private void AddTypesInAssembly(Type representativeTypeInAssembly)
     {
         var assembly = representativeTypeInAssembly.Assembly;
-        var enumTypes = assembly.GetTypes().Where(type => type.IsEnum).OrderBy(type => type.FullName);
+        var types = assembly.GetTypes().OrderBy(type => type.FullName);
 
-        foreach (var enumType in enumTypes)
+        foreach (var type in types)
         {
-            AddEnum(enumType);
+            if (type.IsEnum)
+            {
+                AddEnum(type);
+            }
+            else
+            {
+                AddObject(type);
+            }
         }
+    }
+
+    private bool IsPublicType(Type type)
+    {
+        if (type.IsNested)
+        {
+            return type.IsNestedPublic && IsPublicType(type.DeclaringType!);
+        }
+        return type.IsPublic;
     }
 
     private void AddEnum(Type type)
     {
         if (!type.IsEnum)
+            return;
+
+        if (!IsPublicType(type))
             return;
 
         var assembly = type.Assembly;
@@ -79,56 +87,12 @@ public class ApiExporter : Singleton<ApiExporter>
         _api.Enums.Add(def);
     }
 
-    private void AddObjects()
-    {
-        AddObject(typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<>));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.ContentDialog));
-        AddObject(typeof(Microsoft.UI.Colors));
-        AddObject(typeof(Microsoft.UI.Windowing.AppWindowTitleBar));
-        AddObject(typeof(Microsoft.UI.Windowing.OverlappedPresenter));
-        AddObject(typeof(Microsoft.UI.Windowing.CompactOverlayPresenter));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.NavigationView));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.Primitives.ButtonBase));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.StackPanel));
-        AddObject(typeof(Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo));
-        AddObject(typeof(Microsoft.UI.Xaml.Window));
-        AddObject(typeof(Microsoft.UI.Xaml.Thickness));
-        AddObject(typeof(Microsoft.UI.Xaml.Application));
-        AddObject(typeof(Microsoft.UI.Xaml.DebugSettings));
-        AddObject(typeof(Microsoft.UI.Xaml.ResourceDictionary));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.Button));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.TextBlock));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.Frame));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.FontIcon));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.TabView));
-        AddObject(typeof(Uri));
-        AddObject(typeof(UriCreationOptions));
-        AddObject(typeof(Windows.UI.Core.CoreDispatcher));
-        AddObject(typeof(Microsoft.UI.Text.FontWeights));
-        AddObject(typeof(Microsoft.UI.Xaml.Markup.XamlReader));
-        AddObject(typeof(Microsoft.UI.Xaml.Controls.Page));
-        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueue));
-        AddObject(typeof(KeyValuePair<,>));
-        AddObject(typeof(System.Collections.IEnumerator));
-        AddObject(typeof(System.Collections.IEnumerable));
-        AddObject(typeof(IEnumerable<>));
-        AddObject(typeof(IEnumerator<>));
-        AddObject(typeof(IDictionary<,>));
-        AddObject(typeof(ICollection<>));
-        AddObject(typeof(IList<>));
-        AddObject(typeof(Span<>));
-        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherQueueTimer));
-        AddObject(typeof(Microsoft.UI.Dispatching.DispatcherExitDeferral));
-        AddObject(typeof(Microsoft.UI.Xaml.LaunchActivatedEventArgs));
-        AddObject(typeof(Windows.UI.Core.ICoreAcceleratorKeys));
-        AddObject(typeof(System.TimeSpan));
-        AddObject(typeof(System.ReadOnlySpan<>));
-        AddObject(typeof(Windows.ApplicationModel.Activation.LaunchActivatedEventArgs));
-    }
-
     private void AddObject(Type type)
     {
         if (type.IsEnum)
+            return;
+
+        if (!IsPublicType(type))
             return;
 
         string typeDefName = GetTypeDefName(type);
