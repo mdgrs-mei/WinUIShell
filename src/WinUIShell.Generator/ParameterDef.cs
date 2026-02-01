@@ -8,15 +8,20 @@ internal class ParameterDef
     private readonly Api.ParameterDef _apiParameterDef;
 
     public TypeDef Type;
-    public string Name
-    {
-        get => _apiParameterDef.Name!;
-    }
+    public string Name { get; set; }
 
     public ParameterDef(Api.ParameterDef apiParameterDef, bool useSystemInterfaceName)
     {
         _apiParameterDef = apiParameterDef;
         Type = new TypeDef(apiParameterDef.Type, useSystemInterfaceName);
+
+        Name = _apiParameterDef.Name!;
+
+        // event is a keyword.
+        if (Name == "event")
+        {
+            Name = "_event";
+        }
     }
 
     public bool IsSupported()
