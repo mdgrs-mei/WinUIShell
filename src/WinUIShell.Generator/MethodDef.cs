@@ -136,7 +136,7 @@ internal class MethodDef
         string accessorExpression = isExplicitImplementation ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = "";
-        string overrideExpression = "";
+        string overrideExpression = _apiMethodDef.Name == "ToString" ? "override " : "";
         string abstractExpression = "";
         string virtualExpression = "";
 
