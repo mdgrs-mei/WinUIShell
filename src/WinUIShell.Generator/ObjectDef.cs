@@ -1003,11 +1003,21 @@ internal class ObjectDef
 
         if (_staticEvents.Count > 0)
         {
-            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Static));
+            string eventCallbackList = EventDef.GetEventCallbackListExpression(MemberDefType.Static);
+            if (!signatureStore.ContainsString(eventCallbackList))
+            {
+                codeWriter.AppendAndReserveNewLine(eventCallbackList);
+                signatureStore.AddString(eventCallbackList);
+            }
         }
         if (_instanceEvents.Count > 0)
         {
-            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Instance));
+            string eventCallbackList = EventDef.GetEventCallbackListExpression(MemberDefType.Instance);
+            if (!signatureStore.ContainsString(eventCallbackList))
+            {
+                codeWriter.AppendAndReserveNewLine(eventCallbackList);
+                signatureStore.AddString(eventCallbackList);
+            }
         }
 
         foreach (var eventDef in _instanceEvents)

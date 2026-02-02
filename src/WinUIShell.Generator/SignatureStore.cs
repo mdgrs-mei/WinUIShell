@@ -3,10 +3,16 @@
 internal class SignatureStore
 {
     private readonly List<ObjectDef> _objectDefs = [];
+    private readonly List<string> _strings = [];
 
     public void AddObjectDef(ObjectDef objectDef)
     {
         _objectDefs.Add(objectDef);
+    }
+
+    public void AddString(string str)
+    {
+        _strings.Add(str);
     }
 
     public bool ContainsObject(ObjectDef objectDef)
@@ -42,5 +48,10 @@ internal class SignatureStore
                 return true;
         }
         return false;
+    }
+
+    public bool ContainsString(string str)
+    {
+        return _strings.Contains(str);
     }
 }
