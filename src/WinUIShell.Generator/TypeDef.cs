@@ -155,7 +155,8 @@ internal class TypeDef
                 {
                     GenericArguments = [];
                 }
-                GenericArguments.Add(new TypeDef(genericArgument, AlwaysReturnSystemInterfaceName));
+                // Generic arguments should always return the passed type name, not the original system interface name.
+                GenericArguments.Add(new TypeDef(genericArgument, alwaysReturnSystemInterfaceName: false));
             }
         }
     }
