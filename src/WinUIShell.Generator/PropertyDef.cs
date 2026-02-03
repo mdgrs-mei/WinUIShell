@@ -156,9 +156,10 @@ internal class PropertyDef
         string overrideExpression = _isOverride ? "override " : "";
         string abstractExpression = IsAbstract ? "abstract " : "";
         string virtualExpression = (_isVirtual && !_isOverride && !IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
+        string indexerNameExpression = (IsIndexer && _explicitInterfaceType is null) ? $"[global::System.Runtime.CompilerServices.IndexerName(\"{_propertyName}\")]\n" : "";
         string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!, genericTypeParametersOverride: null)}]" : "";
 
-        return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
+        return $"{indexerNameExpression}{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{Type.GetTypeExpression()} {GetName()}{indexerParametersExpression}";
     }
 
     public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
