@@ -67,7 +67,6 @@ internal class TypeDef
     private static readonly List<string> _unsupportedTypes =
     [
         "System.IntPtr",
-        "Microsoft.UI.Xaml.DependencyObject",
         "WinRT.IWinRTObject",
         "WinRT.IObjectReference",
         "WinRT.ObjectReference",
