@@ -494,7 +494,7 @@ public class ApiExporter : Singleton<ApiExporter>
         if (!isImplemented)
             return false;
 
-        if (objectType.IsInterface && IsSystemType(GetTypeDefName(objectType)))
+        if (objectType.IsInterface && Api.IsSupportedSystemInterface(GetTypeDefName(objectType)))
         {
             return true;
         }
@@ -502,7 +502,7 @@ public class ApiExporter : Singleton<ApiExporter>
         foreach (var interfaceType in objectType.GetInterfaces())
         {
             var interfaceName = GetTypeDefName(interfaceType);
-            bool isSystemInterface = IsSystemType(interfaceName);
+            bool isSystemInterface = Api.IsSupportedSystemInterface(interfaceName);
             if (!isSystemInterface)
                 continue;
 
