@@ -849,6 +849,7 @@ internal class ObjectDef
                 continue;
 
             bool isExplicit = signatureStore.ContainsSignature(property);
+            TypeDef propertyType = property.Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
 
             codeWriter.Append($$"""
                 {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
@@ -859,7 +860,7 @@ internal class ObjectDef
             if (property.CanRead)
             {
                 codeWriter.Append($$"""
-                    get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
+                    get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(
                         ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
                         nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
                     """);
@@ -885,6 +886,7 @@ internal class ObjectDef
                 continue;
 
             bool isExplicit = signatureStore.ContainsSignature(property);
+            TypeDef propertyType = property.Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
 
             codeWriter.Append($$"""
                 {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
@@ -897,13 +899,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(propertyType.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.Get<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.Get<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, nameof({{property.GetName()}})){{(propertyType.IsNullable ? "" : "!")}};
                         """);
                 }
             }
@@ -913,13 +915,13 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
                         """);
                 }
                 else
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.Set(WinUIShellObjectId, nameof({{property.GetName()}}), {{property.Type.GetValueExpression()}});
+                        set => PropertyAccessor.Set(WinUIShellObjectId, nameof({{property.GetName()}}), {{propertyType.GetValueExpression()}});
                         """);
                 }
             }
