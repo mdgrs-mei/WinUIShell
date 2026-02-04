@@ -10,6 +10,14 @@ public partial class Frame : ContentControl
 {
     private const string _accessorClassName = "WinUIShell.Server.FrameAccessor, WinUIShell.Server";
 
+    public string SourcePageName
+    {
+        get => CommandClient.Get().InvokeStaticMethodAndGetResult<string, string>(
+            _accessorClassName,
+            "GetSourcePageName",
+            WinUIShellObjectId)!;
+    }
+
     [SurpressGeneratorMethodByName]
     public bool Navigate(
         string pageName,
