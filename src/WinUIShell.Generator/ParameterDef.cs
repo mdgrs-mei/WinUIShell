@@ -17,10 +17,10 @@ internal class ParameterDef
 
         Name = _apiParameterDef.Name!;
 
-        // event is a keyword.
-        if (Name == "event")
+        // event is a keyword, object is a type name.
+        if (Name is "event" or "object")
         {
-            Name = "_event";
+            Name = $"_{Name}";
         }
     }
 
