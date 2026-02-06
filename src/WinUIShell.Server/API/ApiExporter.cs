@@ -59,6 +59,9 @@ public class ApiExporter : Singleton<ApiExporter>
         if (!IsPublicType(type))
             return;
 
+        if (IsIgnoredNamespace(type.Namespace))
+            return;
+
         var assembly = type.Assembly;
         string fullName = $"{type.FullName}, {assembly.GetName().Name}";
 
@@ -96,6 +99,9 @@ public class ApiExporter : Singleton<ApiExporter>
             return;
 
         if (!IsPublicType(type))
+            return;
+
+        if (IsIgnoredNamespace(type.Namespace))
             return;
 
         string typeDefName = GetTypeDefName(type);
@@ -725,6 +731,14 @@ public class ApiExporter : Singleton<ApiExporter>
             eventDef.Parameters.Add(GetParameterDef(parameter));
         }
         return eventDef;
+    }
+
+    private bool IsIgnoredNamespace(string? ns)
+    {
+        if (ns is null)
+            return true;
+
+        return ns.StartsWith("ABI.", StringComparison.Ordinal);
     }
 
     private bool IsIgnoredMethod(MethodInfo methodInfo)
