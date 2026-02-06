@@ -587,6 +587,12 @@ public class ApiExporter : Singleton<ApiExporter>
 
     private Api.TypeDef GetTypeDef(Type type, Type[]? genericArgumentsOverride = null)
     {
+        if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(Nullable<>)))
+        {
+            // Use underlying type if System.Nullable as nullable is handled by TypeDef.IsNullable property.
+            return GetTypeDef(Nullable.GetUnderlyingType(type)!, genericArgumentsOverride);
+        }
+
         var name = GetTypeDefName(type);
         var typeDef = new Api.TypeDef
         {
