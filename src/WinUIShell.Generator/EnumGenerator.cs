@@ -18,7 +18,7 @@ internal static class EnumGenerator
 
                 namespace {{ns}};
 
-                public enum {{enumDef.Name}} : {{enumDef.UnderlyingType}}
+                public enum {{enumDef.Name}} : global::System.{{enumDef.UnderlyingType}}
                 {
                 """);
 
