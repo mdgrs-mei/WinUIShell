@@ -237,9 +237,11 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
+        var rpcValue = RpcValueConverter.ConvertObjectToRpcValue(value);
+
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
+            await _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, rpcValue);
         });
     }
 
@@ -250,7 +252,8 @@ public class CommandClient : Singleton<CommandClient>
     public Task SetPropertyAsync(CommandQueueId queueId, ObjectId id, string propertyName, object? value)
     {
         Debug.Assert(_rpc is not null);
-        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
+        var rpcValue = RpcValueConverter.ConvertObjectToRpcValue(value);
+        return _rpc.InvokeAsync("SetProperty", queueId, id, propertyName, rpcValue);
     }
 
     public void SetPropertyWait(ObjectId id, string propertyName, object? value)
@@ -261,9 +264,11 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
+        var rpcValue = RpcValueConverter.ConvertObjectToRpcValue(value);
+
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
+            await _rpc.InvokeAsync("SetPropertyWait", queueId, id, propertyName, rpcValue);
         });
     }
 
@@ -276,9 +281,11 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
+        var rpcValue = RpcValueConverter.ConvertObjectToRpcValue(value);
+
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetStaticProperty", queueId, className, propertyName, RpcValueConverter.ConvertObjectToRpcValue(value));
+            await _rpc.InvokeAsync("SetStaticProperty", queueId, className, propertyName, rpcValue);
         });
     }
 
