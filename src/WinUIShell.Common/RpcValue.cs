@@ -6,6 +6,7 @@ public class RpcValue
     public ObjectId? IdValue { get; set; }
     public bool? BoolValue { get; set; }
     public byte? ByteValue { get; set; }
+    public char? CharValue { get; set; }
     public ushort? UShortValue { get; set; }
     public int? IntValue { get; set; }
     public uint? UIntValue { get; set; }
@@ -33,6 +34,7 @@ public class RpcValue
             ObjectId or
             bool or
             byte or
+            char or
             ushort or
             int or
             uint or
@@ -76,6 +78,9 @@ public class RpcValue
                 break;
             case byte value:
                 ByteValue = value;
+                break;
+            case char value:
+                CharValue = value;
                 break;
             case ushort value:
                 UShortValue = value;
@@ -148,6 +153,10 @@ public class RpcValue
         if (ByteValue is not null)
         {
             return ByteValue;
+        }
+        if (CharValue is not null)
+        {
+            return CharValue;
         }
         if (UShortValue is not null)
         {
