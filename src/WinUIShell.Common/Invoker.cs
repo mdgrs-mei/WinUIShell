@@ -182,14 +182,14 @@ public class Invoker : Singleton<Invoker>
         throw new InvalidOperationException($"Property or Filed [{name}] not found.");
     }
 
-    public void SetIndexerProperty(object obj, object? value, object?[] indexArguments)
+    public void SetIndexerProperty(object obj, string indexerName, object? value, object?[] indexArguments)
     {
         ArgumentNullException.ThrowIfNull(obj);
         if (!IsValid(obj))
             return;
 
         var type = obj.GetType();
-        var property = GetIndexerPropertyInfo(type, indexArguments);
+        var property = GetIndexerPropertyInfo(type, indexerName, indexArguments);
 
         if (property == null)
         {
@@ -198,14 +198,14 @@ public class Invoker : Singleton<Invoker>
         property.SetValue(obj, value, indexArguments);
     }
 
-    public object? GetIndexerProperty(object obj, object?[] indexArguments)
+    public object? GetIndexerProperty(object obj, string indexerName, object?[] indexArguments)
     {
         ArgumentNullException.ThrowIfNull(obj);
         if (!IsValid(obj))
             return null;
 
         var type = obj.GetType();
-        var property = GetIndexerPropertyInfo(type, indexArguments);
+        var property = GetIndexerPropertyInfo(type, indexerName, indexArguments);
 
         if (property == null)
         {
@@ -216,9 +216,9 @@ public class Invoker : Singleton<Invoker>
 
     private PropertyInfo? GetIndexerPropertyInfo(
         Type objType,
+        string indexerName,
         object?[]? indexArguments)
     {
-        var indexerName = objType.GetCustomAttribute<DefaultMemberAttribute>()!.MemberName;
         var bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
         if (indexArguments is null)

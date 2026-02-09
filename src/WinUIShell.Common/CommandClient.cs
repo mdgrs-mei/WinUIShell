@@ -313,20 +313,21 @@ public class CommandClient : Singleton<CommandClient>
         return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
     }
 
-    public void SetIndexerProperty(ObjectId id, object? value, params object?[] indexArguments)
+    public void SetIndexerProperty(ObjectId id, string indexerName, object? value, params object?[] indexArguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(indexArguments);
 
         var rpcIndexArguments = RpcValueConverter.ConvertObjectArrayToRpcArray(indexArguments);
+        var rpcValue = RpcValueConverter.ConvertObjectToRpcValue(value);
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("SetIndexerProperty", id, RpcValueConverter.ConvertObjectToRpcValue(value), rpcIndexArguments);
+            await _rpc.InvokeAsync("SetIndexerProperty", id, indexerName, rpcValue, rpcIndexArguments);
         });
     }
 
-    public TReturn? GetIndexerProperty<TReturn, TCreate>(ObjectId id, params object?[] indexArguments)
+    public TReturn? GetIndexerProperty<TReturn, TCreate>(ObjectId id, string indexerName, params object?[] indexArguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(indexArguments);
@@ -335,7 +336,7 @@ public class CommandClient : Singleton<CommandClient>
 
         var rpcValue = _joinableTaskFactory.Run(async () =>
         {
-            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, rpcIndexArguments);
+            return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, indexerName, rpcIndexArguments);
         });
 
         return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);

@@ -68,7 +68,7 @@ internal class PropertyDef
         _hidesBase = indexerGetter.HidesBase;
         _isOverride = indexerGetter.IsOverride;
         _isVirtual = indexerGetter.IsVirtual;
-        _propertyName = "";
+        _propertyName = "Item";
 
         CanRead = true;
         CanWrite = indexerSetter is not null;
@@ -133,6 +133,22 @@ internal class PropertyDef
 
         string name = IsIndexer ? "this" : _propertyName;
         return $"{interfaceTypeName}{name}";
+    }
+
+    public string GetOriginalName(bool isExplicitImplementation = false)
+    {
+        string interfaceTypeName = "";
+        if (_explicitInterfaceType is not null)
+        {
+            interfaceTypeName = $"{_explicitInterfaceType.GetOriginalName()}.";
+        }
+        else
+        if (isExplicitImplementation)
+        {
+            interfaceTypeName = $"{_objectDef.Type.GetOriginalName()}.";
+        }
+
+        return $"{interfaceTypeName}{_propertyName}";
     }
 
     public string GetSignatureId()

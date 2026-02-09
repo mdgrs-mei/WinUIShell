@@ -304,7 +304,7 @@ internal sealed class RpcService
         return taskCompletion.Task;
     }
 
-    public void SetIndexerProperty(ObjectId id, RpcValue rpcValue, RpcValue[]? rpcIndexArguments)
+    public void SetIndexerProperty(ObjectId id, string indexerName, RpcValue rpcValue, RpcValue[]? rpcIndexArguments)
     {
         _commandServer.AddCommand(
             CommandQueueId.MainThread,
@@ -319,11 +319,11 @@ internal sealed class RpcService
                     throw new InvalidOperationException("Index of Indexer property cannot be null.");
                 }
 
-                Invoker.Get().SetIndexerProperty(obj, value, indexArguments);
+                Invoker.Get().SetIndexerProperty(obj, indexerName, value, indexArguments);
             });
     }
 
-    public Task<RpcValue> GetIndexerPropertyAsync(ObjectId id, RpcValue[]? rpcIndexArguments)
+    public Task<RpcValue> GetIndexerPropertyAsync(ObjectId id, string indexerName, RpcValue[]? rpcIndexArguments)
     {
         var taskCompletion = new TaskCompletionSource<RpcValue>();
         _commandServer.AddCommand(
@@ -340,7 +340,7 @@ internal sealed class RpcService
                         throw new InvalidOperationException("Index of Indexer property cannot be null.");
                     }
 
-                    var value = Invoker.Get().GetIndexerProperty(obj, indexArguments);
+                    var value = Invoker.Get().GetIndexerProperty(obj, indexerName, indexArguments);
                     taskCompletion.SetResult(RpcValueConverter.ConvertObjectToRpcValue(value));
                 }
                 catch (Exception e)

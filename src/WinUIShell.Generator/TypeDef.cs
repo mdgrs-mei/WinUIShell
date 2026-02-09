@@ -81,46 +81,46 @@ internal class TypeDef
         _apiTypeDef = apiTypeDef;
         AlwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
 
-        var serverTypeName = apiTypeDef.Name;
+        var originalTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
         if (_apiTypeDef.IsGenericTypeParameter || _apiTypeDef.IsGenericMethodParameter ||
             _apiTypeDef.ElementType is not null || _apiTypeDef.ParentType is not null)
         {
-            _name = serverTypeName;
+            _name = originalTypeName;
         }
         else
         if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
         {
             IsSystemInterface = true;
-            _name = $"WinUIShell.{serverTypeName}";
+            _name = $"WinUIShell.{originalTypeName}";
         }
         else
-        if (serverTypeName.StartsWith("WinUIShell.Server"))
+        if (originalTypeName.StartsWith("WinUIShell.Server"))
         {
-            _name = serverTypeName.Replace("WinUIShell.Server", "WinUIShell");
+            _name = originalTypeName.Replace("WinUIShell.Server", "WinUIShell");
         }
         else
-        if (serverTypeName == "System.Object")
+        if (originalTypeName == "System.Object")
         {
             _name = "object";
             IsObject = true;
         }
         else
-        if (serverTypeName == "System.Void")
+        if (originalTypeName == "System.Void")
         {
             _name = "void";
             IsVoid = true;
             IsRpcSupportedType = true;
         }
         else
-        if (TryReplaceSystemType(serverTypeName, out var systemTypeName))
+        if (TryReplaceSystemType(originalTypeName, out var systemTypeName))
         {
             _name = systemTypeName!;
             IsRpcSupportedType = true;
         }
         else
         {
-            _name = $"WinUIShell.{serverTypeName}";
+            _name = $"WinUIShell.{originalTypeName}";
         }
 
         if (elementTypeOverride is not null)
@@ -280,11 +280,17 @@ internal class TypeDef
         }
     }
 
-    private enum NameType
+    public string GetOriginalName()
+    {
+        return GetNameInternal(NameType.Original);
+    }
+
+    public enum NameType
     {
         Normal,
         SystemInterface,
         InterfaceImplementation,
+        Original,
     }
 
     private string GetNameInternal(NameType nameType)
@@ -327,13 +333,17 @@ internal class TypeDef
                 name = $"{parentNameSpace}{_name}Impl";
                 break;
 
+            case NameType.Original:
+                name = _apiTypeDef.Name;
+                break;
+
             default:
                 break;
         }
 
         if (GenericArguments is not null)
         {
-            return $"{name}{GetGenericArgumentsExpression()}";
+            return $"{name}{GetGenericArgumentsExpression(nameType)}";
         }
         else
         {
@@ -399,16 +409,16 @@ internal class TypeDef
         }
     }
 
-    public string GetGenericArgumentsExpression()
+    public string GetGenericArgumentsExpression(NameType nameType = NameType.Normal)
     {
         if (GenericArguments is not null)
         {
-            var genericArgumentsNames = GenericArguments.Select(t => t.GetName());
+            var genericArgumentsNames = GenericArguments.Select(t => (nameType == NameType.Original) ? t.GetOriginalName() : t.GetName());
 
             // In a nested class, generic arguments defined in the parent class can be omitted.
             if (_parentType is not null && _parentType.GenericArguments is not null)
             {
-                var parentGenericArgumentsNames = _parentType.GenericArguments.Select(t => t.GetName());
+                var parentGenericArgumentsNames = _parentType.GenericArguments.Select(t => (nameType == NameType.Original) ? t.GetOriginalName() : t.GetName());
                 genericArgumentsNames = genericArgumentsNames.Where(t => !parentGenericArgumentsNames.Contains(t));
             }
 

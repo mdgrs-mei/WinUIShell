@@ -657,7 +657,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, "{{property.GetOriginalName()}}"{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
@@ -681,7 +681,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName()}}", {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
                         """);
                 }
                 else
@@ -899,7 +899,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId{{property.GetIndexerArgumentsExpression()}}){{(propertyType.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, "{{property.GetOriginalName()}}"{{property.GetIndexerArgumentsExpression()}}){{(propertyType.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
@@ -915,7 +915,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName()}}", {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
                         """);
                 }
                 else
