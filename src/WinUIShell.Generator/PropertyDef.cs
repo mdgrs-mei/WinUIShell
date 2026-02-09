@@ -118,7 +118,7 @@ internal class PropertyDef
         return true;
     }
 
-    public string GetName(bool isExplicitImplementation = false)
+    public string GetName(bool isInterfaceImplExplicitImplementation = false)
     {
         string interfaceTypeName = "";
         if (_explicitInterfaceType is not null)
@@ -126,7 +126,7 @@ internal class PropertyDef
             interfaceTypeName = $"{_explicitInterfaceType.GetName()}.";
         }
         else
-        if (isExplicitImplementation)
+        if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{_objectDef.Type.GetName()}.";
         }
@@ -135,7 +135,7 @@ internal class PropertyDef
         return $"{interfaceTypeName}{name}";
     }
 
-    public string GetOriginalName(bool isExplicitImplementation = false)
+    public string GetOriginalName(bool isInterfaceImplExplicitImplementation = false)
     {
         string interfaceTypeName = "";
         if (_explicitInterfaceType is not null)
@@ -143,12 +143,24 @@ internal class PropertyDef
             interfaceTypeName = $"{_explicitInterfaceType.GetOriginalName()}.";
         }
         else
-        if (isExplicitImplementation)
+        if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{_objectDef.Type.GetOriginalName()}.";
         }
 
         return $"{interfaceTypeName}{_propertyName}";
+    }
+
+    public string GetNameOfExpression(bool isInterfaceImplExplicitImplementation = false)
+    {
+        if (_explicitInterfaceType is not null || isInterfaceImplExplicitImplementation)
+        {
+            return $"\"{GetOriginalName(isInterfaceImplExplicitImplementation)}\"";
+        }
+        else
+        {
+            return $"nameof({GetName()})";
+        }
     }
 
     public string GetSignatureId()
