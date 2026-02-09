@@ -219,15 +219,22 @@ public class Invoker : Singleton<Invoker>
         object?[]? indexArguments)
     {
         var indexerName = objType.GetCustomAttribute<DefaultMemberAttribute>()!.MemberName;
+        var bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
         if (indexArguments is null)
         {
-            return objType.GetProperty(indexerName, Type.EmptyTypes);
+            return objType.GetProperty(
+                indexerName,
+                bindingFlags,
+                null,
+                null,
+                Type.EmptyTypes,
+                null);
         }
         else
         if (indexArguments.Contains(null))
         {
-            var properties = objType.GetProperties();
+            var properties = objType.GetProperties(bindingFlags);
             foreach (var property in properties)
             {
                 if (property.Name != indexerName)
@@ -246,7 +253,13 @@ public class Invoker : Singleton<Invoker>
         else
         {
             Type[] types = [.. indexArguments.Select(argument => argument is not null ? argument.GetType() : typeof(object))];
-            return objType.GetProperty(indexerName, types);
+            return objType.GetProperty(
+                indexerName,
+                bindingFlags,
+                null,
+                null,
+                types,
+                null);
         }
     }
 }
