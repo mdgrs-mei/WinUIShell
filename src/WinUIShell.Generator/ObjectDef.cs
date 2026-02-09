@@ -716,7 +716,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeStaticMethod(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
                     }
                     """);
             }
@@ -727,7 +727,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -759,7 +759,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
                     }
                     """);
             }
@@ -770,7 +770,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             WinUIShellObjectId,
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -948,7 +948,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeStaticMethod(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
                     }
                     """);
             }
@@ -959,7 +959,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -986,7 +986,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
                     }
                     """);
             }
@@ -997,7 +997,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
                             WinUIShellObjectId,
-                            nameof({{method.GetName()}}){{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }

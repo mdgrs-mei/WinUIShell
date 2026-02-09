@@ -116,6 +116,34 @@ internal class MethodDef
         return $"{interfaceTypeName}{_apiMethodDef.Name}";
     }
 
+    private string GetOriginalName(bool isInterfaceImplExplicitImplementation = false)
+    {
+        string interfaceTypeName = "";
+        if (ExplicitInterfaceType is not null)
+        {
+            interfaceTypeName = $"{ExplicitInterfaceType.GetOriginalName()}.";
+        }
+        else
+        if (isInterfaceImplExplicitImplementation)
+        {
+            interfaceTypeName = $"{ObjectDef.Type.GetOriginalName()}.";
+        }
+
+        return $"{interfaceTypeName}{_apiMethodDef.Name}";
+    }
+
+    public string GetNameOfExpression(bool isInterfaceImplExplicitImplementation = false)
+    {
+        if (ExplicitInterfaceType is not null || isInterfaceImplExplicitImplementation)
+        {
+            return $"\"{GetOriginalName(isInterfaceImplExplicitImplementation)}\"";
+        }
+        else
+        {
+            return $"nameof({GetName()})";
+        }
+    }
+
     public string GetSignatureId()
     {
         return $"{GetName()}({GetParametersSignatureId()})";
