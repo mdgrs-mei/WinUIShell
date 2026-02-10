@@ -151,7 +151,8 @@ public static class RpcValueConverter
             {
                 // If the object is not a primitive type or a registered object, register it here.
                 // The corresponding object needs to be created on the client side.
-                _ = ObjectStore.Get().RegisterObjectWithType(obj!, out ObjectId id);
+                _ = ObjectTypeMapping.Get().TryGetTargetTypeName(obj!.GetType(), out string? targetTypeName);
+                _ = ObjectStore.Get().RegisterObjectWithType(obj!, targetTypeName, out ObjectId id);
                 return new RpcValue(id);
             }
         }
