@@ -33,7 +33,8 @@ Install-PSResource -Name WinUIShell
 This code creates a Window that has a clickable button:
 
 ```powershell
-using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
 Import-Module WinUIShell
 
 $win = [Window]::new()
@@ -61,16 +62,18 @@ If you dot-source the script and comment out `$win.WaitForClosed()`, you can ins
 ```powershell
 PS> $button
 
-Content             : Click Me
-Background          : WinUIShell.Brush
-BackgroundSizing    : InnerBorderEdge
-BorderBrush         : WinUIShell.Brush
-BorderThickness     : 1,1,1,1
-CharacterSpacing    : 0
+Flyout               :
+ClickMode            : Release
+CommandParameter     :
+IsPointerOver        : False
+IsPressed            : False
+Content              : Click Me
+ContentTemplate      :
+ContentTemplateRoot  : WinUIShell.Microsoft.UI.Xaml.Controls.TextBlock
 :
 ```
 
-Since the API of WinUIShell tries following the WinUI 3's API, you can read the Windows App SDK documentation to see what should be available. The documentation of the `Button` class is [here](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button?view=windows-app-sdk-1.7) for example.
+Since the API of WinUIShell follows the WinUI 3's API, you can read the Windows App SDK documentation to see what should be available. The documentation of the `Button` class is [here](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button?view=windows-app-sdk-1.7) for example.
 
 You can also look at the [examples](./examples/) folder for script examples.
 
@@ -113,6 +116,8 @@ $button.AddClick({
 Instead of creating UI elements by code, you can also create them by loading XAML similar to WPF in PowerShell. You can search for an UI element by the `FindName` method of `FrameworkElement` and add event handlers from PowerShell. Note that you can't use `x:Class` attributes or code-behind binding in XAML as mentioned in this [documentation](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.markup.xamlreader).
 
 ```powershell
+using namespace WinUIShell.Microsoft.UI.Xaml.Markup
+
 $xamlString = @'
 <Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -219,7 +224,7 @@ Since the callbacks are executed in parallel, you should pass variables via `Arg
 
 ## Major Limitations
 
-- Not all UI elements are supported yet
+- Data binding is not supported
 
 ## Contributing
 
