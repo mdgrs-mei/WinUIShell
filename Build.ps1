@@ -1,6 +1,8 @@
 param (
     [ValidateSet('Debug', 'Release')]
-    [String]$Configuration = 'Debug'
+    [String]$Configuration = 'Debug',
+
+    [Switch]$ExportApi
 )
 
 $originalProgressPreference = $ProgressPreference
@@ -10,12 +12,18 @@ $netVersion = 'net8.0'
 $serverTarget = 'net8.0-windows10.0.18362.0'
 $copyExtensions = @('.dll', '.pdb')
 $src = "$PSScriptRoot/src"
+$apiSrc = "$src/WinUIShell.ApiExporter"
 $coreSrc = "$src/WinUIShell"
 $depSrc = "$src/WinUIShell.Common"
 $serverSrc = "$src/WinUIShell.Server"
+
+$apiPublish = [System.IO.Path]::GetFullPath("$apiSrc/bin/$Configuration/$serverTarget/publish/")
 $corePublish = [System.IO.Path]::GetFullPath("$coreSrc/bin/$Configuration/$netVersion/publish/")
 $depPublish = [System.IO.Path]::GetFullPath("$depSrc/bin/$Configuration/$netVersion/publish/")
 $serverPublish = [System.IO.Path]::GetFullPath("$serverSrc/bin/$Configuration/$serverTarget/publish/")
+
+$apiXml = "$apiSrc/Api.xml"
+$apiExporter = "$apiPublish/WinUIShell.ApiExporter.exe"
 
 $outDir = "$PSScriptRoot/module/WinUIShell/bin/$netVersion"
 $outDeps = "$outDir/Dependencies"
@@ -36,6 +44,15 @@ Pop-Location
 
 Remove-Item -Path $outDir -Recurse -ErrorAction Ignore
 Remove-Item -Path $outServer -Recurse -ErrorAction Ignore
+
+if ($ExportApi) {
+    Push-Location $apiSrc
+    dotnet publish -c $Configuration -o $apiPublish
+    Pop-Location
+
+    Remove-Item -Path $apiXml -ErrorAction Ignore
+    Start-Process -FilePath $apiExporter -ArgumentList $apiXml -Wait
+}
 
 Push-Location $depSrc
 dotnet publish -c $Configuration -o $depPublish
