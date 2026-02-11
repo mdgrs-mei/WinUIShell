@@ -61,9 +61,7 @@ public class Exporter
         if (IsIgnoredNamespace(type.Namespace))
             return;
 
-        var assembly = type.Assembly;
-        string fullName = $"{type.FullName}, {assembly.GetName().Name}";
-
+        string fullName = GetTypeFullName(type);
         if (_addedEnums.Contains(fullName))
             return;
         _ = _addedEnums.Add(fullName);
@@ -115,7 +113,7 @@ public class Exporter
             return;
         }
 
-        string fullName = GetObjectFullName(type);
+        string fullName = GetTypeFullName(type);
         if (_addedObjects.Contains(fullName))
             return;
         _ = _addedObjects.Add(fullName);
@@ -130,7 +128,7 @@ public class Exporter
         var def = new Api.ObjectDef
         {
             Name = GetObjectTypeName(type),
-            FullName = GetObjectFullName(type),
+            FullName = GetTypeFullName(type),
             Namespace = type.Namespace!,
             Type = GetTypeDef(type),
         };
@@ -692,10 +690,13 @@ public class Exporter
         return RemoveGenericExpression(type.Name);
     }
 
-    private string GetObjectFullName(Type type)
+    private string GetTypeFullName(Type type)
     {
         var assembly = type.Assembly;
-        return $"{type.FullName}, {assembly.GetName().Name}";
+        var assemblyName = assembly.GetName().Name;
+        assemblyName = assemblyName!.Replace("WinUIShell.ApiExporter", "WinUIShell.Server", StringComparison.Ordinal);
+
+        return $"{type.FullName}, {assemblyName}";
     }
 
     private string RemoveGenericExpression(string name)

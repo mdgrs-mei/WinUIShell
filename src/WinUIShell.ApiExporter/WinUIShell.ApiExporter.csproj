@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\WinUIShell.Server\System\EventCallbackRunspaceMode.cs" />
+    <Compile Include="..\WinUIShell.Server\System\EventCallbackRunspaceMode.cs" Link="ServerTypes\EventCallbackRunspaceMode.cs" />
   </ItemGroup>
 </Project>
