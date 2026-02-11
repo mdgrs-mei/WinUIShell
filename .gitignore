@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Repository specific ignores
+Api.xml
+
 # dotenv files
 .env
 
