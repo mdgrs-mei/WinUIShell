@@ -26,6 +26,6 @@
 
   <ItemGroup>
     <CompilerVisibleProperty Include="WinUIShellGenerator_GenerateTypeMapping" />
-    <AdditionalFiles Include="..\WinUIShell.Server\Api.xml" />
+    <AdditionalFiles Include="..\WinUIShell.ApiExporter\Api.xml" />
   </ItemGroup>
 </Project>

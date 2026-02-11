@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WinUIShell.Server;
+namespace WinUIShell.ApiExporter;
 
 public class Api
 {

@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 using System.Xml.Serialization;
-using WinUIShell.Common;
 
-namespace WinUIShell.Server;
+namespace WinUIShell.ApiExporter;
 
-public class ApiExporter : Singleton<ApiExporter>
+public class Exporter
 {
     private readonly Api _api = new();
     private readonly HashSet<string> _addedEnums = [];
@@ -16,7 +15,7 @@ public class ApiExporter : Singleton<ApiExporter>
         AddTypesInAssembly(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing)); // Microsoft.WinUI
         AddTypesInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
         AddTypesInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
-        AddEnum(typeof(EventCallbackRunspaceMode));
+        AddEnum(typeof(Server.EventCallbackRunspaceMode));
 
         ExportToFile(apiFilePath);
     }

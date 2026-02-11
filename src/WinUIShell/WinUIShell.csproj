@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\WinUIShell.Server\Api.xml" />
+    <AdditionalFiles Include="..\WinUIShell.ApiExporter\Api.xml" />
   </ItemGroup>
 
 </Project>

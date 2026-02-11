@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace WinUIShell.Server;
+namespace WinUIShell.ApiExporter;
 
 internal static class Reflection
 {

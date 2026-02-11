@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 using Microsoft.CodeAnalysis;
-using WinUIShell.Server;
+using WinUIShell.ApiExporter;
 
 namespace WinUIShell.Generator;
 

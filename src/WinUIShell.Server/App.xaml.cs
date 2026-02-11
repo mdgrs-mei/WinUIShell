@@ -12,7 +12,6 @@ public partial class App : Application
     private Process? _parentProcess;
     private string _upstreamPipeName = "";
     private string _downstreamPipeName = "";
-    private string _apiFilePath = "";
     private DispatcherQueueTimer? _updateTimer;
 
     public App()
@@ -40,16 +39,6 @@ public partial class App : Application
     {
         ParseArgs();
 
-#if DEBUG
-        //System.Diagnostics.Debugger.Launch();
-        if (!string.IsNullOrEmpty(_apiFilePath))
-        {
-            ApiExporter.Get().Export(_apiFilePath);
-            Exit();
-            return;
-        }
-#endif
-
         DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
         InitializeComponent();
@@ -69,12 +58,6 @@ public partial class App : Application
     private void ParseArgs()
     {
         string[] arguments = Environment.GetCommandLineArgs();
-        if (arguments.Length == 2)
-        {
-            _apiFilePath = arguments[1];
-            return;
-        }
-
         if (arguments.Length != 4)
         {
             throw new ArgumentException($"Invalid arguments {arguments}");

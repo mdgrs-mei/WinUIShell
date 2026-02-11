@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ExportApi": {
+        "commandName": "Project",
+        "commandLineArgs": "$(MSBuildProjectDirectory)\\Api.xml"
+    }
+  }
+}
