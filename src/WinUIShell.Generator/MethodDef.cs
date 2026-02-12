@@ -25,13 +25,6 @@ internal class MethodDef
         get => _apiMethodDef.ImplementsSystemInterface;
     }
 
-    private static readonly List<string> _unsupportedMethodNames =
-    [
-        "Equals",
-        "GetHashCode",
-        "GetType",
-    ];
-
     public MethodDef(
         Api.MethodDef apiMethodDef,
         ObjectDef objectDef,
@@ -75,7 +68,7 @@ internal class MethodDef
 
         if (!string.IsNullOrEmpty(_apiMethodDef.Name))
         {
-            if (_unsupportedMethodNames.Contains(_apiMethodDef.Name!))
+            if (Api.IsUnsupportedMethod(_apiMethodDef.Name!))
                 return false;
         }
 

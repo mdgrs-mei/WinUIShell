@@ -7,6 +7,84 @@ public class Api
 #pragma warning disable CA1034 // Nested types should not be visible
 #pragma warning disable CA1002 // Do not expose generic lists
 #pragma warning disable CA2227 // Collection properties should be read only
+
+    public static readonly List<(string FullName, string ShortName)> SystemTypes =
+    [
+        ("System.Boolean", "bool"),
+        ("System.Byte", "byte"),
+        ("System.SByte", "sbyte"),
+        ("System.Char", "char"),
+        ("System.Decimal", "decimal"),
+        ("System.Double", "double"),
+        ("System.Single", "float"),
+        ("System.Int32", "int"),
+        ("System.UInt32", "uint"),
+        ("System.Int64", "long"),
+        ("System.UInt64", "ulong"),
+        ("System.Int16", "short"),
+        ("System.UInt16", "ushort"),
+        ("System.String", "string"),
+        ("System.Object", "object"),
+        ("System.Void", "void"),
+    ];
+
+    private static readonly List<string> _unsupportedTypes =
+    [
+        "System.IntPtr",
+        "WinRT.IWinRTObject",
+        "WinRT.IObjectReference",
+        "WinRT.ObjectReference",
+    ];
+
+    private static readonly List<string> _supportedSystemInterfaces =
+    [
+        "System.IDisposable",
+        "System.Collections.Generic.ICollection",
+        "System.Collections.Generic.IList",
+        "System.Collections.IEnumerable",
+        "System.Collections.Generic.IEnumerable",
+        "System.Collections.IEnumerator",
+        "System.Collections.Generic.IEnumerator",
+        "System.Collections.Generic.IReadOnlyList",
+        "System.Collections.Generic.IReadOnlyCollection",
+    ];
+
+    private static readonly List<string> _unsupportedMethodNames =
+    [
+        "Equals",
+        "GetHashCode",
+        "GetType",
+    ];
+
+    public static bool TryReplaceSystemTypeNameWithShortName(string fullTypeName, out string? shortTypeName)
+    {
+        foreach (var (fullName, shortName) in SystemTypes)
+        {
+            if (fullTypeName == fullName)
+            {
+                shortTypeName = shortName;
+                return true;
+            }
+        }
+        shortTypeName = null;
+        return false;
+    }
+
+    public static bool IsUnsupportedType(string typeDefName)
+    {
+        return _unsupportedTypes.Contains(typeDefName);
+    }
+
+    public static bool IsSupportedSystemInterface(string typeDefName)
+    {
+        return _supportedSystemInterfaces.Contains(typeDefName);
+    }
+
+    public static bool IsUnsupportedMethod(string methodName)
+    {
+        return _unsupportedMethodNames.Contains(methodName);
+    }
+
     public List<EnumDef> Enums { get; } = [];
     public List<ObjectDef> Objects { get; } = [];
 
@@ -215,23 +293,6 @@ public class Api
     {
         public string? Name { get; set; } = "";
         public TypeDef Type { get; set; } = new();
-    }
-
-    private static readonly List<string> _supportedSystemInterfaces =
-    [
-        "System.IDisposable",
-        "System.Collections.Generic.ICollection",
-        "System.Collections.Generic.IList",
-        "System.Collections.IEnumerable",
-        "System.Collections.Generic.IEnumerable",
-        "System.Collections.IEnumerator",
-        "System.Collections.Generic.IEnumerator",
-        "System.Collections.Generic.IReadOnlyList",
-        "System.Collections.Generic.IReadOnlyCollection",
-    ];
-    public static bool IsSupportedSystemInterface(string typeDefName)
-    {
-        return _supportedSystemInterfaces.Contains(typeDefName);
     }
 
 #pragma warning restore CA2227

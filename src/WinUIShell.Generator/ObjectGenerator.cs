@@ -133,7 +133,7 @@ internal static class ObjectGenerator
 
         codeWriter.IncrementIndent();
 
-        foreach (var (systemTypeFullName, _) in TypeDef.SystemTypes)
+        foreach (var (systemTypeFullName, _) in Api.SystemTypes)
         {
             codeWriter.Append($"""
                 ("{systemTypeFullName}, System.Private.CoreLib", "{systemTypeFullName}, System.Private.CoreLib"),

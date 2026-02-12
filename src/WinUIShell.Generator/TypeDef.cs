@@ -44,34 +44,6 @@ internal class TypeDef
         get => _apiTypeDef.GenericParameterPosition;
     }
 
-    public static readonly List<(string FullName, string ShortName)> SystemTypes =
-    [
-        ("System.Boolean", "bool"),
-        ("System.Byte", "byte"),
-        ("System.SByte", "sbyte"),
-        ("System.Char", "char"),
-        ("System.Decimal", "decimal"),
-        ("System.Double", "double"),
-        ("System.Single", "float"),
-        ("System.Int32", "int"),
-        ("System.UInt32", "uint"),
-        ("System.Int64", "long"),
-        ("System.UInt64", "ulong"),
-        ("System.Int16", "short"),
-        ("System.UInt16", "ushort"),
-        ("System.String", "string"),
-        ("System.Object", "object"),
-        ("System.Void", "void"),
-    ];
-
-    private static readonly List<string> _unsupportedTypes =
-    [
-        "System.IntPtr",
-        "WinRT.IWinRTObject",
-        "WinRT.IObjectReference",
-        "WinRT.ObjectReference",
-    ];
-
     public TypeDef(
         Api.TypeDef apiTypeDef,
         bool alwaysReturnSystemInterfaceName = false,
@@ -113,7 +85,7 @@ internal class TypeDef
             IsRpcSupportedType = true;
         }
         else
-        if (TryReplaceSystemType(originalTypeName, out var systemTypeName))
+        if (Api.TryReplaceSystemTypeNameWithShortName(originalTypeName, out var systemTypeName))
         {
             _name = systemTypeName!;
             IsRpcSupportedType = true;
@@ -160,20 +132,6 @@ internal class TypeDef
         }
     }
 
-    private static bool TryReplaceSystemType(string typeName, out string? systemTypeName)
-    {
-        foreach (var (fullName, shortName) in SystemTypes)
-        {
-            if (typeName == fullName)
-            {
-                systemTypeName = typeName.Replace(fullName, shortName);
-                return true;
-            }
-        }
-        systemTypeName = null;
-        return false;
-    }
-
     public bool IsSupported()
     {
         if (!IsPublic)
@@ -215,7 +173,7 @@ internal class TypeDef
     private bool IsUnsupportedType()
     {
         bool isUnsupportedSystemInterface = IsSystemInterface && !Api.IsSupportedSystemInterface(_apiTypeDef.Name);
-        return _unsupportedTypes.Contains(_apiTypeDef.Name) || _apiTypeDef.IsDelegate || isUnsupportedSystemInterface;
+        return Api.IsUnsupportedType(_apiTypeDef.Name) || _apiTypeDef.IsDelegate || isUnsupportedSystemInterface;
     }
 
     private bool IsRefOrOut()
