@@ -1,6 +1,7 @@
 using namespace WinUIShell
 using namespace WinUIShell.Microsoft.UI.Xaml
 using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls.Primitives
 using namespace WinUIShell.Microsoft.UI.Xaml.Media
 
 if (-not (Get-Module WinUIShell)) {
@@ -9,12 +10,27 @@ if (-not (Get-Module WinUIShell)) {
 
 $win = [Window]::new()
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
-$win.AppWindow.ResizeClient(420, 420)
+$win.AppWindow.ResizeClient(800, 700)
 
 $toggleSwitch = [ToggleSwitch]::new()
 $toggleSwitch.Header = 'ToggleSwitch'
 $toggleSwitch.AddToggled({
         Write-Host "Toggled [$($toggleSwitch.IsOn)]"
+    })
+
+$toggleButton = [ToggleButton]::new()
+$toggleButton.Content = 'ToggleButton'
+$toggleButton.AddClick({
+        Write-Host "Toggled [$($toggleButton.IsChecked)]"
+    })
+
+$checkBox = [CheckBox]::new()
+$checkBox.Content = 'CheckBox'
+$checkBox.AddChecked({
+        Write-Host 'CheckBox is checked'
+    })
+$checkBox.AddUnchecked({
+        Write-Host 'CheckBox is unchecked'
     })
 
 $comboBox = [ComboBox]::new()
@@ -47,14 +63,57 @@ $radioButtons.AddSelectionChanged({
         }
     })
 
-$panel = [StackPanel]::new()
-$panel.Margin = 32
-$panel.Spacing = 12
+$leftPanel = [StackPanel]::new()
+$leftPanel.Spacing = 16
+$leftPanel.Children.Add($toggleButton)
+$leftPanel.Children.Add($toggleSwitch)
+$leftPanel.Children.Add($checkBox)
+$leftPanel.Children.Add($comboBox)
+$leftPanel.Children.Add($radioButtons)
 
-$panel.Children.Add($toggleSwitch)
-$panel.Children.Add($comboBox)
-$panel.Children.Add($radioButtons)
+$colorPicker = [ColorPicker]::new()
+$colorPicker.IsMoreButtonVisible = $true
+$colorPicker.IsAlphaEnabled = $true
+$colorPicker.IsAlphaSliderVisible = $true
+$colorPicker.AddColorChanged({
+        Write-Host "Color changed to [$($colorPicker.Color)]"
+    })
 
-$win.Content = $panel
+$horizontalSlider = [Slider]::new()
+$horizontalSlider.Width = 200
+$horizontalSlider.AddValueChanged({
+        Write-Host "Slider value changed to [$($horizontalSlider.Value)]"
+    })
+
+$verticalSlider = [Slider]::new()
+$verticalSlider.Orientation = 'Vertical'
+$verticalSlider.Height = 200
+$verticalSlider.TickPlacement = 'Outside'
+$verticalSlider.TickFrequency = 20
+$verticalSlider.AddValueChanged({
+        Write-Host "Slider value changed to [$($verticalSlider.Value)]"
+    })
+
+$ratingControl = [RatingControl]::new()
+$ratingControl.Caption = 'RatingControl'
+$ratingControl.AddValueChanged({
+        Write-Host "Rating changed to [$($ratingControl.Value)]"
+    })
+
+$rightPanel = [StackPanel]::new()
+$rightPanel.Spacing = 16
+$rightPanel.Children.Add($horizontalSlider)
+$rightPanel.Children.Add($verticalSlider)
+$rightPanel.Children.Add($ratingControl)
+
+$rootPanel = [StackPanel]::new()
+$rootPanel.Orientation = 'Horizontal'
+$rootPanel.Margin = 32
+$rootPanel.Spacing = 32
+$rootPanel.Children.Add($leftPanel)
+$rootPanel.Children.Add($colorPicker)
+$rootPanel.Children.Add($rightPanel)
+
+$win.Content = $rootPanel
 $win.Activate()
 $win.WaitForClosed()
