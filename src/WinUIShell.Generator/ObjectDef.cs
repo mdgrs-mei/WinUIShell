@@ -510,10 +510,8 @@ internal class ObjectDef
             _ = baseTypeExpression.Append($" : IWinUIShellObject");
         }
 
-        string abstractExpression = _apiObjectDef.Type.IsAbstract ? "abstract " : "";
-
         codeWriter.Append($$"""
-            public {{abstractExpression}}partial class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            public partial class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
             {
             """);
         codeWriter.IncrementIndent();
@@ -540,25 +538,14 @@ internal class ObjectDef
             if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
                 continue;
 
-            if (_apiObjectDef.Type.IsAbstract)
-            {
-                codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
-                    {
-                    }
-                    """);
-            }
-            else
-            {
-                codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}{{baseInitializer}}
-                    {
-                        WinUIShellObjectId = CommandClient.Get().CreateObject(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            this{{method.GetArgumentsExpression()}});
-                    }
-                    """);
-            }
+            codeWriter.AppendAndReserveNewLine($$"""
+                {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}{{baseInitializer}}
+                {
+                    WinUIShellObjectId = CommandClient.Get().CreateObject(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        this{{method.GetArgumentsExpression()}});
+                }
+                """);
         }
 
         if (!AttributeGenerator.IsConstructorSurpressed(Type.GetName()))
@@ -595,39 +582,21 @@ internal class ObjectDef
 
             if (property.CanRead)
             {
-                if (property.IsAbstract)
-                {
-                    codeWriter.Append($$"""
-                        get;
-                        """);
-                }
-                else
-                {
-                    codeWriter.Append($$"""
-                        get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
-                        """);
-                }
+                codeWriter.Append($$"""
+                    get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                    """);
             }
 
             if (property.CanWrite)
             {
-                if (property.IsAbstract)
-                {
-                    codeWriter.Append($$"""
-                        set;
-                        """);
-                }
-                else
-                {
-                    codeWriter.Append($$"""
-                        set => PropertyAccessor.SetStatic(
-                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            {{property.GetNameOfExpression()}},
-                            value);
-                        """);
-                }
+                codeWriter.Append($$"""
+                    set => PropertyAccessor.SetStatic(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        {{property.GetNameOfExpression()}},
+                        value);
+                    """);
             }
 
             codeWriter.DecrementIndent();
@@ -647,13 +616,6 @@ internal class ObjectDef
 
             if (property.CanRead)
             {
-                if (property.IsAbstract)
-                {
-                    codeWriter.Append($$"""
-                        get;
-                        """);
-                }
-                else
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
@@ -671,13 +633,6 @@ internal class ObjectDef
             // Make the property readonly if it's struct. We cannot update value type objects in the ObjectStore.
             if (property.CanWrite && (Type.IsClass || property.ImplementsInterface))
             {
-                if (property.IsAbstract)
-                {
-                    codeWriter.Append($$"""
-                        set;
-                        """);
-                }
-                else
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
@@ -702,13 +657,6 @@ internal class ObjectDef
                 continue;
 
             var returnType = method.ReturnType!;
-            if (method.IsAbstract)
-            {
-                codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetSignatureExpression()}};
-                    """);
-            }
-            else
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
@@ -745,13 +693,6 @@ internal class ObjectDef
                 continue;
 
             var returnType = method.ReturnType!;
-            if (method.IsAbstract)
-            {
-                codeWriter.AppendAndReserveNewLine($$"""
-                    {{method.GetSignatureExpression()}};
-                    """);
-            }
-            else
             if (returnType.IsVoid)
             {
                 codeWriter.AppendAndReserveNewLine($$"""

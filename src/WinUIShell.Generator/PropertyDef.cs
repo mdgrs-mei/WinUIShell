@@ -11,12 +11,12 @@ internal class PropertyDef
     private readonly bool _hidesBase;
     private readonly bool _isOverride;
     private readonly bool _isVirtual;
+    private readonly bool _isAbstract;
     private readonly string _propertyName;
 
     public readonly TypeDef Type;
     public bool CanRead { get; private set; }
     public bool CanWrite { get; private set; }
-    public bool IsAbstract { get; private set; }
     public bool ImplementsInterface { get; private set; }
     public bool IsIndexer
     {
@@ -30,12 +30,16 @@ internal class PropertyDef
     {
         _hidesBase = apiPropertyDef.HidesBase;
         _isOverride = apiPropertyDef.IsOverride;
-        _isVirtual = apiPropertyDef.IsVirtual;
+
+        // Additinally make abstract methods in classes virtual to provide default implementation because abstract classes need to be instantiated as return values.
+        _isVirtual = apiPropertyDef.IsVirtual || (apiPropertyDef.IsAbstract && !objectDef.Type.IsInterface);
+        // Remove abstract from methods in classes. Instead, make them virtual.
+        _isAbstract = apiPropertyDef.IsAbstract && objectDef.Type.IsInterface;
+
         _propertyName = apiPropertyDef.Name;
 
         CanRead = apiPropertyDef.CanRead;
         CanWrite = apiPropertyDef.CanWrite;
-        IsAbstract = apiPropertyDef.IsAbstract;
         ImplementsInterface = apiPropertyDef.ImplementsInterface;
 
         _objectDef = objectDef;
@@ -67,12 +71,12 @@ internal class PropertyDef
     {
         _hidesBase = indexerGetter.HidesBase;
         _isOverride = indexerGetter.IsOverride;
-        _isVirtual = indexerGetter.IsVirtual;
+        _isVirtual = indexerGetter.IsVirtual || (indexerGetter.IsAbstract && !objectDef.Type.IsInterface); ;
+        _isAbstract = indexerGetter.IsAbstract && objectDef.Type.IsInterface;
         _propertyName = "Item";
 
         CanRead = true;
         CanWrite = indexerSetter is not null;
-        IsAbstract = indexerGetter.IsAbstract;
         ImplementsInterface = indexerGetter.ImplementsInterface;
 
         _objectDef = objectDef;
@@ -182,8 +186,8 @@ internal class PropertyDef
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = _hidesBase ? "new " : "";
         string overrideExpression = _isOverride ? "override " : "";
-        string abstractExpression = IsAbstract ? "abstract " : "";
-        string virtualExpression = (_isVirtual && !_isOverride && !IsAbstract && _explicitInterfaceType is null) ? "virtual " : "";
+        string abstractExpression = _isAbstract ? "abstract " : "";
+        string virtualExpression = (_isVirtual && !_isOverride && !_isAbstract && _explicitInterfaceType is null) ? "virtual " : "";
         string indexerNameExpression = (IsIndexer && _explicitInterfaceType is null) ? $"[global::System.Runtime.CompilerServices.IndexerName(\"{_propertyName}\")]\n" : "";
         string indexerParametersExpression = IsIndexer ? $"[{ParameterDef.GetParametersSignatureExpression(_indexParameters!, genericTypeParametersOverride: null)}]" : "";
 

@@ -12,9 +12,15 @@ internal class MethodDef
     public TypeDef? ReturnType { get; }
     public List<ParameterDef> Parameters { get; } = [];
     public TypeDef? ExplicitInterfaceType;
-    public bool IsAbstract
+    private bool IsVirtual
     {
-        get => _apiMethodDef.IsAbstract;
+        // Additinally make abstract methods in classes virtual to provide default implementation because abstract classes need to be instantiated as return values.
+        get => _apiMethodDef.IsVirtual || (_apiMethodDef.IsAbstract && !ObjectDef.Type.IsInterface);
+    }
+    private bool IsAbstract
+    {
+        // Remove abstract from methods in classes. Instead, make them virtual.
+        get => _apiMethodDef.IsAbstract && ObjectDef.Type.IsInterface;
     }
     public bool ImplementsInterface
     {
@@ -150,7 +156,7 @@ internal class MethodDef
         string newExpression = _apiMethodDef.HidesBase ? "new " : "";
         string overrideExpression = _apiMethodDef.IsOverride ? "override " : "";
         string abstractExpression = IsAbstract ? "abstract " : "";
-        string virtualExpression = (_apiMethodDef.IsVirtual && !_apiMethodDef.IsOverride && !_apiMethodDef.IsAbstract && ExplicitInterfaceType is null) ? "virtual " : "";
+        string virtualExpression = (IsVirtual && !_apiMethodDef.IsOverride && !IsAbstract && ExplicitInterfaceType is null) ? "virtual " : "";
 
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{ReturnType!.GetTypeExpression()} {GetName()}({GetParametersExpression(genericTypeParametersOverride: null)})";
     }
