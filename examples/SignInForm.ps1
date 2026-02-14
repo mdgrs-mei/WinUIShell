@@ -1,4 +1,8 @@
 using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Media
+
 if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
@@ -9,7 +13,7 @@ $win.Title = 'Hello from PowerShell!'
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
 $win.AppWindow.ResizeClient(420, 420)
 
-$icon = [SymbolIcon]::new([Symbol]::Globe)
+$icon = [SymbolIcon]::new('Globe')
 
 $title = [TextBlock]::new()
 $title.Text = 'Sign In'

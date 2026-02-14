@@ -3,14 +3,15 @@ using WinUIShell.Common;
 
 namespace WinUIShell;
 
-internal sealed class EventCallbackList : WinUIShellObject
+internal sealed class EventCallbackList : IWinUIShellObject
 {
     private readonly List<EventCallback> _callbacks = [];
+    public ObjectId WinUIShellObjectId { get; } = new();
 
     public EventCallbackList()
     {
         _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
-        Id = id;
+        WinUIShellObjectId = id;
     }
 
     public void Add(
@@ -31,15 +32,7 @@ internal sealed class EventCallbackList : WinUIShellObject
             _callbacks.Add(copiedEventCallback);
         }
 
-        ObjectId[]? disabledControlIds = null;
-        if (copiedEventCallback.DisabledControlsWhileProcessing is not null)
-        {
-            disabledControlIds = new ObjectId[copiedEventCallback.DisabledControlsWhileProcessing.Length];
-            for (int i = 0; i < copiedEventCallback.DisabledControlsWhileProcessing.Length; ++i)
-            {
-                disabledControlIds[i] = copiedEventCallback.DisabledControlsWhileProcessing[i].Id;
-            }
-        }
+        ObjectId[]? disabledControlIds = copiedEventCallback.GetDisabledControlIds();
 
         CommandClient.Get().InvokeStaticMethod(
             "WinUIShell.Server.EventCallback, WinUIShell.Server",
@@ -49,7 +42,40 @@ internal sealed class EventCallbackList : WinUIShellObject
             eventArgsTypeName,
             copiedEventCallback.RunspaceMode,
             Runspace.DefaultRunspace.Id,
-            Id.Id,
+            WinUIShellObjectId.Id,
+            eventId,
+            disabledControlIds);
+    }
+
+    public void AddStatic(
+        string className,
+        string eventName,
+        string eventArgsTypeName,
+        EventCallback? eventCallback)
+    {
+        if (eventCallback is null)
+            return;
+
+        var copiedEventCallback = eventCallback.Copy();
+
+        int eventId = 0;
+        lock (_callbacks)
+        {
+            eventId = _callbacks.Count;
+            _callbacks.Add(copiedEventCallback);
+        }
+
+        ObjectId[]? disabledControlIds = copiedEventCallback.GetDisabledControlIds();
+
+        CommandClient.Get().InvokeStaticMethod(
+            "WinUIShell.Server.EventCallback, WinUIShell.Server",
+            "AddStatic",
+            className,
+            eventName,
+            eventArgsTypeName,
+            copiedEventCallback.RunspaceMode,
+            Runspace.DefaultRunspace.Id,
+            WinUIShellObjectId.Id,
             eventId,
             disabledControlIds);
     }

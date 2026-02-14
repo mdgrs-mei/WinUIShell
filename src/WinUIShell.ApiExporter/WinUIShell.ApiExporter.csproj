@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\WinUIShell.Server\Server.props" />
+  <PropertyGroup>
+    <RootNamespace>WinUIShell.ApiExporter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\WinUIShell.Server\System\EventCallbackRunspaceMode.cs" Link="ServerTypes\EventCallbackRunspaceMode.cs" />
+  </ItemGroup>
+</Project>

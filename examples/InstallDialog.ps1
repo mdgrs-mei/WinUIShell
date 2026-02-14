@@ -1,4 +1,9 @@
 using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Media
+using namespace WinUIShell.Microsoft.UI.Windowing
+
 if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
@@ -8,7 +13,7 @@ $win = [Window]::new()
 $win.SystemBackdrop = [MicaBackdrop]::new()
 $win.ExtendsContentIntoTitleBar = $true
 
-$presenter = [CompactOverlayPresenter]::new()
+$presenter = [CompactOverlayPresenter]::Create()
 $win.AppWindow.SetPresenter($presenter)
 $win.AppWindow.ResizeClient(420, 260)
 

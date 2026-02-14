@@ -1,13 +1,13 @@
 ﻿using System.Management.Automation;
 using WinUIShell.Common;
+using WinUIShell.Generator;
 
-namespace WinUIShell;
+namespace WinUIShell.Microsoft.UI.Xaml;
 
-public class Window : WinUIShellObject
+public partial class Window : IWinUIShellObject
 {
     private const string _accessorClassName = "WinUIShell.Server.WindowAccessor, WinUIShell.Server";
     private readonly EventCallbackList _closedCallbacks = new();
-    private readonly EventCallbackList _callbacks = new();
     private bool _isActivateCalled;
     private bool _isCloseCalled;
     private bool IsTerminated { get => _isActivateCalled && (_isCloseCalled || IsClosed); }
@@ -19,50 +19,23 @@ public class Window : WinUIShellObject
         private set => Interlocked.Exchange(ref _isClosed, value ? 1 : 0);
     }
 
-    public AppWindow AppWindow
-    {
-        get => PropertyAccessor.Get<AppWindow>(Id, nameof(AppWindow))!;
-    }
-
-    public UIElement? Content
-    {
-        get => PropertyAccessor.Get<UIElement>(Id, nameof(Content));
-        set => PropertyAccessor.Set(Id, nameof(Content), value?.Id);
-    }
-
-    public bool ExtendsContentIntoTitleBar
-    {
-        get => PropertyAccessor.Get<bool>(Id, nameof(ExtendsContentIntoTitleBar));
-        set => PropertyAccessor.Set(Id, nameof(ExtendsContentIntoTitleBar), value);
-    }
-
-    public SystemBackdrop? SystemBackdrop
-    {
-        get => PropertyAccessor.Get<SystemBackdrop>(Id, nameof(SystemBackdrop));
-        set => PropertyAccessor.Set(Id, nameof(SystemBackdrop), value?.Id);
-    }
-
-    public string Title
-    {
-        get => PropertyAccessor.Get<string>(Id, nameof(Title))!;
-        set => PropertyAccessor.Set(Id, nameof(Title), value);
-    }
-
+    [SurpressGeneratorMethodByName]
     public Window()
     {
-        Id = CommandClient.Get().CreateObject(
+        WinUIShellObjectId = CommandClient.Get().CreateObject(
             ObjectTypeMapping.Get().GetTargetTypeName<Window>(),
             this);
 
-        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", Id);
+        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", WinUIShellObjectId);
     }
 
     internal Window(ObjectId id)
-        : base(id)
     {
-        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", Id);
+        WinUIShellObjectId = id;
+        CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", WinUIShellObjectId);
     }
 
+    [SurpressGeneratorMethodByName]
     public void Activate()
     {
         if (IsTerminated)
@@ -70,26 +43,10 @@ public class Window : WinUIShellObject
 
         _isActivateCalled = true;
         IsClosed = false;
-        CommandClient.Get().InvokeMethod(Id, nameof(Activate));
+        CommandClient.Get().InvokeMethod(WinUIShellObjectId, nameof(Activate));
     }
 
-    public void AddActivated(ScriptBlock scriptBlock, object? argumentList = null)
-    {
-        AddActivated(new EventCallback
-        {
-            ScriptBlock = scriptBlock,
-            ArgumentList = argumentList
-        });
-    }
-    public void AddActivated(EventCallback eventCallback)
-    {
-        _callbacks.Add(
-            Id,
-            "Activated",
-            ObjectTypeMapping.Get().GetTargetTypeName<WindowActivatedEventArgs>(),
-            eventCallback);
-    }
-
+    [SurpressGeneratorMethodByName]
     public void AddClosed(ScriptBlock scriptBlock, object? argumentList = null)
     {
         AddClosed(new EventCallback
@@ -101,58 +58,20 @@ public class Window : WinUIShellObject
     public void AddClosed(EventCallback eventCallback)
     {
         _closedCallbacks.Add(
-            Id,
+            WinUIShellObjectId,
             "Closed",
             ObjectTypeMapping.Get().GetTargetTypeName<WindowEventArgs>(),
             eventCallback);
     }
 
-    public void AddSizeChanged(ScriptBlock scriptBlock, object? argumentList = null)
-    {
-        AddSizeChanged(new EventCallback
-        {
-            ScriptBlock = scriptBlock,
-            ArgumentList = argumentList
-        });
-    }
-    public void AddSizeChanged(EventCallback eventCallback)
-    {
-        _callbacks.Add(
-            Id,
-            "SizeChanged",
-            ObjectTypeMapping.Get().GetTargetTypeName<WindowSizeChangedEventArgs>(),
-            eventCallback);
-    }
-
-    public void AddVisibilityChanged(ScriptBlock scriptBlock, object? argumentList = null)
-    {
-        AddVisibilityChanged(new EventCallback
-        {
-            ScriptBlock = scriptBlock,
-            ArgumentList = argumentList
-        });
-    }
-    public void AddVisibilityChanged(EventCallback eventCallback)
-    {
-        _callbacks.Add(
-            Id,
-            "VisibilityChanged",
-            ObjectTypeMapping.Get().GetTargetTypeName<WindowVisibilityChangedEventArgs>(),
-            eventCallback);
-    }
-
+    [SurpressGeneratorMethodByName]
     public void Close()
     {
         if (IsTerminated || IsClosed)
             return;
 
         _isCloseCalled = true;
-        CommandClient.Get().InvokeMethod(Id, nameof(Close));
-    }
-
-    public void SetTitleBar(UIElement titleBar)
-    {
-        CommandClient.Get().InvokeMethod(Id, nameof(SetTitleBar), titleBar?.Id);
+        CommandClient.Get().InvokeMethod(WinUIShellObjectId, nameof(Close));
     }
 
     public void WaitForClosed()

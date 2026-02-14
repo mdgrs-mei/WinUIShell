@@ -2,16 +2,12 @@
 using WinUIShell.Common;
 namespace WinUIShell;
 
-public class WinUIShellObject
+public sealed class WinUIShellObject : IWinUIShellObject
 {
-    public ObjectId Id { get; protected set; } = new();
-
-    internal WinUIShellObject()
-    {
-    }
+    public ObjectId WinUIShellObjectId { get; } = new();
 
     internal WinUIShellObject(ObjectId id)
     {
-        Id = id;
+        WinUIShellObjectId = id;
     }
 }

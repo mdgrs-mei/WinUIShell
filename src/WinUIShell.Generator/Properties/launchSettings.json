@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Generator(Common)": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\WinUIShell.Common\\WinUIShell.Common.csproj"
+    },
+    "Generator(WinUIShell)": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\WinUIShell\\WinUIShell.csproj"
+    }
+  }
+}

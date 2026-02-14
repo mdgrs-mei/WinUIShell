@@ -6,6 +6,8 @@ public class ObjectId
     public string Id { get; set; } = "";
     public string Type { get; set; } = "";
 
+    public static ObjectId Null { get; } = new();
+
     public ObjectId()
     {
     }

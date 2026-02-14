@@ -8,6 +8,7 @@ namespace WinUIShell.Server;
 #pragma warning disable CA1515 // Consider making public types internal
 public partial class App : Application
 {
+#pragma warning restore CA1515
     private Process? _parentProcess;
     private string _upstreamPipeName = "";
     private string _downstreamPipeName = "";
@@ -36,13 +37,10 @@ public partial class App : Application
 
     private void Init()
     {
-#if DEBUG
-        //System.Diagnostics.Debugger.Launch();
-        TypeMappingPrinter.Print();
-#endif
+        ParseArgs();
+
         DispatcherShutdownMode = DispatcherShutdownMode.OnExplicitShutdown;
 
-        ParseArgs();
         InitializeComponent();
         ObjectStore.Get().SetObjectIdPrefix("s");
         CommandServer.Get().Init(_upstreamPipeName);
@@ -108,4 +106,3 @@ public partial class App : Application
         }
     }
 }
-#pragma warning restore CA1515

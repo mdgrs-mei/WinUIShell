@@ -11,10 +11,21 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- And avoid errors due to GenerateDocumentationFile -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <WinUIShellGenerator_GenerateTypeMapping>true</WinUIShellGenerator_GenerateTypeMapping>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WinUIShell.Generator\WinUIShell.Generator.csproj">
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <PackageReference Include="StreamJsonRpc" Version="2.21.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <CompilerVisibleProperty Include="WinUIShellGenerator_GenerateTypeMapping" />
+    <AdditionalFiles Include="..\WinUIShell.ApiExporter\Api.xml" />
+  </ItemGroup>
 </Project>

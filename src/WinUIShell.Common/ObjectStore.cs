@@ -28,16 +28,10 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
-    public bool RegisterObjectWithType(object? obj, out ObjectId id)
+    public bool RegisterObjectWithType(object? obj, string? targetTypeName, out ObjectId id)
     {
         bool registered = RegisterObject(obj, out id);
-        if (obj is not null)
-        {
-            var type = obj.GetType();
-            var typeName = type.FullName;
-            var assemblyName = type.Assembly.GetName().Name;
-            id.Type = $"{typeName}, {assemblyName}";
-        }
+        id.Type = targetTypeName ?? "";
         return registered;
     }
 

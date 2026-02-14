@@ -1,4 +1,5 @@
 ﻿using System.Management.Automation;
+using WinUIShell.Common;
 
 namespace WinUIShell;
 
@@ -18,7 +19,7 @@ public class EventCallback
 
     public object? ArgumentList { get; set; }
 
-    public Control[]? DisabledControlsWhileProcessing { get; set; }
+    public Microsoft.UI.Xaml.Controls.Control[]? DisabledControlsWhileProcessing { get; set; }
 
     public EventCallback()
     {
@@ -32,6 +33,19 @@ public class EventCallback
             e._scriptBlockString = ScriptBlock.ToString();
         }
         return e;
+    }
+
+    internal ObjectId[]? GetDisabledControlIds()
+    {
+        if (DisabledControlsWhileProcessing is null)
+            return null;
+
+        ObjectId[] ids = new ObjectId[DisabledControlsWhileProcessing.Length];
+        for (int i = 0; i < DisabledControlsWhileProcessing.Length; ++i)
+        {
+            ids[i] = DisabledControlsWhileProcessing[i].WinUIShellObjectId;
+        }
+        return ids;
     }
 
     internal void Invoke(object? sender, object? eventArgs)

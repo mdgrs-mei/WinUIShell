@@ -1,4 +1,8 @@
 using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Media
+
 if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
@@ -36,7 +40,7 @@ $threadJob = Start-ThreadJob -ScriptBlock {
     Import-Module $ModulePath
 
     "Sub Runspace ID [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
-    $win = [WinUIShell.Window]::new()
+    $win = [WinUIShell.Microsoft.UI.Xaml.Window]::new()
     $win.Title = 'Multiple Runspaces'
     $win.AppWindow.ResizeClient(420, 240)
     $win.AddClosed({
@@ -44,7 +48,7 @@ $threadJob = Start-ThreadJob -ScriptBlock {
             "Sub window closed [$([Runspace]::DefaultRunspace.Id)]" | Write-Host
         })
 
-    $button = [WinUIShell.Button]::new()
+    $button = [WinUIShell.Microsoft.UI.Xaml.Controls.Button]::new()
     $button.Content = 'Sub Runspace'
     $button.AddClick({
             # Long-running tasks here do not block the button click on the main window as this callback is processed independent of the main runspace.
@@ -53,7 +57,7 @@ $threadJob = Start-ThreadJob -ScriptBlock {
             $button.Content = "Sub Runspace[$([Runspace]::DefaultRunspace.Id)] - Done"
         })
 
-    $panel = [WinUIShell.StackPanel]::new()
+    $panel = [WinUIShell.Microsoft.UI.Xaml.Controls.StackPanel]::new()
     $panel.Margin = 32
     $panel.Children.Add($button)
 

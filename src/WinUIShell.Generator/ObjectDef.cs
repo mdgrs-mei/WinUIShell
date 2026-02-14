@@ -1,0 +1,1006 @@
+﻿using System.Diagnostics;
+using System.Text;
+using WinUIShell.ApiExporter;
+
+namespace WinUIShell.Generator;
+
+internal class ObjectDef
+{
+    private readonly Api.ObjectDef _apiObjectDef;
+
+    private readonly List<TypeDef> _interfaces = [];
+    private readonly List<PropertyDef> _staticProperties = [];
+    private readonly List<PropertyDef> _instanceProperties = [];
+    private readonly List<MethodDef> _constructors = [];
+    private readonly List<MethodDef> _staticMethods = [];
+    private readonly List<MethodDef> _instanceMethods = [];
+    private readonly List<EventDef> _staticEvents = [];
+    private readonly List<EventDef> _instanceEvents = [];
+    private readonly List<ObjectDef> _nestedObjects = [];
+
+    private Dictionary<string, GetterSetter>? _explicitInterfaceImplementationIndexerMethods;
+
+    public TypeDef Type { get; }
+    public TypeDef? BaseType { get; }
+
+    public ObjectDef(Api.ObjectDef apiObjectDef)
+    {
+        _apiObjectDef = apiObjectDef;
+
+        Type = new TypeDef(_apiObjectDef.Type);
+        Type.AlwaysReturnSystemInterfaceName = Type.IsSystemInterface;
+
+        if (_apiObjectDef.BaseType is not null)
+        {
+            BaseType = new TypeDef(_apiObjectDef.BaseType);
+        }
+
+        if (_apiObjectDef.Interfaces is not null)
+        {
+            foreach (var interfaceType in _apiObjectDef.Interfaces)
+            {
+                _interfaces.Add(new TypeDef(interfaceType));
+            }
+        }
+        if (_apiObjectDef.StaticProperties is not null)
+        {
+            foreach (var property in _apiObjectDef.StaticProperties)
+            {
+                _staticProperties.Add(new PropertyDef(property, this, MemberDefType.Static));
+            }
+        }
+        if (_apiObjectDef.InstanceProperties is not null)
+        {
+            foreach (var property in _apiObjectDef.InstanceProperties)
+            {
+                _instanceProperties.Add(new PropertyDef(property, this, MemberDefType.Instance));
+            }
+        }
+        if (_apiObjectDef.Constructors is not null)
+        {
+            foreach (var constructor in _apiObjectDef.Constructors)
+            {
+                _constructors.Add(new MethodDef(constructor, this, MemberDefType.Constructor));
+            }
+        }
+        if (_apiObjectDef.StaticMethods is not null)
+        {
+            foreach (var method in _apiObjectDef.StaticMethods)
+            {
+                _staticMethods.Add(new MethodDef(method, this, MemberDefType.Static));
+            }
+        }
+
+        InitExplicitInterfaceImplementationIndexerMethods();
+
+        if (_apiObjectDef.InstanceMethods is not null)
+        {
+            foreach (var method in _apiObjectDef.InstanceMethods)
+            {
+                if (IsExplicitInterfaceImplementationIndexerMethod(method))
+                    continue;
+                _instanceMethods.Add(new MethodDef(method, this, MemberDefType.Instance));
+            }
+        }
+        if (_apiObjectDef.StaticEvents is not null)
+        {
+            foreach (var eventDef in _apiObjectDef.StaticEvents)
+            {
+                _staticEvents.Add(new EventDef(eventDef, this, MemberDefType.Static));
+            }
+        }
+        if (_apiObjectDef.InstanceEvents is not null)
+        {
+            foreach (var eventDef in _apiObjectDef.InstanceEvents)
+            {
+                _instanceEvents.Add(new EventDef(eventDef, this, MemberDefType.Instance));
+            }
+        }
+        if (_apiObjectDef.NestedTypes is not null)
+        {
+            foreach (var nestedType in _apiObjectDef.NestedTypes)
+            {
+                _nestedObjects.Add(new ObjectDef(nestedType));
+            }
+        }
+    }
+
+    private class GetterSetter
+    {
+        public Api.MethodDef? Getter;
+        public Api.MethodDef? Setter;
+    }
+
+    // Depending on the compiler, some classes have "InterfaceName.get_Item" and "InterfaceName.set_Item" methods
+    // instead of indexer explicit interface implementation. Look for those methods and turn them into an indexer property.
+    private void InitExplicitInterfaceImplementationIndexerMethods()
+    {
+        if (_apiObjectDef.InstanceMethods is null)
+            return;
+
+        Dictionary<string, GetterSetter>? indexerMethods = null;
+        foreach (var method in _apiObjectDef.InstanceMethods)
+        {
+            if (method.ExplicitInterfaceType is null)
+                continue;
+
+            bool isGetter = method.Name == "get_Item";
+            bool isSetter = method.Name == "set_Item";
+            if (!isGetter && !isSetter)
+                continue;
+
+            if (indexerMethods is null)
+            {
+                indexerMethods = [];
+            }
+
+            string interfaceName = method.ExplicitInterfaceType.Name;
+            if (!indexerMethods.TryGetValue(interfaceName, out var getterSetter))
+            {
+                getterSetter = new GetterSetter();
+                indexerMethods.Add(interfaceName, getterSetter);
+            }
+
+            if (isGetter)
+            {
+                getterSetter.Getter = method;
+            }
+            else
+            if (isSetter)
+            {
+                getterSetter.Setter = method;
+            }
+        }
+
+        _explicitInterfaceImplementationIndexerMethods = indexerMethods;
+
+        if (_explicitInterfaceImplementationIndexerMethods is not null)
+        {
+            foreach (var getterSetter in _explicitInterfaceImplementationIndexerMethods.Values)
+            {
+                Debug.Assert(getterSetter.Getter is not null);
+                _instanceProperties.Add(new PropertyDef(
+                    getterSetter.Getter!,
+                    getterSetter.Setter,
+                    this,
+                    MemberDefType.Instance));
+            }
+        }
+    }
+
+    private bool IsExplicitInterfaceImplementationIndexerMethod(Api.MethodDef apiMethodDef)
+    {
+        if (_explicitInterfaceImplementationIndexerMethods is null)
+            return false;
+
+        foreach (var getterSetter in _explicitInterfaceImplementationIndexerMethods.Values)
+        {
+            if (apiMethodDef == getterSetter.Getter || apiMethodDef == getterSetter.Setter)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool IsSupported()
+    {
+        return Type.IsSupported() && !Type.IsRpcSupportedType && !Type.IsObject;
+    }
+
+    public bool ContainsSignature(PropertyDef propertyDef)
+    {
+        string signature = propertyDef.GetSignatureId();
+        foreach (var property in _staticProperties)
+        {
+            if (property.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var property in _instanceProperties)
+        {
+            if (property.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool ContainsSignature(MethodDef methodDef)
+    {
+        string signature = methodDef.GetSignatureId();
+        foreach (var method in _constructors)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var method in _staticMethods)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var method in _instanceMethods)
+        {
+            if (method.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool ContainsSignature(EventDef eventDef)
+    {
+        string signature = eventDef.GetSignatureId();
+        foreach (var e in _staticEvents)
+        {
+            if (e.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        foreach (var e in _instanceEvents)
+        {
+            if (e.GetSignatureId() == signature)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public string GetSourceCodeFileName()
+    {
+        var fullName = _apiObjectDef.FullName.Split(',')[0];
+        return $"WinUIShell.{fullName}.g.cs";
+    }
+
+    public string Generate()
+    {
+        var codeWriter = new CodeWriter();
+
+        var ns = Generator.GetTargetNamespace(_apiObjectDef.Namespace);
+        codeWriter.Append($$"""
+            // <auto-generated/>
+            #nullable enable
+
+            using System.Management.Automation;
+            using WinUIShell;
+            using WinUIShell.Common;
+
+            namespace {{ns}};
+
+            """);
+
+        Generate(codeWriter);
+        return codeWriter.ToString();
+    }
+
+    private void Generate(CodeWriter codeWriter)
+    {
+        if (Type.IsInterface)
+        {
+            GenerateInterface(codeWriter);
+            GenerateInterfaceImpl(codeWriter);
+        }
+        else
+        {
+            GenerateClass(codeWriter);
+        }
+    }
+
+    private void GenerateInterface(CodeWriter codeWriter)
+    {
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+        StringBuilder baseTypeExpression = new();
+        foreach (var interfaceType in _interfaces)
+        {
+            if (interfaceType.IsSupported())
+            {
+                if (baseTypeExpression.Length == 0)
+                {
+                    _ = baseTypeExpression.Append(" : ");
+                }
+                else
+                {
+                    _ = baseTypeExpression.Append(", ");
+                }
+                _ = baseTypeExpression.Append(interfaceType.GetName());
+            }
+        }
+
+        if (baseTypeExpression.Length == 0)
+        {
+            _ = baseTypeExpression.Append($" : IWinUIShellObject");
+        }
+
+        if (Type.IsSystemInterface)
+        {
+            _ = baseTypeExpression.Append($", {Type.GetSystemInterfaceName()}");
+        }
+
+        codeWriter.Append($$"""
+            public partial interface {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            {
+            """);
+
+        if (Type.IsSystemInterface)
+        {
+            codeWriter.IncrementIndent();
+            foreach (var method in _instanceMethods)
+            {
+                if (AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                _ = SpecializedMethodGenerator.Generate(codeWriter, method);
+            }
+            codeWriter.DecrementIndent();
+        }
+        else
+        {
+            codeWriter.IncrementIndent();
+
+            foreach (var method in _constructors)
+            {
+                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}
+                    """);
+            }
+
+            foreach (var property in _staticProperties)
+            {
+                if (!property.IsSupported())
+                    continue;
+
+                codeWriter.Append($$"""
+                    {{property.GetSignatureExpression()}}
+                    {
+                    """);
+                codeWriter.IncrementIndent();
+
+                if (property.CanRead)
+                {
+                    codeWriter.Append($$"""
+                        get;
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    codeWriter.Append($$"""
+                        set;
+                        """);
+                }
+
+                codeWriter.DecrementIndent();
+                codeWriter.AppendAndReserveNewLine("}");
+            }
+
+            foreach (var property in _instanceProperties)
+            {
+                if (!property.IsSupported())
+                    continue;
+
+                codeWriter.Append($$"""
+                    {{property.GetSignatureExpression()}}
+                    {
+                    """);
+                codeWriter.IncrementIndent();
+
+                if (property.CanRead)
+                {
+                    codeWriter.Append($$"""
+                        get;
+                        """);
+                }
+
+                if (property.CanWrite)
+                {
+                    codeWriter.Append($$"""
+                        set;
+                        """);
+                }
+
+                codeWriter.DecrementIndent();
+                codeWriter.AppendAndReserveNewLine("}");
+            }
+
+            foreach (var method in _staticMethods)
+            {
+                if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var method in _instanceMethods)
+            {
+                if (AttributeGenerator.IsSurpressed(method))
+                    continue;
+
+                if (SpecializedMethodGenerator.Generate(codeWriter, method))
+                    continue;
+
+                if (!method.IsSupported())
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var eventDef in _staticEvents)
+            {
+                if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetScriptBlockMethodSignatureExpression()}};
+                    """);
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetEventCallbackMethodSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var eventDef in _instanceEvents)
+            {
+                if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                    continue;
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetScriptBlockMethodSignatureExpression()}};
+                    """);
+
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{eventDef.GetEventCallbackMethodSignatureExpression()}};
+                    """);
+            }
+
+            foreach (var nestedObject in _nestedObjects)
+            {
+                nestedObject.Generate(codeWriter);
+            }
+
+            codeWriter.DecrementIndent();
+        }
+        codeWriter.AppendAndReserveNewLine("}");
+    }
+
+    private void GenerateClass(CodeWriter codeWriter)
+    {
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+
+        StringBuilder baseTypeExpression = new();
+        if (BaseType is not null && BaseType.IsSupported())
+        {
+            _ = baseTypeExpression.Append($" : {BaseType.GetName()}");
+        }
+        bool hasBaseType = baseTypeExpression.Length > 0;
+
+        foreach (var interfaceType in _interfaces)
+        {
+            if (interfaceType.IsSupported())
+            {
+                if (baseTypeExpression.Length == 0)
+                {
+                    _ = baseTypeExpression.Append(" : ");
+                }
+                else
+                {
+                    _ = baseTypeExpression.Append(", ");
+                }
+                _ = baseTypeExpression.Append(interfaceType.GetName());
+            }
+        }
+
+        if (baseTypeExpression.Length == 0)
+        {
+            _ = baseTypeExpression.Append($" : IWinUIShellObject");
+        }
+
+        codeWriter.Append($$"""
+            public partial class {{_apiObjectDef.Name}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            {
+            """);
+        codeWriter.IncrementIndent();
+
+        if (_staticEvents.Count > 0)
+        {
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Static));
+        }
+        if (_instanceEvents.Count > 0)
+        {
+            codeWriter.AppendAndReserveNewLine(EventDef.GetEventCallbackListExpression(MemberDefType.Instance));
+        }
+
+        if (!hasBaseType)
+        {
+            codeWriter.AppendAndReserveNewLine($$"""
+                public ObjectId WinUIShellObjectId { get; protected set; } = new();
+                """);
+        }
+
+        string baseInitializer = hasBaseType ? " : base(ObjectId.Null)" : "";
+        foreach (var method in _constructors)
+        {
+            if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine($$"""
+                {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}{{baseInitializer}}
+                {
+                    WinUIShellObjectId = CommandClient.Get().CreateObject(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        this{{method.GetArgumentsExpression()}});
+                }
+                """);
+        }
+
+        if (!AttributeGenerator.IsConstructorSurpressed(Type.GetName()))
+        {
+            if (hasBaseType)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                internal {{_apiObjectDef.Name}}(ObjectId id) : base(id)
+                {
+                }
+                """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                internal {{_apiObjectDef.Name}}(ObjectId id)
+                {
+                    WinUIShellObjectId = id;
+                }
+                """);
+            }
+        }
+
+        foreach (var property in _staticProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            codeWriter.Append($$"""
+                {{property.GetSignatureExpression()}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                codeWriter.Append($$"""
+                    get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                    """);
+            }
+
+            if (property.CanWrite)
+            {
+                codeWriter.Append($$"""
+                    set => PropertyAccessor.SetStatic(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                        {{property.GetNameOfExpression()}},
+                        value);
+                    """);
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var property in _instanceProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            codeWriter.Append($$"""
+                {{property.GetSignatureExpression()}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, "{{property.GetOriginalName()}}"{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.Get<{{property.Type.GetName()}}, {{property.Type.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        """);
+                }
+            }
+
+            // Make the property readonly if it's struct. We cannot update value type objects in the ObjectStore.
+            if (property.CanWrite && (Type.IsClass || property.ImplementsInterface))
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName()}}", {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.Set(WinUIShellObjectId, {{property.GetNameOfExpression()}}, {{property.Type.GetValueExpression()}});
+                        """);
+                }
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var method in _staticMethods)
+        {
+            if (!method.IsSupported() || AttributeGenerator.IsSurpressed(method))
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}}
+                    {
+                        CommandClient.Get().InvokeStaticMethod(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}}
+                    {
+                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
+        }
+
+        foreach (var method in _instanceMethods)
+        {
+            if (AttributeGenerator.IsSurpressed(method))
+                continue;
+
+            if (SpecializedMethodGenerator.Generate(codeWriter, method))
+                continue;
+
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!;
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}}
+                    {
+                        CommandClient.Get().InvokeMethod(
+                            WinUIShellObjectId,
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetSignatureExpression()}}
+                    {
+                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
+                            WinUIShellObjectId,
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
+        }
+
+        foreach (var eventDef in _staticEvents)
+        {
+            if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine(eventDef.GetScriptBlockMethodExpression());
+            codeWriter.AppendAndReserveNewLine(eventDef.GetEventCallbackMethodExpression());
+        }
+
+        foreach (var eventDef in _instanceEvents)
+        {
+            if (!eventDef.IsSupported() || AttributeGenerator.IsSurpressed(eventDef))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine(eventDef.GetScriptBlockMethodExpression());
+            codeWriter.AppendAndReserveNewLine(eventDef.GetEventCallbackMethodExpression());
+        }
+
+        foreach (var nestedObject in _nestedObjects)
+        {
+            nestedObject.Generate(codeWriter);
+        }
+
+        codeWriter.DecrementIndent();
+        codeWriter.AppendAndReserveNewLine("}");
+    }
+
+    // When properties or methods return an object with its interface type, and if we don't have the corresponding object type on the client side,
+    // we have to create an accessor object that implements the interface. This function generates such implementation classes.
+    private void GenerateInterfaceImpl(CodeWriter codeWriter)
+    {
+        string genericArgumentsExpression = Type.GetGenericArgumentsExpression();
+        string baseTypeExpression = $" : {_apiObjectDef.Name}{genericArgumentsExpression}";
+        string className = $"{_apiObjectDef.Name}Impl";
+
+        codeWriter.Append($$"""
+            public partial class {{className}}{{genericArgumentsExpression}}{{baseTypeExpression}}
+            {
+            """);
+        codeWriter.IncrementIndent();
+
+        codeWriter.AppendAndReserveNewLine($$"""
+            public ObjectId WinUIShellObjectId { get; protected set; } = new();
+            """);
+
+        if (!AttributeGenerator.IsConstructorSurpressed(Type.GetName()))
+        {
+            codeWriter.AppendAndReserveNewLine($$"""
+                internal {{className}}(ObjectId id)
+                {
+                    WinUIShellObjectId = id;
+                }
+                """);
+        }
+
+        SignatureStore signatureStore = new();
+        GenerateInterfaceImplBody(codeWriter, className, Type.GenericArguments, signatureStore);
+
+        codeWriter.DecrementIndent();
+        codeWriter.AppendAndReserveNewLine("}");
+    }
+
+    private void GenerateInterfaceImplBody(CodeWriter codeWriter, string rootClassName, List<TypeDef>? genericTypeParametersOverride, SignatureStore signatureStore)
+    {
+        if (signatureStore.ContainsObject(this))
+            return;
+
+        foreach (var property in _staticProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            bool isExplicit = signatureStore.ContainsSignature(property);
+            TypeDef propertyType = property.Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+
+            codeWriter.Append($$"""
+                {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                codeWriter.Append($$"""
+                    get => PropertyAccessor.GetStatic<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
+                        {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                    """);
+            }
+
+            if (property.CanWrite)
+            {
+                codeWriter.Append($$"""
+                    set => PropertyAccessor.SetStatic(
+                        ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
+                        {{property.GetNameOfExpression()}},
+                        value);
+                    """);
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var property in _instanceProperties)
+        {
+            if (!property.IsSupported())
+                continue;
+
+            bool isExplicit = signatureStore.ContainsSignature(property);
+            TypeDef propertyType = property.Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+
+            codeWriter.Append($$"""
+                {{property.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                {
+                """);
+            codeWriter.IncrementIndent();
+
+            if (property.CanRead)
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}"{{property.GetIndexerArgumentsExpression()}}){{(propertyType.IsNullable ? "" : "!")}};
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        get => PropertyAccessor.Get<{{propertyType.GetName()}}, {{propertyType.GetReturnInstanceTypeName()}}>(WinUIShellObjectId, {{property.GetNameOfExpression(isExplicit)}}){{(propertyType.IsNullable ? "" : "!")}};
+                        """);
+                }
+            }
+
+            if (property.CanWrite)
+            {
+                if (property.IsIndexer)
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}", {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        """);
+                }
+                else
+                {
+                    codeWriter.Append($$"""
+                        set => PropertyAccessor.Set(WinUIShellObjectId, {{property.GetNameOfExpression(isExplicit)}}, {{propertyType.GetValueExpression()}});
+                        """);
+                }
+            }
+
+            codeWriter.DecrementIndent();
+            codeWriter.AppendAndReserveNewLine("}");
+        }
+
+        foreach (var method in _staticMethods)
+        {
+            if (!method.IsSupported())
+                continue;
+
+            bool isExplicit = signatureStore.ContainsSignature(method);
+
+            if (AttributeGenerator.IsSurpressed(method, isExplicit))
+                continue;
+
+            var returnType = method.ReturnType!.OverrideGenericTypeParameter(genericTypeParametersOverride);
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                    {
+                        CommandClient.Get().InvokeStaticMethod(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                    {
+                        return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
+                            ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
+        }
+
+        foreach (var method in _instanceMethods)
+        {
+            bool isExplicit = signatureStore.ContainsSignature(method);
+
+            if (AttributeGenerator.IsSurpressed(method, isExplicit))
+                continue;
+
+            if (SpecializedMethodGenerator.GenerateForInterfaceImpl(codeWriter, method, genericTypeParametersOverride, signatureStore))
+                continue;
+
+            if (!method.IsSupported())
+                continue;
+
+            var returnType = method.ReturnType!.OverrideGenericTypeParameter(genericTypeParametersOverride);
+            if (returnType.IsVoid)
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                    {
+                        CommandClient.Get().InvokeMethod(
+                            WinUIShellObjectId,
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
+                    }
+                    """);
+            }
+            else
+            {
+                codeWriter.AppendAndReserveNewLine($$"""
+                    {{method.GetInterfaceImplSignatureExpression(isExplicit, genericTypeParametersOverride)}}
+                    {
+                        return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}, {{returnType.GetReturnInstanceTypeName()}}>(
+                            WinUIShellObjectId,
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                    }
+                    """);
+            }
+        }
+
+        if (_staticEvents.Count > 0)
+        {
+            string eventCallbackList = EventDef.GetEventCallbackListExpression(MemberDefType.Static);
+            if (!signatureStore.ContainsString(eventCallbackList))
+            {
+                codeWriter.AppendAndReserveNewLine(eventCallbackList);
+                signatureStore.AddString(eventCallbackList);
+            }
+        }
+        if (_instanceEvents.Count > 0)
+        {
+            string eventCallbackList = EventDef.GetEventCallbackListExpression(MemberDefType.Instance);
+            if (!signatureStore.ContainsString(eventCallbackList))
+            {
+                codeWriter.AppendAndReserveNewLine(eventCallbackList);
+                signatureStore.AddString(eventCallbackList);
+            }
+        }
+
+        foreach (var eventDef in _instanceEvents)
+        {
+            if (!eventDef.IsSupported())
+                continue;
+
+            bool isExplicit = signatureStore.ContainsSignature(eventDef);
+
+            if (AttributeGenerator.IsSurpressed(eventDef, isExplicit))
+                continue;
+
+            codeWriter.AppendAndReserveNewLine(
+                eventDef.GetInterfaceImplScriptBlockMethodExpression(isExplicit));
+
+            codeWriter.AppendAndReserveNewLine(
+                eventDef.GetInterfaceImplEventCallbackMethodExpression(
+                    rootClassName,
+                    isExplicit,
+                    genericTypeParametersOverride));
+        }
+
+        signatureStore.AddObjectDef(this);
+
+        foreach (var interfaceType in _interfaces)
+        {
+            if (!interfaceType.IsSupported())
+                continue;
+
+            ObjectDef? interfaceObject = ObjectGenerator.GetObjectDef(interfaceType);
+            if (interfaceObject is null)
+                continue;
+
+            TypeDef overridenInterfaceType = interfaceType.OverrideGenericTypeParameter(genericTypeParametersOverride);
+
+            interfaceObject.GenerateInterfaceImplBody(
+                codeWriter,
+                rootClassName,
+                overridenInterfaceType.GenericArguments,
+                signatureStore);
+        }
+    }
+}

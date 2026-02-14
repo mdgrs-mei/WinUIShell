@@ -6,9 +6,12 @@ public class RpcValue
     public ObjectId? IdValue { get; set; }
     public bool? BoolValue { get; set; }
     public byte? ByteValue { get; set; }
+    public char? CharValue { get; set; }
     public ushort? UShortValue { get; set; }
     public int? IntValue { get; set; }
     public uint? UIntValue { get; set; }
+    public long? LongValue { get; set; }
+    public float? FloatValue { get; set; }
     public double? DoubleValue { get; set; }
     public string? StringValue { get; set; }
     public RpcValue[]? ArrayValue { get; set; }
@@ -31,9 +34,12 @@ public class RpcValue
             ObjectId or
             bool or
             byte or
+            char or
             ushort or
             int or
             uint or
+            long or
+            float or
             double or
             string or
             Enum;
@@ -73,6 +79,9 @@ public class RpcValue
             case byte value:
                 ByteValue = value;
                 break;
+            case char value:
+                CharValue = value;
+                break;
             case ushort value:
                 UShortValue = value;
                 break;
@@ -81,6 +90,12 @@ public class RpcValue
                 break;
             case uint value:
                 UIntValue = value;
+                break;
+            case long value:
+                LongValue = value;
+                break;
+            case float value:
+                FloatValue = value;
                 break;
             case double value:
                 DoubleValue = value;
@@ -139,6 +154,10 @@ public class RpcValue
         {
             return ByteValue;
         }
+        if (CharValue is not null)
+        {
+            return CharValue;
+        }
         if (UShortValue is not null)
         {
             return UShortValue;
@@ -150,6 +169,14 @@ public class RpcValue
         if (UIntValue is not null)
         {
             return UIntValue;
+        }
+        if (LongValue is not null)
+        {
+            return LongValue;
+        }
+        if (FloatValue is not null)
+        {
+            return FloatValue;
         }
         if (DoubleValue is not null)
         {

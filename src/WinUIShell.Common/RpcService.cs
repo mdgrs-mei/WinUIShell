@@ -221,7 +221,7 @@ internal sealed class RpcService
             () =>
             {
                 var obj = ObjectStore.Get().GetObject(id);
-                var value = RpcValueConverter.ConvertRpcValueTo<object>(rpcValue);
+                var value = RpcValueConverter.ConvertRpcValueTo<object, object>(rpcValue);
                 Invoker.Get().SetProperty(obj, propertyName, value);
             });
     }
@@ -236,7 +236,7 @@ internal sealed class RpcService
                 try
                 {
                     var obj = ObjectStore.Get().GetObject(id);
-                    var value = RpcValueConverter.ConvertRpcValueTo<object>(rpcValue);
+                    var value = RpcValueConverter.ConvertRpcValueTo<object, object>(rpcValue);
                     Invoker.Get().SetProperty(obj, propertyName, value);
 
                     taskCompletion.SetResult();
@@ -248,6 +248,17 @@ internal sealed class RpcService
                 }
             });
         return taskCompletion.Task;
+    }
+
+    public void SetStaticProperty(CommandQueueId queueId, string className, string propertyName, RpcValue rpcValue)
+    {
+        _commandServer.AddCommand(
+            queueId,
+            () =>
+            {
+                var value = RpcValueConverter.ConvertRpcValueTo<object, object>(rpcValue);
+                Invoker.Get().SetStaticProperty(className, propertyName, value);
+            });
     }
 
     public Task<RpcValue> GetPropertyAsync(ObjectId id, string propertyName)
@@ -293,26 +304,26 @@ internal sealed class RpcService
         return taskCompletion.Task;
     }
 
-    public void SetIndexerProperty(ObjectId id, RpcValue rpcIndex, RpcValue rpcValue)
+    public void SetIndexerProperty(ObjectId id, string indexerName, RpcValue rpcValue, RpcValue[]? rpcIndexArguments)
     {
         _commandServer.AddCommand(
             CommandQueueId.MainThread,
             () =>
             {
                 var obj = ObjectStore.Get().GetObject(id);
-                var index = RpcValueConverter.ConvertRpcValueTo<object>(rpcIndex);
-                var value = RpcValueConverter.ConvertRpcValueTo<object>(rpcValue);
+                var value = RpcValueConverter.ConvertRpcValueTo<object, object>(rpcValue);
+                var indexArguments = RpcValueConverter.ConvertRpcValueArrayToObjectArray(rpcIndexArguments);
 
-                if (index is null)
+                if (indexArguments is null)
                 {
                     throw new InvalidOperationException("Index of Indexer property cannot be null.");
                 }
 
-                Invoker.Get().SetIndexerProperty(obj, index, value);
+                Invoker.Get().SetIndexerProperty(obj, indexerName, value, indexArguments);
             });
     }
 
-    public Task<RpcValue> GetIndexerPropertyAsync(ObjectId id, RpcValue rpcIndex)
+    public Task<RpcValue> GetIndexerPropertyAsync(ObjectId id, string indexerName, RpcValue[]? rpcIndexArguments)
     {
         var taskCompletion = new TaskCompletionSource<RpcValue>();
         _commandServer.AddCommand(
@@ -322,13 +333,14 @@ internal sealed class RpcService
                 try
                 {
                     var obj = ObjectStore.Get().GetObject(id);
-                    var index = RpcValueConverter.ConvertRpcValueTo<object>(rpcIndex);
-                    if (index is null)
+                    var indexArguments = RpcValueConverter.ConvertRpcValueArrayToObjectArray(rpcIndexArguments);
+
+                    if (indexArguments is null)
                     {
                         throw new InvalidOperationException("Index of Indexer property cannot be null.");
                     }
 
-                    var value = Invoker.Get().GetIndexerProperty(obj, index);
+                    var value = Invoker.Get().GetIndexerProperty(obj, indexerName, indexArguments);
                     taskCompletion.SetResult(RpcValueConverter.ConvertObjectToRpcValue(value));
                 }
                 catch (Exception e)

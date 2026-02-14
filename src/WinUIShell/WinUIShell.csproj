@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
     <AnalysisMode>All</AnalysisMode>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
@@ -11,11 +12,20 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!-- And avoid errors due to GenerateDocumentationFile -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WinUIShell.Generator\WinUIShell.Generator.csproj">
+      <OutputItemType>Analyzer</OutputItemType>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\WinUIShell.Common\WinUIShell.Common.csproj" />
     <PackageReference Include="System.Management.Automation" Version="7.4.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\WinUIShell.ApiExporter\Api.xml" />
   </ItemGroup>
 
 </Project>

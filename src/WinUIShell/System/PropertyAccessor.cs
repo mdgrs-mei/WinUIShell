@@ -4,11 +4,11 @@ namespace WinUIShell;
 
 internal static class PropertyAccessor
 {
-    public static T? Get<T>(ObjectId id, string propertyName)
+    public static TReturn? Get<TReturn, TCreate>(ObjectId id, string propertyName)
     {
         try
         {
-            return CommandClient.Get().GetProperty<T>(id, propertyName);
+            return CommandClient.Get().GetProperty<TReturn, TCreate>(id, propertyName);
         }
         catch (Exception e)
         {
@@ -29,16 +29,16 @@ internal static class PropertyAccessor
         CommandClient.Get().SetPropertyWait(id, propertyName, value);
     }
 
-    public static void SetIndexer(ObjectId id, object index, object? value)
+    public static void SetIndexer(ObjectId id, string indexerName, object? value, params object?[] indexArguments)
     {
-        CommandClient.Get().SetIndexerProperty(id, index, value);
+        CommandClient.Get().SetIndexerProperty(id, indexerName, value, indexArguments);
     }
 
-    public static T? GetIndexer<T>(ObjectId id, object index)
+    public static TReturn? GetIndexer<TReturn, TCreate>(ObjectId id, string indexerName, params object?[] indexArguments)
     {
         try
         {
-            return CommandClient.Get().GetIndexerProperty<T>(id, index);
+            return CommandClient.Get().GetIndexerProperty<TReturn, TCreate>(id, indexerName, indexArguments);
         }
         catch (Exception e)
         {
@@ -47,11 +47,16 @@ internal static class PropertyAccessor
         }
     }
 
-    public static T? GetStatic<T>(string className, string propertyName)
+    public static void SetStatic(string className, string propertyName, object? value)
+    {
+        CommandClient.Get().SetStaticProperty(className, propertyName, value);
+    }
+
+    public static TReturn? GetStatic<TReturn, TCreate>(string className, string propertyName)
     {
         try
         {
-            return CommandClient.Get().GetStaticProperty<T>(className, propertyName);
+            return CommandClient.Get().GetStaticProperty<TReturn, TCreate>(className, propertyName);
         }
         catch (Exception e)
         {

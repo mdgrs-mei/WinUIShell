@@ -1,4 +1,9 @@
 using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Windowing
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Markup
+
 if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
@@ -109,13 +114,13 @@ foreach ($flyoutItem in $menuFlyout.Items) {
 
             switch ($flyoutItem.Text) {
                 'Compact Overlay' {
-                    $presenter = [CompactOverlayPresenter]::new()
+                    $presenter = [CompactOverlayPresenter]::Create()
                 }
                 'Fullscreen' {
-                    $presenter = [FullScreenPresenter]::new()
+                    $presenter = [FullScreenPresenter]::Create()
                 }
                 default {
-                    $presenter = [OverlappedPresenter]::new()
+                    $presenter = [OverlappedPresenter]::Create()
                     $win.AppWindow.ResizeClient(1200, 600)
                 }
             }

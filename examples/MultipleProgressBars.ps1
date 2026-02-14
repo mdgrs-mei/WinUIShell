@@ -1,6 +1,9 @@
 # See CancelLongRunningEventCallback.ps1 first for basic usage of runspace pool event callbacks.
 
 using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Media
 
 $resources = [Application]::Current.Resources
 $syncHashList = @()
@@ -68,8 +71,8 @@ function CreateProgressBarSet() {
     $progressBar.Value = 0
     $syncHash.progressBar = $progressBar
 
-    $syncHash.pauseIcon = [WinUIShell.SymbolIcon]::new('Pause')
-    $syncHash.playIcon = [WinUIShell.SymbolIcon]::new('Play')
+    $syncHash.pauseIcon = [SymbolIcon]::new('Pause')
+    $syncHash.playIcon = [SymbolIcon]::new('Play')
 
     $pauseButton = [Button]::new()
     $pauseButton.Content = $syncHash.pauseIcon

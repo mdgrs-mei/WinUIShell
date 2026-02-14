@@ -1,4 +1,8 @@
-using namespace WinUIShell
+using namespace WinUIShell.Microsoft.UI
+using namespace WinUIShell.Microsoft.UI.Xaml
+using namespace WinUIShell.Microsoft.UI.Xaml.Controls
+using namespace WinUIShell.Microsoft.UI.Xaml.Media
+
 if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
