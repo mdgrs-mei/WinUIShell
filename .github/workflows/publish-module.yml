@@ -18,7 +18,7 @@ jobs:
       - name: Build
         shell: pwsh
         run: |
-          & ./Build.ps1 Release
+          & ./Build.ps1 -Configuration Release -ExportApi
       - name: Publish
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
