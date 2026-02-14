@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.0] - 2026-02-15
+
+### Added
+
+- Added all controls by using source generator
+
+### Changed
+
+- Changed namespaces of WinUIShell types to follow WindowsAppSDK namespaces
+
 ## [0.9.0] - 2025-09-16
 
 ### Added
