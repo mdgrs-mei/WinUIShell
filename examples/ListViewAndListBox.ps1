@@ -137,7 +137,7 @@ function AddListItems($List) {
     $listItems = $List.Items
     $nameStyle = $resources['BodyStrongTextBlockStyle']
     $descStyle = $resources['CaptionTextBlockStyle']
-    $bitmap = [BitmapImage]::new("$PSScriptRoot/resources/circle.png")
+    $bitmap = [BitmapImage]::new("$PSScriptRoot/resources/Circle.png")
 
     foreach ($itemName in $itemNames) {
         $icon = [ImageIcon]::new()

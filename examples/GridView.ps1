@@ -90,7 +90,7 @@ function AddItems($View) {
     $viewItems = $View.Items
     $nameStyle = $resources['SubtitleTextBlockStyle']
     $descStyle = $resources['CaptionTextBlockStyle']
-    $bitmap = [BitmapImage]::new("$PSScriptRoot/resources/circle.png")
+    $bitmap = [BitmapImage]::new("$PSScriptRoot/resources/Circle.png")
 
     foreach ($itemName in $itemNames) {
         $icon = [ImageIcon]::new()
