@@ -78,7 +78,7 @@ ContentTemplateRoot  : WinUIShell.Microsoft.UI.Xaml.Controls.TextBlock
 
 Since the API of WinUIShell follows the WinUI 3's API, you can read the Windows App SDK documentation to see what should be available. The documentation of the `Button` class is [here](https://learn.microsoft.com/en-us/windows/windows-app-sdk/api/winrt/microsoft.ui.xaml.controls.button?view=windows-app-sdk-1.7) for example.
 
-You can also refer to the [examples](./examples/) folder for script samples.
+You can also refer to the [examples](./examples/Examples.md) folder for script samples.
 
 ## How It Works
 
