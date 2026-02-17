@@ -7,6 +7,17 @@ if (-not (Get-Module WinUIShell)) {
     Import-Module WinUIShell
 }
 
+$autoSuggestBox = [AutoSuggestBox]::new()
+$autoSuggestBox.Width = 360
+$autoSuggestBox.VerticalAlignment = 'Center'
+$autoSuggestBox.PlaceholderText = 'Search..'
+$autoSuggestBox.QueryIcon = [SymbolIcon]::new('Find')
+
+$personPicture = [PersonPicture]::new()
+$personPicture.Width = 30
+$personPicture.Height = 30
+$personPicture.Initials = 'MD'
+
 $titleBar = [TitleBar]::new()
 $titleBar.IconSource = [SymbolIconSource]@{
     Symbol = 'Home'
@@ -14,15 +25,20 @@ $titleBar.IconSource = [SymbolIconSource]@{
 }
 $titleBar.Title = 'WinUIShell'
 $titleBar.Subtitle = 'Beta'
+$titleBar.Content = $autoSuggestBox
+$titleBar.RightHeader = $personPicture
 [Grid]::SetRow($titleBar, 0)
 
 $win = [Window]::new()
-$win.AppWindow.ResizeClient(400, 200)
-$win.ExtendsContentIntoTitleBar = $true
+$win.SystemBackdrop = [MicaBackdrop]::new()
+$win.AppWindow.ResizeClient(1000, 400)
 $win.SetTitleBar($titleBar)
+$win.ExtendsContentIntoTitleBar = $true
+$win.AppWindow.TitleBar.PreferredHeightOption = 'Tall'
 
 $text = [TextBlock]::new()
 $text.Text = 'Hello from PowerShell!'
+$text.FontSize = 24
 $text.HorizontalAlignment = 'Center'
 $text.VerticalAlignment = 'Center'
 [Grid]::SetRow($text, 1)
