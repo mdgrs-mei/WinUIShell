@@ -60,4 +60,30 @@ Minimum example that has a window and a button.
 
 <img width="414" height="244" alt="image" src="https://github.com/user-attachments/assets/8f9b12d2-e8a5-4189-954e-8999fc1bfe20" />
 
+## [SignInForm.ps1](./SignInForm.ps1)
 
+Example sign-in form that takes account name and password.
+
+<img width="432" height="456" alt="image" src="https://github.com/user-attachments/assets/7812345a-5b32-449e-8e7e-98bc848a8405" />
+
+## [TabView.ps1](./TabView.ps1)
+
+<img width="569" height="453" alt="image" src="https://github.com/user-attachments/assets/5e0490fc-b7e6-4356-8eff-5c28671ffe5c" />
+
+## [TextBoxValidation.ps1](./TextBoxValidation.ps1)
+
+Example to show the case where the `MainRunspaceSyncUI` event callback is required.
+
+<img width="436" height="197" alt="image" src="https://github.com/user-attachments/assets/f0b95a9d-b026-41e1-8e1b-81c39a96454a" />
+
+## [TitleBar.ps1](./TitleBar.ps1)
+
+Custom tall title bar with a search bar.
+
+<img width="1006" height="438" alt="image" src="https://github.com/user-attachments/assets/8bf60544-4388-4265-a5f2-5faf13265af7" />
+
+## [XamlReader.ps1](./XamlReader.ps1)
+
+Demonstrates how to construct UI elements from a Xaml string.
+
+<img width="1210" height="638" alt="image" src="https://github.com/user-attachments/assets/56b9bc6b-5a69-4b1e-8800-51d0a0419b8b" />
