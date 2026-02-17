@@ -5,14 +5,14 @@ using namespace WinUIShell.Microsoft.UI.Xaml
 using namespace WinUIShell.Microsoft.UI.Xaml.Controls
 using namespace WinUIShell.Microsoft.UI.Xaml.Media
 
+if (-not (Get-Module WinUIShell)) {
+    Import-Module WinUIShell
+}
+
 $resources = [Application]::Current.Resources
 $syncHashList = @()
 
 function Main() {
-    if (-not (Get-Module WinUIShell)) {
-        Import-Module WinUIShell
-    }
-
     # This script runs in the global scope of each runspace in the runspace pool.
     $runspaceInitializationScript = {
         param ($ScriptRoot)

@@ -31,12 +31,13 @@ function Main() {
     $listViewMultiSelection.IsOn = $false
     $listViewMultiSelection.Header = 'Multi Selection'
     $listViewMultiSelection.AddToggled({
-            if ($listViewMultiSelection.IsOn) {
-                $listView.SelectionMode = 'Multiple'
+            param ($ListView, $SenderToggle)
+            if ($SenderToggle.IsOn) {
+                $ListView.SelectionMode = 'Multiple'
             } else {
-                $listView.SelectionMode = 'Single'
+                $ListView.SelectionMode = 'Single'
             }
-        })
+        }, $listView)
     [Grid]::SetRow($listViewMultiSelection, 1)
     [Grid]::SetColumn($listViewMultiSelection, 0)
 
@@ -45,10 +46,11 @@ function Main() {
     $listViewRemoveItemButton.HorizontalAlignment = 'Stretch'
     $listViewRemoveItemButton.Content = 'Remove Selection'
     $listViewRemoveItemButton.AddClick({
+            param ($ListView)
             $removedItems = @()
-            $listView.SelectedItems | ForEach-Object { $removedItems += $_ }
-            $removedItems | ForEach-Object { $listView.Items.Remove($_) }
-        })
+            $ListView.SelectedItems | ForEach-Object { $removedItems += $_ }
+            $removedItems | ForEach-Object { $ListView.Items.Remove($_) }
+        }, $listView)
     [Grid]::SetRow($listViewRemoveItemButton, 2)
     [Grid]::SetColumn($listViewRemoveItemButton, 0)
 
@@ -66,12 +68,13 @@ function Main() {
     $listBoxMultiSelection.IsOn = $false
     $listBoxMultiSelection.Header = 'Multi Selection'
     $listBoxMultiSelection.AddToggled({
-            if ($listBoxMultiSelection.IsOn) {
-                $listBox.SelectionMode = 'Multiple'
+            param ($ListBox, $SenderToggle)
+            if ($SenderToggle.IsOn) {
+                $ListBox.SelectionMode = 'Multiple'
             } else {
-                $listBox.SelectionMode = 'Single'
+                $ListBox.SelectionMode = 'Single'
             }
-        })
+        }, $listBox)
     [Grid]::SetRow($listBoxMultiSelection, 1)
     [Grid]::SetColumn($listBoxMultiSelection, 1)
 
@@ -80,10 +83,11 @@ function Main() {
     $listBoxRemoveItemButton.HorizontalAlignment = 'Stretch'
     $listBoxRemoveItemButton.Content = 'Remove Selection'
     $listBoxRemoveItemButton.AddClick({
+            param ($ListBox)
             $removedItems = @()
-            $listBox.SelectedItems | ForEach-Object { $removedItems += $_ }
-            $removedItems | ForEach-Object { $listBox.Items.Remove($_) }
-        })
+            $ListBox.SelectedItems | ForEach-Object { $removedItems += $_ }
+            $removedItems | ForEach-Object { $ListBox.Items.Remove($_) }
+        }, $listBox)
     [Grid]::SetRow($listBoxRemoveItemButton, 2)
     [Grid]::SetColumn($listBoxRemoveItemButton, 1)
 

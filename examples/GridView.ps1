@@ -30,12 +30,13 @@ function Main() {
     $multiSelection.IsOn = $false
     $multiSelection.Header = 'Multi Selection'
     $multiSelection.AddToggled({
-            if ($multiSelection.IsOn) {
-                $gridView.SelectionMode = 'Multiple'
+            param ($GridView, $SenderToggle)
+            if ($SenderToggle.IsOn) {
+                $GridView.SelectionMode = 'Multiple'
             } else {
-                $gridView.SelectionMode = 'Single'
+                $GridView.SelectionMode = 'Single'
             }
-        })
+        }, $gridView)
     [Grid]::SetRow($multiSelection, 1)
 
     $removeItemButton = [Button]::new()
@@ -43,10 +44,11 @@ function Main() {
     $removeItemButton.HorizontalAlignment = 'Stretch'
     $removeItemButton.Content = 'Remove Selection'
     $removeItemButton.AddClick({
+            param ($GridView)
             $removedItems = @()
-            $gridView.SelectedItems | ForEach-Object { $removedItems += $_ }
-            $removedItems | ForEach-Object { $gridView.Items.Remove($_) }
-        })
+            $GridView.SelectedItems | ForEach-Object { $removedItems += $_ }
+            $removedItems | ForEach-Object { $GridView.Items.Remove($_) }
+        }, $gridView)
     [Grid]::SetRow($removeItemButton, 2)
 
     $row0 = [RowDefinition]::new()
