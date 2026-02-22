@@ -1,6 +1,4 @@
-﻿
-
-namespace WinUIShell.Common;
+﻿namespace WinUIShell.Common;
 
 public static class RpcValueConverter
 {
@@ -14,25 +12,33 @@ public static class RpcValueConverter
         {
             // Newly created object on the server side, and no type mapping was found.
             // Create the object on the client side with the return type. It needs to have a constructor from ObjectId.
-            if (typeof(TCreate) == typeof(object))
+            Type createType = typeof(TReturn);
+            if (createType == typeof(object))
             {
                 throw new InvalidOperationException($"Object not found or unsupported object type. Id:[{objectId.Id}], Type:[{objectId.Type}].");
             }
-            else
+            else if (createType.IsInterface)
             {
-                obj = Activator.CreateInstance(
-                    typeof(TCreate),
-                    System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
-                    null,
-                    [objectId],
-                    null);
-
-                if (obj == null)
+                var interfaceImplType = GetInterfaceImplType(createType);
+                if (interfaceImplType is null)
                 {
-                    throw new InvalidOperationException($"Failed to create instance of type [{typeof(TCreate).Name}].");
+                    throw new InvalidOperationException($"Unsupported interface type [{createType.FullName}]. Id:[{objectId.Id}], Type:[{objectId.Type}].");
                 }
-                ObjectStore.Get().RegisterObject(objectId, obj);
+                createType = interfaceImplType;
             }
+
+            obj = Activator.CreateInstance(
+                createType,
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public,
+                null,
+                [objectId],
+                null);
+
+            if (obj == null)
+            {
+                throw new InvalidOperationException($"Failed to create instance of type [{createType.FullName}].");
+            }
+            ObjectStore.Get().RegisterObject(objectId, obj);
         }
 
         return (TReturn?)obj;
@@ -88,6 +94,43 @@ public static class RpcValueConverter
         {
             return value;
         }
+    }
+
+    private static Type? GetInterfaceImplType(Type interfaceType)
+    {
+        // Get interface Impl type fullname from interface type fullname.
+        // fullName has a format like "WinUIShell.Namespace.Class`1+InnerClass+InnerMost`2[[WinUIShell.Namespace.GenericArgumentClass, WinUIShell, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]".
+        var fullName = interfaceType.FullName!;
+
+        // System interface types don't have "WinUIShell" namespace. Add it here as Impl classes are always under WinUIShell namespace.
+        if (!fullName.StartsWith("WinUIShell.", StringComparison.Ordinal))
+        {
+            fullName = "WinUIShell." + fullName;
+        }
+
+        int insertIndex = fullName.Length;
+        int firstGenericArgumentSeparator = fullName.IndexOf('[', StringComparison.Ordinal);
+        if (firstGenericArgumentSeparator >= 0)
+        {
+            insertIndex = firstGenericArgumentSeparator;
+        }
+
+        int lastNestedClassSeparator = fullName.LastIndexOf('+', insertIndex - 1);
+        int lastGenericTypeSeparator = fullName.LastIndexOf('`', insertIndex - 1);
+        if (lastNestedClassSeparator >= 0)
+        {
+            if (lastNestedClassSeparator < lastGenericTypeSeparator)
+            {
+                insertIndex = lastGenericTypeSeparator;
+            }
+        }
+        else if (lastGenericTypeSeparator >= 0)
+        {
+            insertIndex = lastGenericTypeSeparator;
+        }
+
+        string implTypeFullName = $"{fullName.Insert(insertIndex, "Impl")}, WinUIShell";
+        return Type.GetType(implTypeFullName);
     }
 
     private static object? ConvertRpcValueToEnum(RpcValue rpcValue)
