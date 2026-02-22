@@ -135,14 +135,14 @@ public static class RpcValueConverter
 
     private static object? ConvertRpcValueToEnum(RpcValue rpcValue)
     {
-        var value = rpcValue.GetObject();
-        if (value is null)
+        var sourceEnumName = rpcValue.GetEnumTypeName();
+        if (sourceEnumName is null)
         {
             return null;
         }
 
-        var sourceEnumName = rpcValue.GetEnumTypeName();
-        if (sourceEnumName is null)
+        var value = rpcValue.GetObject();
+        if (value is null)
         {
             return null;
         }
