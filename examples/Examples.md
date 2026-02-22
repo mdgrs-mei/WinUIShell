@@ -66,6 +66,10 @@ Example sign-in form that takes account name and password.
 
 <img width="432" height="456" alt="image" src="https://github.com/user-attachments/assets/7812345a-5b32-449e-8e7e-98bc848a8405" />
 
+## [StoragePickers.ps1](./StoragePickers.ps1)
+
+<img width="1109" height="780" alt="image" src="https://github.com/user-attachments/assets/96eac004-a412-4306-b93f-741c36b4334d" />
+
 ## [TabView.ps1](./TabView.ps1)
 
 <img width="569" height="453" alt="image" src="https://github.com/user-attachments/assets/5e0490fc-b7e6-4356-8eff-5c28671ffe5c" />
