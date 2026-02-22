@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.11.0] - 2026-02-22
+
+### Added
+
+- Added APIs in `Microsoft.Windows.Storage.Pickers.Projection`
+- Added `sbyte`, `short`, `ulong` and `decimal` types as supported RPC values
+
+### Changed
+
+- Updated WindowsAppSDK to 1.8.260209005
+
+### Fixed
+
+- Fixed an issue where interface implementations inside generic arguments could not be instantiated
+
 ## [0.10.0] - 2026-02-15
 
 ### Added
