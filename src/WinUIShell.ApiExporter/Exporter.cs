@@ -15,6 +15,7 @@ public class Exporter
         AddTypesInAssembly(typeof(Microsoft.UI.Xaml.Controls.BackgroundSizing)); // Microsoft.WinUI
         AddTypesInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
         AddTypesInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
+        AddTypesInAssembly(typeof(Microsoft.Windows.Storage.Pickers.FileOpenPicker)); // Microsoft.Windows.Storage.Pickers.Projection
         AddEnum(typeof(Server.EventCallbackRunspaceMode));
 
         ExportToFile(apiFilePath);
