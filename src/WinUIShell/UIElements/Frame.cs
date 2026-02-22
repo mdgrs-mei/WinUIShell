@@ -12,7 +12,7 @@ public partial class Frame : ContentControl
 
     public string SourcePageName
     {
-        get => CommandClient.Get().InvokeStaticMethodAndGetResult<string, string>(
+        get => CommandClient.Get().InvokeStaticMethodAndGetResult<string>(
             _accessorClassName,
             "GetSourcePageName",
             WinUIShellObjectId)!;
@@ -41,7 +41,7 @@ public partial class Frame : ContentControl
     {
         ArgumentNullException.ThrowIfNull(onLoaded);
         PageStore.Get().RegisterLoaded(pageName, onLoaded);
-        return CommandClient.Get().InvokeStaticMethodAndGetResult<bool, bool>(
+        return CommandClient.Get().InvokeStaticMethodAndGetResult<bool>(
             _accessorClassName,
             nameof(Navigate),
             WinUIShellObjectId,

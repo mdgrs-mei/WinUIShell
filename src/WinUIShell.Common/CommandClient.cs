@@ -176,7 +176,7 @@ public class CommandClient : Singleton<CommandClient>
         return _rpc.InvokeAsync("InvokeMethodWait", queueId, id, methodName, rpcArguments);
     }
 
-    public TReturn? InvokeMethodAndGetResult<TReturn, TCreate>(ObjectId id, string methodName, params object?[] arguments)
+    public T? InvokeMethodAndGetResult<T>(ObjectId id, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -188,7 +188,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("InvokeMethodAndGetResult", id, methodName, rpcArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void InvokeStaticMethod(string className, string methodName, params object?[] arguments)
@@ -214,7 +214,7 @@ public class CommandClient : Singleton<CommandClient>
         return _rpc.InvokeAsync("InvokeStaticMethodWait", queueId, className, methodName, rpcArguments);
     }
 
-    public TReturn? InvokeStaticMethodAndGetResult<TReturn, TCreate>(string className, string methodName, params object?[] arguments)
+    public T? InvokeStaticMethodAndGetResult<T>(string className, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -226,7 +226,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("InvokeStaticMethodAndGetResult", className, methodName, rpcArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void SetProperty(ObjectId id, string propertyName, object? value)
@@ -289,7 +289,7 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public TReturn? GetProperty<TReturn, TCreate>(ObjectId id, string propertyName)
+    public T? GetProperty<T>(ObjectId id, string propertyName)
     {
         Debug.Assert(_rpc is not null);
 
@@ -298,10 +298,10 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetProperty", id, propertyName);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
-    public TReturn? GetStaticProperty<TReturn, TCreate>(string className, string propertyName)
+    public T? GetStaticProperty<T>(string className, string propertyName)
     {
         Debug.Assert(_rpc is not null);
 
@@ -310,7 +310,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetStaticProperty", className, propertyName);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void SetIndexerProperty(ObjectId id, string indexerName, object? value, params object?[] indexArguments)
@@ -327,7 +327,7 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public TReturn? GetIndexerProperty<TReturn, TCreate>(ObjectId id, string indexerName, params object?[] indexArguments)
+    public T? GetIndexerProperty<T>(ObjectId id, string indexerName, params object?[] indexArguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(indexArguments);
@@ -339,7 +339,7 @@ public class CommandClient : Singleton<CommandClient>
             return await _rpc.InvokeAsync<RpcValue>("GetIndexerProperty", id, indexerName, rpcIndexArguments);
         });
 
-        return RpcValueConverter.ConvertRpcValueTo<TReturn, TCreate>(rpcValue);
+        return RpcValueConverter.ConvertRpcValueTo<T>(rpcValue);
     }
 
     public void WriteError(string message)

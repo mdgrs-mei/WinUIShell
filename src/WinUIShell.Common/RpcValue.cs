@@ -5,14 +5,15 @@ public class RpcValue
 {
     public ObjectId? IdValue { get; set; }
     public bool? BoolValue { get; set; }
-    public byte? ByteValue { get; set; }
     public char? CharValue { get; set; }
-    public ushort? UShortValue { get; set; }
-    public int? IntValue { get; set; }
-    public uint? UIntValue { get; set; }
+
+    public int Bytes { get; set; }
     public long? LongValue { get; set; }
+    public ulong? ULongValue { get; set; }
+
     public float? FloatValue { get; set; }
     public double? DoubleValue { get; set; }
+    public decimal? DecimalValue { get; set; }
     public string? StringValue { get; set; }
     public RpcValue[]? ArrayValue { get; set; }
 
@@ -33,14 +34,18 @@ public class RpcValue
         return obj is null or
             ObjectId or
             bool or
-            byte or
             char or
-            ushort or
+            sbyte or
+            short or
             int or
-            uint or
             long or
+            byte or
+            ushort or
+            uint or
+            ulong or
             float or
             double or
+            decimal or
             string or
             Enum;
     }
@@ -52,7 +57,7 @@ public class RpcValue
 
     private bool IsEnum()
     {
-        return StringValue is not null && (IntValue is not null || UIntValue is not null);
+        return StringValue is not null && (LongValue is not null || ULongValue is not null);
     }
 
     public string? GetEnumTypeName()
@@ -76,29 +81,52 @@ public class RpcValue
             case bool value:
                 BoolValue = value;
                 break;
-            case byte value:
-                ByteValue = value;
-                break;
             case char value:
                 CharValue = value;
                 break;
-            case ushort value:
-                UShortValue = value;
+
+            case sbyte value:
+                LongValue = value;
+                Bytes = 1;
+                break;
+            case short value:
+                LongValue = value;
+                Bytes = 2;
                 break;
             case int value:
-                IntValue = value;
-                break;
-            case uint value:
-                UIntValue = value;
+                LongValue = value;
+                Bytes = 4;
                 break;
             case long value:
                 LongValue = value;
+                Bytes = 8;
                 break;
+
+            case byte value:
+                ULongValue = value;
+                Bytes = 1;
+                break;
+            case ushort value:
+                ULongValue = value;
+                Bytes = 2;
+                break;
+            case uint value:
+                ULongValue = value;
+                Bytes = 4;
+                break;
+            case ulong value:
+                ULongValue = value;
+                Bytes = 8;
+                break;
+
             case float value:
                 FloatValue = value;
                 break;
             case double value:
                 DoubleValue = value;
+                break;
+            case decimal value:
+                DecimalValue = value;
                 break;
             case string value:
                 StringValue = value;
@@ -111,12 +139,13 @@ public class RpcValue
                     StringValue = $"{typeName}, {assemblyName}";
                     if (Enum.GetUnderlyingType(type) == typeof(int))
                     {
-                        IntValue = (int)obj;
+                        LongValue = (int)obj;
                     }
                     else
                     {
-                        UIntValue = (uint)obj;
+                        ULongValue = (uint)obj;
                     }
+                    Bytes = 4;
                     break;
                 }
             case Array array:
@@ -133,15 +162,16 @@ public class RpcValue
     {
         if (IsEnum())
         {
-            if (IntValue is not null)
+            if (LongValue is not null)
             {
-                return IntValue;
+                return (int)LongValue;
             }
             else
             {
-                return UIntValue;
+                return (uint)ULongValue!;
             }
         }
+
         if (IdValue is not null)
         {
             return IdValue;
@@ -150,30 +180,34 @@ public class RpcValue
         {
             return BoolValue;
         }
-        if (ByteValue is not null)
-        {
-            return ByteValue;
-        }
         if (CharValue is not null)
         {
             return CharValue;
         }
-        if (UShortValue is not null)
-        {
-            return UShortValue;
-        }
-        if (IntValue is not null)
-        {
-            return IntValue;
-        }
-        if (UIntValue is not null)
-        {
-            return UIntValue;
-        }
+
         if (LongValue is not null)
         {
-            return LongValue;
+            return Bytes switch
+            {
+                1 => (sbyte)LongValue,
+                2 => (short)LongValue,
+                4 => (int)LongValue,
+                8 => (object)LongValue,
+                _ => throw new InvalidOperationException($"Invalid number of bytes [{Bytes}] for signed integer."),
+            };
         }
+        if (ULongValue is not null)
+        {
+            return Bytes switch
+            {
+                1 => (byte)ULongValue,
+                2 => (ushort)ULongValue,
+                4 => (uint)ULongValue,
+                8 => (object)ULongValue,
+                _ => throw new InvalidOperationException($"Invalid number of bytes [{Bytes}] for unsigned integer."),
+            };
+        }
+
         if (FloatValue is not null)
         {
             return FloatValue;
@@ -181,6 +215,10 @@ public class RpcValue
         if (DoubleValue is not null)
         {
             return DoubleValue;
+        }
+        if (DecimalValue is not null)
+        {
+            return DecimalValue;
         }
         if (StringValue is not null)
         {
