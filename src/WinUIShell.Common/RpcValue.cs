@@ -13,6 +13,7 @@ public class RpcValue
 
     public float? FloatValue { get; set; }
     public double? DoubleValue { get; set; }
+    public decimal? DecimalValue { get; set; }
     public string? StringValue { get; set; }
     public RpcValue[]? ArrayValue { get; set; }
 
@@ -44,6 +45,7 @@ public class RpcValue
             ulong or
             float or
             double or
+            decimal or
             string or
             Enum;
     }
@@ -122,6 +124,9 @@ public class RpcValue
                 break;
             case double value:
                 DoubleValue = value;
+                break;
+            case decimal value:
+                DecimalValue = value;
                 break;
             case string value:
                 StringValue = value;
@@ -210,6 +215,10 @@ public class RpcValue
         if (DoubleValue is not null)
         {
             return DoubleValue;
+        }
+        if (DecimalValue is not null)
+        {
+            return DecimalValue;
         }
         if (StringValue is not null)
         {
