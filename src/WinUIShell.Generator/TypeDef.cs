@@ -221,23 +221,6 @@ internal class TypeDef
         }
     }
 
-    public string GetReturnInstanceTypeName()
-    {
-        if (IsInterface)
-        {
-            return GetNameInternal(NameType.InterfaceImplementation);
-        }
-        else
-        if (IsObject)
-        {
-            return "WinUIShell.WinUIShellObject";
-        }
-        else
-        {
-            return GetName();
-        }
-    }
-
     public string GetOriginalName()
     {
         return GetNameInternal(NameType.Original);
@@ -247,7 +230,6 @@ internal class TypeDef
     {
         Normal,
         SystemInterface,
-        InterfaceImplementation,
         Original,
     }
 
@@ -285,10 +267,6 @@ internal class TypeDef
                 {
                     name = $"global::{_apiTypeDef.Name}";
                 }
-                break;
-
-            case NameType.InterfaceImplementation:
-                name = $"{parentNameSpace}{_name}Impl";
                 break;
 
             case NameType.Original:

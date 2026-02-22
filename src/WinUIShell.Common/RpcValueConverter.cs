@@ -2,7 +2,7 @@
 
 public static class RpcValueConverter
 {
-    public static TReturn? ConvertRpcValueTo<TReturn, TCreate>(RpcValue rpcValue)
+    public static T? ConvertRpcValueTo<T>(RpcValue rpcValue)
     {
         var obj = ConvertRpcValueToObject(rpcValue);
         if (obj is null)
@@ -12,7 +12,7 @@ public static class RpcValueConverter
         {
             // Newly created object on the server side, and no type mapping was found.
             // Create the object on the client side with the return type. It needs to have a constructor from ObjectId.
-            Type createType = typeof(TReturn);
+            Type createType = typeof(T);
             if (createType == typeof(object))
             {
                 throw new InvalidOperationException($"Object not found or unsupported object type. Id:[{objectId.Id}], Type:[{objectId.Type}].");
@@ -41,7 +41,7 @@ public static class RpcValueConverter
             ObjectStore.Get().RegisterObject(objectId, obj);
         }
 
-        return (TReturn?)obj;
+        return (T?)obj;
     }
 
     private static object? ConvertRpcValueToObject(RpcValue rpcValue)
@@ -172,7 +172,7 @@ public static class RpcValueConverter
         var objectArray = new object?[rpcArray.Length];
         for (int i = 0; i < objectArray.Length; ++i)
         {
-            objectArray[i] = ConvertRpcValueTo<object, object>(rpcArray[i]);
+            objectArray[i] = ConvertRpcValueTo<object>(rpcArray[i]);
         }
         return objectArray;
     }
