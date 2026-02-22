@@ -11,19 +11,19 @@ if (-not (Get-Module WinUIShell)) {
 $win = [Window]::new()
 $win.Title = 'Storage Pickers'
 $win.SystemBackdrop = [DesktopAcrylicBackdrop]::new()
-$win.AppWindow.ResizeClient(600, 200)
+$win.AppWindow.ResizeClient(600, 240)
 
 # FileOpenPicker
 $textBox0 = [TextBox]::new()
 $textBox0.IsReadonly = $true
 $button0 = [Button]::new()
-$button0.Content = 'Pick File'
+$button0.Content = 'Pick Single File'
 $button0.AddClick({
         param ($TextBox, $s, $e)
 
         $senderButton = $s
         $picker = [FileOpenPicker]::new($senderButton.XamlRoot.ContentIslandEnvironment.AppWindowId)
-        $picker.CommitButtonText = 'Pick File'
+        $picker.CommitButtonText = 'Pick Single File'
         $picker.FileTypeFilter.Add('.ps1')
         $picker.FileTypeFilter.Add('.cs')
         $result = $picker.PickSingleFileAsync().WaitForCompleted()
@@ -34,12 +34,30 @@ $button0.AddClick({
 [Grid]::SetRow($button0, 0)
 [Grid]::SetColumn($button0, 1)
 
-# FileSavePicker
 $textBox1 = [TextBox]::new()
 $textBox1.IsReadonly = $true
 $button1 = [Button]::new()
-$button1.Content = 'Save File'
+$button1.Content = 'Pick Multiple Files'
 $button1.AddClick({
+        param ($TextBox, $s, $e)
+
+        $senderButton = $s
+        $picker = [FileOpenPicker]::new($senderButton.XamlRoot.ContentIslandEnvironment.AppWindowId)
+        $picker.CommitButtonText = 'Pick Multiple Files'
+        $results = $picker.PickMultipleFilesAsync().WaitForCompleted()
+        $TextBox.Text = $results.Path -join ';'
+    }, $textBox1)
+[Grid]::SetRow($textBox1, 1)
+[Grid]::SetColumn($textBox1, 0)
+[Grid]::SetRow($button1, 1)
+[Grid]::SetColumn($button1, 1)
+
+# FileSavePicker
+$textBox2 = [TextBox]::new()
+$textBox2.IsReadonly = $true
+$button2 = [Button]::new()
+$button2.Content = 'Save File'
+$button2.AddClick({
         param ($TextBox, $s, $e)
 
         $senderButton = $s
@@ -50,18 +68,18 @@ $button1.AddClick({
 
         $result = $picker.PickSaveFileAsync().WaitForCompleted()
         $TextBox.Text = $result.Path
-    }, $textBox1)
-[Grid]::SetRow($textBox1, 1)
-[Grid]::SetColumn($textBox1, 0)
-[Grid]::SetRow($button1, 1)
-[Grid]::SetColumn($button1, 1)
+    }, $textBox2)
+[Grid]::SetRow($textBox2, 2)
+[Grid]::SetColumn($textBox2, 0)
+[Grid]::SetRow($button2, 2)
+[Grid]::SetColumn($button2, 1)
 
 # FolderPicker
-$textBox2 = [TextBox]::new()
-$textBox2.IsReadonly = $true
-$button2 = [Button]::new()
-$button2.Content = 'Pick Folder'
-$button2.AddClick({
+$textBox3 = [TextBox]::new()
+$textBox3.IsReadonly = $true
+$button3 = [Button]::new()
+$button3.Content = 'Pick Folder'
+$button3.AddClick({
         param ($TextBox, $s, $e)
 
         $senderButton = $s
@@ -69,11 +87,11 @@ $button2.AddClick({
         $picker.CommitButtonText = 'Pick Folder'
         $result = $picker.PickSingleFolderAsync().WaitForCompleted()
         $TextBox.Text = $result.Path
-    }, $textBox2)
-[Grid]::SetRow($textBox2, 2)
-[Grid]::SetColumn($textBox2, 0)
-[Grid]::SetRow($button2, 2)
-[Grid]::SetColumn($button2, 1)
+    }, $textBox3)
+[Grid]::SetRow($textBox3, 3)
+[Grid]::SetColumn($textBox3, 0)
+[Grid]::SetRow($button3, 3)
+[Grid]::SetColumn($button3, 1)
 
 $row0 = [RowDefinition]::new()
 $row0.Height = [GridLength]::Auto
@@ -106,6 +124,8 @@ $grid.Children.Add($textBox1)
 $grid.Children.Add($button1)
 $grid.Children.Add($textBox2)
 $grid.Children.Add($button2)
+$grid.Children.Add($textBox3)
+$grid.Children.Add($button3)
 
 $win.Content = $grid
 $win.Activate()
