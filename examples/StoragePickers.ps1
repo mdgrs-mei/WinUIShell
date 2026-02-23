@@ -66,6 +66,12 @@ $button2.AddClick({
         $picker.SuggestedFileName = 'DefaultFileName'
         $picker.DefaultFileExtension = '.ps1'
 
+        $fileTypes = [WinUIShell.System.Collections.Generic.List[string]]::new()
+        $fileTypes.Add('.ps1')
+        $fileTypes.Add('.psd1')
+        $fileTypes.Add('.psm1')
+        $picker.FileTypeChoices.Add('PowerShell files', $fileTypes)
+
         $result = $picker.PickSaveFileAsync().WaitForCompleted()
         $TextBox.Text = $result.Path
     }, $textBox2)

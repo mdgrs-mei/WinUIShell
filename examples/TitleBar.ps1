@@ -12,6 +12,11 @@ $autoSuggestBox.Width = 360
 $autoSuggestBox.VerticalAlignment = 'Center'
 $autoSuggestBox.PlaceholderText = 'Search..'
 $autoSuggestBox.QueryIcon = [SymbolIcon]::new('Find')
+$suggestions = [WinUIShell.System.Collections.Generic.List[string]]::new()
+$suggestions.Add('Suggestion 1')
+$suggestions.Add('Suggestion 2')
+$suggestions.Add('Suggestion 3')
+$autoSuggestBox.ItemsSource = $suggestions
 
 $personPicture = [PersonPicture]::new()
 $personPicture.Width = 30
