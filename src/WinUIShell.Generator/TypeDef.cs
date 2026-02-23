@@ -60,32 +60,27 @@ internal class TypeDef
         {
             _name = originalTypeName;
         }
-        else
-        if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
+        else if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
         {
             IsSystemInterface = true;
             _name = $"WinUIShell.{originalTypeName}";
         }
-        else
-        if (originalTypeName.StartsWith("WinUIShell.Server"))
+        else if (originalTypeName.StartsWith("WinUIShell.Server"))
         {
             _name = originalTypeName.Replace("WinUIShell.Server", "WinUIShell");
         }
-        else
-        if (originalTypeName == "System.Object")
+        else if (originalTypeName == "System.Object")
         {
             _name = "object";
             IsObject = true;
         }
-        else
-        if (originalTypeName == "System.Void")
+        else if (originalTypeName == "System.Void")
         {
             _name = "void";
             IsVoid = true;
             IsRpcSupportedType = true;
         }
-        else
-        if (Api.TryReplaceSystemTypeNameWithShortName(originalTypeName, out var systemTypeName))
+        else if (Api.TryReplaceSystemTypeNameWithShortName(originalTypeName, out var systemTypeName))
         {
             _name = systemTypeName!;
             IsRpcSupportedType = true;
@@ -99,8 +94,7 @@ internal class TypeDef
         {
             _elementType = elementTypeOverride;
         }
-        else
-        if (apiTypeDef.ElementType is not null)
+        else if (apiTypeDef.ElementType is not null)
         {
             _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
         }
@@ -114,8 +108,7 @@ internal class TypeDef
         {
             GenericArguments = genericArgumentsOverride;
         }
-        else
-        if (apiTypeDef.GenericTypeArguments is not null)
+        else if (apiTypeDef.GenericTypeArguments is not null)
         {
             foreach (var genericArgument in apiTypeDef.GenericTypeArguments)
             {
@@ -242,8 +235,7 @@ internal class TypeDef
             {
                 return $"{elementName}[]";
             }
-            else
-            if (_apiTypeDef.IsPointer)
+            else if (_apiTypeDef.IsPointer)
             {
                 return $"{elementName}*";
             }
@@ -295,8 +287,7 @@ internal class TypeDef
             {
                 return $"{_elementType.GetId()}[]";
             }
-            else
-            if (_apiTypeDef.IsPointer)
+            else if (_apiTypeDef.IsPointer)
             {
                 return $"{_elementType.GetId()}*";
             }
@@ -329,8 +320,7 @@ internal class TypeDef
         {
             return genericTypeParametersOverride[GenericParameterPosition];
         }
-        else
-        if (GenericArguments is not null)
+        else if (GenericArguments is not null)
         {
             List<TypeDef> overriddenGenericArguments = [];
             foreach (var genericArgument in GenericArguments)
@@ -381,8 +371,7 @@ internal class TypeDef
             {
                 refExpression = "in ";
             }
-            else
-            if (_apiTypeDef.IsOut)
+            else if (_apiTypeDef.IsOut)
             {
                 refExpression = "out ";
             }
@@ -400,8 +389,7 @@ internal class TypeDef
         {
             return "value";
         }
-        else
-        if (IsObject || IsGenericParameter())
+        else if (IsObject || IsGenericParameter())
         {
             return "(value is IWinUIShellObject v ? v.WinUIShellObjectId : value)";
         }
@@ -417,13 +405,11 @@ internal class TypeDef
         {
             return _elementType!.GetArgumentExpression(variableName, variableIndex);
         }
-        else
-        if (IsRpcSupportedType)
+        else if (IsRpcSupportedType)
         {
             return variableName;
         }
-        else
-        if (IsObject || IsGenericParameter())
+        else if (IsObject || IsGenericParameter())
         {
             return $"({variableName} is IWinUIShellObject v{variableIndex} ? v{variableIndex}.WinUIShellObjectId : {variableName})";
         }

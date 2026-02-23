@@ -129,8 +129,7 @@ internal class PropertyDef
         {
             interfaceTypeName = $"{_explicitInterfaceType.GetName()}.";
         }
-        else
-        if (isInterfaceImplExplicitImplementation)
+        else if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{_objectDef.Type.GetName()}.";
         }
@@ -146,8 +145,7 @@ internal class PropertyDef
         {
             interfaceTypeName = $"{_explicitInterfaceType.GetOriginalName()}.";
         }
-        else
-        if (isInterfaceImplExplicitImplementation)
+        else if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{_objectDef.Type.GetOriginalName()}.";
         }

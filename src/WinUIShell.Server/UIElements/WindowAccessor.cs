@@ -2,6 +2,7 @@
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
+
 internal static class WindowAccessor
 {
     public static void RegisterWindow(

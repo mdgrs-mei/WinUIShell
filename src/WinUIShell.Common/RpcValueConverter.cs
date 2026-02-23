@@ -60,8 +60,7 @@ public static class RpcValueConverter
         {
             return ConvertRpcValueArrayToObjectArray(array);
         }
-        else
-        if (value is ObjectId objectId)
+        else if (value is ObjectId objectId)
         {
             object? obj = ObjectStore.Get().FindObject(objectId);
             if (obj is null)

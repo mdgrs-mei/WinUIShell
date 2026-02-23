@@ -64,12 +64,12 @@ internal class SpecializedMethodGenerator
                     {
                         throw new ArgumentOutOfRangeException("{{indexName}}");
                     }
-                
+
                     if ({{arrayName}}.Length - {{indexName}} < Count)
                     {
                         throw new ArgumentException("Insufficient space to copy.");
                     }
-                
+
                     int i = 0;
                     foreach (var item in this)
                     {
@@ -80,9 +80,8 @@ internal class SpecializedMethodGenerator
                 """);
             return true;
         }
-        else
-        if (methodName.EndsWith("GetAwaiter") &&
-            methodDef.Parameters.Count == 0)
+        else if (methodName.EndsWith("GetAwaiter") &&
+                methodDef.Parameters.Count == 0)
         {
             // If the object is awaitable, add WaitForCompleted() method.
 

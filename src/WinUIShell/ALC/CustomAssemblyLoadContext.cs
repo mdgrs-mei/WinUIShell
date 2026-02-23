@@ -2,6 +2,7 @@
 using System.Runtime.Loader;
 
 namespace WinUIShell;
+
 internal sealed class CustomAssemblyLoadContext : AssemblyLoadContext
 {
     private readonly string _directory;

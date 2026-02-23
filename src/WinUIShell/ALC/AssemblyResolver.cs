@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 
 namespace WinUIShell;
+
 public class AssemblyResolver : IModuleAssemblyInitializer, IModuleAssemblyCleanup
 {
     private static readonly CustomAssemblyLoadContext _alc = CreateAssemblyLoadContext();

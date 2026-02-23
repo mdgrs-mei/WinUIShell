@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using WinUIShell.Common;
 
 namespace WinUIShell.Server;
+
 public interface IPage
 {
     ObjectId Id { get; set; }

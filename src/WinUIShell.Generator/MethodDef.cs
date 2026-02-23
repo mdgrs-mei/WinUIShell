@@ -106,8 +106,7 @@ internal class MethodDef
         {
             interfaceTypeName = $"{ExplicitInterfaceType.GetName()}.";
         }
-        else
-        if (isInterfaceImplExplicitImplementation)
+        else if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{ObjectDef.Type.GetSystemInterfaceName()}.";
         }
@@ -122,8 +121,7 @@ internal class MethodDef
         {
             interfaceTypeName = $"{ExplicitInterfaceType.GetOriginalName()}.";
         }
-        else
-        if (isInterfaceImplExplicitImplementation)
+        else if (isInterfaceImplExplicitImplementation)
         {
             interfaceTypeName = $"{ObjectDef.Type.GetOriginalName()}.";
         }

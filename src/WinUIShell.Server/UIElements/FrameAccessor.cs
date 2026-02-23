@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace WinUIShell.Server;
+
 internal static class FrameAccessor
 {
     public static bool Navigate(

@@ -32,8 +32,7 @@ internal static class ObjectValidator
                 return false;
             return true;
         }
-        else
-        if (obj is Window window)
+        else if (obj is Window window)
         {
             var property = WindowStore.Get().GetWindowProperty(window);
             if (property.IsTerminated)

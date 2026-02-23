@@ -82,8 +82,7 @@ public class Invoker : Singleton<Invoker>
         {
             return objType.GetMethod(methodName, bindingFlags, Type.EmptyTypes);
         }
-        else
-        if (arguments.Contains(null))
+        else if (arguments.Contains(null))
         {
             var methods = objType.GetMethods();
             foreach (var method in methods)
@@ -231,8 +230,7 @@ public class Invoker : Singleton<Invoker>
                 Type.EmptyTypes,
                 null);
         }
-        else
-        if (indexArguments.Contains(null))
+        else if (indexArguments.Contains(null))
         {
             var properties = objType.GetProperties(bindingFlags);
             foreach (var property in properties)

@@ -145,8 +145,7 @@ internal class ObjectDef
             {
                 getterSetter.Getter = method;
             }
-            else
-            if (isSetter)
+            else if (isSetter)
             {
                 getterSetter.Setter = method;
             }

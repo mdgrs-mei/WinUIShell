@@ -618,13 +618,11 @@ public class Exporter
             var elementType = type.GetElementType();
             typeDef.ElementType = GetTypeDef(elementType!);
         }
-        else
-        if (type.IsEnum)
+        else if (type.IsEnum)
         {
             AddEnum(type);
         }
-        else
-        if (!type.IsGenericParameter)
+        else if (!type.IsGenericParameter)
         {
             if (type.IsGenericType && !type.IsGenericTypeDefinition)
             {

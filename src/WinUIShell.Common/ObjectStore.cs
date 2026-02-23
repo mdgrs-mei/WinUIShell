@@ -59,8 +59,7 @@ public class ObjectStore : Singleton<ObjectStore>
         {
             return _classTypeObjectStore.UnregisterObject(id);
         }
-        else
-        if (_valueTypeObjectStore.FindObject(id) is not null)
+        else if (_valueTypeObjectStore.FindObject(id) is not null)
         {
             return _valueTypeObjectStore.UnregisterObject(id);
         }
