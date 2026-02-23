@@ -58,7 +58,7 @@ internal class EventDef
     public string GetMethodFullName(bool isInterfaceImplExplicitImplementation = false)
     {
         string interfaceTypeName = isInterfaceImplExplicitImplementation ?
-            $"{ObjectDef.Type.GetSystemInterfaceName()}." :
+            $"{ObjectDef.Type.GetGlobalSystemInterfaceName()}." :
             "";
 
         return $"{interfaceTypeName}{GetMethodName()}";

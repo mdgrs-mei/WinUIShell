@@ -45,9 +45,10 @@ internal class ParameterDef
         return $"{type.GetTypeExpression()} {Name}";
     }
 
-    public string GetArgumentExpression(int parameterIndex)
+    public string GetArgumentExpression(int parameterIndex, List<TypeDef>? genericTypeParametersOverride)
     {
-        return Type.GetArgumentExpression(Name, parameterIndex);
+        TypeDef type = Type.OverrideGenericTypeParameter(genericTypeParametersOverride);
+        return type.GetArgumentExpression(Name, parameterIndex);
     }
 
     public static string GetParametersSignatureId(List<ParameterDef> parameters)
@@ -80,7 +81,7 @@ internal class ParameterDef
         return builder.ToString();
     }
 
-    public static string GetParametersArgumentExpression(List<ParameterDef> parameters)
+    public static string GetParametersArgumentExpression(List<ParameterDef> parameters, List<TypeDef>? genericTypeParametersOverride)
     {
         if (parameters.Count == 0)
             return "";
@@ -89,7 +90,7 @@ internal class ParameterDef
         int parameterIndex = 0;
         foreach (var parameter in parameters)
         {
-            _ = builder.Append($", {parameter.GetArgumentExpression(parameterIndex)}");
+            _ = builder.Append($", {parameter.GetArgumentExpression(parameterIndex, genericTypeParametersOverride)}");
             ++parameterIndex;
         }
         return builder.ToString();
