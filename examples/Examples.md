@@ -66,6 +66,12 @@ Example sign-in form that takes account name and password.
 
 <img width="432" height="456" alt="image" src="https://github.com/user-attachments/assets/7812345a-5b32-449e-8e7e-98bc848a8405" />
 
+## [StopWatch.ps1](./StopWatch.ps1)
+
+Stopwatch example that uses a simple loop to update the UI. Event callbacks are still handled during the loop.
+
+![StopWatch](https://github.com/user-attachments/assets/14e08e5d-68fd-409c-8119-7edf8cbb90df)
+
 ## [StoragePickers.ps1](./StoragePickers.ps1)
 
 <img width="1109" height="780" alt="image" src="https://github.com/user-attachments/assets/96eac004-a412-4306-b93f-741c36b4334d" />
