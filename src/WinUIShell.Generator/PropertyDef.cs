@@ -45,8 +45,10 @@ internal class PropertyDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
 
-        bool useSystemInterfaceName = apiPropertyDef.ImplementsSystemInterface;
-        _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ? null : new TypeDef(apiPropertyDef.ExplicitInterfaceType, useSystemInterfaceName);
+        bool useSystemInterfaceName = apiPropertyDef.ImplementsGlobalSystemInterface;
+        _explicitInterfaceType = apiPropertyDef.ExplicitInterfaceType is null ?
+            null :
+            new TypeDef(apiPropertyDef.ExplicitInterfaceType, useSystemInterfaceName);
 
         if (apiPropertyDef.IndexParameters is not null)
         {
@@ -82,7 +84,7 @@ internal class PropertyDef
         _objectDef = objectDef;
         _memberDefType = memberDefType;
 
-        bool useSystemInterfaceName = indexerGetter!.ImplementsSystemInterface;
+        bool useSystemInterfaceName = indexerGetter!.ImplementsGlobalSystemInterface;
         _explicitInterfaceType = indexerGetter.ExplicitInterfaceType is null ? null : new TypeDef(indexerGetter.ExplicitInterfaceType, useSystemInterfaceName);
 
         List<Api.ParameterDef> indexParameters = indexerGetter.Parameters!;
@@ -207,11 +209,11 @@ internal class PropertyDef
         return $"{unsafeExpression}{accessorExpression}{staticExpression}{newExpression}{overrideExpression}{abstractExpression}{virtualExpression}{type.GetTypeExpression()} {GetName(isExplicitImplementation)}{indexerParametersExpression}";
     }
 
-    public string GetIndexerArgumentsExpression()
+    public string GetIndexerArgumentsExpression(List<TypeDef>? genericTypeParametersOverride)
     {
         if (!IsIndexer)
             return "";
 
-        return ParameterDef.GetParametersArgumentExpression(_indexParameters!);
+        return ParameterDef.GetParametersArgumentExpression(_indexParameters!, genericTypeParametersOverride);
     }
 }

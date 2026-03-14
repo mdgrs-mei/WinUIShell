@@ -34,7 +34,7 @@ internal class SpecializedMethodGenerator
         SignatureStore? signatureStore)
     {
         var methodName = methodDef.GetName();
-        if (methodDef.ImplementsSystemInterface &&
+        if (methodDef.ImplementsGlobalSystemInterface &&
             (isInterfaceImpl || !methodDef.ObjectDef.Type.IsInterface) &&
             methodName.EndsWith("CopyTo") &&
             methodDef.Parameters.Count == 2 &&

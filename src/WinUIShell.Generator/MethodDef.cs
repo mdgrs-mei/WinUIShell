@@ -26,9 +26,9 @@ internal class MethodDef
     {
         get => _apiMethodDef.ImplementsInterface;
     }
-    public bool ImplementsSystemInterface
+    public bool ImplementsGlobalSystemInterface
     {
-        get => _apiMethodDef.ImplementsSystemInterface;
+        get => _apiMethodDef.ImplementsGlobalSystemInterface;
     }
 
     public MethodDef(
@@ -40,7 +40,7 @@ internal class MethodDef
         ObjectDef = objectDef;
         _memberDefType = memberDefType;
 
-        bool useSystemInterfaceName = _apiMethodDef.ImplementsSystemInterface;
+        bool useSystemInterfaceName = _apiMethodDef.ImplementsGlobalSystemInterface;
 
         if (apiMethodDef.ReturnType is not null)
         {
@@ -108,7 +108,7 @@ internal class MethodDef
         }
         else if (isInterfaceImplExplicitImplementation)
         {
-            interfaceTypeName = $"{ObjectDef.Type.GetSystemInterfaceName()}.";
+            interfaceTypeName = $"{ObjectDef.Type.GetGlobalSystemInterfaceName()}.";
         }
 
         return $"{interfaceTypeName}{_apiMethodDef.Name}";
@@ -191,8 +191,8 @@ internal class MethodDef
         return ParameterDef.GetParametersSignatureExpression(Parameters, genericTypeParametersOverride);
     }
 
-    public string GetArgumentsExpression()
+    public string GetArgumentsExpression(List<TypeDef>? genericTypeParametersOverride)
     {
-        return ParameterDef.GetParametersArgumentExpression(Parameters);
+        return ParameterDef.GetParametersArgumentExpression(Parameters, genericTypeParametersOverride);
     }
 }

@@ -28,7 +28,7 @@ internal class ObjectDef
         _apiObjectDef = apiObjectDef;
 
         Type = new TypeDef(_apiObjectDef.Type);
-        Type.AlwaysReturnSystemInterfaceName = Type.IsSystemInterface;
+        Type.AlwaysReturnGlobalSystemInterfaceName = Type.IsGlobalSystemInterface;
 
         if (_apiObjectDef.BaseType is not null)
         {
@@ -319,9 +319,9 @@ internal class ObjectDef
             _ = baseTypeExpression.Append($" : IWinUIShellObject");
         }
 
-        if (Type.IsSystemInterface)
+        if (Type.IsGlobalSystemInterface)
         {
-            _ = baseTypeExpression.Append($", {Type.GetSystemInterfaceName()}");
+            _ = baseTypeExpression.Append($", {Type.GetGlobalSystemInterfaceName()}");
         }
 
         codeWriter.Append($$"""
@@ -329,7 +329,7 @@ internal class ObjectDef
             {
             """);
 
-        if (Type.IsSystemInterface)
+        if (Type.IsGlobalSystemInterface)
         {
             codeWriter.IncrementIndent();
             foreach (var method in _instanceMethods)
@@ -542,7 +542,7 @@ internal class ObjectDef
                 {
                     WinUIShellObjectId = CommandClient.Get().CreateObject(
                         ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                        this{{method.GetArgumentsExpression()}});
+                        this{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}});
                 }
                 """);
         }
@@ -618,7 +618,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(WinUIShellObjectId, "{{property.GetOriginalName()}}"{{property.GetIndexerArgumentsExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{property.Type.GetName()}}>(WinUIShellObjectId, "{{property.GetOriginalName()}}"{{property.GetIndexerArgumentsExpression(genericTypeParametersOverride: null)}}){{(property.Type.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
@@ -635,7 +635,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName()}}", {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName()}}", {{property.Type.GetValueExpression()}}{{property.GetIndexerArgumentsExpression(genericTypeParametersOverride: null)}});
                         """);
                 }
                 else
@@ -663,7 +663,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeStaticMethod(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}});
                     }
                     """);
             }
@@ -674,7 +674,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{Type.GetName()}}>(),
-                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -699,7 +699,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
-                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}});
                     }
                     """);
             }
@@ -710,7 +710,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                             WinUIShellObjectId,
-                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -839,7 +839,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}>(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}"{{property.GetIndexerArgumentsExpression()}}){{(propertyType.IsNullable ? "" : "!")}};
+                        get => PropertyAccessor.GetIndexer<{{propertyType.GetName()}}>(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}"{{property.GetIndexerArgumentsExpression(genericTypeParametersOverride)}}){{(propertyType.IsNullable ? "" : "!")}};
                         """);
                 }
                 else
@@ -855,7 +855,7 @@ internal class ObjectDef
                 if (property.IsIndexer)
                 {
                     codeWriter.Append($$"""
-                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}", {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression()}});
+                        set => PropertyAccessor.SetIndexer(WinUIShellObjectId, "{{property.GetOriginalName(isExplicit)}}", {{propertyType.GetValueExpression()}}{{property.GetIndexerArgumentsExpression(genericTypeParametersOverride)}});
                         """);
                 }
                 else
@@ -888,7 +888,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeStaticMethod(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
-                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression(genericTypeParametersOverride)}});
                     }
                     """);
             }
@@ -899,7 +899,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
                             ObjectTypeMapping.Get().GetTargetTypeName<{{rootClassName}}>(),
-                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression(genericTypeParametersOverride)}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }
@@ -926,7 +926,7 @@ internal class ObjectDef
                     {
                         CommandClient.Get().InvokeMethod(
                             WinUIShellObjectId,
-                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}});
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression(genericTypeParametersOverride)}});
                     }
                     """);
             }
@@ -937,7 +937,7 @@ internal class ObjectDef
                     {
                         return CommandClient.Get().InvokeMethodAndGetResult<{{returnType.GetName()}}>(
                             WinUIShellObjectId,
-                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression()}}){{(returnType.IsNullable ? "" : "!")}};
+                            {{method.GetNameOfExpression(isExplicit)}}{{method.GetArgumentsExpression(genericTypeParametersOverride)}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
             }

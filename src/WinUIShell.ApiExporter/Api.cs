@@ -36,7 +36,7 @@ public class Api
         "WinRT.ObjectReference",
     ];
 
-    private static readonly List<string> _supportedSystemInterfaces =
+    private static readonly List<string> _supportedGlobalSystemInterfaces =
     [
         "System.IDisposable",
         "System.Collections.Generic.ICollection",
@@ -47,6 +47,11 @@ public class Api
         "System.Collections.Generic.IEnumerator",
         "System.Collections.Generic.IReadOnlyList",
         "System.Collections.Generic.IReadOnlyCollection",
+    ];
+
+    private static readonly List<string> _emulatedSystemInterfaces =
+    [
+        "System.Collections.Generic.IDictionary",
     ];
 
     private static readonly List<string> _unsupportedMethodNames =
@@ -75,9 +80,14 @@ public class Api
         return _unsupportedTypes.Contains(typeDefName);
     }
 
+    public static bool IsSupportedGlobalSystemInterface(string typeDefName)
+    {
+        return _supportedGlobalSystemInterfaces.Contains(typeDefName);
+    }
+
     public static bool IsSupportedSystemInterface(string typeDefName)
     {
-        return _supportedSystemInterfaces.Contains(typeDefName);
+        return IsSupportedGlobalSystemInterface(typeDefName) || _emulatedSystemInterfaces.Contains(typeDefName);
     }
 
     public static bool IsUnsupportedMethod(string methodName)
@@ -174,7 +184,7 @@ public class Api
         public bool ImplementsInterface { get; set; }
 
         [DefaultValue(false)]
-        public bool ImplementsSystemInterface { get; set; }
+        public bool ImplementsGlobalSystemInterface { get; set; }
     }
 
     public class TypeDef
@@ -278,7 +288,7 @@ public class Api
         public bool ImplementsInterface { get; set; }
 
         [DefaultValue(false)]
-        public bool ImplementsSystemInterface { get; set; }
+        public bool ImplementsGlobalSystemInterface { get; set; }
     }
 
     public class EventDef

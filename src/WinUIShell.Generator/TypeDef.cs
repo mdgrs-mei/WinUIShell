@@ -9,7 +9,7 @@ internal class TypeDef
     private readonly TypeDef? _elementType;
     private readonly TypeDef? _parentType;
 
-    public bool AlwaysReturnSystemInterfaceName { get; set; }
+    public bool AlwaysReturnGlobalSystemInterfaceName { get; set; }
     public readonly List<TypeDef>? GenericArguments;
     public bool IsPublic
     {
@@ -24,7 +24,7 @@ internal class TypeDef
     {
         get => _apiTypeDef.IsInterface;
     }
-    public bool IsSystemInterface { get; private set; }
+    public bool IsGlobalSystemInterface { get; private set; }
     public bool IsObject { get; private set; }
     public bool IsVoid { get; private set; }
     public bool IsClass
@@ -46,12 +46,12 @@ internal class TypeDef
 
     public TypeDef(
         Api.TypeDef apiTypeDef,
-        bool alwaysReturnSystemInterfaceName = false,
+        bool alwaysReturnGlobalSystemInterfaceName = false,
         List<TypeDef>? genericArgumentsOverride = null,
         TypeDef? elementTypeOverride = null)
     {
         _apiTypeDef = apiTypeDef;
-        AlwaysReturnSystemInterfaceName = alwaysReturnSystemInterfaceName;
+        AlwaysReturnGlobalSystemInterfaceName = alwaysReturnGlobalSystemInterfaceName;
 
         var originalTypeName = apiTypeDef.Name;
         IsRpcSupportedType = apiTypeDef.IsEnum;
@@ -60,9 +60,9 @@ internal class TypeDef
         {
             _name = originalTypeName;
         }
-        else if (_apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject)
+        else if (Api.IsSupportedGlobalSystemInterface(originalTypeName))
         {
-            IsSystemInterface = true;
+            IsGlobalSystemInterface = true;
             _name = $"WinUIShell.{originalTypeName}";
         }
         else if (originalTypeName.StartsWith("WinUIShell.Server"))
@@ -96,12 +96,12 @@ internal class TypeDef
         }
         else if (apiTypeDef.ElementType is not null)
         {
-            _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnSystemInterfaceName);
+            _elementType = new TypeDef(apiTypeDef.ElementType, AlwaysReturnGlobalSystemInterfaceName);
         }
 
         if (_apiTypeDef.ParentType is not null)
         {
-            _parentType = new TypeDef(_apiTypeDef.ParentType, AlwaysReturnSystemInterfaceName);
+            _parentType = new TypeDef(_apiTypeDef.ParentType, AlwaysReturnGlobalSystemInterfaceName);
         }
 
         if (genericArgumentsOverride is not null)
@@ -120,7 +120,7 @@ internal class TypeDef
                     GenericArguments = [];
                 }
                 // Generic arguments should always return the passed type name, not the original system interface name.
-                GenericArguments.Add(new TypeDef(genericArgument, alwaysReturnSystemInterfaceName: false));
+                GenericArguments.Add(new TypeDef(genericArgument, alwaysReturnGlobalSystemInterfaceName: false));
             }
         }
     }
@@ -165,7 +165,7 @@ internal class TypeDef
 
     private bool IsUnsupportedType()
     {
-        bool isUnsupportedSystemInterface = IsSystemInterface && !Api.IsSupportedSystemInterface(_apiTypeDef.Name);
+        bool isUnsupportedSystemInterface = _apiTypeDef.IsInterface && _apiTypeDef.IsSystemObject && !Api.IsSupportedSystemInterface(_apiTypeDef.Name);
         return Api.IsUnsupportedType(_apiTypeDef.Name) || _apiTypeDef.IsDelegate || isUnsupportedSystemInterface;
     }
 
@@ -192,9 +192,9 @@ internal class TypeDef
 
     public string GetName()
     {
-        if (AlwaysReturnSystemInterfaceName)
+        if (AlwaysReturnGlobalSystemInterfaceName)
         {
-            return GetSystemInterfaceName();
+            return GetGlobalSystemInterfaceName();
         }
         else
         {
@@ -202,11 +202,11 @@ internal class TypeDef
         }
     }
 
-    public string GetSystemInterfaceName()
+    public string GetGlobalSystemInterfaceName()
     {
-        if (IsSystemInterface)
+        if (IsGlobalSystemInterface)
         {
-            return GetNameInternal(NameType.SystemInterface);
+            return GetNameInternal(NameType.GlobalSystemInterface);
         }
         else
         {
@@ -222,7 +222,7 @@ internal class TypeDef
     public enum NameType
     {
         Normal,
-        SystemInterface,
+        GlobalSystemInterface,
         Original,
     }
 
@@ -250,7 +250,7 @@ internal class TypeDef
                 name = $"{parentNameSpace}{_name}";
                 break;
 
-            case NameType.SystemInterface:
+            case NameType.GlobalSystemInterface:
                 if (_parentType is not null)
                 {
                     name = $"{parentNameSpace}{_apiTypeDef.Name}";
@@ -313,7 +313,7 @@ internal class TypeDef
         if (_elementType is not null)
         {
             var overriddenElementType = _elementType.OverrideGenericTypeParameter(genericTypeParametersOverride);
-            return new TypeDef(_apiTypeDef, AlwaysReturnSystemInterfaceName, null, overriddenElementType);
+            return new TypeDef(_apiTypeDef, AlwaysReturnGlobalSystemInterfaceName, null, overriddenElementType);
         }
 
         if (IsGenericTypeParameter)
@@ -327,7 +327,7 @@ internal class TypeDef
             {
                 overriddenGenericArguments.Add(genericArgument.OverrideGenericTypeParameter(genericTypeParametersOverride));
             }
-            return new TypeDef(_apiTypeDef, AlwaysReturnSystemInterfaceName, overriddenGenericArguments);
+            return new TypeDef(_apiTypeDef, AlwaysReturnGlobalSystemInterfaceName, overriddenGenericArguments);
         }
         else
         {

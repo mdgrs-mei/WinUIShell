@@ -16,6 +16,8 @@ public class Exporter
         AddTypesInAssembly(typeof(Microsoft.UI.Windowing.CompactOverlaySize)); // Microsoft.InteractiveExperiences.Projection
         AddTypesInAssembly(typeof(Windows.UI.Text.FontStretch)); // Microsoft.Windows.SDK.NET
         AddTypesInAssembly(typeof(Microsoft.Windows.Storage.Pickers.FileOpenPicker)); // Microsoft.Windows.Storage.Pickers.Projection
+
+        AddObject(typeof(List<>));
         AddEnum(typeof(Server.EventCallbackRunspaceMode));
 
         ExportToFile(apiFilePath);
@@ -293,7 +295,7 @@ public class Exporter
             IsOverride = IsOverride(propertyInfo.GetMethod),
             HidesBase = HidesBaseMethod(propertyInfo.GetMethod),
             ImplementsInterface = ImplementsInterface(propertyInfo.GetMethod),
-            ImplementsSystemInterface = ImplementsSystemInterface(propertyInfo.GetMethod),
+            ImplementsGlobalSystemInterface = ImplementsGlobalSystemInterface(propertyInfo.GetMethod),
         };
 
         var indexParameters = propertyInfo.GetIndexParameters();
@@ -340,7 +342,7 @@ public class Exporter
             IsOverride = false,
             HidesBase = false,
             ImplementsInterface = false,
-            ImplementsSystemInterface = false,
+            ImplementsGlobalSystemInterface = false,
         };
 
         return propertyDef;
@@ -384,7 +386,7 @@ public class Exporter
             IsOverride = IsOverride(methodInfo),
             HidesBase = HidesBaseMethod(methodInfo),
             ImplementsInterface = ImplementsInterface(methodInfo),
-            ImplementsSystemInterface = ImplementsSystemInterface(methodInfo),
+            ImplementsGlobalSystemInterface = ImplementsGlobalSystemInterface(methodInfo),
         };
 
         var parameters = methodInfo.GetParameters();
@@ -485,7 +487,7 @@ public class Exporter
         return false;
     }
 
-    private bool ImplementsSystemInterface(MethodInfo? methodInfo)
+    private bool ImplementsGlobalSystemInterface(MethodInfo? methodInfo)
     {
         if (methodInfo is null)
             return false;
@@ -498,7 +500,7 @@ public class Exporter
         if (!isImplemented)
             return false;
 
-        if (objectType.IsInterface && Api.IsSupportedSystemInterface(GetTypeDefName(objectType)))
+        if (objectType.IsInterface && Api.IsSupportedGlobalSystemInterface(GetTypeDefName(objectType)))
         {
             return true;
         }
@@ -506,8 +508,8 @@ public class Exporter
         foreach (var interfaceType in objectType.GetInterfaces())
         {
             var interfaceName = GetTypeDefName(interfaceType);
-            bool isSystemInterface = Api.IsSupportedSystemInterface(interfaceName);
-            if (!isSystemInterface)
+            bool isGlobalSystemInterface = Api.IsSupportedGlobalSystemInterface(interfaceName);
+            if (!isGlobalSystemInterface)
                 continue;
 
             if (objectType.IsInterface)
