@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.12.0] - 2026-03-14
+
+### Added
+
+- Added `WinUIShell.System.Collections.Generic.IDictionary`
+- Added `WinUIShell.System.Collections.Generic.List`
+
 ## [0.11.0] - 2026-02-22
 
 ### Added
