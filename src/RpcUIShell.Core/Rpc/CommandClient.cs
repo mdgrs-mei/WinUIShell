@@ -48,12 +48,12 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public ObjectId CreateObject(string typeName, object? linkedObject, params object?[] arguments)
+    public ObjectId CreateObject(string typeName, object linkedObject, params object?[] arguments)
     {
         return CreateObject(CommandQueueId.MainThread, typeName, linkedObject, arguments);
     }
 
-    public ObjectId CreateObject(CommandQueueId queueId, string typeName, object? linkedObject, params object?[] arguments)
+    public ObjectId CreateObject(CommandQueueId queueId, string typeName, object linkedObject, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -70,12 +70,12 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public ObjectId CreateObjectWithId(string typeName, object? linkedObject)
+    public ObjectId CreateObjectWithId(string typeName, object linkedObject)
     {
         return CreateObjectWithId(CommandQueueId.MainThread, typeName, linkedObject);
     }
 
-    public ObjectId CreateObjectWithId(CommandQueueId queueId, string typeName, object? linkedObject)
+    public ObjectId CreateObjectWithId(CommandQueueId queueId, string typeName, object linkedObject)
     {
         Debug.Assert(_rpc is not null);
 
@@ -89,12 +89,12 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public Task<ObjectId> CreateObjectWaitAsync(string typeName, object? linkedObject, params object?[] arguments)
+    public Task<ObjectId> CreateObjectWaitAsync(string typeName, object linkedObject, params object?[] arguments)
     {
         return CreateObjectWaitAsync(CommandQueueId.MainThread, typeName, linkedObject, arguments);
     }
 
-    public async Task<ObjectId> CreateObjectWaitAsync(CommandQueueId queueId, string typeName, object? linkedObject, params object?[] arguments)
+    public async Task<ObjectId> CreateObjectWaitAsync(CommandQueueId queueId, string typeName, object linkedObject, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -112,7 +112,7 @@ public class CommandClient : Singleton<CommandClient>
     public ObjectId CreateObjectWithStaticMethod(
         string className,
         string methodName,
-        object? linkedObject,
+        object linkedObject,
         params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);

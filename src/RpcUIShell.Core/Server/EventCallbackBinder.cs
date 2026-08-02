@@ -90,10 +90,14 @@ public class EventCallbackBinder<TDisabledControlsHolder> where TDisabledControl
                 _defaultEventArgsTypeName :
                 ObjectTypeMapping.Get().GetTargetTypeName(eventArgsType);
 
-            var eventArgsId = CommandClient.Get().CreateObjectWithId(
-                temporaryQueueId,
-                eventArgsTypeName,
-                eventArgs);
+            ObjectId? eventArgsId = null;
+            if (eventArgs is not null)
+            {
+                eventArgsId = CommandClient.Get().CreateObjectWithId(
+                    temporaryQueueId,
+                    eventArgsTypeName,
+                    eventArgs);
+            }
 
             var invokeTask = CommandClient.Get().InvokeMethodWaitAsync(
                 temporaryQueueId,
@@ -108,7 +112,10 @@ public class EventCallbackBinder<TDisabledControlsHolder> where TDisabledControl
 
             await WaitEventCallbackAsync(runspaceMode, invokeTask);
 
-            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
+            if (eventArgsId is not null)
+            {
+                CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
+            }
             disabledControls.Enable();
 
             ExitEventCallback(parentWindow);
