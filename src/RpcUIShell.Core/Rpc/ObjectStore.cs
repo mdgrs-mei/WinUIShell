@@ -10,13 +10,9 @@ public class ObjectStore : Singleton<ObjectStore>
         ObjectIdGenerator.Get().SetPrefix(prefix);
     }
 
-    public bool RegisterObject(object? obj, out ObjectId id)
+    public bool RegisterObject(object obj, out ObjectId id)
     {
-        if (obj is null)
-        {
-            id = ObjectIdGenerator.Get().Generate();
-            return true;
-        }
+        ArgumentNullException.ThrowIfNull(obj);
 
         if (obj.GetType().IsClass)
         {
@@ -28,7 +24,7 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
-    public bool RegisterObjectWithType(object? obj, string? targetTypeName, out ObjectId id)
+    public bool RegisterObjectWithType(object obj, string? targetTypeName, out ObjectId id)
     {
         bool registered = RegisterObject(obj, out id);
         id.Type = targetTypeName ?? "";
@@ -63,11 +59,8 @@ public class ObjectStore : Singleton<ObjectStore>
         {
             return _valueTypeObjectStore.UnregisterObject(id);
         }
-        else
-        {
-            // Allow unregistering not registered object for null linkedObject cases.
-            return false;
-        }
+
+        throw new InvalidOperationException($"Object [{id}] not found.");
     }
 
     public object GetObject(ObjectId id)
