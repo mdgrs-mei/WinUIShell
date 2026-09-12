@@ -10,25 +10,24 @@ public class ObjectStore : Singleton<ObjectStore>
         ObjectIdGenerator.Get().SetPrefix(prefix);
     }
 
-    public bool RegisterObject(object obj, out ObjectId id)
+    public void RegisterObject(object obj, out ObjectId id)
     {
         ArgumentNullException.ThrowIfNull(obj);
 
         if (obj.GetType().IsClass)
         {
-            return _classTypeObjectStore.RegisterObject(obj, out id);
+            _classTypeObjectStore.RegisterObject(obj, out id);
         }
         else
         {
-            return _valueTypeObjectStore.RegisterObject(obj, out id);
+            _valueTypeObjectStore.RegisterObject(obj, out id);
         }
     }
 
-    public bool RegisterObjectWithType(object obj, string? targetTypeName, out ObjectId id)
+    public void RegisterObjectWithType(object obj, string? targetTypeName, out ObjectId id)
     {
-        bool registered = RegisterObject(obj, out id);
+        RegisterObject(obj, out id);
         id.Type = targetTypeName ?? "";
-        return registered;
     }
 
 
@@ -47,20 +46,22 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
-    public bool UnregisterObject(ObjectId id)
+    public void UnregisterObject(ObjectId id)
     {
         ArgumentNullException.ThrowIfNull(id);
 
         if (_classTypeObjectStore.FindObject(id) is not null)
         {
-            return _classTypeObjectStore.UnregisterObject(id);
+            _classTypeObjectStore.UnregisterObject(id);
         }
         else if (_valueTypeObjectStore.FindObject(id) is not null)
         {
-            return _valueTypeObjectStore.UnregisterObject(id);
+            _valueTypeObjectStore.UnregisterObject(id);
         }
-
-        throw new InvalidOperationException($"Object [{id}] not found.");
+        else
+        {
+            throw new InvalidOperationException($"Object [{id}] not found.");
+        }
     }
 
     public object GetObject(ObjectId id)

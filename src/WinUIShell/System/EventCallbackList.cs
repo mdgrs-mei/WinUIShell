@@ -10,7 +10,7 @@ internal sealed class EventCallbackList : IWinUIShellObject
 
     public EventCallbackList()
     {
-        _ = ObjectStore.Get().RegisterObject(this, out ObjectId id);
+        ObjectStore.Get().RegisterObject(this, out ObjectId id);
         WinUIShellObjectId = id;
     }
 
