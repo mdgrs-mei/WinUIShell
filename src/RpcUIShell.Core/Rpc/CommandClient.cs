@@ -58,8 +58,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -79,8 +78,7 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -99,8 +97,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -118,8 +115,7 @@ public class CommandClient : Singleton<CommandClient>
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -139,8 +135,7 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
-        if (!ObjectStore.Get().UnregisterObject(id))
-            return;
+        ObjectStore.Get().UnregisterObject(id);
 
         _joinableTaskFactory.Run(async () =>
         {

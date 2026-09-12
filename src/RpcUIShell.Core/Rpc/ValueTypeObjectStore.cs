@@ -4,12 +4,10 @@ internal sealed class ValueTypeObjectStore
 {
     private sealed class RegisteredObject
     {
-        public int RegisterCount { get; set; }
         public object Obj { get; set; }
 
         public RegisteredObject(object obj)
         {
-            RegisterCount = 1;
             Obj = obj;
         }
     }
@@ -18,24 +16,13 @@ internal sealed class ValueTypeObjectStore
     private readonly Dictionary<string, RegisteredObject> _objects = [];
     private readonly Dictionary<object, List<string>> _ids = [];
 
-    public bool RegisterObject(object obj, out ObjectId id)
+    public void RegisterObject(object obj, out ObjectId id)
     {
         lock (_lock)
         {
-            if (_ids.TryGetValue(obj, out List<string>? list))
-            {
-                var idValue = list[0];
-                _objects[idValue].RegisterCount++;
-                id = new ObjectId(idValue);
-                return false;
-            }
-            else
-            {
-                var newId = ObjectIdGenerator.Get().Generate();
-                RegisterObject(newId, obj);
-                id = newId;
-                return true;
-            }
+            var newId = ObjectIdGenerator.Get().Generate();
+            RegisterObject(newId, obj);
+            id = newId;
         }
     }
 
@@ -59,7 +46,7 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
-    public bool UnregisterObject(ObjectId id)
+    public void UnregisterObject(ObjectId id)
     {
         lock (_lock)
         {
@@ -68,13 +55,8 @@ internal sealed class ValueTypeObjectStore
                 throw new InvalidOperationException($"Object [{id}] not found.");
             }
 
-            robj.RegisterCount--;
-            if (robj.RegisterCount > 0)
-                return false;
-
             _ = _objects.Remove(id.Id);
             RemoveId(robj.Obj, id);
-            return true;
         }
     }
 
