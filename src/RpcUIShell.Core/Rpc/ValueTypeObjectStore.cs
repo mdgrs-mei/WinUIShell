@@ -2,18 +2,8 @@
 
 internal sealed class ValueTypeObjectStore
 {
-    private sealed class RegisteredObject
-    {
-        public object Obj { get; set; }
-
-        public RegisteredObject(object obj)
-        {
-            Obj = obj;
-        }
-    }
-
     private readonly object _lock = new();
-    private readonly Dictionary<string, RegisteredObject> _objects = [];
+    private readonly Dictionary<string, object> _objects = [];
     private readonly Dictionary<object, List<string>> _ids = [];
 
     public void RegisterObject(object obj, out ObjectId id)
@@ -30,7 +20,7 @@ internal sealed class ValueTypeObjectStore
     {
         lock (_lock)
         {
-            if (!_objects.TryAdd(id.Id, new(obj)))
+            if (!_objects.TryAdd(id.Id, obj))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -50,13 +40,13 @@ internal sealed class ValueTypeObjectStore
     {
         lock (_lock)
         {
-            if (!_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (!_objects.TryGetValue(id.Id, out object? obj))
             {
                 throw new InvalidOperationException($"Object [{id}] not found.");
             }
 
             _ = _objects.Remove(id.Id);
-            RemoveId(robj.Obj, id);
+            RemoveId(obj, id);
         }
     }
 
@@ -82,9 +72,9 @@ internal sealed class ValueTypeObjectStore
     {
         lock (_lock)
         {
-            if (_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (_objects.TryGetValue(id.Id, out object? obj))
             {
-                return robj.Obj;
+                return obj;
             }
             else
             {
