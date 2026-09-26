@@ -36,16 +36,6 @@ internal sealed class ClassTypeObjectStore
     private readonly Dictionary<string, WeakReference<object>> _objects = [];
     private readonly Dictionary<WeakReference<object>, string> _ids = new(new ObjectComparer());
 
-    public void RegisterObject(object obj, out ObjectId id)
-    {
-        lock (_lock)
-        {
-            var newId = ObjectIdGenerator.Get().Generate();
-            RegisterObject(newId, obj);
-            id = newId;
-        }
-    }
-
     public void RegisterObject(ObjectId id, object obj)
     {
         lock (_lock)

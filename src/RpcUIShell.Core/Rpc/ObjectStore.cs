@@ -14,14 +14,9 @@ public class ObjectStore : Singleton<ObjectStore>
     {
         ArgumentNullException.ThrowIfNull(obj);
 
-        if (obj.GetType().IsClass)
-        {
-            _classTypeObjectStore.RegisterObject(obj, out id);
-        }
-        else
-        {
-            _valueTypeObjectStore.RegisterObject(obj, out id);
-        }
+        var newId = ObjectIdGenerator.Get().Generate();
+        RegisterObject(newId, obj);
+        id = newId;
     }
 
     public void RegisterObjectWithType(object obj, string? targetTypeName, out ObjectId id)
@@ -29,7 +24,6 @@ public class ObjectStore : Singleton<ObjectStore>
         RegisterObject(obj, out id);
         id.Type = targetTypeName ?? "";
     }
-
 
     public void RegisterObject(ObjectId id, object obj)
     {
