@@ -4,31 +4,37 @@ namespace RpcUIShell.Core;
 
 internal sealed class ClassTypeObjectStore
 {
-    private sealed class ObjectComparer : IEqualityComparer<object>
+    private sealed class ObjectComparer : IEqualityComparer<WeakReference<object>>
     {
-        public new bool Equals(object? x, object? y)
+        public bool Equals(WeakReference<object>? x, WeakReference<object>? y)
         {
-            return ReferenceEquals(x, y);
+            if (x is null && y is null)
+                return true;
+
+            if (x is null)
+                return false;
+
+            if (y is null)
+                return false;
+
+            if (x.TryGetTarget(out object? xTarget) && y.TryGetTarget(out object? yTarget))
+            {
+                return ReferenceEquals(xTarget, yTarget);
+            }
+            else
+            {
+                return false;
+            }
         }
-        public int GetHashCode(object obj)
+        public int GetHashCode(WeakReference<object> obj)
         {
             return RuntimeHelpers.GetHashCode(obj);
         }
     }
 
-    private sealed class RegisteredObject
-    {
-        public object Obj { get; set; }
-
-        public RegisteredObject(object obj)
-        {
-            Obj = obj;
-        }
-    }
-
     private readonly object _lock = new();
-    private readonly Dictionary<string, RegisteredObject> _objects = [];
-    private readonly Dictionary<object, string> _ids = new(new ObjectComparer());
+    private readonly Dictionary<string, WeakReference<object>> _objects = [];
+    private readonly Dictionary<WeakReference<object>, string> _ids = new(new ObjectComparer());
 
     public void RegisterObject(object obj, out ObjectId id)
     {
@@ -48,7 +54,7 @@ internal sealed class ClassTypeObjectStore
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
-            if (!_ids.TryAdd(obj, id.Id))
+            if (!_ids.TryAdd(new(obj), id.Id))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -59,16 +65,16 @@ internal sealed class ClassTypeObjectStore
     {
         lock (_lock)
         {
-            if (!_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (!_objects.TryGetValue(id.Id, out WeakReference<object>? robj))
             {
                 throw new InvalidOperationException($"Object [{id}] not found.");
             }
 
             _ = _objects.Remove(id.Id);
 
-            if (!_ids.Remove(robj.Obj, out string? _))
+            if (!_ids.Remove(robj, out string? _))
             {
-                throw new InvalidOperationException($"Object [{robj.Obj}] not found.");
+                throw new InvalidOperationException($"Object [{robj}] not found.");
             }
         }
     }
@@ -77,9 +83,16 @@ internal sealed class ClassTypeObjectStore
     {
         lock (_lock)
         {
-            if (_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (_objects.TryGetValue(id.Id, out WeakReference<object>? robj))
             {
-                return robj.Obj;
+                if (robj.TryGetTarget(out object? target))
+                {
+                    return target;
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Object [{id}] has been garbage collected.");
+                }
             }
             else
             {
@@ -92,7 +105,7 @@ internal sealed class ClassTypeObjectStore
     {
         lock (_lock)
         {
-            if (_ids.TryGetValue(obj, out string? id))
+            if (_ids.TryGetValue(new(obj), out string? id))
             {
                 return new ObjectId(id);
             }
