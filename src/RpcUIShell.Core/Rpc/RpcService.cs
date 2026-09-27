@@ -28,7 +28,7 @@ internal sealed class RpcService
             {
                 var arguments = RpcValueConverter.Get().ConvertRpcValueArrayToObjectArray(rpcArguments);
                 var obj = Invoker.Get().CreateObject(typeName, arguments);
-                ObjectStore.Get().RegisterObject(id, obj);
+                ObjectStore.Get().StoreObject(id, obj);
             });
     }
 
@@ -39,7 +39,7 @@ internal sealed class RpcService
             () =>
             {
                 var obj = Invoker.Get().CreateObject(typeName, [id]);
-                ObjectStore.Get().RegisterObject(id, obj);
+                ObjectStore.Get().StoreObject(id, obj);
             });
     }
 
@@ -54,7 +54,7 @@ internal sealed class RpcService
                 {
                     var arguments = RpcValueConverter.Get().ConvertRpcValueArrayToObjectArray(rpcArguments);
                     var obj = Invoker.Get().CreateObject(typeName, arguments);
-                    ObjectStore.Get().RegisterObject(id, obj);
+                    ObjectStore.Get().StoreObject(id, obj);
 
                     taskCompletion.SetResult();
                 }
@@ -83,7 +83,7 @@ internal sealed class RpcService
                 {
                     throw new InvalidOperationException($"Failed to create object with [{className}.{methodName}].");
                 }
-                ObjectStore.Get().RegisterObject(id, obj);
+                ObjectStore.Get().StoreObject(id, obj);
             });
     }
 
@@ -93,7 +93,7 @@ internal sealed class RpcService
             queueId,
             () =>
             {
-                ObjectStore.Get().UnregisterObject(id);
+                ObjectStore.Get().RemoveObject(id);
             });
     }
 

@@ -135,7 +135,7 @@ public class CommandClient : Singleton<CommandClient>
     {
         Debug.Assert(_rpc is not null);
 
-        ObjectStore.Get().UnregisterObject(id);
+        ObjectStore.Get().RemoveObject(id);
 
         _joinableTaskFactory.Run(async () =>
         {

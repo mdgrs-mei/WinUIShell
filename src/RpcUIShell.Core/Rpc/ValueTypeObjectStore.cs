@@ -6,7 +6,7 @@ internal sealed class ValueTypeObjectStore
     private readonly Dictionary<string, object> _objects = [];
     private readonly Dictionary<object, List<string>> _ids = [];
 
-    public void RegisterObject(ObjectId id, object obj)
+    public void StoreObject(ObjectId id, object obj)
     {
         lock (_lock)
         {
@@ -26,7 +26,12 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
-    public void UnregisterObject(ObjectId id)
+    public void RegisterObject(ObjectId id, object obj)
+    {
+        StoreObject(id, obj);
+    }
+
+    public void RemoveObject(ObjectId id)
     {
         lock (_lock)
         {

@@ -10,19 +10,36 @@ public class ObjectStore : Singleton<ObjectStore>
         ObjectIdGenerator.Get().SetPrefix(prefix);
     }
 
-    public void RegisterObject(object obj, out ObjectId id)
+    public void StoreObjectWithType(object obj, string? targetTypeName, out ObjectId id)
     {
-        ArgumentNullException.ThrowIfNull(obj);
-
         var newId = ObjectIdGenerator.Get().Generate();
-        RegisterObject(newId, obj);
+        StoreObject(newId, obj);
+        newId.Type = targetTypeName ?? "";
         id = newId;
     }
 
-    public void RegisterObjectWithType(object obj, string? targetTypeName, out ObjectId id)
+    // Add object and hold the reference.
+    public void StoreObject(ObjectId id, object obj)
     {
-        RegisterObject(obj, out id);
-        id.Type = targetTypeName ?? "";
+        ArgumentNullException.ThrowIfNull(id);
+        ArgumentNullException.ThrowIfNull(obj);
+
+        if (obj.GetType().IsClass)
+        {
+            _classTypeObjectStore.StoreObject(id, obj);
+        }
+        else
+        {
+            _valueTypeObjectStore.StoreObject(id, obj);
+        }
+    }
+
+    // Add object but do not hold the reference.
+    public void RegisterObject(object obj, out ObjectId id)
+    {
+        var newId = ObjectIdGenerator.Get().Generate();
+        RegisterObject(newId, obj);
+        id = newId;
     }
 
     public void RegisterObject(ObjectId id, object obj)
@@ -40,17 +57,17 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
-    public void UnregisterObject(ObjectId id)
+    public void RemoveObject(ObjectId id)
     {
         ArgumentNullException.ThrowIfNull(id);
 
         if (_classTypeObjectStore.FindObject(id) is not null)
         {
-            _classTypeObjectStore.UnregisterObject(id);
+            _classTypeObjectStore.RemoveObject(id);
         }
         else if (_valueTypeObjectStore.FindObject(id) is not null)
         {
-            _valueTypeObjectStore.UnregisterObject(id);
+            _valueTypeObjectStore.RemoveObject(id);
         }
         else
         {

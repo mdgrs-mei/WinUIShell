@@ -33,9 +33,27 @@ internal sealed class ClassTypeObjectStore
     }
 
     private readonly object _lock = new();
-    private readonly HashSet<object> _serverObjectReferences = new(ReferenceEqualityComparer.Instance);
+    private readonly HashSet<object> _storedReferences = new(ReferenceEqualityComparer.Instance);
     private readonly Dictionary<string, WeakReference<object>> _objects = [];
     private readonly Dictionary<WeakReference<object>, string> _ids = new(new ObjectComparer());
+
+    public void StoreObject(ObjectId id, object obj)
+    {
+        lock (_lock)
+        {
+            if (!_objects.TryAdd(id.Id, new(obj)))
+            {
+                throw new InvalidOperationException($"Object [{id}] already exists.");
+            }
+
+            _ = _storedReferences.Add(obj);
+
+            if (!_ids.TryAdd(new(obj), id.Id))
+            {
+                throw new InvalidOperationException($"Object [{id}] already exists.");
+            }
+        }
+    }
 
     public void RegisterObject(ObjectId id, object obj)
     {
@@ -46,7 +64,7 @@ internal sealed class ClassTypeObjectStore
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
 
-            _ = _serverObjectReferences.Add(obj);
+            // Do not hold the reference so that the object can be garbage collected.
 
             if (!_ids.TryAdd(new(obj), id.Id))
             {
@@ -55,7 +73,7 @@ internal sealed class ClassTypeObjectStore
         }
     }
 
-    public void UnregisterObject(ObjectId id)
+    public void RemoveObject(ObjectId id)
     {
         lock (_lock)
         {
@@ -67,7 +85,7 @@ internal sealed class ClassTypeObjectStore
             _ = _objects.Remove(id.Id);
             if (robj.TryGetTarget(out object? obj))
             {
-                _ = _serverObjectReferences.Remove(obj);
+                _ = _storedReferences.Remove(obj);
             }
 
             if (!_ids.Remove(robj, out string? _))
