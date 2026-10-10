@@ -660,20 +660,30 @@ internal class ObjectDef
             if (hasBaseType)
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                internal {{_apiObjectDef.Name}}(ObjectId id) : base(id)
-                {
-                }
-                """);
+                    internal {{_apiObjectDef.Name}}(ObjectId id) : base(id)
+                    {
+                    }
+                    """);
             }
             else
             {
                 codeWriter.AppendAndReserveNewLine($$"""
-                internal {{_apiObjectDef.Name}}(ObjectId id)
+                    internal {{_apiObjectDef.Name}}(ObjectId id)
+                    {
+                        {{Generator.Api!.ObjectIdMemberName}} = id;
+                    }
+                    """);
+            }
+        }
+
+        if (!hasBaseType && !isStatic)
+        {
+            codeWriter.AppendAndReserveNewLine($$"""
+                ~{{_apiObjectDef.Name}}()
                 {
-                    {{Generator.Api!.ObjectIdMemberName}} = id;
+                    CommandClient.Get().DestroyObject({{Generator.Api!.ObjectIdMemberName}});
                 }
                 """);
-            }
         }
 
         foreach (var property in _staticProperties)
