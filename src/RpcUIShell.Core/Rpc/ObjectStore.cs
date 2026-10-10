@@ -61,11 +61,11 @@ public class ObjectStore : Singleton<ObjectStore>
     {
         ArgumentNullException.ThrowIfNull(id);
 
-        if (_classTypeObjectStore.FindObject(id) is not null)
+        if (_classTypeObjectStore.ContainsObject(id))
         {
             _classTypeObjectStore.RemoveObject(id);
         }
-        else if (_valueTypeObjectStore.FindObject(id) is not null)
+        else if (_valueTypeObjectStore.ContainsObject(id))
         {
             _valueTypeObjectStore.RemoveObject(id);
         }

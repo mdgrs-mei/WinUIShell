@@ -17,6 +17,9 @@ internal sealed class ClassTypeObjectStore
             if (y is null)
                 return false;
 
+            if (ReferenceEquals(x, y))
+                return true;
+
             if (x.TryGetTarget(out object? xTarget) && y.TryGetTarget(out object? yTarget))
             {
                 return ReferenceEquals(xTarget, yTarget);
@@ -39,16 +42,18 @@ internal sealed class ClassTypeObjectStore
 
     public void StoreObject(ObjectId id, object obj)
     {
+        WeakReference<object> robj = new(obj);
+
         lock (_lock)
         {
-            if (!_objects.TryAdd(id.Id, new(obj)))
+            if (!_objects.TryAdd(id.Id, robj))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
 
             _ = _storedReferences.Add(obj);
 
-            if (!_ids.TryAdd(new(obj), id.Id))
+            if (!_ids.TryAdd(robj, id.Id))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -57,16 +62,18 @@ internal sealed class ClassTypeObjectStore
 
     public void RegisterObject(ObjectId id, object obj)
     {
+        WeakReference<object> robj = new(obj);
+
         lock (_lock)
         {
-            if (!_objects.TryAdd(id.Id, new(obj)))
+            if (!_objects.TryAdd(id.Id, robj))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
 
             // Do not hold the reference so that the object can be garbage collected.
 
-            if (!_ids.TryAdd(new(obj), id.Id))
+            if (!_ids.TryAdd(robj, id.Id))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -129,6 +136,14 @@ internal sealed class ClassTypeObjectStore
             {
                 return null;
             }
+        }
+    }
+
+    public bool ContainsObject(ObjectId id)
+    {
+        lock (_lock)
+        {
+            return _objects.ContainsKey(id.Id);
         }
     }
 }
