@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace RpcUIShell.Core;
+﻿namespace RpcUIShell.Core;
 
 internal sealed class ClassTypeObjectStore
 {
@@ -15,41 +13,9 @@ internal sealed class ClassTypeObjectStore
         }
     }
 
-    private sealed class ReferenceComparer : IEqualityComparer<WeakReference<object>>
-    {
-        public bool Equals(WeakReference<object>? x, WeakReference<object>? y)
-        {
-            if (x is null && y is null)
-                return true;
-
-            if (x is null)
-                return false;
-
-            if (y is null)
-                return false;
-
-            if (ReferenceEquals(x, y))
-                return true;
-
-            if (x.TryGetTarget(out object? xTarget) && y.TryGetTarget(out object? yTarget))
-            {
-                return ReferenceEquals(xTarget, yTarget);
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public int GetHashCode(WeakReference<object> obj)
-        {
-            return RuntimeHelpers.GetHashCode(obj);
-        }
-    }
-
     private readonly object _lock = new();
     private readonly HashSet<object> _storedReferences = new(ReferenceEqualityComparer.Instance);
     private readonly Dictionary<string, RegisteredObject> _objects = [];
-    private readonly Dictionary<WeakReference<object>, string> _ids = new(new ReferenceComparer());
 
     public void StoreObject(ObjectId id, object obj)
     {
@@ -61,13 +27,7 @@ internal sealed class ClassTypeObjectStore
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
-
             _ = _storedReferences.Add(obj);
-
-            if (!_ids.TryAdd(robj.Reference, id.Id))
-            {
-                throw new InvalidOperationException($"Object [{id}] already exists.");
-            }
         }
     }
 
@@ -83,11 +43,6 @@ internal sealed class ClassTypeObjectStore
             }
 
             // Do not hold the reference so that the object can be garbage collected.
-
-            if (!_ids.TryAdd(robj.Reference, id.Id))
-            {
-                throw new InvalidOperationException($"Object [{id}] already exists.");
-            }
         }
     }
 
@@ -123,11 +78,6 @@ internal sealed class ClassTypeObjectStore
             {
                 _ = _storedReferences.Remove(obj);
             }
-
-            if (!_ids.Remove(robj.Reference, out string? _))
-            {
-                throw new InvalidOperationException($"Object [{robj}] not found.");
-            }
             return true;
         }
     }
@@ -158,14 +108,14 @@ internal sealed class ClassTypeObjectStore
     {
         lock (_lock)
         {
-            if (_ids.TryGetValue(new(obj), out string? id))
+            foreach (var it in _objects)
             {
-                return new ObjectId(id);
+                if (it.Value.Reference.TryGetTarget(out object? target) && ReferenceEquals(target, obj))
+                {
+                    return new ObjectId(it.Key);
+                }
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 
