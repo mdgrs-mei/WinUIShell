@@ -93,7 +93,7 @@ internal sealed class RpcService
             queueId,
             () =>
             {
-                ObjectStore.Get().RemoveObject(id);
+                _ = ObjectStore.Get().RemoveObject(id);
             });
     }
 

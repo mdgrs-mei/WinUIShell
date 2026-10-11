@@ -75,17 +75,17 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
-    public void RemoveObject(ObjectId id)
+    public bool RemoveObject(ObjectId id)
     {
         ArgumentNullException.ThrowIfNull(id);
 
         if (_classTypeObjectStore.ContainsObject(id))
         {
-            _classTypeObjectStore.RemoveObject(id);
+            return _classTypeObjectStore.RemoveObject(id);
         }
         else if (_valueTypeObjectStore.ContainsObject(id))
         {
-            _valueTypeObjectStore.RemoveObject(id);
+            return _valueTypeObjectStore.RemoveObject(id);
         }
         else
         {

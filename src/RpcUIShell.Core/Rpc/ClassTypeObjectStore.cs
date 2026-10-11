@@ -103,7 +103,7 @@ internal sealed class ClassTypeObjectStore
         }
     }
 
-    public void RemoveObject(ObjectId id)
+    public bool RemoveObject(ObjectId id)
     {
         lock (_lock)
         {
@@ -115,7 +115,7 @@ internal sealed class ClassTypeObjectStore
             robj.ReferenceCount--;
             if (robj.ReferenceCount > 0)
             {
-                return;
+                return false;
             }
 
             _ = _objects.Remove(id.Id);
@@ -128,6 +128,7 @@ internal sealed class ClassTypeObjectStore
             {
                 throw new InvalidOperationException($"Object [{robj}] not found.");
             }
+            return true;
         }
     }
 

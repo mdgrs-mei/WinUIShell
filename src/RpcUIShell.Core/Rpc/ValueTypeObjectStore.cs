@@ -56,7 +56,7 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
-    public void RemoveObject(ObjectId id)
+    public bool RemoveObject(ObjectId id)
     {
         lock (_lock)
         {
@@ -68,11 +68,12 @@ internal sealed class ValueTypeObjectStore
             robj.ReferenceCount--;
             if (robj.ReferenceCount > 0)
             {
-                return;
+                return false;
             }
 
             _ = _objects.Remove(id.Id);
             RemoveId(robj.Obj, id);
+            return true;
         }
     }
 
