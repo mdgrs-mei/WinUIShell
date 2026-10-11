@@ -57,6 +57,24 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
+    public void AddReference(ObjectId id)
+    {
+        ArgumentNullException.ThrowIfNull(id);
+
+        if (_classTypeObjectStore.ContainsObject(id))
+        {
+            _classTypeObjectStore.AddReference(id);
+        }
+        else if (_valueTypeObjectStore.ContainsObject(id))
+        {
+            _valueTypeObjectStore.AddReference(id);
+        }
+        else
+        {
+            throw new InvalidOperationException($"Object [{id}] not found.");
+        }
+    }
+
     public void RemoveObject(ObjectId id)
     {
         ArgumentNullException.ThrowIfNull(id);

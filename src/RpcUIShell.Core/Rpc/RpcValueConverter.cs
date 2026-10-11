@@ -104,6 +104,11 @@ public class RpcValueConverter : Singleton<RpcValueConverter>
         {
             ObjectStore.Get().RegisterObject(objectId, obj);
         }
+        else
+        {
+            ObjectStore.Get().AddReference(objectId);
+        }
+
         return obj;
     }
 
