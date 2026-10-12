@@ -87,10 +87,9 @@ public class ObjectStore : Singleton<ObjectStore>
         {
             return _valueTypeObjectStore.RemoveObject(id);
         }
-        else
-        {
-            throw new InvalidOperationException($"Object [{id}] not found.");
-        }
+
+        // Allow removing objects multiple times in case they are removed explicitly, such as EventArgs.
+        return true;
     }
 
     public object GetObject(ObjectId id)
