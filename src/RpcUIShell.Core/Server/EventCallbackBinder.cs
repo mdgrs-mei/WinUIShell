@@ -81,7 +81,7 @@ public class EventCallbackBinder<TDisabledControlsHolder> where TDisabledControl
             IDisabledControlsHolder disabledControls = CreateDisabledControlsHolder(disabledControlsWhileProcessing);
             disabledControls.Disable();
 
-            var senderId = ObjectStore.Get().GetId(sender);
+            var senderId = RpcValueConverter.Get().ConvertObjectToRpcValue(sender).IdValue;
             var temporaryQueueId = CommandClient.Get().CreateTemporaryQueueId();
             var processingQueueId = GetProcessingQueueId(runspaceMode, mainRunspaceId);
 
