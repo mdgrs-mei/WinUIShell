@@ -87,7 +87,7 @@ internal sealed class RpcService
             });
     }
 
-    public void DestroyObject(CommandQueueId queueId, ObjectId id)
+    public void RemoveObject(CommandQueueId queueId, ObjectId id)
     {
         _commandServer.AddCommand(
             queueId,

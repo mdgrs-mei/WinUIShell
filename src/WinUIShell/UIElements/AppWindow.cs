@@ -14,7 +14,7 @@ public partial class AppWindow : IWinUIShellObject
             "Resize",
             size.WinUIShellObjectId);
 
-        CommandClient.Get().DestroyObject(size.WinUIShellObjectId);
+        CommandClient.Get().RemoveObject(size.WinUIShellObjectId);
     }
 
     public void ResizeClient(int width, int height)
@@ -27,6 +27,6 @@ public partial class AppWindow : IWinUIShellObject
             "ResizeClient",
             size.WinUIShellObjectId);
 
-        CommandClient.Get().DestroyObject(size.WinUIShellObjectId);
+        CommandClient.Get().RemoveObject(size.WinUIShellObjectId);
     }
 }

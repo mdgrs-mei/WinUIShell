@@ -126,12 +126,12 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public void DestroyObject(ObjectId id)
+    public void RemoveObject(ObjectId id)
     {
-        DestroyObject(CommandQueueId.MainThread, id);
+        RemoveObject(CommandQueueId.MainThread, id);
     }
 
-    public void DestroyObject(CommandQueueId queueId, ObjectId id)
+    public void RemoveObject(CommandQueueId queueId, ObjectId id)
     {
         Debug.Assert(_rpc is not null);
 
@@ -139,7 +139,7 @@ public class CommandClient : Singleton<CommandClient>
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("DestroyObject", queueId, id);
+            await _rpc.InvokeAsync("RemoveObject", queueId, id);
         });
     }
 
