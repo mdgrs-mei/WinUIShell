@@ -114,7 +114,7 @@ public class EventCallbackBinder<TDisabledControlsHolder> where TDisabledControl
 
             if (eventArgsId is not null)
             {
-                CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
+                CommandClient.Get().RemoveObject(processingQueueId, eventArgsId);
             }
             disabledControls.Enable();
 

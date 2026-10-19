@@ -28,7 +28,7 @@ public interface IPage
             pageProperty.OnLoadedCallbackRunspaceMode,
             pageProperty.OnLoadedCallbackMainRunspaceId);
 
-        CommandClient.Get().DestroyObject(queueId, page.Id);
+        CommandClient.Get().RemoveObject(queueId, page.Id);
         page.Id = new();
     }
 
@@ -72,7 +72,7 @@ public interface IPage
 
             await EventCallback.s_binder.WaitEventCallbackAsync(pageProperty.OnLoadedCallbackRunspaceMode, invokeTask);
 
-            CommandClient.Get().DestroyObject(processingQueueId, eventArgsId);
+            CommandClient.Get().RemoveObject(processingQueueId, eventArgsId);
             disabledControls.Enable();
 
             EventCallback.s_binder.ExitEventCallback(parentWindow);
