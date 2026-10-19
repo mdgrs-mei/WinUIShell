@@ -6,16 +6,6 @@ internal sealed class ValueTypeObjectStore
     private readonly Dictionary<string, object> _objects = [];
     private readonly Dictionary<object, List<string>> _ids = [];
 
-    public void RegisterObject(object obj, out ObjectId id)
-    {
-        lock (_lock)
-        {
-            var newId = ObjectIdGenerator.Get().Generate();
-            RegisterObject(newId, obj);
-            id = newId;
-        }
-    }
-
     public void RegisterObject(ObjectId id, object obj)
     {
         lock (_lock)
