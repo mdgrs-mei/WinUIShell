@@ -97,6 +97,16 @@ internal sealed class RpcService
             });
     }
 
+    public void RemoveAllObjects()
+    {
+        _commandServer.AddCommand(
+            CommandQueueId.MainThread,
+            () =>
+            {
+                ObjectStore.Get().UnregisterAllObjects();
+            });
+    }
+
     public void InvokeMethod(ObjectId id, string? typeName, string methodName, RpcValue[]? rpcArguments)
     {
         _commandServer.AddCommand(

@@ -143,6 +143,18 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
+    public void RemoveAllObjects()
+    {
+        Debug.Assert(_rpc is not null);
+
+        ObjectStore.Get().UnregisterAllObjects();
+
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("RemoveAllObjects");
+        });
+    }
+
     public void InvokeMethod(ObjectId id, string? typeName, string methodName, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);

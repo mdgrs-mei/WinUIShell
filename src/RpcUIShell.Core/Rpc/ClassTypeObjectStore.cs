@@ -39,6 +39,15 @@ internal sealed class ClassTypeObjectStore
         }
     }
 
+    public void UnregisterAllObjects()
+    {
+        lock (_lock)
+        {
+            _objects.Clear();
+            _ids.Clear();
+        }
+    }
+
     public object? FindObject(ObjectId id)
     {
         lock (_lock)

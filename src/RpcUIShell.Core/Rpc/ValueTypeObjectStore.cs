@@ -40,6 +40,15 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
+    public void UnregisterAllObjects()
+    {
+        lock (_lock)
+        {
+            _objects.Clear();
+            _ids.Clear();
+        }
+    }
+
     private void RemoveId(object obj, ObjectId id)
     {
         if (!_ids.TryGetValue(obj, out List<string>? list))
