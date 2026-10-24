@@ -59,6 +59,12 @@ public class ObjectStore : Singleton<ObjectStore>
         }
     }
 
+    public void UnregisterAllObjects()
+    {
+        _classTypeObjectStore.UnregisterAllObjects();
+        _valueTypeObjectStore.UnregisterAllObjects();
+    }
+
     public object GetObject(ObjectId id)
     {
         var obj = FindObject(id);

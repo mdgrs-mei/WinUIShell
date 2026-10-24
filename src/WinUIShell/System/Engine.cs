@@ -250,4 +250,17 @@ $engineUpdateTimer.Start()
             }
         }
     }
+
+    public void RemoveWinUIShellObject(IWinUIShellObject? obj)
+    {
+        if (obj is null)
+            return;
+
+        CommandClient.Get().RemoveObject(obj.WinUIShellObjectId);
+    }
+
+    public void RemoveAllWinUIShellObjects()
+    {
+        CommandClient.Get().RemoveAllObjects();
+    }
 }
