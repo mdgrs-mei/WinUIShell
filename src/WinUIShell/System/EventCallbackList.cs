@@ -10,8 +10,14 @@ internal sealed class EventCallbackList : IWinUIShellObject
 
     public EventCallbackList()
     {
-        ObjectStore.Get().RegisterObject(this, out ObjectId id);
+        // Do not store a reference to leave the lifetime to the parent object.
+        ObjectStore.Get().RegisterObject(this, out ObjectId id, storeReference: false);
         WinUIShellObjectId = id;
+    }
+
+    ~EventCallbackList()
+    {
+        ObjectStore.Get().UnregisterObject(WinUIShellObjectId);
     }
 
     public void Add(
