@@ -3,6 +3,7 @@
 public class ObjectStore : Singleton<ObjectStore>
 {
     private readonly ClassTypeObjectStore _classTypeObjectStore = new();
+    private readonly WeakReferenceObjectStore _weakReferenceObjectStore = new();
     private readonly ValueTypeObjectStore _valueTypeObjectStore = new();
 
     public void SetObjectIdPrefix(string prefix)
@@ -10,12 +11,12 @@ public class ObjectStore : Singleton<ObjectStore>
         ObjectIdGenerator.Get().SetPrefix(prefix);
     }
 
-    public void RegisterObject(object obj, out ObjectId id)
+    public void RegisterObject(object obj, out ObjectId id, bool storeReference = true)
     {
         ArgumentNullException.ThrowIfNull(obj);
 
         var newId = ObjectIdGenerator.Get().Generate();
-        RegisterObject(newId, obj);
+        RegisterObject(newId, obj, storeReference);
         id = newId;
     }
 
@@ -26,14 +27,21 @@ public class ObjectStore : Singleton<ObjectStore>
     }
 
 
-    public void RegisterObject(ObjectId id, object obj)
+    public void RegisterObject(ObjectId id, object obj, bool storeReference = true)
     {
         ArgumentNullException.ThrowIfNull(id);
         ArgumentNullException.ThrowIfNull(obj);
 
         if (obj.GetType().IsClass)
         {
-            _classTypeObjectStore.RegisterObject(id, obj);
+            if (storeReference)
+            {
+                _classTypeObjectStore.RegisterObject(id, obj);
+            }
+            else
+            {
+                _weakReferenceObjectStore.RegisterObject(id, obj);
+            }
         }
         else
         {
@@ -45,11 +53,15 @@ public class ObjectStore : Singleton<ObjectStore>
     {
         ArgumentNullException.ThrowIfNull(id);
 
-        if (_classTypeObjectStore.FindObject(id) is not null)
+        if (_classTypeObjectStore.ContainsObject(id))
         {
             _classTypeObjectStore.UnregisterObject(id);
         }
-        else if (_valueTypeObjectStore.FindObject(id) is not null)
+        else if (_weakReferenceObjectStore.ContainsObject(id))
+        {
+            _weakReferenceObjectStore.UnregisterObject(id);
+        }
+        else if (_valueTypeObjectStore.ContainsObject(id))
         {
             _valueTypeObjectStore.UnregisterObject(id);
         }
@@ -62,6 +74,7 @@ public class ObjectStore : Singleton<ObjectStore>
     public void UnregisterAllObjects()
     {
         _classTypeObjectStore.UnregisterAllObjects();
+        _weakReferenceObjectStore.UnregisterAllObjects();
         _valueTypeObjectStore.UnregisterAllObjects();
     }
 
@@ -81,10 +94,14 @@ public class ObjectStore : Singleton<ObjectStore>
             return null;
 
         var obj = _classTypeObjectStore.FindObject(id);
-        if (obj is null)
-        {
-            obj = _valueTypeObjectStore.FindObject(id);
-        }
+        if (obj is not null)
+            return obj;
+
+        obj = _weakReferenceObjectStore.FindObject(id);
+        if (obj is not null)
+            return obj;
+
+        obj = _valueTypeObjectStore.FindObject(id);
         return obj;
     }
 
@@ -104,7 +121,11 @@ public class ObjectStore : Singleton<ObjectStore>
 
         if (obj.GetType().IsClass)
         {
-            return _classTypeObjectStore.FindId(obj);
+            ObjectId? id = _classTypeObjectStore.FindId(obj);
+            if (id is not null)
+                return id;
+
+            return _weakReferenceObjectStore.FindId(obj);
         }
         else
         {

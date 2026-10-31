@@ -67,6 +67,14 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
+    public bool ContainsObject(ObjectId id)
+    {
+        lock (_lock)
+        {
+            return _objects.ContainsKey(id.Id);
+        }
+    }
+
     public object? FindObject(ObjectId id)
     {
         lock (_lock)
