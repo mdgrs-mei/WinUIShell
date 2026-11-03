@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StreamJsonRpc" Version="2.21.10" />
+    <PackageReference Include="StreamJsonRpc" Version="2.26.150" />
     <PackageReference Include="System.Management.Automation" Version="7.4.0" PrivateAssets="all" />
   </ItemGroup>
 </Project>
