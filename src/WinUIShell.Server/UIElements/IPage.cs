@@ -4,7 +4,7 @@ using RpcUIShell.Core;
 
 namespace WinUIShell.Server;
 
-public interface IPage
+internal interface IPage
 {
     ObjectId Id { get; set; }
 
@@ -34,7 +34,7 @@ public interface IPage
 
     private static RoutedEventHandler CreateOnLoaded<TPage>(TPage page) where TPage : Page, IPage
     {
-        return async (object sender, RoutedEventArgs eventArgs) =>
+        return async (sender, eventArgs) =>
         {
             var parentWindow = EventCallback.s_binder.EnterEventCallbackAndGetParentWindow(sender);
 
