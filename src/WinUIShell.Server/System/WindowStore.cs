@@ -6,7 +6,7 @@ namespace WinUIShell.Server;
 
 internal sealed class WindowStore : Singleton<WindowStore>, IWindowStore
 {
-    public sealed class WindowProperty
+    internal sealed class WindowProperty
     {
         public bool IsTerminated { get; set; }
         public int RunningEventCallbackCount { get; set; }

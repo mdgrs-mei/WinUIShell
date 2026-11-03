@@ -3,7 +3,7 @@ using RpcUIShell.Core;
 
 namespace WinUIShell.Server;
 
-public partial class Page07 : Page, IPage
+internal sealed partial class Page07 : Page, IPage
 {
     public ObjectId Id { get; set; } = new();
 
