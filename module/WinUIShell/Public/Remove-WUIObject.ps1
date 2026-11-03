@@ -1,7 +1,7 @@
 function Remove-WUIObject {
     [CmdletBinding(DefaultParameterSetName = 'Object')]
     param (
-        [Parameter(ParameterSetName = 'Object', Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
+        [Parameter(ParameterSetName = 'Object', Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [WinUIShell.IWinUIShellObject]$InputObject,
 
         [Parameter(ParameterSetName = 'All', Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
