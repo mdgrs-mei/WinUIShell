@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.14.0] - 2026-11-03
+
+### Changed
+
+- Upgraded the target framework of WinUIShell.Server to net10.0
+
+### Fixed
+
+- Fixed an issue where the server doesn't start if it's located under a UNC path
+
 ## [0.13.0] - 2026-07-26
 
 ### Added
