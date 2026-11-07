@@ -49,7 +49,7 @@ $win.AddClosed({
 $win.Activate()
 
 while (-not $isClosed) {
-    # Event callbacks can be handled in this loop using a timer event.
+    # Event callbacks can be handled even in this loop using a timer event.
     $timerText.Text = $stopWatch.Elapsed.ToString('mm\:ss\.ff')
     Start-Sleep -Milliseconds 10
 }
