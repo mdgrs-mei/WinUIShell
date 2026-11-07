@@ -2,48 +2,15 @@
 
 internal sealed class ValueTypeObjectStore
 {
-    private sealed class RegisteredObject
-    {
-        public int RegisterCount { get; set; }
-        public object Obj { get; set; }
-
-        public RegisteredObject(object obj)
-        {
-            RegisterCount = 1;
-            Obj = obj;
-        }
-    }
-
     private readonly object _lock = new();
-    private readonly Dictionary<string, RegisteredObject> _objects = [];
+    private readonly Dictionary<string, object> _objects = [];
     private readonly Dictionary<object, List<string>> _ids = [];
-
-    public bool RegisterObject(object obj, out ObjectId id)
-    {
-        lock (_lock)
-        {
-            if (_ids.TryGetValue(obj, out List<string>? list))
-            {
-                var idValue = list[0];
-                _objects[idValue].RegisterCount++;
-                id = new ObjectId(idValue);
-                return false;
-            }
-            else
-            {
-                var newId = ObjectIdGenerator.Get().Generate();
-                RegisterObject(newId, obj);
-                id = newId;
-                return true;
-            }
-        }
-    }
 
     public void RegisterObject(ObjectId id, object obj)
     {
         lock (_lock)
         {
-            if (!_objects.TryAdd(id.Id, new(obj)))
+            if (!_objects.TryAdd(id.Id, obj))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -59,22 +26,26 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
-    public bool UnregisterObject(ObjectId id)
+    public void UnregisterObject(ObjectId id)
     {
         lock (_lock)
         {
-            if (!_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (!_objects.TryGetValue(id.Id, out object? obj))
             {
                 throw new InvalidOperationException($"Object [{id}] not found.");
             }
 
-            robj.RegisterCount--;
-            if (robj.RegisterCount > 0)
-                return false;
-
             _ = _objects.Remove(id.Id);
-            RemoveId(robj.Obj, id);
-            return true;
+            RemoveId(obj, id);
+        }
+    }
+
+    public void UnregisterAllObjects()
+    {
+        lock (_lock)
+        {
+            _objects.Clear();
+            _ids.Clear();
         }
     }
 
@@ -96,13 +67,21 @@ internal sealed class ValueTypeObjectStore
         }
     }
 
+    public bool ContainsObject(ObjectId id)
+    {
+        lock (_lock)
+        {
+            return _objects.ContainsKey(id.Id);
+        }
+    }
+
     public object? FindObject(ObjectId id)
     {
         lock (_lock)
         {
-            if (_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (_objects.TryGetValue(id.Id, out object? obj))
             {
-                return robj.Obj;
+                return obj;
             }
             else
             {

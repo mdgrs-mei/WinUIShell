@@ -48,18 +48,17 @@ public class CommandClient : Singleton<CommandClient>
         });
     }
 
-    public ObjectId CreateObject(string typeName, object? linkedObject, params object?[] arguments)
+    public ObjectId CreateObject(string typeName, object linkedObject, params object?[] arguments)
     {
         return CreateObject(CommandQueueId.MainThread, typeName, linkedObject, arguments);
     }
 
-    public ObjectId CreateObject(CommandQueueId queueId, string typeName, object? linkedObject, params object?[] arguments)
+    public ObjectId CreateObject(CommandQueueId queueId, string typeName, object linkedObject, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -70,17 +69,16 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public ObjectId CreateObjectWithId(string typeName, object? linkedObject)
+    public ObjectId CreateObjectWithId(string typeName, object linkedObject)
     {
         return CreateObjectWithId(CommandQueueId.MainThread, typeName, linkedObject);
     }
 
-    public ObjectId CreateObjectWithId(CommandQueueId queueId, string typeName, object? linkedObject)
+    public ObjectId CreateObjectWithId(CommandQueueId queueId, string typeName, object linkedObject)
     {
         Debug.Assert(_rpc is not null);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         _joinableTaskFactory.Run(async () =>
         {
@@ -89,18 +87,17 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public Task<ObjectId> CreateObjectWaitAsync(string typeName, object? linkedObject, params object?[] arguments)
+    public Task<ObjectId> CreateObjectWaitAsync(string typeName, object linkedObject, params object?[] arguments)
     {
         return CreateObjectWaitAsync(CommandQueueId.MainThread, typeName, linkedObject, arguments);
     }
 
-    public async Task<ObjectId> CreateObjectWaitAsync(CommandQueueId queueId, string typeName, object? linkedObject, params object?[] arguments)
+    public async Task<ObjectId> CreateObjectWaitAsync(CommandQueueId queueId, string typeName, object linkedObject, params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -112,14 +109,13 @@ public class CommandClient : Singleton<CommandClient>
     public ObjectId CreateObjectWithStaticMethod(
         string className,
         string methodName,
-        object? linkedObject,
+        object linkedObject,
         params object?[] arguments)
     {
         Debug.Assert(_rpc is not null);
         ArgumentNullException.ThrowIfNull(arguments);
 
-        if (!ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id))
-            return id;
+        ObjectStore.Get().RegisterObject(linkedObject, out ObjectId id);
 
         var rpcArguments = RpcValueConverter.Get().ConvertObjectArrayToRpcArray(arguments);
 
@@ -130,21 +126,32 @@ public class CommandClient : Singleton<CommandClient>
         return id;
     }
 
-    public void DestroyObject(ObjectId id)
+    public void RemoveObject(ObjectId id)
     {
-        DestroyObject(CommandQueueId.MainThread, id);
+        RemoveObject(CommandQueueId.MainThread, id);
     }
 
-    public void DestroyObject(CommandQueueId queueId, ObjectId id)
+    public void RemoveObject(CommandQueueId queueId, ObjectId id)
     {
         Debug.Assert(_rpc is not null);
 
-        if (!ObjectStore.Get().UnregisterObject(id))
-            return;
+        ObjectStore.Get().UnregisterObject(id);
 
         _joinableTaskFactory.Run(async () =>
         {
-            await _rpc.InvokeAsync("DestroyObject", queueId, id);
+            await _rpc.InvokeAsync("RemoveObject", queueId, id);
+        });
+    }
+
+    public void RemoveAllObjects()
+    {
+        Debug.Assert(_rpc is not null);
+
+        ObjectStore.Get().UnregisterAllObjects();
+
+        _joinableTaskFactory.Run(async () =>
+        {
+            await _rpc.InvokeAsync("RemoveAllObjects");
         });
     }
 

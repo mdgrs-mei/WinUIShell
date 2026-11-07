@@ -1,62 +1,16 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace RpcUIShell.Core;
+﻿namespace RpcUIShell.Core;
 
 internal sealed class ClassTypeObjectStore
 {
-    private sealed class ObjectComparer : IEqualityComparer<object>
-    {
-        public new bool Equals(object? x, object? y)
-        {
-            return ReferenceEquals(x, y);
-        }
-        public int GetHashCode(object obj)
-        {
-            return RuntimeHelpers.GetHashCode(obj);
-        }
-    }
-
-    private sealed class RegisteredObject
-    {
-        public int RegisterCount { get; set; }
-        public object Obj { get; set; }
-
-        public RegisteredObject(object obj)
-        {
-            RegisterCount = 1;
-            Obj = obj;
-        }
-    }
-
     private readonly object _lock = new();
-    private readonly Dictionary<string, RegisteredObject> _objects = [];
-    private readonly Dictionary<object, string> _ids = new(new ObjectComparer());
-
-    public bool RegisterObject(object obj, out ObjectId id)
-    {
-        lock (_lock)
-        {
-            if (_ids.TryGetValue(obj, out string? idValue))
-            {
-                _objects[idValue].RegisterCount++;
-                id = new ObjectId(idValue);
-                return false;
-            }
-            else
-            {
-                var newId = ObjectIdGenerator.Get().Generate();
-                RegisterObject(newId, obj);
-                id = newId;
-                return true;
-            }
-        }
-    }
+    private readonly Dictionary<string, object> _objects = [];
+    private readonly Dictionary<object, string> _ids = new(ReferenceEqualityComparer.Instance);
 
     public void RegisterObject(ObjectId id, object obj)
     {
         lock (_lock)
         {
-            if (!_objects.TryAdd(id.Id, new(obj)))
+            if (!_objects.TryAdd(id.Id, obj))
             {
                 throw new InvalidOperationException($"Object [{id}] already exists.");
             }
@@ -67,25 +21,38 @@ internal sealed class ClassTypeObjectStore
         }
     }
 
-    public bool UnregisterObject(ObjectId id)
+    public void UnregisterObject(ObjectId id)
     {
         lock (_lock)
         {
-            if (!_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (!_objects.TryGetValue(id.Id, out object? obj))
             {
                 throw new InvalidOperationException($"Object [{id}] not found.");
             }
 
-            robj.RegisterCount--;
-            if (robj.RegisterCount > 0)
-                return false;
-
             _ = _objects.Remove(id.Id);
-            if (!_ids.Remove(robj.Obj, out string? _))
+
+            if (!_ids.Remove(obj, out string? _))
             {
-                throw new InvalidOperationException($"Object [{robj.Obj}] not found.");
+                throw new InvalidOperationException($"Object [{obj}] not found.");
             }
-            return true;
+        }
+    }
+
+    public void UnregisterAllObjects()
+    {
+        lock (_lock)
+        {
+            _objects.Clear();
+            _ids.Clear();
+        }
+    }
+
+    public bool ContainsObject(ObjectId id)
+    {
+        lock (_lock)
+        {
+            return _objects.ContainsKey(id.Id);
         }
     }
 
@@ -93,9 +60,9 @@ internal sealed class ClassTypeObjectStore
     {
         lock (_lock)
         {
-            if (_objects.TryGetValue(id.Id, out RegisteredObject? robj))
+            if (_objects.TryGetValue(id.Id, out object? obj))
             {
-                return robj.Obj;
+                return obj;
             }
             else
             {
