@@ -65,10 +65,8 @@ public class ObjectStore : Singleton<ObjectStore>
         {
             _valueTypeObjectStore.UnregisterObject(id);
         }
-        else
-        {
-            throw new InvalidOperationException($"Object [{id}] not found.");
-        }
+
+        // Allow unregistering an object multiple times.
     }
 
     public void UnregisterAllObjects()
