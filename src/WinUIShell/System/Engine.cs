@@ -1,24 +1,14 @@
 ﻿using System.Diagnostics;
 using System.Management.Automation;
 using System.Management.Automation.Host;
-using System.Management.Automation.Runspaces;
 using RpcUIShell.Core;
 
 namespace WinUIShell;
 
 public class Engine
 {
-    private sealed class RunspaceState
-    {
-        public bool IsInitialized { get; set; }
-        public bool IsInUpdate { get; set; }
-        public global::System.Timers.Timer? EventTimer;
-        public PSEventSubscriber? TimerEventSubscriber;
-    }
-
-    private readonly RunspaceLocal<RunspaceState> _thisRunspace = new(() => new RunspaceState());
-    private readonly object _lock = new();
-    private int _mainRunspaceId = Constants.InvalidRunspaceId;
+    private readonly RunspaceLocal<EngineRunspace> _thisRunspace = new(() => new EngineRunspace());
+    private int _remainingMainRunspaceCount = 1;
     private string _upstreamPipeName = "";
     private string _downstreamPipeName = "";
     private Process? _serverProcess;
@@ -30,7 +20,17 @@ public class Engine
         return _instance;
     }
 
-    public void InitRunspace(
+    public bool AcquireMainRunspace()
+    {
+        return Interlocked.Exchange(ref _remainingMainRunspaceCount, 0) > 0;
+    }
+
+    public void ReleaseMainRunspace()
+    {
+        _ = Interlocked.Exchange(ref _remainingMainRunspaceCount, 1);
+    }
+
+    public void InitMainRunspace(
         string serverExePath,
         PSHost? streamingHost,
         string modulePath,
@@ -40,36 +40,30 @@ public class Engine
         if (thisRunspace.IsInitialized)
             return;
 
-        lock (_lock)
-        {
-            if (_mainRunspaceId == Constants.InvalidRunspaceId)
-            {
 #if DEBUG
-                //System.Diagnostics.Debugger.Launch();
+        //System.Diagnostics.Debugger.Launch();
 #endif
-                InitPipeNames();
-                try
-                {
-                    StartServerProcess(serverExePath);
-                    InitConnection();
-                }
-                catch (Exception)
-                {
-                    StopServerProcess();
-                    Console.Error.WriteLine($"Failed to start server [{serverExePath}]");
-                    throw;
-                }
-                InitCommandThreadPool(streamingHost, modulePath);
-                _mainRunspaceId = Runspace.DefaultRunspace.Id;
-            }
-        }
-
-        if (useTimerEvent)
+        InitPipeNames();
+        try
         {
-            InitTimerEvent();
+            StartServerProcess(serverExePath);
+            InitConnection();
         }
+        catch (Exception)
+        {
+            StopServerProcess();
+            Console.Error.WriteLine($"Failed to start server [{serverExePath}]");
+            throw;
+        }
+        InitCommandThreadPool(streamingHost, modulePath);
 
-        thisRunspace.IsInitialized = true;
+        thisRunspace.Init(useTimerEvent, isMain: true);
+    }
+
+    public void InitSubRunspace(bool useTimerEvent)
+    {
+        var thisRunspace = _thisRunspace.Value;
+        thisRunspace.Init(useTimerEvent, isMain: false);
     }
 
     public void TermRunspace()
@@ -78,19 +72,14 @@ public class Engine
         if (!thisRunspace.IsInitialized)
             return;
 
-        thisRunspace.IsInitialized = false;
+        bool isMainRunspace = thisRunspace.IsMain;
+        thisRunspace.Term();
 
-        TermTimerEvent();
-
-        lock (_lock)
+        if (isMainRunspace)
         {
-            if (Runspace.DefaultRunspace.Id == _mainRunspaceId)
-            {
-                TermCommandThreadPool();
-                TermConnection();
-                StopServerProcess();
-                _mainRunspaceId = Constants.InvalidRunspaceId;
-            }
+            TermCommandThreadPool();
+            TermConnection();
+            StopServerProcess();
         }
     }
 
@@ -137,48 +126,6 @@ public class Engine
         CommandServer.Get().Term();
     }
 
-    private void InitTimerEvent()
-    {
-        var thisRunspace = _thisRunspace.Value;
-
-        // Register timer event to process the main command queue.
-        // The timer event fires when commands are processed on the main runspace or when waiting for user inputs in interactive sessions.
-        thisRunspace.EventTimer = new()
-        {
-            Interval = Constants.ClientTimerEventCommandPolingIntervalMillisecond,
-            AutoReset = false,
-            Enabled = false
-        };
-
-        ScriptBlock action = ScriptBlock.Create(@"
-[WinUIShell.Engine]::Get().IdleUpdateRunspace()
-$engineUpdateTimer = $Sender
-$engineUpdateTimer.Start()
-"
-        );
-
-        thisRunspace.TimerEventSubscriber = Runspace.DefaultRunspace.Events.SubscribeEvent(
-            source: thisRunspace.EventTimer,
-            eventName: "Elapsed",
-            sourceIdentifier: "",
-            data: null,
-            action: action,
-            supportEvent: false,
-            forwardEvent: false);
-
-        thisRunspace.EventTimer.Start();
-    }
-
-    private void TermTimerEvent()
-    {
-        var thisRunspace = _thisRunspace.Value;
-        if (thisRunspace.EventTimer is null)
-            return;
-
-        thisRunspace.EventTimer.Stop();
-        Runspace.DefaultRunspace.Events.UnsubscribeEvent(thisRunspace.TimerEventSubscriber);
-    }
-
     private void InitCommandThreadPool(PSHost? streamingHost, string modulePath)
     {
         _commandThreadPool.Init(streamingHost, modulePath, Constants.ClientCommandThreadPoolDefaultThreadCount);
@@ -203,52 +150,13 @@ $engineUpdateTimer.Start()
     public void IdleUpdateRunspace()
     {
         var thisRunspace = _thisRunspace.Value;
-        if (!thisRunspace.IsInitialized)
-            return;
-
-        // Do not run commands inside other event callbacks.
-        if (thisRunspace.IsInUpdate)
-            return;
-
-        ProcessCommands();
+        thisRunspace.IdleUpdate();
     }
 
     internal void UpdateRunspace()
     {
         var thisRunspace = _thisRunspace.Value;
-        if (!thisRunspace.IsInitialized)
-            return;
-
-        if (!thisRunspace.IsInUpdate)
-        {
-            // Root update.
-            thisRunspace.IsInUpdate = true;
-            ProcessCommands();
-            thisRunspace.IsInUpdate = false;
-        }
-        else
-        {
-            // Recursive update.
-            ProcessCommands();
-        }
-    }
-
-    private void ProcessCommands()
-    {
-        var queueId = new CommandQueueId(CommandQueueType.RunspaceId, Runspace.DefaultRunspace.Id);
-        try
-        {
-            CommandServer.Get().ProcessCommands(queueId);
-        }
-        catch (Exception e)
-        {
-            Console.Error.WriteLine("Engine.ProcessCommands faild:");
-            Console.Error.WriteLine($"{e.GetType().FullName}: {e.Message}");
-            if (e.InnerException is not null)
-            {
-                Console.Error.WriteLine($"-> {e.InnerException.GetType().FullName}: {e.InnerException.Message}");
-            }
-        }
+        thisRunspace.Update();
     }
 
     public void RemoveWinUIShellObject(IWinUIShellObject? obj)
