@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Generator(GliderUI)": {
+    "Generator(WinUIShell)": {
       "commandName": "DebugRoslynComponent",
       "targetProject": "..\\WinUIShell\\WinUIShell.csproj"
     },
