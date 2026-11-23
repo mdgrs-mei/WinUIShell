@@ -165,7 +165,7 @@ internal class MethodDef
     public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
     {
         string unsafeExpression = _isUnsafe ? "unsafe " : "";
-        string accessorExpression = isExplicitImplementation ? "" : "public ";
+        string accessorExpression = (isExplicitImplementation || ExplicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = "";
         string overrideExpression = _apiMethodDef.Name == "ToString" ? "override " : "";

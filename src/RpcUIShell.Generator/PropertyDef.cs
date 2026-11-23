@@ -235,7 +235,7 @@ internal class PropertyDef
     public string GetInterfaceImplSignatureExpression(bool isExplicitImplementation, List<TypeDef>? genericTypeParametersOverride)
     {
         string unsafeExpression = Type.IsUnsafe() ? "unsafe " : "";
-        string accessorExpression = isExplicitImplementation ? "" : "public ";
+        string accessorExpression = (isExplicitImplementation || ExplicitInterfaceType is not null) ? "" : "public ";
         string staticExpression = _memberDefType == MemberDefType.Static ? "static " : "";
         string newExpression = "";
         string overrideExpression = "";
