@@ -9,7 +9,7 @@ $originalProgressPreference = $ProgressPreference
 $ProgressPreference = 'SilentlyContinue'
 
 $netVersion = 'net8.0'
-$serverTarget = 'net8.0-windows10.0.18362.0'
+$serverTarget = 'net10.0-windows10.0.18362.0'
 $copyExtensions = @('.dll', '.pdb')
 $src = "$PSScriptRoot/src"
 $apiSrc = "$src/WinUIShell.ApiExporter"

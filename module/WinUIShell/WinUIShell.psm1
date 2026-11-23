@@ -26,7 +26,7 @@ $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
 }
 
 if ($script:isMainRunspace) {
-    $serverTarget = 'net8.0-windows10.0.18362.0'
+    $serverTarget = 'net10.0-windows10.0.18362.0'
     $serverPath = "$PSScriptRoot/bin/$serverTarget/WinUIShell.Server.exe"
 }
 
