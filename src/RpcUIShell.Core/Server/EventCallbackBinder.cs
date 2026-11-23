@@ -88,7 +88,7 @@ public class EventCallbackBinder<TDisabledControlsHolder> where TDisabledControl
             Type eventArgsType = typeof(TEventArgs);
             var eventArgsTypeName = (eventArgsType == typeof(object)) ?
                 _defaultEventArgsTypeName :
-                ObjectTypeMapping.Get().GetTargetTypeName(eventArgsType);
+                TypeMapping.Get().GetTargetTypeName(eventArgsType);
 
             ObjectId? eventArgsId = null;
             if (eventArgs is not null)

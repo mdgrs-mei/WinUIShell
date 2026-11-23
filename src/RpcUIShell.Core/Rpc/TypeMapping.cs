@@ -1,6 +1,6 @@
 ﻿namespace RpcUIShell.Core;
 
-public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
+public sealed class TypeMapping : Singleton<TypeMapping>
 {
     private readonly Dictionary<string, string> _map = [];
     private MappingDirection _direction = MappingDirection.ClientToServer;
@@ -62,16 +62,7 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
             List<string> argNames = [];
             foreach (var argType in sourceType.GetGenericArguments())
             {
-                string? argTargetTypeName;
-                if (argType.IsEnum)
-                {
-                    if (!EnumTypeMapping.Get().TryGetTargetTypeName(argType, out argTargetTypeName))
-                    {
-                        targetTypeName = null;
-                        return false;
-                    }
-                }
-                else if (!TryGetTargetTypeName(argType, out argTargetTypeName))
+                if (!TryGetTargetTypeName(argType, out string? argTargetTypeName))
                 {
                     targetTypeName = null;
                     return false;
@@ -82,6 +73,10 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
             targetTypeName = $"{thisNameAndAssembly[0]}[{string.Join(", ", argNames)}], {thisNameAndAssembly[1]}";
             return true;
         }
+        else if (sourceType.IsEnum)
+        {
+            return TryGetValueEnum($"{sourceType.FullName}, {assemblyName}", out targetTypeName);
+        }
         else
         {
             return TryGetValue($"{sourceType.FullName}, {assemblyName}", out targetTypeName);
@@ -90,22 +85,20 @@ public sealed class ObjectTypeMapping : Singleton<ObjectTypeMapping>
 
     private bool TryGetValue(string sourceTypeName, out string? targetTypeName)
     {
-        if (_direction == MappingDirection.ClientToServer)
+        if (_direction == MappingDirection.ClientToServer && !sourceTypeName.StartsWith(ClientNamespace, StringComparison.Ordinal))
         {
-            if (sourceTypeName.StartsWith(ClientNamespace, StringComparison.Ordinal))
-            {
-                return _map.TryGetValue(sourceTypeName, out targetTypeName);
-            }
-            else
-            {
-                // If the client requests a type that is not in the client namespace, which means non-wrapper types like system types, return it as-is.
-                targetTypeName = sourceTypeName;
-                return true;
-            }
+            // If the client requests a type that is not in the client namespace, which means non-wrapper types like system types, return it as-is.
+            targetTypeName = sourceTypeName;
+            return true;
         }
         else
         {
             return _map.TryGetValue(sourceTypeName, out targetTypeName);
         }
+    }
+
+    public bool TryGetValueEnum(string sourceEnumName, out string? targetEnumName)
+    {
+        return _map.TryGetValue(sourceEnumName, out targetEnumName);
     }
 }

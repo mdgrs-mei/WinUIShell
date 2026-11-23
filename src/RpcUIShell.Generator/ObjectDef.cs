@@ -15,6 +15,7 @@ internal class ObjectDef
     private readonly List<EventDef> _staticEvents = [];
     private readonly List<EventDef> _instanceEvents = [];
     private readonly List<ObjectDef> _nestedObjects = [];
+    private readonly List<EnumDef> _nestedEnums = [];
 
     private Dictionary<string, GetterSetter>? _explicitInterfaceImplementationGetterSetters;
 
@@ -95,11 +96,18 @@ internal class ObjectDef
                 _instanceEvents.Add(new EventDef(eventDef, this, MemberDefType.Instance));
             }
         }
-        if (_apiObjectDef.NestedTypes is not null)
+        if (_apiObjectDef.NestedObjects is not null)
         {
-            foreach (var nestedType in _apiObjectDef.NestedTypes)
+            foreach (var nestedObject in _apiObjectDef.NestedObjects)
             {
-                _nestedObjects.Add(new ObjectDef(nestedType));
+                _nestedObjects.Add(new ObjectDef(nestedObject));
+            }
+        }
+        if (_apiObjectDef.NestedEnums is not null)
+        {
+            foreach (var nestedEnum in _apiObjectDef.NestedEnums)
+            {
+                _nestedEnums.Add(new EnumDef(nestedEnum));
             }
         }
     }
@@ -496,6 +504,10 @@ internal class ObjectDef
             {
                 nestedObject.Generate(codeWriter);
             }
+            foreach (var nestedEnum in _nestedEnums)
+            {
+                nestedEnum.Generate(codeWriter);
+            }
 
             codeWriter.DecrementIndent();
         }
@@ -504,7 +516,7 @@ internal class ObjectDef
 
     private void GeneratePropertyGetterSetter(CodeWriter codeWriter, PropertyDef property)
     {
-        string typeNameExpression = property.ExplicitInterfaceType is not null ? $"ObjectTypeMapping.Get().GetTargetTypeName(typeof({Type.GetName()}))" : "null";
+        string typeNameExpression = property.ExplicitInterfaceType is not null ? $"TypeMapping.Get().GetTargetTypeName(typeof({Type.GetName()}))" : "null";
         if (property.CanRead)
         {
             if (property.IsIndexer)
@@ -555,7 +567,7 @@ internal class ObjectDef
     private void GenerateMethod(CodeWriter codeWriter, MethodDef method)
     {
         var returnType = method.ReturnType!;
-        string typeNameExpression = method.ExplicitInterfaceType is not null ? $"ObjectTypeMapping.Get().GetTargetTypeName(typeof({Type.GetName()}))" : "null";
+        string typeNameExpression = method.ExplicitInterfaceType is not null ? $"TypeMapping.Get().GetTargetTypeName(typeof({Type.GetName()}))" : "null";
 
         if (returnType.IsVoid)
         {
@@ -649,7 +661,7 @@ internal class ObjectDef
                 {{method.GetConstructorSignatureExpression(_apiObjectDef.Name)}}{{baseInitializer}}
                 {
                     {{Generator.Api!.ObjectIdMemberName}} = CommandClient.Get().CreateObject(
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
                         this{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}});
                 }
                 """);
@@ -691,7 +703,7 @@ internal class ObjectDef
             {
                 codeWriter.Append($$"""
                     get => PropertyAccessor.GetStatic<{{property.Type.GetName()}}>(
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
                         {{property.GetNameOfExpression()}}){{(property.Type.IsNullable ? "" : "!")}};
                     """);
             }
@@ -700,7 +712,7 @@ internal class ObjectDef
             {
                 codeWriter.Append($$"""
                     set => PropertyAccessor.SetStatic(
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
                         {{property.GetNameOfExpression()}},
                         value);
                     """);
@@ -739,7 +751,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         CommandClient.Get().InvokeStaticMethod(
-                            ObjectTypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
+                            TypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
                             {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}});
                     }
                     """);
@@ -750,7 +762,7 @@ internal class ObjectDef
                     {{method.GetSignatureExpression()}}
                     {
                         return CommandClient.Get().InvokeStaticMethodAndGetResult<{{returnType.GetName()}}>(
-                            ObjectTypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
+                            TypeMapping.Get().GetTargetTypeName(typeof({{Type.GetName()}})),
                             {{method.GetNameOfExpression()}}{{method.GetArgumentsExpression(genericTypeParametersOverride: null)}}){{(returnType.IsNullable ? "" : "!")}};
                     }
                     """);
@@ -798,6 +810,10 @@ internal class ObjectDef
         foreach (var nestedObject in _nestedObjects)
         {
             nestedObject.Generate(codeWriter);
+        }
+        foreach (var nestedEnum in _nestedEnums)
+        {
+            nestedEnum.Generate(codeWriter);
         }
 
         codeWriter.DecrementIndent();
@@ -847,7 +863,7 @@ internal class ObjectDef
             return;
 
         string typeName = Type.OverrideGenericTypeParameter(genericTypeParametersOverride).GetName();
-        string typeNameExpression = $"ObjectTypeMapping.Get().GetTargetTypeName(typeof({typeName}))";
+        string typeNameExpression = $"TypeMapping.Get().GetTargetTypeName(typeof({typeName}))";
 
         foreach (var property in _staticProperties)
         {
@@ -1081,7 +1097,7 @@ internal class ObjectDef
             if (!interfaceType.IsSupported())
                 continue;
 
-            ObjectDef? interfaceObject = ObjectGenerator.GetObjectDef(interfaceType);
+            ObjectDef? interfaceObject = ApiGenerator.GetObjectDef(interfaceType);
             if (interfaceObject is null)
                 continue;
 

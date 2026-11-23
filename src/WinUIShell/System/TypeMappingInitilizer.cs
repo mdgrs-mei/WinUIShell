@@ -11,12 +11,11 @@ internal static partial class TypeMappingInitializer
         if (s_isInitialized)
             return;
 
-        ObjectTypeMapping.Get().Init(
-            ObjectTypeMapping.MappingDirection.ClientToServer,
+        TypeMapping.Get().Init(
+            TypeMapping.MappingDirection.ClientToServer,
             "WinUIShell");
 
-        InitEnumTypeMapping();
-        InitObjectTypeMapping();
+        InitMapping();
         s_isInitialized = true;
     }
 }

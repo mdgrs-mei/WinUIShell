@@ -109,7 +109,10 @@ public class Api
         public List<EventDef>? InstanceEvents { get; set; }
 
         [DefaultValue(null)]
-        public List<ObjectDef>? NestedTypes { get; set; }
+        public List<ObjectDef>? NestedObjects { get; set; }
+
+        [DefaultValue(null)]
+        public List<EnumDef>? NestedEnums { get; set; }
     }
 
     public class PropertyDef

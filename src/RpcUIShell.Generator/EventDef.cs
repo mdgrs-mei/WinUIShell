@@ -211,9 +211,9 @@ internal class EventDef
                 {{signatureExpression}}
                 {
                     {{GetEventCallbackListFieldName(_memberDefType)}}.AddStatic(
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{className}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{className}})),
                         "{{GetEventName()}}",
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{GetEventArgsTypeName(genericTypeParametersOverride)}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{GetEventArgsTypeName(genericTypeParametersOverride)}})),
                         eventCallback);
                 }
                 """;
@@ -226,7 +226,7 @@ internal class EventDef
                     {{GetEventCallbackListFieldName(_memberDefType)}}.Add(
                         {{Generator.Api!.ObjectIdMemberName}},
                         "{{GetEventName()}}",
-                        ObjectTypeMapping.Get().GetTargetTypeName(typeof({{GetEventArgsTypeName(genericTypeParametersOverride)}})),
+                        TypeMapping.Get().GetTargetTypeName(typeof({{GetEventArgsTypeName(genericTypeParametersOverride)}})),
                         eventCallback);
                 }
                 """;

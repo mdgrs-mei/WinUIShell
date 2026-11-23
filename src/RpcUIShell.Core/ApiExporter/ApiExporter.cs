@@ -90,17 +90,29 @@ public class ApiExporter
         if (IsIgnoredNamespace(type.Namespace))
             return;
 
+        if (type.IsNested)
+        {
+            AddObject(type.DeclaringType!);
+            return;
+        }
+
         string fullName = GetTypeFullName(type);
         if (_addedEnums.Contains(fullName))
             return;
         _ = _addedEnums.Add(fullName);
 
+        var def = GetEnumDef(type);
+        Api.Enums.Add(def);
+    }
+
+    private Api.EnumDef GetEnumDef(Type type)
+    {
         var underlyingType = Enum.GetUnderlyingType(type);
 
         var def = new Api.EnumDef
         {
             Name = type.Name,
-            FullName = fullName,
+            FullName = GetTypeFullName(type),
             Namespace = type.Namespace!,
             UnderlyingType = underlyingType.Name
         };
@@ -116,7 +128,7 @@ public class ApiExporter
             });
         }
 
-        Api.Enums.Add(def);
+        return def;
     }
 
     public void AddObject(Type type)
@@ -329,11 +341,22 @@ public class ApiExporter
 
         foreach (var nestedType in type.GetNestedTypes())
         {
-            if (def.NestedTypes is null)
+            if (nestedType.IsEnum)
             {
-                def.NestedTypes = [];
+                if (def.NestedEnums is null)
+                {
+                    def.NestedEnums = [];
+                }
+                def.NestedEnums.Add(GetEnumDef(nestedType));
             }
-            def.NestedTypes.Add(GetObjectDef(nestedType));
+            else
+            {
+                if (def.NestedObjects is null)
+                {
+                    def.NestedObjects = [];
+                }
+                def.NestedObjects.Add(GetObjectDef(nestedType));
+            }
         }
 
         return def;

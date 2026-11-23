@@ -60,19 +60,19 @@ internal class SpecializedMethodGenerator
                 {
                     ArgumentNullException.ThrowIfNull({{arrayName}});
                     ArgumentOutOfRangeException.ThrowIfNegative({{indexName}});
-                    if ({{arrayName}}.Length <= {{indexName}} && Count > 0)
+                    if ({{arrayName}}.Length <= {{indexName}})
                     {
                         throw new ArgumentOutOfRangeException("{{indexName}}");
-                    }
-
-                    if ({{arrayName}}.Length - {{indexName}} < Count)
-                    {
-                        throw new ArgumentException("Insufficient space to copy.");
                     }
 
                     int i = 0;
                     foreach (var item in this)
                     {
+                        if (i + {{indexName}} >= {{arrayName}}.Length)
+                        {
+                            throw new ArgumentException("Insufficient space to copy.");
+                        }
+
                         {{arrayName}}[i + {{indexName}}] = item;
                         i++;
                     }
@@ -90,7 +90,7 @@ internal class SpecializedMethodGenerator
             string newExpression = "";
             if (methodDef.ObjectDef.BaseType is not null)
             {
-                ObjectDef? baseObjectDef = ObjectGenerator.GetObjectDef(methodDef.ObjectDef.BaseType);
+                ObjectDef? baseObjectDef = ApiGenerator.GetObjectDef(methodDef.ObjectDef.BaseType);
                 newExpression = (baseObjectDef is not null) && baseObjectDef.ContainsSignature(methodDef) ? "new " : "";
             }
 

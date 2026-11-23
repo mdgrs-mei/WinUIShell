@@ -121,16 +121,16 @@ public class RpcValueConverter : Singleton<RpcValueConverter>
             return null;
         }
 
-        _ = EnumTypeMapping.Get().TryGetValue(sourceEnumName, out string? enumTargetName);
-        if (enumTargetName is null)
+        _ = TypeMapping.Get().TryGetValueEnum(sourceEnumName, out string? targetEnumName);
+        if (targetEnumName is null)
         {
             throw new InvalidOperationException($"Enum mapping for [{sourceEnumName}] not found.");
         }
 
-        var targetEnumType = Type.GetType(enumTargetName);
+        var targetEnumType = Type.GetType(targetEnumName);
         if (targetEnumType == null)
         {
-            throw new InvalidOperationException($"Type [{enumTargetName}] not found.");
+            throw new InvalidOperationException($"Type [{targetEnumName}] not found.");
         }
 
         return Enum.ToObject(targetEnumType, value);
@@ -168,7 +168,7 @@ public class RpcValueConverter : Singleton<RpcValueConverter>
             {
                 // If the object is not a primitive type or a registered object, register it here.
                 // The corresponding object needs to be created on the client side.
-                _ = ObjectTypeMapping.Get().TryGetTargetTypeName(obj!.GetType(), out string? targetTypeName);
+                _ = TypeMapping.Get().TryGetTargetTypeName(obj!.GetType(), out string? targetTypeName);
                 ObjectStore.Get().RegisterObjectWithType(obj!, targetTypeName, out ObjectId id);
                 return new RpcValue(id);
             }

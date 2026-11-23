@@ -56,7 +56,7 @@ public class Invoker : Singleton<Invoker>
         // Get interface Impl type fullname from interface type fullname.
         // fullName has a format like "clientAssemblyName.Namespace.Class`1+InnerClass+InnerMost`2[[clientAssemblyName.Namespace.GenericArgumentClass, clientAssemblyName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]".
 
-        var clientAssemblyName = ObjectTypeMapping.Get().ClientNamespace;
+        var clientAssemblyName = TypeMapping.Get().ClientNamespace;
         var interfaceFullName = interfaceType.FullName!;
 
         // System interface types don't have "clientAssemblyName" namespace. Add it here as Impl classes are always under "clientAssemblyName" namespace.

@@ -3,61 +3,9 @@ using RpcUIShell.Core;
 
 namespace RpcUIShell.Generator;
 
-internal static class ObjectGenerator
+internal static class TypeMappingGenerator
 {
-    private static readonly Dictionary<string, ObjectDef> _objectDefs = [];
-
-    public static void Generate(SourceProductionContext sourceProductionContext)
-    {
-        CreateObjectDefMap();
-
-        foreach (var keyValuePair in _objectDefs)
-        {
-            ObjectDef objectDef = keyValuePair.Value;
-            string filename = objectDef.GetSourceCodeFileName();
-            string sourceCode = objectDef.Generate();
-            sourceProductionContext.AddSource(filename, sourceCode);
-        }
-
-        DestroyObjectDefMap();
-    }
-
-    private static void CreateObjectDefMap()
-    {
-        Api api = Generator.Api!;
-
-        foreach (var apiObjectDef in api.Objects)
-        {
-            ObjectDef objectDef = new(apiObjectDef);
-            if (!objectDef.IsSupported())
-                continue;
-
-            var typeId = objectDef.Type.GetId();
-            if (_objectDefs.ContainsKey(typeId))
-            {
-                DestroyObjectDefMap();
-                throw new InvalidOperationException($"Duplicate object found: {typeId}");
-            }
-            _objectDefs[typeId] = objectDef;
-        }
-    }
-
-    private static void DestroyObjectDefMap()
-    {
-        _objectDefs.Clear();
-    }
-
-    public static ObjectDef? GetObjectDef(TypeDef typeDef)
-    {
-        var typeId = typeDef.GetId();
-        if (_objectDefs.TryGetValue(typeId, out var objectDef))
-        {
-            return objectDef;
-        }
-        return null;
-    }
-
-    public static void GenerateTypeMapping(
+    public static void Generate(
         SourceProductionContext sourceProductionContext,
         string rootNamespace)
     {
@@ -77,17 +25,26 @@ internal static class ObjectGenerator
 
         codeWriter.IncrementIndent();
         codeWriter.AppendAndReserveNewLine($$"""
-            private static void InitObjectTypeMapping()
+            private static void InitMapping()
             {
-                ObjectTypeMapping.Get().InitMapping(_objectList);
+                TypeMapping.Get().InitMapping(_list);
             }
             """);
 
         codeWriter.Append($$"""
-            private static readonly List<(string, string)> _objectList = [
+            private static readonly List<(string, string)> _list = [
             """);
 
         codeWriter.IncrementIndent();
+
+        foreach (var enumDef in api.Enums)
+        {
+            var targetTypeFullName = Generator.GetTargetTypeFullName(enumDef.FullName);
+
+            codeWriter.Append($"""
+                ("{targetTypeFullName}", "{enumDef.FullName}"),
+                """);
+        }
 
         foreach (var (systemTypeFullName, _) in Api.SystemTypes)
         {
@@ -117,10 +74,10 @@ internal static class ObjectGenerator
                 ("{targetTypeFullName}", "{apiObjectDef.FullName}"),
                 """);
 
-            if (apiObjectDef.NestedTypes is null)
+            if (apiObjectDef.NestedObjects is null)
                 continue;
 
-            foreach (var nestedApiObjectDef in apiObjectDef.NestedTypes)
+            foreach (var nestedApiObjectDef in apiObjectDef.NestedObjects)
             {
                 ObjectDef nestedObjectDef = new(nestedApiObjectDef);
                 if (!nestedObjectDef.IsSupported())
@@ -139,6 +96,6 @@ internal static class ObjectGenerator
         codeWriter.DecrementIndent();
         codeWriter.Append("}");
 
-        sourceProductionContext.AddSource($"ObjectTypeMappingInitializer.g.cs", codeWriter.ToString());
+        sourceProductionContext.AddSource($"TypeMappingInitializer.g.cs", codeWriter.ToString());
     }
 }

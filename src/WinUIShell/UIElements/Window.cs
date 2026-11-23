@@ -23,7 +23,7 @@ public partial class Window : IWinUIShellObject
     public Window()
     {
         WinUIShellObjectId = CommandClient.Get().CreateObject(
-            ObjectTypeMapping.Get().GetTargetTypeName(typeof(Window)),
+            TypeMapping.Get().GetTargetTypeName(typeof(Window)),
             this);
 
         CommandClient.Get().InvokeStaticMethod(_accessorClassName, "RegisterWindow", WinUIShellObjectId);
@@ -63,7 +63,7 @@ public partial class Window : IWinUIShellObject
         _closedCallbacks.Add(
             WinUIShellObjectId,
             "Closed",
-            ObjectTypeMapping.Get().GetTargetTypeName(typeof(WindowEventArgs)),
+            TypeMapping.Get().GetTargetTypeName(typeof(WindowEventArgs)),
             eventCallback);
     }
 
