@@ -64,6 +64,7 @@ public class CommandThreadWorker
         ProcessCommands();
         _threadLocalPowerShell.Value = null;
 
+        TermRunspace(powershell);
         powershell.Dispose();
         runspace.Close();
         runspace.Dispose();
@@ -84,6 +85,13 @@ public class CommandThreadWorker
                 }
             }
         }
+        _ = powershell.Invoke();
+        powershell.Commands.Clear();
+    }
+
+    private void TermRunspace(PowerShell powershell)
+    {
+        _ = powershell.AddScript($"Remove-Module -FullyQualifiedName '{_modulePath}'");
         _ = powershell.Invoke();
         powershell.Commands.Clear();
     }
